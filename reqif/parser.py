@@ -13,6 +13,7 @@ from reqif.models.reqif_specification import (
 from reqif.parsers.data_type_parser import (
     DataTypeParser,
 )
+from reqif.parsers.header_parser import ReqIFHeaderParser
 from reqif.parsers.spec_object_parser import (
     SpecObjectParser,
 )
@@ -22,6 +23,7 @@ from reqif.parsers.spec_object_type_parser import (
 from reqif.parsers.spec_relation_parser import (
     SpecRelationParser,
 )
+from reqif.parsers.spec_relation_type_parser import SpecRelationTypeParser
 from reqif.parsers.specification_parser import (
     ReqIFSpecificationParser,
 )
@@ -78,6 +80,7 @@ class ReqIFStage1Parser:
             return ReqIFBundle.create_empty(
                 namespace=namespace, configuration=configuration
             )
+        req_if_header = ReqIFHeaderParser.parse(xml_the_header)
 
         # Core content, contains req-if-content which contains all the actual
         # content.
@@ -130,6 +133,10 @@ class ReqIFStage1Parser:
         xml_specifications = xml_req_if_content.find("SPECIFICATIONS")
         assert xml_specifications is not None
 
+        tool_extensions_tag_exists = (
+            xml_reqif.find("TOOL-EXTENSIONS") is not None
+        )
+
         # Note: the other objects have to be present in a proper ReqIF file as
         # well, but these two are absolutely required.
         if xml_spec_types is None or xml_spec_objects is None:
@@ -139,6 +146,12 @@ class ReqIFStage1Parser:
         for xml_spec_object_type_xml in list(xml_spec_types):
             if xml_spec_object_type_xml.tag == "SPEC-OBJECT-TYPE":
                 spec_type = SpecObjectTypeParser.parse(xml_spec_object_type_xml)
+            elif xml_spec_object_type_xml.tag == "SPEC-RELATION-TYPE":
+                spec_type = SpecRelationTypeParser.parse(
+                    xml_spec_object_type_xml
+                )
+            else:
+                raise NotImplementedError
             spec_object_types.append(spec_type)
         specifications: List[ReqIFSpecification] = []
         if xml_specifications is not None:
@@ -164,14 +177,13 @@ class ReqIFStage1Parser:
             spec_objects.append(spec_object)
             spec_objects_lookup[spec_object.identifier] = spec_object
 
-        reqif_reqif_content = ReqIFReqIFContent(
-            spec_objects=spec_objects
-        )
+        reqif_reqif_content = ReqIFReqIFContent(spec_objects=spec_objects)
         core_content_or_none = ReqIFCoreContent(reqif_reqif_content)
 
         return ReqIFBundle(
             namespace=namespace,
             configuration=configuration,
+            req_if_header=req_if_header,
             core_content=core_content_or_none,
             data_types=data_types,
             spec_object_types=spec_object_types,
@@ -179,6 +191,7 @@ class ReqIFStage1Parser:
             spec_relations=spec_relations,
             spec_relations_parent_lookup=spec_relations_parent_lookup,
             specifications=specifications,
+            tool_extensions_tag_exists=tool_extensions_tag_exists,
         )
 
     @staticmethod
