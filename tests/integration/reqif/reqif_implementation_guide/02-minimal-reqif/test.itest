@@ -1,0 +1,2 @@
+RUN: %reqif passthrough %S/sample.reqif %S/output/sample.reqif
+RUN: diff %S/sample.reqif %S/output/sample.reqif

@@ -1,0 +1,46 @@
+[tool.poetry]
+name = "reqif"
+version = "0.0.1"
+description = "ReqIF Export/Import library."
+authors = ["Stanislav Pankevich <s.pankevich@gmail.com>"]
+maintainers = ["Stanislav Pankevich <s.pankevich@gmail.com>"]
+license = "Apache 2"
+readme = "README.md"
+homepage = ""
+repository = "https://github.com/strictdoc-project/reqif"
+documentation = "https://reqif.readthedocs.io/en/latest/index.html"
+keywords = [
+    "Documentation",
+    "Requirements management"
+]
+
+[tool.poetry.dependencies]
+python = "^3.6.2"
+beautifulsoup4 = '^4.9.3'
+lxml = '^4.6.2'
+
+[tool.poetry.dev-dependencies]
+black = "21.9b0"
+coverage = "^5.4"
+filecheck = "0.0.20"
+flake8 = "^3.9.2"
+invoke = "1.4.1"
+lit = '0.11.0.post1'
+mypy = "0.910"
+pytest = "^6.2.2"
+pylint = "2.11.1"
+sphinx = '^3.2.1'
+guzzle_sphinx_theme = "^0.7.11"
+
+
+# https://python-poetry.org/blog/announcing-poetry-1-1-0.html#standalone-build-backend
+# https://github.com/python-poetry/poetry/issues/3153#issuecomment-727196619
+[build-system]
+requires = ["setuptools", "poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.poetry.scripts]
+strictdoc = "reqif.cli.main:main"
+
+[tool.black]
+line-length = 80
