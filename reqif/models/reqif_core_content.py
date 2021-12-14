@@ -8,10 +8,7 @@ class ReqIFCoreContent:
         self.req_if_content: Optional[ReqIFReqIFContent] = req_if_content
 
     def __str__(self) -> str:
-        return (
-            f"ReqIFCoreContent("
-            f")"
-        )
+        return "ReqIFCoreContent()"
 
     def __repr__(self) -> str:
         return self.__str__()

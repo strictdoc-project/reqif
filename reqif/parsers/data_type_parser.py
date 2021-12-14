@@ -53,3 +53,21 @@ class DataTypeParser:
             return ReqIFDataTypeDefinitionString(identifier)
 
         raise NotImplementedError(etree.tostring(data_type_xml))
+
+    @staticmethod
+    def unparse(
+        data_type_definition: Union[
+            ReqIFDataTypeDefinitionString, ReqIFDataTypeDefinitionEnumeration
+        ]
+    ) -> str:
+        if isinstance(data_type_definition, ReqIFDataTypeDefinitionString):
+            return (
+                "        "
+                "<DATATYPE-DEFINITION-STRING "
+                f'IDENTIFIER="{data_type_definition.identifier}" '
+                'LAST-CHANGE="2021-10-14T10:11:59.495+02:00" '
+                'LONG-NAME="T_String32k" '
+                'MAX-LENGTH="32000"/>'
+                "\n"
+            )
+        raise NotImplementedError

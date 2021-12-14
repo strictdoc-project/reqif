@@ -1,6 +1,6 @@
 from xml.etree import ElementTree as etree
 
-from reqif.models.reqif_header import ReqIFHeader
+from reqif.models.reqif_reqif_header import ReqIFReqIFHeader
 from reqif.parsers.header_parser import (
     ReqIFHeaderParser,
 )
@@ -21,5 +21,5 @@ def test_01_title() -> None:
     xml_header = etree.fromstring(spec_type_string)
 
     header = ReqIFHeaderParser.parse(xml_header)
-    assert isinstance(header, ReqIFHeader)
+    assert isinstance(header, ReqIFReqIFHeader)
     assert header.title == "Subset026"
