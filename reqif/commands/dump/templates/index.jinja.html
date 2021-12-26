@@ -53,17 +53,23 @@
 <h3 class="level-3">&lt;REQ-IF-CONTENT&gt;</h3>
 
 <h4 class="level-4">&lt;DATATYPES&gt;</h4>
-    {% for data_type in reqif_bundle.data_types %}
-    <table class="level-5">
-      <tr>
-        <td>TITLE:</td>
-        <td>{{ data_type.identifier }}</td>
-      </tr>
-    </table>
-    {% endfor %}
+  {% if reqif_bundle.core_content %}
+  {% if reqif_bundle.core_content.req_if_content %}
+  {% for data_type in reqif_bundle.core_content.req_if_content.data_types %}
+  <table class="level-5">
+    <tr>
+      <td>TITLE:</td>
+      <td>{{ data_type.identifier }}</td>
+    </tr>
+  </table>
+  {% endfor %}
+  {% endif %}
+  {% endif %}
 
 <h4 class="level-4">&lt;SPEC-TYPES&gt;</h4>
-  {% for spec_type in reqif_bundle.spec_object_types %}
+  {% if reqif_bundle.core_content %}
+  {% if reqif_bundle.core_content.req_if_content %}
+  {% for spec_type in reqif_bundle.core_content.req_if_content.spec_types %}
     <table class="level-5">
       <tr>
         <td>TITLE:</td>
@@ -71,6 +77,8 @@
       </tr>
     </table>
   {% endfor %}
+  {% endif %}
+  {% endif %}
 
 <h4 class="level-4">&lt;SPEC-OBJECTS&gt;</h4>
 <h4 class="level-4">&lt;SPEC-RELATIONS&gt;</h4>
@@ -80,7 +88,10 @@
 
 <hr/>
 
-{% for specification in reqif_bundle.specifications %}
+{% if reqif_bundle.core_content %}
+{% if reqif_bundle.core_content.req_if_content %}
+
+{% for specification in reqif_bundle.core_content.req_if_content.specifications %}
   <h1>{{ specification.long_name }}</h1>
 
   {% for current_hierarchy in reqif_bundle.iterate_specification_hierarchy(specification) %}
@@ -123,5 +134,8 @@
     </table>
   {% endfor %}
 {% endfor %}
+
+{% endif %}
+{% endif %}
 </body>
 </html>

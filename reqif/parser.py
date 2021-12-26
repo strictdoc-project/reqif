@@ -177,7 +177,13 @@ class ReqIFStage1Parser:
             spec_objects.append(spec_object)
             spec_objects_lookup[spec_object.identifier] = spec_object
 
-        reqif_reqif_content = ReqIFReqIFContent(spec_objects=spec_objects)
+        reqif_reqif_content = ReqIFReqIFContent(
+            data_types=data_types,
+            spec_types=spec_object_types,
+            spec_objects=spec_objects,
+            spec_relations=spec_relations,
+            specifications=specifications,
+        )
         core_content_or_none = ReqIFCoreContent(reqif_reqif_content)
 
         return ReqIFBundle(
@@ -185,12 +191,8 @@ class ReqIFStage1Parser:
             configuration=configuration,
             req_if_header=req_if_header,
             core_content=core_content_or_none,
-            data_types=data_types,
-            spec_object_types=spec_object_types,
             spec_objects_lookup=spec_objects_lookup,
-            spec_relations=spec_relations,
             spec_relations_parent_lookup=spec_relations_parent_lookup,
-            specifications=specifications,
             tool_extensions_tag_exists=tool_extensions_tag_exists,
         )
 

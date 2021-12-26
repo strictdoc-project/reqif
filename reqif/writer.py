@@ -28,20 +28,20 @@ class ReqIFWriter:
 
         if bundle.core_content is not None:
             reqif_xml_output += "  <CORE-CONTENT>\n"
-            reqif_xml_output += "    <REQ-IF-CONTENT>\n"
-
             reqif_content = bundle.core_content.req_if_content
             if reqif_content:
-                if bundle.data_types:
+                reqif_xml_output += "    <REQ-IF-CONTENT>\n"
+
+                if reqif_content.data_types:
                     reqif_xml_output += "      <DATATYPES>\n"
-                    for data_type in bundle.data_types:
+                    for data_type in reqif_content.data_types:
                         reqif_xml_output += DataTypeParser.unparse(data_type)
 
                     reqif_xml_output += "      </DATATYPES>\n"
 
-                if bundle.spec_object_types:
+                if reqif_content.spec_types:
                     reqif_xml_output += "      <SPEC-TYPES>\n"
-                    for spec_type in bundle.spec_object_types:
+                    for spec_type in reqif_content.spec_types:
                         if isinstance(spec_type, ReqIFSpecObjectType):
                             reqif_xml_output += SpecObjectTypeParser.unparse(
                                 spec_type
@@ -63,20 +63,20 @@ class ReqIFWriter:
 
                     reqif_xml_output += "      </SPEC-OBJECTS>\n"
 
-            reqif_xml_output += "      <SPEC-RELATIONS>\n"
-            reqif_xml_output += "      </SPEC-RELATIONS>\n"
+                reqif_xml_output += "      <SPEC-RELATIONS>\n"
+                reqif_xml_output += "      </SPEC-RELATIONS>\n"
 
-            if bundle.specifications is not None:
-                reqif_xml_output += "      <SPECIFICATIONS>\n"
+                if reqif_content.specifications is not None:
+                    reqif_xml_output += "      <SPECIFICATIONS>\n"
 
-                for specification in bundle.specifications:
-                    reqif_xml_output += ReqIFSpecificationParser.unparse(
-                        specification
-                    )
+                    for specification in reqif_content.specifications:
+                        reqif_xml_output += ReqIFSpecificationParser.unparse(
+                            specification
+                        )
 
-                reqif_xml_output += "      </SPECIFICATIONS>\n"
+                    reqif_xml_output += "      </SPECIFICATIONS>\n"
 
-            reqif_xml_output += "    </REQ-IF-CONTENT>\n"
+                reqif_xml_output += "    </REQ-IF-CONTENT>\n"
             reqif_xml_output += "  </CORE-CONTENT>\n"
 
         if bundle.tool_extensions_tag_exists:
