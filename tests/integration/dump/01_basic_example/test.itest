@@ -1,3 +1,6 @@
+REQUIRES: PLATFORM_IS_NOT_WINDOWS
+
+RUN: mkdir -p %S/output
 RUN: %reqif dump %S/sample.reqif %S/output/sample.html
 
 RUN: cat %S/output/sample.html | filecheck %s --check-prefix=CHECK-HTML

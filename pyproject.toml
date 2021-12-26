@@ -30,8 +30,6 @@ lit = '0.11.0.post1'
 mypy = "0.910"
 pytest = "^6.2.2"
 pylint = "2.11.1"
-sphinx = '^3.2.1'
-guzzle_sphinx_theme = "^0.7.11"
 html5lib = '1.1'
 pytidylib = '0.3.2'
 
