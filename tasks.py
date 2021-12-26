@@ -106,14 +106,16 @@ def test_integration(context, focus=None, debug=False):
 def export_pip_requirements(context):
     run_invoke_cmd(
         context,
-        """
+        one_line_command(
+            """
         poetry
             export
                 --dev
                 --without-hashes
                 --format requirements.txt
                 > requirements.txt
-        """,
+        """
+        ),
     )
 
 
