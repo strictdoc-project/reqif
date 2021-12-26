@@ -10,6 +10,7 @@ try:
     sys.path.append(ROOT_PATH)
 
     from reqif.cli.cli_arg_parser import create_reqif_args_parser
+    from reqif.commands.dump.dump import DumpCommand
     from reqif.passthrough import ReqIFPassthrough
 
 except FileNotFoundError:
@@ -44,9 +45,10 @@ def main():
             sys.exit(1)
         with open(output_file, "w", encoding="UTF-8") as file:
             file.write(output)
-
+    elif parser.is_dump_command:
+        DumpCommand.execute(parser.get_dump_config())
     else:
-        raise NotImplementedError
+        raise NotImplementedError(parser) from None
 
 
 if __name__ == "__main__":

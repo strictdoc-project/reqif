@@ -1,0 +1,10 @@
+RUN: %reqif dump %S/sample.reqif %S/output/sample.html
+
+RUN: cat %S/output/sample.html | filecheck %s --check-prefix=CHECK-HTML
+
+CHECK-HTML:<meta charset="UTF-8"/>
+
+TODO: etree.parse fails on the "&nbsp;" surprisingly. Fix it later :(
+RUN: sed -i.bak 's/\&nbsp;/ /g' "%S/output/sample.html"
+
+RUN: %html_markup_validator "%S/output/sample.html"
