@@ -40,7 +40,7 @@ requires = ["setuptools", "poetry-core>=1.0.0"]
 build-backend = "poetry.core.masonry.api"
 
 [tool.poetry.scripts]
-strictdoc = "reqif.cli.main:main"
+reqif = "reqif.cli.main:main"
 
 [tool.black]
 line-length = 80
