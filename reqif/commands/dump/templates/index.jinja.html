@@ -81,19 +81,37 @@
 <hr/>
 
 {% for specification in reqif_bundle.specifications %}
+  <h1>{{ specification.long_name }}</h1>
+
   {% for current_hierarchy in reqif_bundle.iterate_specification_hierarchy(specification) %}
 
     {% set spec_object = reqif_bundle.get_spec_object_by_ref(current_hierarchy.spec_object) %}
 
     <table>
       <tr>
-        <td colspan="2">
+        <td style="text-align: center;" colspan="2">
+          &lt;SPEC-OBJECT&gt;
+        </td>
+      </tr>
+      <tr>
+        <td>
+          &lt;SPEC-OBJECT-TYPE&gt;
+        </td>
+        <td>
           {{ spec_object.spec_object_type }}
         </td>
       </tr>
       <tr>
-        <td colspan="2">
+        <td>
+          IDENTIFIER
+        </td>
+        <td>
           {{ spec_object.identifier }}
+        </td>
+      </tr>
+      <tr>
+        <td style="text-align: center;" colspan="2">
+          &lt;VALUES&gt;
         </td>
       </tr>
     {% for attribute in spec_object.attributes %}
