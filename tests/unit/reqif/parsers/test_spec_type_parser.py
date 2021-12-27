@@ -10,7 +10,7 @@ from reqif.parsers.spec_object_type_parser import (
 
 def test_01_nominal_case() -> None:
     spec_type_string = """
-<SPEC-OBJECT-TYPE IDENTIFIER="_gFhrWmojEeuExICsU7Acmg" LAST-CHANGE="2021-02-08T16:37:07.454+01:00" LONG-NAME="FUNCTIONAL">
+<SPEC-OBJECT-TYPE IDENTIFIER="TEST_SPEC_OBJECT_TYPE_ID" LAST-CHANGE="2021-02-08T16:37:07.454+01:00" LONG-NAME="TEST_SPEC_OBJECT_TYPE_LONG_NAME">
   <SPEC-ATTRIBUTES>
     <ATTRIBUTE-DEFINITION-STRING IDENTIFIER="_gFhrW2ojEeuExICsU7Acmg" LAST-CHANGE="2021-02-08T16:37:07.454+01:00" LONG-NAME="ReqIF.ForeignID">
       <TYPE>
@@ -30,8 +30,8 @@ def test_01_nominal_case() -> None:
 
     reqif_spec_object_type = SpecObjectTypeParser.parse(spec_type_xml)
     assert isinstance(reqif_spec_object_type, ReqIFSpecObjectType)
-    assert reqif_spec_object_type.identifier == "_gFhrWmojEeuExICsU7Acmg"
-    assert reqif_spec_object_type.long_name == "FUNCTIONAL"
+    assert reqif_spec_object_type.identifier == "TEST_SPEC_OBJECT_TYPE_ID"
+    assert reqif_spec_object_type.long_name == "TEST_SPEC_OBJECT_TYPE_LONG_NAME"
     attribute_map = reqif_spec_object_type.attribute_map
     assert len(attribute_map) == 2
     assert attribute_map.get("_gFhrW2ojEeuExICsU7Acmg") == "ReqIF.ForeignID"
@@ -40,7 +40,7 @@ def test_01_nominal_case() -> None:
 
 def test_02_integer_attribute_definition() -> None:
     spec_type_string = """
-<SPEC-OBJECT-TYPE IDENTIFIER="_gFhrWmojEeuExICsU7Acmg" LAST-CHANGE="2021-02-08T16:37:07.454+01:00" LONG-NAME="FUNCTIONAL">
+<SPEC-OBJECT-TYPE IDENTIFIER="TEST_SPEC_OBJECT_TYPE_ID" LAST-CHANGE="2021-02-08T16:37:07.454+01:00" LONG-NAME="TEST_SPEC_OBJECT_TYPE_LONG_NAME">
   <SPEC-ATTRIBUTES>
     <ATTRIBUTE-DEFINITION-INTEGER IDENTIFIER="TEST_INTEGER_ATTRIBUTE_ID" LONG-NAME="IntegerAttributeId" IS-EDITABLE="false">
       <TYPE>
@@ -54,10 +54,67 @@ def test_02_integer_attribute_definition() -> None:
 
     reqif_spec_object_type = SpecObjectTypeParser.parse(spec_type_xml)
     assert isinstance(reqif_spec_object_type, ReqIFSpecObjectType)
-    assert reqif_spec_object_type.identifier == "_gFhrWmojEeuExICsU7Acmg"
-    assert reqif_spec_object_type.long_name == "FUNCTIONAL"
+    assert reqif_spec_object_type.identifier == "TEST_SPEC_OBJECT_TYPE_ID"
+    assert reqif_spec_object_type.long_name == "TEST_SPEC_OBJECT_TYPE_LONG_NAME"
     attribute_map = reqif_spec_object_type.attribute_map
     assert len(attribute_map) == 1
     assert (
         attribute_map.get("TEST_INTEGER_ATTRIBUTE_ID") == "IntegerAttributeId"
+    )
+
+
+def test_03_boolean_attribute_definition() -> None:
+    spec_type_string = """
+<SPEC-OBJECT-TYPE IDENTIFIER="TEST_SPEC_OBJECT_TYPE_ID" LAST-CHANGE="2021-02-08T16:37:07.454+01:00" LONG-NAME="TEST_SPEC_OBJECT_TYPE_LONG_NAME">
+  <SPEC-ATTRIBUTES>
+    <ATTRIBUTE-DEFINITION-BOOLEAN IDENTIFIER="TEST_BOOLEAN_ATTRIBUTE_ID" LAST-CHANGE="2015-12-14T02:04:51.768+01:00" LONG-NAME="BooleanAttributeId" IS-EDITABLE="true">
+      <TYPE>
+        <DATATYPE-DEFINITION-BOOLEAN-REF>TEST_BOOLEAN_TYPE</DATATYPE-DEFINITION-BOOLEAN-REF>
+      </TYPE>
+      <DEFAULT-VALUE>
+        <ATTRIBUTE-VALUE-BOOLEAN THE-VALUE="false">
+          <DEFINITION>
+            <ATTRIBUTE-DEFINITION-BOOLEAN-REF>_stype_requirement_atomic</ATTRIBUTE-DEFINITION-BOOLEAN-REF>
+          </DEFINITION>
+        </ATTRIBUTE-VALUE-BOOLEAN>
+      </DEFAULT-VALUE>
+    </ATTRIBUTE-DEFINITION-BOOLEAN>
+  </SPEC-ATTRIBUTES>
+</SPEC-OBJECT-TYPE>
+    """  # noqa: E501
+    spec_type_xml = etree.fromstring(spec_type_string)
+
+    reqif_spec_object_type = SpecObjectTypeParser.parse(spec_type_xml)
+    assert isinstance(reqif_spec_object_type, ReqIFSpecObjectType)
+    assert reqif_spec_object_type.identifier == "TEST_SPEC_OBJECT_TYPE_ID"
+    assert reqif_spec_object_type.long_name == "TEST_SPEC_OBJECT_TYPE_LONG_NAME"
+    attribute_map = reqif_spec_object_type.attribute_map
+    assert len(attribute_map) == 1
+    assert (
+        attribute_map.get("TEST_BOOLEAN_ATTRIBUTE_ID") == "BooleanAttributeId"
+    )
+
+
+def test_04_xhtml_attribute_definition() -> None:
+    spec_type_string = """
+<SPEC-OBJECT-TYPE IDENTIFIER="TEST_SPEC_OBJECT_TYPE_ID" LAST-CHANGE="2021-02-08T16:37:07.454+01:00" LONG-NAME="TEST_SPEC_OBJECT_TYPE_LONG_NAME">
+  <SPEC-ATTRIBUTES>
+    <ATTRIBUTE-DEFINITION-XHTML IDENTIFIER="TEST_XHTML_ATTRIBUTE_ID" LAST-CHANGE="2015-12-14T02:04:51.768+01:00" LONG-NAME="TEST_XHTML_ATTRIBUTE_LONG_NAME" IS-EDITABLE="false">
+      <TYPE>
+        <DATATYPE-DEFINITION-XHTML-REF>TEST_XHTML_ATTRIBUTE_DATATYPE_REF</DATATYPE-DEFINITION-XHTML-REF>
+      </TYPE>
+    </ATTRIBUTE-DEFINITION-XHTML>
+  </SPEC-ATTRIBUTES>
+</SPEC-OBJECT-TYPE>
+    """  # noqa: E501
+    spec_type_xml = etree.fromstring(spec_type_string)
+
+    reqif_spec_object_type = SpecObjectTypeParser.parse(spec_type_xml)
+    assert isinstance(reqif_spec_object_type, ReqIFSpecObjectType)
+    assert reqif_spec_object_type.identifier == "TEST_SPEC_OBJECT_TYPE_ID"
+    assert reqif_spec_object_type.long_name == "TEST_SPEC_OBJECT_TYPE_LONG_NAME"
+    attribute_map = reqif_spec_object_type.attribute_map
+    assert (
+        attribute_map.get("TEST_XHTML_ATTRIBUTE_ID")
+        == "TEST_XHTML_ATTRIBUTE_LONG_NAME"
     )

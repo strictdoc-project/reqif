@@ -11,12 +11,16 @@ class SpecAttributeDefinition:
         last_change: Optional[str],
         datatype_definition: str,
         long_name: str,
+        editable: Optional[bool],
     ):
         self.attribute_type: SpecObjectAttributeType = attribute_type
         self.identifier: str = identifier
         self.last_change: Optional[str] = last_change
         self.datatype_definition: str = datatype_definition
         self.long_name: str = long_name
+        self.editable: Optional[bool] = (
+            editable == "true" if editable is not None else None
+        )
 
     def __str__(self) -> str:
         return (
@@ -38,14 +42,16 @@ class SpecAttributeDefinition:
 
 
 class ReqIFSpecObjectType:
-    def __init__(
+    def __init__(  # pylint: disable=too-many-arguments
         self,
         identifier,
+        last_change: str,
         long_name,
         attribute_definitions: List[SpecAttributeDefinition],
         attribute_map,
     ):
         self.identifier = identifier
+        self.last_change = last_change
         self.long_name = long_name
         self.attribute_definitions: List[
             SpecAttributeDefinition

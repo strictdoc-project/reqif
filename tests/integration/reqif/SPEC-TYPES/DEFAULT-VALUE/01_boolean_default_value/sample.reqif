@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<REQ-IF xmlns="http://www.omg.org/spec/ReqIF/20110401/reqif.xsd" xmlns:configuration="http://eclipse.org/rmf/pror/toolextensions/1.0">
+  <CORE-CONTENT>
+    <REQ-IF-CONTENT>
+      <SPEC-TYPES>
+        <SPEC-OBJECT-TYPE IDENTIFIER="TEST_SPEC_OBJECT_TYPE_ID" LAST-CHANGE="2021-02-08T16:37:07.454+01:00" LONG-NAME="TEST_SPEC_OBJECT_TYPE_LONG_NAME">
+          <SPEC-ATTRIBUTES>
+            <ATTRIBUTE-DEFINITION-BOOLEAN IDENTIFIER="TEST_BOOLEAN_ATTRIBUTE_ID" LAST-CHANGE="2015-12-14T02:04:51.768+01:00" LONG-NAME="BooleanAttributeId" IS-EDITABLE="true">
+              <TYPE>
+                <DATATYPE-DEFINITION-BOOLEAN-REF>TEST_BOOLEAN_TYPE</DATATYPE-DEFINITION-BOOLEAN-REF>
+              </TYPE>
+              <DEFAULT-VALUE>
+                <ATTRIBUTE-VALUE-BOOLEAN THE-VALUE="false">
+                  <DEFINITION>
+                    <ATTRIBUTE-DEFINITION-BOOLEAN-REF>_stype_requirement_atomic</ATTRIBUTE-DEFINITION-BOOLEAN-REF>
+                  </DEFINITION>
+                </ATTRIBUTE-VALUE-BOOLEAN>
+              </DEFAULT-VALUE>
+            </ATTRIBUTE-DEFINITION-BOOLEAN>
+          </SPEC-ATTRIBUTES>
+        </SPEC-OBJECT-TYPE>
+      </SPEC-TYPES>
+    </REQ-IF-CONTENT>
+  </CORE-CONTENT>
+</REQ-IF>
