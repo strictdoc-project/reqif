@@ -118,3 +118,28 @@ def test_04_xhtml_attribute_definition() -> None:
         attribute_map.get("TEST_XHTML_ATTRIBUTE_ID")
         == "TEST_XHTML_ATTRIBUTE_LONG_NAME"
     )
+
+
+def test_05_enumeration_attribute_definition() -> None:
+    spec_type_string = """
+<SPEC-OBJECT-TYPE IDENTIFIER="TEST_SPEC_OBJECT_TYPE_ID" LAST-CHANGE="2021-02-08T16:37:07.454+01:00" LONG-NAME="TEST_SPEC_OBJECT_TYPE_LONG_NAME">
+  <SPEC-ATTRIBUTES>
+   <ATTRIBUTE-DEFINITION-ENUMERATION IDENTIFIER="TEST_ENUMERATION_ATTRIBUTE_ID" LAST-CHANGE="2015-12-14T02:04:51.768+01:00" LONG-NAME="TEST_ENUMERATION_ATTRIBUTE_LONG_NAME" IS-EDITABLE="true" MULTI-VALUED="false">
+      <TYPE>
+        <DATATYPE-DEFINITION-ENUMERATION-REF>TEST_ENUMERATION_ATTRIBUTE_DATATYPE_REF</DATATYPE-DEFINITION-ENUMERATION-REF>
+      </TYPE>
+    </ATTRIBUTE-DEFINITION-ENUMERATION>
+  </SPEC-ATTRIBUTES>
+</SPEC-OBJECT-TYPE>
+    """  # noqa: E501
+    spec_type_xml = etree.fromstring(spec_type_string)
+
+    reqif_spec_object_type = SpecObjectTypeParser.parse(spec_type_xml)
+    assert isinstance(reqif_spec_object_type, ReqIFSpecObjectType)
+    assert reqif_spec_object_type.identifier == "TEST_SPEC_OBJECT_TYPE_ID"
+    assert reqif_spec_object_type.long_name == "TEST_SPEC_OBJECT_TYPE_LONG_NAME"
+    attribute_map = reqif_spec_object_type.attribute_map
+    assert (
+        attribute_map.get("TEST_ENUMERATION_ATTRIBUTE_ID")
+        == "TEST_ENUMERATION_ATTRIBUTE_LONG_NAME"
+    )
