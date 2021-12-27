@@ -92,6 +92,18 @@ class SpecObjectTypeParser:
                     raise NotImplementedError(
                         attribute_definition
                     ) from exception
+            elif attribute_definition.tag == "ATTRIBUTE-DEFINITION-ENUMERATION":
+                attribute_type = SpecObjectAttributeType.ENUMERATION
+                try:
+                    datatype_definition = (
+                        attribute_definition.find("TYPE")
+                        .find("DATATYPE-DEFINITION-ENUMERATION-REF")
+                        .text
+                    )
+                except Exception as exception:
+                    raise NotImplementedError(
+                        attribute_definition
+                    ) from exception
             else:
                 raise NotImplementedError(attribute_definition) from None
             attribute_definition = SpecAttributeDefinition(
