@@ -3,7 +3,7 @@ from xml.etree import ElementTree as etree
 from reqif.models.reqif_spec_object_type import (
     ReqIFSpecObjectType,
 )
-from reqif.parsers.spec_object_type_parser import (
+from reqif.parsers.spec_types.spec_object_type_parser import (
     SpecObjectTypeParser,
 )
 

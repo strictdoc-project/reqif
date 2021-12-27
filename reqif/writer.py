@@ -1,10 +1,18 @@
 from reqif.models.reqif_spec_object_type import ReqIFSpecObjectType
 from reqif.models.reqif_spec_relation_type import ReqIFSpecRelationType
+from reqif.models.reqif_specification_type import ReqIFSpecificationType
 from reqif.parsers.data_type_parser import DataTypeParser
 from reqif.parsers.header_parser import ReqIFHeaderParser
 from reqif.parsers.spec_object_parser import SpecObjectParser
-from reqif.parsers.spec_object_type_parser import SpecObjectTypeParser
-from reqif.parsers.spec_relation_type_parser import SpecRelationTypeParser
+from reqif.parsers.spec_types.spec_object_type_parser import (
+    SpecObjectTypeParser,
+)
+from reqif.parsers.spec_types.spec_relation_type_parser import (
+    SpecRelationTypeParser,
+)
+from reqif.parsers.spec_types.specification_type_parser import (
+    SpecificationTypeParser,
+)
 from reqif.parsers.specification_parser import ReqIFSpecificationParser
 from reqif.reqif_bundle import ReqIFBundle
 
@@ -47,6 +55,10 @@ class ReqIFWriter:
                             )
                         elif isinstance(spec_type, ReqIFSpecRelationType):
                             reqif_xml_output += SpecRelationTypeParser.unparse(
+                                spec_type
+                            )
+                        elif isinstance(spec_type, ReqIFSpecificationType):
+                            reqif_xml_output += SpecificationTypeParser.unparse(
                                 spec_type
                             )
 
