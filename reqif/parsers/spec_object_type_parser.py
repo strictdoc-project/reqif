@@ -29,18 +29,19 @@ class SpecObjectTypeParser:
         spec_attributes = list(spec_object_type_xml)[0]
         attribute_definitions: List[SpecAttributeDefinition] = []
         for attribute_definition in spec_attributes:
-            try:
-                long_name = attribute_definition.attrib["LONG-NAME"]
-                identifier = attribute_definition.attrib["IDENTIFIER"]
-                last_change = attribute_definition.attrib["LAST-CHANGE"]
-                datatype_definition = (
-                    attribute_definition.find("TYPE")
-                    .find("DATATYPE-DEFINITION-STRING-REF")
-                    .text
-                )
-            except Exception:
-                raise NotImplementedError(attribute_definition) from None
             if attribute_definition.tag == "ATTRIBUTE-DEFINITION-STRING":
+                try:
+                    long_name = attribute_definition.attrib["LONG-NAME"]
+                    identifier = attribute_definition.attrib["IDENTIFIER"]
+                    last_change = attribute_definition.attrib["LAST-CHANGE"]
+                    datatype_definition = (
+                        attribute_definition.find("TYPE")
+                        .find("DATATYPE-DEFINITION-STRING-REF")
+                        .text
+                    )
+                except Exception:
+                    raise NotImplementedError(attribute_definition) from None
+
                 attribute_definition = SpecAttributeDefinition(
                     attribute_type=SpecObjectAttributeType.STRING,
                     identifier=identifier,
@@ -48,8 +49,34 @@ class SpecObjectTypeParser:
                     datatype_definition=datatype_definition,
                     long_name=long_name,
                 )
+            elif attribute_definition.tag == "ATTRIBUTE-DEFINITION-INTEGER":
+                try:
+                    long_name = attribute_definition.attrib["LONG-NAME"]
+                    identifier = attribute_definition.attrib["IDENTIFIER"]
+                    last_change = (
+                        attribute_definition.attrib["LAST-CHANGE"]
+                        if "LAST-CHANGE" in attribute_definition.attrib
+                        else None
+                    )
+                    datatype_definition = (
+                        attribute_definition.find("TYPE")
+                        .find("DATATYPE-DEFINITION-INTEGER-REF")
+                        .text
+                    )
+                except Exception as exception:
+                    raise NotImplementedError(
+                        attribute_definition
+                    ) from exception
+
+                attribute_definition = SpecAttributeDefinition(
+                    attribute_type=SpecObjectAttributeType.INTEGER,
+                    identifier=identifier,
+                    last_change=last_change,
+                    datatype_definition=datatype_definition,
+                    long_name=long_name,
+                )
             else:
-                raise NotImplementedError
+                raise NotImplementedError(attribute_definition) from None
             attribute_definitions.append(attribute_definition)
             attribute_map[identifier] = long_name
 
@@ -77,7 +104,6 @@ class SpecObjectTypeParser:
 
         for attribute in spec_type.attribute_definitions:
             if attribute.attribute_type == SpecObjectAttributeType.STRING:
-
                 output += (
                     "            "
                     "<ATTRIBUTE-DEFINITION-STRING "
@@ -87,7 +113,6 @@ class SpecObjectTypeParser:
                     "\n"
                 )
                 output += "              <TYPE>\n"
-
                 output += (
                     "                "
                     "<DATATYPE-DEFINITION-STRING-REF>"
@@ -95,12 +120,31 @@ class SpecObjectTypeParser:
                     "</DATATYPE-DEFINITION-STRING-REF>"
                     "\n"
                 )
-
                 output += "              </TYPE>\n"
-
                 output += "            </ATTRIBUTE-DEFINITION-STRING>\n"
+            elif attribute.attribute_type == SpecObjectAttributeType.INTEGER:
+                output += (
+                    "            "
+                    "<ATTRIBUTE-DEFINITION-INTEGER "
+                    f'IDENTIFIER="{attribute.identifier}" '
+                )
+
+                if attribute.last_change:
+                    output += f'LAST-CHANGE="{attribute.last_change}" '
+
+                output += f'LONG-NAME="{attribute.long_name}">' "\n"
+                output += "              <TYPE>\n"
+                output += (
+                    "                "
+                    "<DATATYPE-DEFINITION-INTEGER-REF>"
+                    f"{attribute.datatype_definition}"
+                    "</DATATYPE-DEFINITION-INTEGER-REF>"
+                    "\n"
+                )
+                output += "              </TYPE>\n"
+                output += "            </ATTRIBUTE-DEFINITION-INTEGER>\n"
             else:
-                raise NotImplementedError
+                raise NotImplementedError(attribute) from None
 
         output += "          </SPEC-ATTRIBUTES>\n"
 

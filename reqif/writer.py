@@ -32,14 +32,13 @@ class ReqIFWriter:
             if reqif_content:
                 reqif_xml_output += "    <REQ-IF-CONTENT>\n"
 
-                if reqif_content.data_types:
+                if reqif_content.data_types is not None:
                     reqif_xml_output += "      <DATATYPES>\n"
                     for data_type in reqif_content.data_types:
                         reqif_xml_output += DataTypeParser.unparse(data_type)
-
                     reqif_xml_output += "      </DATATYPES>\n"
 
-                if reqif_content.spec_types:
+                if reqif_content.spec_types is not None:
                     reqif_xml_output += "      <SPEC-TYPES>\n"
                     for spec_type in reqif_content.spec_types:
                         if isinstance(spec_type, ReqIFSpecObjectType):
@@ -63,8 +62,9 @@ class ReqIFWriter:
 
                     reqif_xml_output += "      </SPEC-OBJECTS>\n"
 
-                reqif_xml_output += "      <SPEC-RELATIONS>\n"
-                reqif_xml_output += "      </SPEC-RELATIONS>\n"
+                if reqif_content.spec_relations is not None:
+                    reqif_xml_output += "      <SPEC-RELATIONS>\n"
+                    reqif_xml_output += "      </SPEC-RELATIONS>\n"
 
                 if reqif_content.specifications is not None:
                     reqif_xml_output += "      <SPECIFICATIONS>\n"
