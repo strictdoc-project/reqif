@@ -21,13 +21,18 @@ from reqif.parsers.header_parser import ReqIFHeaderParser
 from reqif.parsers.spec_object_parser import (
     SpecObjectParser,
 )
-from reqif.parsers.spec_object_type_parser import (
+from reqif.parsers.spec_types.spec_object_type_parser import (
     SpecObjectTypeParser,
 )
 from reqif.parsers.spec_relation_parser import (
     SpecRelationParser,
 )
-from reqif.parsers.spec_relation_type_parser import SpecRelationTypeParser
+from reqif.parsers.spec_types.spec_relation_type_parser import (
+    SpecRelationTypeParser,
+)
+from reqif.parsers.spec_types.specification_type_parser import (
+    SpecificationTypeParser,
+)
 from reqif.parsers.specification_parser import (
     ReqIFSpecificationParser,
 )
@@ -145,6 +150,10 @@ class ReqIFStage1Parser:
                     )
                 elif xml_spec_object_type_xml.tag == "SPEC-RELATION-TYPE":
                     spec_type = SpecRelationTypeParser.parse(
+                        xml_spec_object_type_xml
+                    )
+                elif xml_spec_object_type_xml.tag == "SPECIFICATION-TYPE":
+                    spec_type = SpecificationTypeParser.parse(
                         xml_spec_object_type_xml
                     )
                 else:
