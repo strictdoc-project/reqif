@@ -148,7 +148,9 @@ class ReqIFStage1Parser:
                         xml_spec_object_type_xml
                     )
                 else:
-                    raise NotImplementedError
+                    raise NotImplementedError(
+                        xml_spec_object_type_xml
+                    ) from None
                 spec_types.append(spec_type)
 
         # <SPECIFICATIONS>
