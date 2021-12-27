@@ -90,7 +90,7 @@ class ReqIFStage1Parser:
         xml_core_content = xml_reqif.find("CORE-CONTENT")
         if xml_core_content is not None:
             xml_req_if_content = xml_core_content.find("REQ-IF-CONTENT")
-            if xml_req_if_content:
+            if xml_req_if_content is not None:
                 reqif_content, lookup = ReqIFStage1Parser.parse_reqif_content(
                     xml_req_if_content
                 )
