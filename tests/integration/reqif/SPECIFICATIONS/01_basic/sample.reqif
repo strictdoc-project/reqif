@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<REQ-IF xmlns="http://www.omg.org/spec/ReqIF/20110401/reqif.xsd" xmlns:configuration="http://eclipse.org/rmf/pror/toolextensions/1.0">
+  <CORE-CONTENT>
+    <REQ-IF-CONTENT>
+      <SPECIFICATIONS>
+        <SPECIFICATION IDENTIFIER="_Z5pgiizGEey_QIvU1w5Ozg" LAST-CHANGE="2021-10-14T10:11:59.495+02:00" LONG-NAME="Specification Document">
+          <VALUES/>
+          <TYPE>
+            <SPECIFICATION-TYPE-REF>_Z5pghizGEey_QIvU1w5Ozg</SPECIFICATION-TYPE-REF>
+          </TYPE>
+          <CHILDREN>
+            <SPEC-HIERARCHY IDENTIFIER="_eDzeoC2IEeyvlO4vtsM_UA" LAST-CHANGE="2021-10-15T09:21:00.153+02:00">
+              <OBJECT>
+                <SPEC-OBJECT-REF>TEST_SPEC_OBJECT_IDENTIFIER</SPEC-OBJECT-REF>
+              </OBJECT>
+              <CHILDREN>
+              </CHILDREN>
+            </SPEC-HIERARCHY>
+          </CHILDREN>
+        </SPECIFICATION>
+      </SPECIFICATIONS>
+    </REQ-IF-CONTENT>
+  </CORE-CONTENT>
+</REQ-IF>

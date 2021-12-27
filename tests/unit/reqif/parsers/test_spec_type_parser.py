@@ -36,3 +36,28 @@ def test_01_nominal_case() -> None:
     assert len(attribute_map) == 2
     assert attribute_map.get("_gFhrW2ojEeuExICsU7Acmg") == "ReqIF.ForeignID"
     assert attribute_map.get("_aqZG4GxpEeuaU7fHySy8Bw") == "NOTES"
+
+
+def test_02_integer_attribute_definition() -> None:
+    spec_type_string = """
+<SPEC-OBJECT-TYPE IDENTIFIER="_gFhrWmojEeuExICsU7Acmg" LAST-CHANGE="2021-02-08T16:37:07.454+01:00" LONG-NAME="FUNCTIONAL">
+  <SPEC-ATTRIBUTES>
+    <ATTRIBUTE-DEFINITION-INTEGER IDENTIFIER="TEST_INTEGER_ATTRIBUTE_ID" LONG-NAME="IntegerAttributeId" IS-EDITABLE="false">
+      <TYPE>
+        <DATATYPE-DEFINITION-INTEGER-REF>TEST_INTEGER_TYPE</DATATYPE-DEFINITION-INTEGER-REF>
+      </TYPE>
+    </ATTRIBUTE-DEFINITION-INTEGER>
+  </SPEC-ATTRIBUTES>
+</SPEC-OBJECT-TYPE>
+    """  # noqa: E501
+    spec_type_xml = etree.fromstring(spec_type_string)
+
+    reqif_spec_object_type = SpecObjectTypeParser.parse(spec_type_xml)
+    assert isinstance(reqif_spec_object_type, ReqIFSpecObjectType)
+    assert reqif_spec_object_type.identifier == "_gFhrWmojEeuExICsU7Acmg"
+    assert reqif_spec_object_type.long_name == "FUNCTIONAL"
+    attribute_map = reqif_spec_object_type.attribute_map
+    assert len(attribute_map) == 1
+    assert (
+        attribute_map.get("TEST_INTEGER_ATTRIBUTE_ID") == "IntegerAttributeId"
+    )

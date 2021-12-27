@@ -1,15 +1,19 @@
 import io
 import sys
 from collections import defaultdict
-from typing import List, Optional
+from typing import List, Optional, Dict
 
 from lxml import etree
 
 from reqif.models.reqif_core_content import ReqIFCoreContent
 from reqif.models.reqif_req_if_content import ReqIFReqIFContent
+from reqif.models.reqif_reqif_header import ReqIFReqIFHeader
+from reqif.models.reqif_spec_object import ReqIFSpecObject
+from reqif.models.reqif_spec_relation import ReqIFSpecRelation
 from reqif.models.reqif_specification import (
     ReqIFSpecification,
 )
+from reqif.object_lookup import ReqIFObjectLookup
 from reqif.parsers.data_type_parser import (
     DataTypeParser,
 )
@@ -73,128 +77,130 @@ class ReqIFStage1Parser:
                 namespace=namespace, configuration=configuration
             )
 
-        # Getting all structural elements from the ReqIF tree.
-        # TODO: The header, containing metadata about the document.
+        # <THE-HEADER>
+        req_if_header: Optional[ReqIFReqIFHeader] = None
         xml_the_header = xml_reqif.find("THE-HEADER")
-        if xml_the_header is None:
-            return ReqIFBundle.create_empty(
-                namespace=namespace, configuration=configuration
-            )
-        req_if_header = ReqIFHeaderParser.parse(xml_the_header)
+        if xml_the_header is not None:
+            req_if_header = ReqIFHeaderParser.parse(xml_the_header)
 
-        # Core content, contains req-if-content which contains all the actual
-        # content.
+        # <CORE-CONTENT>
+        # <REQ-IF-CONTENT>
+        core_content: Optional[ReqIFCoreContent] = None
+        lookup: Optional[ReqIFObjectLookup] = None
         xml_core_content = xml_reqif.find("CORE-CONTENT")
-        if xml_core_content is None:
-            raise NotImplementedError(xml_core_content)
+        if xml_core_content is not None:
+            xml_req_if_content = xml_core_content.find("REQ-IF-CONTENT")
+            if xml_req_if_content:
+                reqif_content, lookup = ReqIFStage1Parser.parse_reqif_content(
+                    xml_req_if_content
+                )
+                core_content = ReqIFCoreContent(req_if_content=reqif_content)
+            else:
+                core_content = ReqIFCoreContent(req_if_content=None)
 
         # TODO: Tool extensions contains information specific to the tool used
         # to create the ReqIF file.
         # element_tool_extensions = xml_reqif.find(
         #     "TOOL-EXTENSIONS", namespace_dict
         # )
-
-        # req-if-content contains the requirements and structure
-        xml_req_if_content = xml_core_content.find("REQ-IF-CONTENT")
-        assert xml_req_if_content is not None
-
-        xml_data_types = xml_req_if_content.find("DATATYPES")
-        assert xml_data_types is not None
-
-        data_types = []
-        data_types_lookup = {}
-        for xml_data_type in list(xml_data_types):
-            data_type = DataTypeParser.parse(xml_data_type)
-            data_types.append(data_type)
-            data_types_lookup[data_type.identifier] = data_type
-
-        # Spec types contains the spectypes, basically blueprints for spec
-        # objects. Spec types use datatypes to define the kind of information
-        # stored.
-        xml_spec_types = xml_req_if_content.find("SPEC-TYPES")
-
-        # spec-objects contains specobjects, which are the actual requirements.
-        # every specobject must have a spec_type which defines its structure
-        xml_spec_objects = xml_req_if_content.find("SPEC-OBJECTS")
-        assert xml_spec_objects is not None
-
-        # Spec-relations contains arbitrarily defined relations between spec
-        # objects. These relations may be grouped into relation groups which
-        # have user-defined meaning.
-        xml_spec_relations = xml_req_if_content.find("SPEC-RELATIONS")
-        xml_spec_relations = (
-            xml_spec_relations if xml_spec_relations is not None else []
-        )
-
-        # Specifications contains one or more specification elements.
-        # Each specification element contains a tree of spec-hierarchy elements
-        # that represents the basic structure of the document each
-        # spec-hierarchy element contains a spec-object.
-        xml_specifications = xml_req_if_content.find("SPECIFICATIONS")
-        assert xml_specifications is not None
-
         tool_extensions_tag_exists = (
             xml_reqif.find("TOOL-EXTENSIONS") is not None
         )
 
-        # Note: the other objects have to be present in a proper ReqIF file as
-        # well, but these two are absolutely required.
-        if xml_spec_types is None or xml_spec_objects is None:
-            raise NotImplementedError
+        return ReqIFBundle(
+            namespace=namespace,
+            configuration=configuration,
+            req_if_header=req_if_header,
+            core_content=core_content,
+            tool_extensions_tag_exists=tool_extensions_tag_exists,
+            lookup=lookup,
+        )
 
-        spec_object_types = []
-        for xml_spec_object_type_xml in list(xml_spec_types):
-            if xml_spec_object_type_xml.tag == "SPEC-OBJECT-TYPE":
-                spec_type = SpecObjectTypeParser.parse(xml_spec_object_type_xml)
-            elif xml_spec_object_type_xml.tag == "SPEC-RELATION-TYPE":
-                spec_type = SpecRelationTypeParser.parse(
-                    xml_spec_object_type_xml
-                )
-            else:
-                raise NotImplementedError
-            spec_object_types.append(spec_type)
-        specifications: List[ReqIFSpecification] = []
+    @staticmethod
+    def parse_reqif_content(
+        xml_req_if_content,
+    ) -> (ReqIFReqIFContent, ReqIFObjectLookup):
+        assert xml_req_if_content is not None
+        assert xml_req_if_content.tag == "REQ-IF-CONTENT"
+
+        data_types: Optional[List] = None
+        data_types_lookup: Optional[Dict] = None
+        xml_data_types = xml_req_if_content.find("DATATYPES")
+        if xml_data_types is not None:
+            data_types = []
+            data_types_lookup = {}
+            for xml_data_type in list(xml_data_types):
+                data_type = DataTypeParser.parse(xml_data_type)
+                data_types.append(data_type)
+                data_types_lookup[data_type.identifier] = data_type
+
+        spec_types = None
+        xml_spec_types = xml_req_if_content.find("SPEC-TYPES")
+        if xml_spec_types is not None:
+            spec_types = []
+            for xml_spec_object_type_xml in list(xml_spec_types):
+                if xml_spec_object_type_xml.tag == "SPEC-OBJECT-TYPE":
+                    spec_type = SpecObjectTypeParser.parse(
+                        xml_spec_object_type_xml
+                    )
+                elif xml_spec_object_type_xml.tag == "SPEC-RELATION-TYPE":
+                    spec_type = SpecRelationTypeParser.parse(
+                        xml_spec_object_type_xml
+                    )
+                else:
+                    raise NotImplementedError
+                spec_types.append(spec_type)
+
+        # <SPECIFICATIONS>
+        specifications: Optional[List[ReqIFSpecification]] = None
+        xml_specifications = xml_req_if_content.find("SPECIFICATIONS")
         if xml_specifications is not None:
+            specifications = []
             for xml_specification in xml_specifications:
                 specification = ReqIFSpecificationParser.parse(
                     xml_specification
                 )
                 specifications.append(specification)
 
-        spec_relations = []
-        spec_relations_parent_lookup = defaultdict(list)
-        for xml_spec_relation in xml_spec_relations:
-            spec_relation = SpecRelationParser.parse(xml_spec_relation)
-            spec_relations.append(spec_relation)
-            spec_relations_parent_lookup[spec_relation.source].append(
-                spec_relation.target
-            )
+        # <SPEC-RELATIONS>
+        spec_relations: Optional[List[ReqIFSpecRelation]] = None
+        spec_relations_parent_lookup: Optional[Dict[str, List[str]]] = None
+        xml_spec_relations = xml_req_if_content.find("SPEC-RELATIONS")
+        if xml_spec_relations is not None:
+            spec_relations = []
+            spec_relations_parent_lookup = defaultdict(list)
 
-        spec_objects = []
-        spec_objects_lookup = {}
-        for xml_spec_object in xml_spec_objects:
-            spec_object = SpecObjectParser.parse(xml_spec_object)
-            spec_objects.append(spec_object)
-            spec_objects_lookup[spec_object.identifier] = spec_object
+            for xml_spec_relation in xml_spec_relations:
+                spec_relation = SpecRelationParser.parse(xml_spec_relation)
+                spec_relations.append(spec_relation)
+                spec_relations_parent_lookup[spec_relation.source].append(
+                    spec_relation.target
+                )
 
-        reqif_reqif_content = ReqIFReqIFContent(
+        # <SPEC-OBJECTS>
+        spec_objects: Optional[List[ReqIFSpecObject]] = None
+        spec_objects_lookup: Optional[Dict[str, ReqIFSpecObject]] = None
+        xml_spec_objects = xml_req_if_content.find("SPEC-OBJECTS")
+        if xml_spec_objects is not None:
+            spec_objects = []
+            spec_objects_lookup = {}
+            for xml_spec_object in xml_spec_objects:
+                spec_object = SpecObjectParser.parse(xml_spec_object)
+                spec_objects.append(spec_object)
+                spec_objects_lookup[spec_object.identifier] = spec_object
+
+        lookup = ReqIFObjectLookup(
+            spec_objects_lookup=spec_objects_lookup,
+            spec_relations_parent_lookup=spec_relations_parent_lookup,
+        )
+        reqif_content = ReqIFReqIFContent(
             data_types=data_types,
-            spec_types=spec_object_types,
+            spec_types=spec_types,
             spec_objects=spec_objects,
             spec_relations=spec_relations,
             specifications=specifications,
         )
-        core_content_or_none = ReqIFCoreContent(reqif_reqif_content)
-
-        return ReqIFBundle(
-            namespace=namespace,
-            configuration=configuration,
-            req_if_header=req_if_header,
-            core_content=core_content_or_none,
-            spec_objects_lookup=spec_objects_lookup,
-            spec_relations_parent_lookup=spec_relations_parent_lookup,
-            tool_extensions_tag_exists=tool_extensions_tag_exists,
-        )
+        return reqif_content, lookup
 
     @staticmethod
     def strip_namespace_from_xml(root_xml):
