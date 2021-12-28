@@ -23,3 +23,6 @@ class SpecObjectAttributeType(Enum):
 
     def get_definition_tag(self):
         return f"DATATYPE-DEFINITION-{self.name}-REF"
+
+    def get_attribute_value_tag(self):
+        return f"ATTRIBUTE-VALUE-{self.name}"

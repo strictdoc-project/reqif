@@ -143,3 +143,34 @@ def test_05_enumeration_attribute_definition() -> None:
         attribute_map.get("TEST_ENUMERATION_ATTRIBUTE_ID")
         == "TEST_ENUMERATION_ATTRIBUTE_LONG_NAME"
     )
+
+
+def test_06_string_attribute_default_value() -> None:
+    spec_type_string = """
+<SPEC-OBJECT-TYPE DESC="Description goes here" IDENTIFIER="TEST_SPEC_OBJECT_TYPE_ID" LAST-CHANGE="2005-05-30T11:42:19+02:00" LONG-NAME="TEST_SPEC_OBJECT_TYPE_LONG_NAME">
+  <SPEC-ATTRIBUTES>
+    <ATTRIBUTE-DEFINITION-STRING DESC="This attribute contains the author of the requirement as a string." IDENTIFIER="TEST_STRING_ATTRIBUTE_ID" LAST-CHANGE="2005-05-30T11:51:25+02:00" LONG-NAME="TEST_STRING_ATTRIBUTE_LONG_NAME">
+      <DEFAULT-VALUE>
+        <ATTRIBUTE-VALUE-STRING THE-VALUE="TBD"/>
+      </DEFAULT-VALUE>
+      <TYPE>
+        <DATATYPE-DEFINITION-STRING-REF>3631dcd2-59d1-11da-beb2-6fbc179f63e3</DATATYPE-DEFINITION-STRING-REF>
+      </TYPE>
+    </ATTRIBUTE-DEFINITION-STRING>
+  </SPEC-ATTRIBUTES>
+</SPEC-OBJECT-TYPE>
+    """  # noqa: E501
+    spec_type_xml = etree.fromstring(spec_type_string)
+
+    reqif_spec_object_type = SpecObjectTypeParser.parse(spec_type_xml)
+    assert isinstance(reqif_spec_object_type, ReqIFSpecObjectType)
+    assert reqif_spec_object_type.identifier == "TEST_SPEC_OBJECT_TYPE_ID"
+    assert reqif_spec_object_type.long_name == "TEST_SPEC_OBJECT_TYPE_LONG_NAME"
+    attribute_map = reqif_spec_object_type.attribute_map
+    assert (
+        attribute_map.get("TEST_STRING_ATTRIBUTE_ID")
+        == "TEST_STRING_ATTRIBUTE_LONG_NAME"
+    )
+    assert (
+        reqif_spec_object_type.attribute_definitions[0].default_value == "TBD"
+    )

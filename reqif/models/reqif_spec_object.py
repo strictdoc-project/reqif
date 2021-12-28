@@ -1,4 +1,4 @@
-from typing import Dict, List
+from typing import Dict, List, Optional
 
 from reqif.models.reqif_types import SpecObjectAttributeType
 
@@ -13,14 +13,16 @@ class SpecObjectAttribute:
 
 
 class ReqIFSpecObject:
-    def __init__(
+    def __init__(  # pylint: disable=too-many-arguments
         self,
         identifier: str,
+        last_change: Optional[str],
         spec_object_type,
         attributes: List[SpecObjectAttribute],
         attribute_map: Dict[str, SpecObjectAttribute],
     ):
         self.identifier: str = identifier
+        self.last_change: Optional[str] = last_change
         self.spec_object_type = spec_object_type
         self.attributes: List[SpecObjectAttribute] = attributes
         self.attribute_map: Dict[str, SpecObjectAttribute] = attribute_map

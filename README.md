@@ -14,6 +14,15 @@ TBD
 
 TBD
 
+## Implementation details
+
+### Tolerance
+
+The first-stage parser is made tolerant against possible issues in ReqIF.
+It should be possible to parse a ReqIF file even if it is missing important
+information. A separate validation command shall be used to confirm the validity
+of the ReqIF contents.
+
 ## A bottom-up overview of the ReqIF format
 
 - ReqIF is a standard. See reference document [RD01](#rd01-reqif-standard).
@@ -24,7 +33,8 @@ a ReqIF tool implementor is free to choose between several implementation
 approaches. There is a
 [ReqIF Implementation Guide](#rd02-reqif-implementation-guide)
 that attempts to harmonize ReqIF tool developments. See also
-"What is left open by the ReqIF standard" below. 
+"What is left open by the ReqIF standard" below.
+- ReqIF files produced by various tool often have incomplete schemas. 
 
 ### What is common for all ReqIF documents
 

@@ -6,6 +6,7 @@ from typing import List, Optional, Dict
 from lxml import etree
 
 from reqif.models.reqif_core_content import ReqIFCoreContent
+from reqif.models.reqif_namespace_info import ReqIFNamespaceInfo
 from reqif.models.reqif_req_if_content import ReqIFReqIFContent
 from reqif.models.reqif_reqif_header import ReqIFReqIFHeader
 from reqif.models.reqif_spec_object import ReqIFSpecObject
@@ -21,11 +22,11 @@ from reqif.parsers.header_parser import ReqIFHeaderParser
 from reqif.parsers.spec_object_parser import (
     SpecObjectParser,
 )
-from reqif.parsers.spec_types.spec_object_type_parser import (
-    SpecObjectTypeParser,
-)
 from reqif.parsers.spec_relation_parser import (
     SpecRelationParser,
+)
+from reqif.parsers.spec_types.spec_object_type_parser import (
+    SpecObjectTypeParser,
 )
 from reqif.parsers.spec_types.spec_relation_type_parser import (
     SpecRelationTypeParser,
@@ -63,12 +64,32 @@ class ReqIFStage1Parser:
     def parse_reqif(xml_reqif_root) -> ReqIFBundle:
         namespace_info = xml_reqif_root.getroot().nsmap
         namespace: Optional[str] = namespace_info[None]
-        configuration: Optional[str] = namespace_info["configuration"]
+        configuration: Optional[str] = (
+            namespace_info["configuration"]
+            if "configuration" in namespace_info
+            else None
+        )
+        schema_namespace = namespace_info.get("xsi")
 
         xml_reqif_root_nons = ReqIFStage1Parser.strip_namespace_from_xml(
             xml_reqif_root
         )
         xml_reqif = xml_reqif_root_nons.getroot()
+        if xml_reqif is None:
+            raise NotImplementedError(xml_reqif) from None
+
+        schema_location: Optional[str] = None
+        if schema_namespace:
+            schema_location_attribute = f"{{{schema_namespace}}}schemaLocation"
+            if schema_location_attribute in xml_reqif.attrib:
+                schema_location = xml_reqif.attrib[schema_location_attribute]
+
+        namespace_info = ReqIFNamespaceInfo(
+            namespace=namespace,
+            configuration=configuration,
+            schema_namespace=schema_namespace,
+            schema_location=schema_location,
+        )
 
         # ReqIF element naming convention: element_xyz where xyz is the name of
         # the reqif(xml) tag. Dashes are turned into underscores.
@@ -113,8 +134,7 @@ class ReqIFStage1Parser:
         )
 
         return ReqIFBundle(
-            namespace=namespace,
-            configuration=configuration,
+            namespace_info=namespace_info,
             req_if_header=req_if_header,
             core_content=core_content,
             tool_extensions_tag_exists=tool_extensions_tag_exists,
@@ -222,3 +242,5 @@ class ReqIFStage1Parser:
         # Remove unused namespace declarations
         etree.cleanup_namespaces(root_xml)
         return root_xml
+        # objectify.deannotate(root_xml, xsi_nil=True, cleanup_namespaces=True)
+        # return root_xml

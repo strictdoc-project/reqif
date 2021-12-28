@@ -1,3 +1,5 @@
+from typing import Optional, List
+
 from reqif.models.reqif_spec_hierarchy import (
     ReqIFSpecHierarchy,
 )
@@ -12,22 +14,80 @@ class ReqIFSpecHierarchyParser:
             identifier = attributes["IDENTIFIER"]
         except Exception:
             raise NotImplementedError from None
+        last_change: Optional[str] = (
+            attributes["LAST-CHANGE"] if "LAST-CHANGE" in attributes else None
+        )
+        long_name: Optional[str] = (
+            attributes["LONG-NAME"] if "LONG-NAME" in attributes else None
+        )
+        ref_then_children_order = list(
+            map(lambda el: el.tag, list(spec_hierarchy_xml))
+        ) == ["OBJECT", "CHILDREN"]
 
-        spec_hierarchy_children_xml = list(spec_hierarchy_xml)
-        assert spec_hierarchy_children_xml[0].tag == "OBJECT"
-        object_xml = spec_hierarchy_children_xml[0]
-        spec_object_ref_xml = object_xml[0]
-        assert spec_object_ref_xml.tag == "SPEC-OBJECT-REF"
+        object_xml = spec_hierarchy_xml.find("OBJECT")
+        spec_object_ref_xml = object_xml.find("SPEC-OBJECT-REF")
+
         spec_object_ref = spec_object_ref_xml.text
 
-        spec_hierarchy_children = []
-        if len(spec_hierarchy_children_xml) == 2:
-            assert spec_hierarchy_children_xml[1].tag == "CHILDREN"
-            for child_spec_hierarchy_xml in spec_hierarchy_children_xml[1]:
+        spec_hierarchy_children: Optional[List[ReqIFSpecHierarchy]] = None
+        xml_spec_hierarchy_children = spec_hierarchy_xml.find("CHILDREN")
+        if xml_spec_hierarchy_children is not None:
+            spec_hierarchy_children = []
+            for child_spec_hierarchy_xml in xml_spec_hierarchy_children:
                 child_spec_hierarchy = ReqIFSpecHierarchyParser.parse(
                     child_spec_hierarchy_xml, level + 1
                 )
                 spec_hierarchy_children.append(child_spec_hierarchy)
         return ReqIFSpecHierarchy(
-            identifier, spec_object_ref, spec_hierarchy_children, level
+            identifier=identifier,
+            last_change=last_change,
+            long_name=long_name,
+            spec_object=spec_object_ref,
+            children=spec_hierarchy_children,
+            ref_then_children_order=ref_then_children_order,
+            level=level,
         )
+
+    @staticmethod
+    def unparse(hierarchy: ReqIFSpecHierarchy) -> str:
+        base_level = hierarchy.calculate_base_level()
+        base_level_str = " " * base_level
+        output = (
+            base_level_str + f"<SPEC-HIERARCHY"
+            f' IDENTIFIER="{hierarchy.identifier}"'
+        )
+        if hierarchy.last_change:
+            output += f' LAST-CHANGE="{hierarchy.last_change}"'
+        if hierarchy.long_name:
+            output += f' LONG-NAME="{hierarchy.long_name}"'
+        output += ">\n"
+
+        def print_object():
+            object_output = base_level_str + "  <OBJECT>\n"
+            object_output += (
+                base_level_str + "    "
+                f"<SPEC-OBJECT-REF>{hierarchy.spec_object}</SPEC-OBJECT-REF>\n"
+            )
+            object_output += base_level_str + "  </OBJECT>\n"
+            return object_output
+
+        def print_children():
+            children_output = ""
+            children_output += base_level_str + "  <CHILDREN>\n"
+            for child in hierarchy.children:
+                children_output += ReqIFSpecHierarchyParser.unparse(child)
+            children_output += base_level_str + "  </CHILDREN>\n"
+            return children_output
+
+        if hierarchy.ref_then_children_order:
+            output += print_object()
+            if hierarchy.children is not None:
+                output += print_children()
+        else:
+            if hierarchy.children is not None:
+                output += print_children()
+            output += print_object()
+
+        output += base_level_str + "</SPEC-HIERARCHY>\n"
+
+        return output

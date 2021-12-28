@@ -5,6 +5,7 @@ from lxml import etree
 from reqif.models.reqif_data_type import (
     ReqIFDataTypeDefinitionString,
     ReqIFDataTypeDefinitionEnumeration,
+    ReqIFDataTypeDefinitionInteger,
 )
 
 
@@ -13,12 +14,18 @@ class DataTypeParser:
     def parse(
         data_type_xml,
     ) -> Union[
-        ReqIFDataTypeDefinitionString, ReqIFDataTypeDefinitionEnumeration
+        ReqIFDataTypeDefinitionString,
+        ReqIFDataTypeDefinitionInteger,
+        ReqIFDataTypeDefinitionEnumeration,
     ]:
         assert "DATATYPE-DEFINITION-" in data_type_xml.tag
         attributes = data_type_xml.attrib
         identifier = attributes["IDENTIFIER"]
-
+        last_change = (
+            attributes["LAST-CHANGE"] if "LAST-CHANGE" in attributes else None
+        )
+        long_name = attributes["LONG-NAME"]
+        description = attributes["DESC"] if "DESC" in attributes else None
         values_map = {}
 
         if data_type_xml.tag == "DATATYPE-DEFINITION-ENUMERATION":
@@ -40,17 +47,44 @@ class DataTypeParser:
             return ReqIFDataTypeDefinitionEnumeration(identifier, values_map)
 
         if data_type_xml.tag == "DATATYPE-DEFINITION-STRING":
-            return ReqIFDataTypeDefinitionString(identifier)
+            max_length = (
+                attributes["MAX-LENGTH"] if "MAX-LENGTH" in attributes else None
+            )
+
+            return ReqIFDataTypeDefinitionString(
+                description=description,
+                identifier=identifier,
+                last_change=last_change,
+                long_name=long_name,
+                max_length=max_length,
+            )
+
+        if data_type_xml.tag == "DATATYPE-DEFINITION-INTEGER":
+            return ReqIFDataTypeDefinitionInteger(
+                description=description,
+                identifier=identifier,
+                last_change=last_change,
+                long_name=long_name,
+            )
 
         # TODO: All the following is parsed to just String.
-        if data_type_xml.tag == "DATATYPE-DEFINITION-INTEGER":
-            return ReqIFDataTypeDefinitionString(identifier)
-
         if data_type_xml.tag == "DATATYPE-DEFINITION-XHTML":
-            return ReqIFDataTypeDefinitionString(identifier)
+            return ReqIFDataTypeDefinitionString(
+                description=description,
+                identifier=identifier,
+                last_change=last_change,
+                long_name=long_name,
+                max_length=None,
+            )
 
         if data_type_xml.tag == "DATATYPE-DEFINITION-BOOLEAN":
-            return ReqIFDataTypeDefinitionString(identifier)
+            return ReqIFDataTypeDefinitionString(
+                description=description,
+                identifier=identifier,
+                last_change=last_change,
+                long_name=long_name,
+                max_length=None,
+            )
 
         raise NotImplementedError(etree.tostring(data_type_xml))
 
@@ -61,13 +95,27 @@ class DataTypeParser:
         ]
     ) -> str:
         if isinstance(data_type_definition, ReqIFDataTypeDefinitionString):
-            return (
-                "        "
-                "<DATATYPE-DEFINITION-STRING "
-                f'IDENTIFIER="{data_type_definition.identifier}" '
-                'LAST-CHANGE="2021-10-14T10:11:59.495+02:00" '
-                'LONG-NAME="T_String32k" '
-                'MAX-LENGTH="32000"/>'
-                "\n"
-            )
+            output = "        <DATATYPE-DEFINITION-STRING"
+            if data_type_definition.description:
+                output += f' DESC="{data_type_definition.description}"'
+
+            output += f' IDENTIFIER="{data_type_definition.identifier}"'
+            if data_type_definition.last_change:
+                output += f' LAST-CHANGE="{data_type_definition.last_change}"'
+            output += f' LONG-NAME="{data_type_definition.long_name}"'
+            if data_type_definition.max_length:
+                output += f' MAX-LENGTH="{data_type_definition.max_length}"'
+            output += "/>\n"
+            return output
+        if isinstance(data_type_definition, ReqIFDataTypeDefinitionInteger):
+            output = "        <DATATYPE-DEFINITION-INTEGER"
+            if data_type_definition.description:
+                output += f' DESC="{data_type_definition.description}"'
+
+            output += f' IDENTIFIER="{data_type_definition.identifier}"'
+            if data_type_definition.last_change:
+                output += f' LAST-CHANGE="{data_type_definition.last_change}"'
+            output += f' LONG-NAME="{data_type_definition.long_name}"'
+            output += "/>\n"
+            return output
         raise NotImplementedError

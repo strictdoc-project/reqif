@@ -3,17 +3,20 @@ from typing import List, Optional
 from reqif.models.reqif_types import SpecObjectAttributeType
 
 
-class SpecAttributeDefinition:
+class SpecAttributeDefinition:  # pylint: disable=too-many-instance-attributes
     def __init__(  # pylint: disable=too-many-arguments
         self,
         attribute_type: SpecObjectAttributeType,
+        description: Optional[str],
         identifier: str,
         last_change: Optional[str],
         datatype_definition: str,
         long_name: str,
         editable: Optional[bool],
+        default_value: Optional[bool],
     ):
         self.attribute_type: SpecObjectAttributeType = attribute_type
+        self.description: Optional[str] = description
         self.identifier: str = identifier
         self.last_change: Optional[str] = last_change
         self.datatype_definition: str = datatype_definition
@@ -21,11 +24,14 @@ class SpecAttributeDefinition:
         self.editable: Optional[bool] = (
             editable == "true" if editable is not None else None
         )
+        self.default_value: Optional[bool] = default_value
 
     def __str__(self) -> str:
         return (
             f"SpecAttributeDefinition("
             f"attribute_type={self.attribute_type}"
+            ", "
+            f"description={self.description}"
             ", "
             f"identifier={self.identifier}"
             ", "
@@ -34,6 +40,8 @@ class SpecAttributeDefinition:
             f"datatype_definition={self.datatype_definition}"
             ", "
             f"long_name={self.long_name}"
+            ", "
+            f"default_value={self.default_value}"
             f")"
         )
 
@@ -44,14 +52,16 @@ class SpecAttributeDefinition:
 class ReqIFSpecObjectType:
     def __init__(  # pylint: disable=too-many-arguments
         self,
-        identifier,
+        description: Optional[str],
+        identifier: str,
         last_change: str,
         long_name,
         attribute_definitions: List[SpecAttributeDefinition],
         attribute_map,
     ):
-        self.identifier = identifier
-        self.last_change = last_change
+        self.description: Optional[str] = description
+        self.identifier: str = identifier
+        self.last_change: str = last_change
         self.long_name = long_name
         self.attribute_definitions: List[
             SpecAttributeDefinition
@@ -61,6 +71,8 @@ class ReqIFSpecObjectType:
     def __str__(self) -> str:
         return (
             f"ReqIFSpecObjectType("
+            f"description: {self.description}"
+            ", "
             f"identifier: {self.identifier}"
             ", "
             f"attribute_definitions: {self.attribute_definitions}"

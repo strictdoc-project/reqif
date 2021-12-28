@@ -42,5 +42,5 @@ def test_01_nominal_case() -> None:
 
     specification_1_1_1 = specification_1_1.children[0]
     assert specification_1_1_1.identifier == "LEVEL_1_1_1"
-    assert len(specification_1_1_1.children) == 0
+    assert specification_1_1_1.children is None
     assert specification_1_1_1.level == 3

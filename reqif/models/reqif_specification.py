@@ -1,4 +1,4 @@
-from typing import List
+from typing import List, Optional
 
 from reqif.models.reqif_spec_hierarchy import (
     ReqIFSpecHierarchy,
@@ -6,22 +6,29 @@ from reqif.models.reqif_spec_hierarchy import (
 
 
 class ReqIFSpecification:
-    def __init__(
+    def __init__(  # pylint: disable=too-many-arguments
         self,
         identifier: str,
-        long_name: str,
-        specification_type: str,
+        last_change: Optional[str],
+        long_name: Optional[str],
+        values: Optional[List],
+        specification_type: Optional[str],
         children: List[ReqIFSpecHierarchy],
     ):
         self.identifier: str = identifier
-        self.long_name: str = long_name
-        self.specification_type: str = specification_type
+        self.last_change: Optional[str] = last_change
+        self.long_name: Optional[str] = long_name
+        self.values: Optional[List] = values
+        self.specification_type: Optional[str] = specification_type
         self.children: List[ReqIFSpecHierarchy] = children
 
     def __str__(self) -> str:
         return (
             f"ReqIFSpecification("
             f"identifier: {self.identifier},"
+            f"last_change: {self.last_change},"
+            f"long_name: {self.long_name},"
+            f"values: {self.values},"
             f"children: {self.children},"
             f")"
         )
