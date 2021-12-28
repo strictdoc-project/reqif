@@ -1,7 +1,7 @@
 from jinja2 import Environment, PackageLoader, StrictUndefined
 
 from reqif.cli.cli_arg_parser import DumpCommandConfig
-from reqif.parser import ReqIFStage1Parser
+from reqif.parser import ReqIFParser
 
 
 class DumpCommand:
@@ -15,7 +15,7 @@ class DumpCommand:
     def execute(cls, config: DumpCommandConfig):
         template = cls.env.get_template("index.jinja.html")
 
-        reqif_bundle = ReqIFStage1Parser.parse(config.input_file)
+        reqif_bundle = ReqIFParser.parse(config.input_file)
 
         output = template.render(reqif_bundle=reqif_bundle)
         output += "\n"

@@ -40,7 +40,7 @@ from reqif.parsers.specification_parser import (
 from reqif.reqif_bundle import ReqIFBundle
 
 
-class ReqIFStage1Parser:
+class ReqIFParser:
     @staticmethod
     def parse(input_path: str) -> ReqIFBundle:
         # Import file.
@@ -57,7 +57,7 @@ class ReqIFStage1Parser:
             sys.exit(1)
 
         # Build ReqIF bundle.
-        reqif_bundle = ReqIFStage1Parser.parse_reqif(xml_reqif_root)
+        reqif_bundle = ReqIFParser.parse_reqif(xml_reqif_root)
         return reqif_bundle
 
     @staticmethod
@@ -71,7 +71,7 @@ class ReqIFStage1Parser:
         )
         schema_namespace = namespace_info.get("xsi")
 
-        xml_reqif_root_nons = ReqIFStage1Parser.strip_namespace_from_xml(
+        xml_reqif_root_nons = ReqIFParser.strip_namespace_from_xml(
             xml_reqif_root
         )
         xml_reqif = xml_reqif_root_nons.getroot()
@@ -117,7 +117,7 @@ class ReqIFStage1Parser:
         if xml_core_content is not None:
             xml_req_if_content = xml_core_content.find("REQ-IF-CONTENT")
             if xml_req_if_content is not None:
-                reqif_content, lookup = ReqIFStage1Parser.parse_reqif_content(
+                reqif_content, lookup = ReqIFParser.parse_reqif_content(
                     xml_req_if_content
                 )
                 core_content = ReqIFCoreContent(req_if_content=reqif_content)
