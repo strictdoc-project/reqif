@@ -21,12 +21,12 @@ from reqif.parsers.specification_parser import ReqIFSpecificationParser
 from reqif.reqif_bundle import ReqIFBundle
 
 
-class ReqIFWriter:
+class ReqIFUnparser:
     @staticmethod
     def write(bundle: ReqIFBundle) -> str:
         reqif_xml_output = '<?xml version="1.0" encoding="UTF-8"?>\n'
 
-        reqif_xml_output += ReqIFWriter.unparse_namespace_info(
+        reqif_xml_output += ReqIFUnparser.unparse_namespace_info(
             bundle.namespace_info
         )
 
