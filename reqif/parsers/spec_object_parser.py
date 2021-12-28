@@ -36,6 +36,16 @@ ATTRIBUTE_ENUMERATION_TEMPLATE = """\
               </DEFINITION>
             </ATTRIBUTE-VALUE-ENUMERATION>
 """
+ATTRIBUTE_ENUMERATION_TEMPLATE_REVERSE = """\
+            <ATTRIBUTE-VALUE-ENUMERATION>
+              <DEFINITION>
+                <ATTRIBUTE-DEFINITION-ENUMERATION-REF>{name}</ATTRIBUTE-DEFINITION-ENUMERATION-REF>
+              </DEFINITION>
+              <VALUES>
+                <ENUM-VALUE-REF>{value}</ENUM-VALUE-REF>
+              </VALUES>
+            </ATTRIBUTE-VALUE-ENUMERATION>
+"""
 
 
 class SpecObjectParser:
@@ -44,6 +54,13 @@ class SpecObjectParser:
         assert "SPEC-OBJECT" in spec_object_xml.tag
         xml_attributes = spec_object_xml.attrib
 
+        children_tags = list(map(lambda el: el.tag, list(spec_object_xml)))
+        assert len(children_tags) == 2
+        values_then_type_order = children_tags == ["VALUES", "TYPE"]
+
+        spec_object_description: Optional[str] = (
+            xml_attributes["DESC"] if "DESC" in xml_attributes else None
+        )
         try:
             identifier = xml_attributes["IDENTIFIER"]
         except Exception:
@@ -53,13 +70,20 @@ class SpecObjectParser:
             if "LAST-CHANGE" in xml_attributes
             else None
         )
+        spec_object_long_name: Optional[str] = (
+            xml_attributes["LONG-NAME"]
+            if "LONG-NAME" in xml_attributes
+            else None
+        )
+
         spec_object_type = (
             spec_object_xml.find("TYPE").find("SPEC-OBJECT-TYPE-REF").text
         )
 
+        xml_spec_values = spec_object_xml.find("VALUES")
         attributes: List[SpecObjectAttribute] = []
         attribute_map = {}
-        for attribute_xml in spec_object_xml[0]:
+        for attribute_xml in xml_spec_values:
             if attribute_xml.tag == "ATTRIBUTE-VALUE-STRING":
                 attribute_value = attribute_xml.attrib["THE-VALUE"]
                 attribute_name = attribute_xml[0][0].text
@@ -67,8 +91,16 @@ class SpecObjectParser:
                     SpecObjectAttributeType.STRING,
                     attribute_name,
                     attribute_value,
+                    enum_values_then_definition_order=None,
                 )
             elif attribute_xml.tag == "ATTRIBUTE-VALUE-ENUMERATION":
+                children_tags = list(
+                    map(lambda el: el.tag, list(attribute_xml))
+                )
+                enum_values_then_definition_order = children_tags.index(
+                    "VALUES"
+                ) < children_tags.index("DEFINITION")
+
                 attribute_value = (
                     attribute_xml.find("VALUES").find("ENUM-VALUE-REF").text
                 )
@@ -81,6 +113,7 @@ class SpecObjectParser:
                     SpecObjectAttributeType.ENUMERATION,
                     attribute_name,
                     attribute_value,
+                    enum_values_then_definition_order,
                 )
             elif attribute_xml.tag == "ATTRIBUTE-VALUE-INTEGER":
                 attribute_value = attribute_xml.attrib["THE-VALUE"]
@@ -94,6 +127,7 @@ class SpecObjectParser:
                     SpecObjectAttributeType.INTEGER,
                     attribute_name,
                     attribute_value,
+                    enum_values_then_definition_order=None,
                 )
             elif attribute_xml.tag == "ATTRIBUTE-VALUE-BOOLEAN":
                 attribute_value = attribute_xml.attrib["THE-VALUE"]
@@ -107,6 +141,7 @@ class SpecObjectParser:
                     SpecObjectAttributeType.BOOLEAN,
                     attribute_name,
                     attribute_value,
+                    enum_values_then_definition_order=None,
                 )
             elif attribute_xml.tag == "ATTRIBUTE-VALUE-XHTML":
                 attribute_value = stringify_children(
@@ -121,6 +156,7 @@ class SpecObjectParser:
                     SpecObjectAttributeType.XHTML,
                     attribute_name,
                     attribute_value,
+                    enum_values_then_definition_order=None,
                 )
             else:
                 raise NotImplementedError(etree.tostring(attribute_xml))
@@ -128,22 +164,59 @@ class SpecObjectParser:
             attribute_map[attribute_name] = attribute_value
 
         return ReqIFSpecObject(
+            description=spec_object_description,
             identifier=identifier,
             last_change=spec_object_last_change,
+            long_name=spec_object_long_name,
             spec_object_type=spec_object_type,
             attributes=attributes,
             attribute_map=attribute_map,
+            values_then_type_order=values_then_type_order,
         )
 
     @staticmethod
     def unparse(spec_object: ReqIFSpecObject) -> str:
         output = ""
 
-        output += (
-            "        <SPEC-OBJECT" f' IDENTIFIER="{spec_object.identifier}"'
-        )
+        output += "        <SPEC-OBJECT"
+        if spec_object.description is not None:
+            output += f' DESC="{spec_object.description}"'
+
+        output += f' IDENTIFIER="{spec_object.identifier}"'
+
         if spec_object.last_change:
-            output += f' LAST-CHANGE="{spec_object.last_change}">\n'
+            output += f' LAST-CHANGE="{spec_object.last_change}"'
+        if spec_object.long_name is not None:
+            output += f' LONG-NAME="{spec_object.long_name}"'
+        output += ">\n"
+
+        if spec_object.values_then_type_order:
+            output += SpecObjectParser._unparse_spec_values(spec_object)
+            output += SpecObjectParser._unparse_spec_object_type(spec_object)
+        else:
+            output += SpecObjectParser._unparse_spec_object_type(spec_object)
+            output += SpecObjectParser._unparse_spec_values(spec_object)
+
+        output += "        </SPEC-OBJECT>\n"
+
+        return output
+
+    @staticmethod
+    def _unparse_spec_object_type(spec_object: ReqIFSpecObject):
+        output = ""
+        output += (
+            "          <TYPE>\n"
+            f"            "
+            f"<SPEC-OBJECT-TYPE-REF>"
+            f"{spec_object.spec_object_type}"
+            f"</SPEC-OBJECT-TYPE-REF>\n"
+            "          </TYPE>\n"
+        )
+        return output
+
+    @staticmethod
+    def _unparse_spec_values(spec_object: ReqIFSpecObject):
+        output = ""
         output += "          <VALUES>\n"
         for attribute in spec_object.attributes:
             if attribute.attribute_type == SpecObjectAttributeType.STRING:
@@ -157,18 +230,14 @@ class SpecObjectParser:
             elif (
                 attribute.attribute_type == SpecObjectAttributeType.ENUMERATION
             ):
-                output += ATTRIBUTE_ENUMERATION_TEMPLATE.format(
-                    name=attribute.name, value=attribute.value
-                )
+                assert attribute.enum_values_then_definition_order is not None
+                if attribute.enum_values_then_definition_order:
+                    output += ATTRIBUTE_ENUMERATION_TEMPLATE.format(
+                        name=attribute.name, value=attribute.value
+                    )
+                else:
+                    output += ATTRIBUTE_ENUMERATION_TEMPLATE_REVERSE.format(
+                        name=attribute.name, value=attribute.value
+                    )
         output += "          </VALUES>\n"
-        output += (
-            "          <TYPE>\n"
-            f"            "
-            f"<SPEC-OBJECT-TYPE-REF>"
-            f"{spec_object.spec_object_type}"
-            f"</SPEC-OBJECT-TYPE-REF>\n"
-            "          </TYPE>\n"
-        )
-        output += "        </SPEC-OBJECT>\n"
-
         return output

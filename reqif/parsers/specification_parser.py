@@ -12,19 +12,32 @@ class ReqIFSpecificationParser:
     @staticmethod
     def parse(specification_xml):
         assert "SPECIFICATION" in specification_xml.tag, f"{specification_xml}"
+
+        children_tags = list(map(lambda el: el.tag, list(specification_xml)))
+        type_then_children_order = True
+        if "TYPE" in children_tags and "CHILDREN" in children_tags:
+            type_then_children_order = children_tags.index(
+                "TYPE"
+            ) < children_tags.index("CHILDREN")
+
         attributes = specification_xml.attrib
         try:
             identifier = attributes["IDENTIFIER"]
         except Exception:
             raise NotImplementedError(attributes) from None
 
+        # DESC is optional
+        description: Optional[str] = (
+            attributes["DESC"] if "DESC" in attributes else None
+        )
+
         # LAST-CHANGE is optional
-        last_change = (
+        last_change: Optional[str] = (
             attributes["LAST-CHANGE"] if "LAST-CHANGE" in attributes else None
         )
 
         # LONG-NAME is optional
-        long_name = (
+        long_name: Optional[str] = (
             attributes["LONG-NAME"] if "LONG-NAME" in attributes else None
         )
 
@@ -59,6 +72,8 @@ class ReqIFSpecificationParser:
                 spec_hierarchy_xml = ReqIFSpecHierarchyParser.parse(child_xml)
                 children.append(spec_hierarchy_xml)
         return ReqIFSpecification(
+            type_then_children_order=type_then_children_order,
+            description=description,
             identifier=identifier,
             last_change=last_change,
             long_name=long_name,
@@ -71,9 +86,12 @@ class ReqIFSpecificationParser:
     def unparse(specification: ReqIFSpecification) -> str:
         output = ""
 
-        output += (
-            f'        <SPECIFICATION IDENTIFIER="{specification.identifier}"'
-        )
+        output += "        <SPECIFICATION"
+        if specification.description is not None:
+            output += f' DESC="{specification.description}"'
+
+        output += f' IDENTIFIER="{specification.identifier}"'
+
         if specification.last_change is not None:
             output += f' LAST-CHANGE="{specification.last_change}"'
         if specification.long_name:
@@ -86,21 +104,46 @@ class ReqIFSpecificationParser:
                 raise NotImplementedError(specification_values)
             output += "          <VALUES/>\n"
 
-        if specification.specification_type:
-            output += f"""\
-          <TYPE>
-            <SPECIFICATION-TYPE-REF>\
-{specification.specification_type}\
-</SPECIFICATION-TYPE-REF>
-          </TYPE>
-"""
+        if specification.type_then_children_order:
+            if specification.specification_type:
+                output += ReqIFSpecificationParser._unparse_specification_type(
+                    specification
+                )
+            output += ReqIFSpecificationParser._unparse_specification_children(
+                specification
+            )
+        else:
+            output += ReqIFSpecificationParser._unparse_specification_children(
+                specification
+            )
+            if specification.specification_type:
+                output += ReqIFSpecificationParser._unparse_specification_type(
+                    specification
+                )
 
+        output += "        </SPECIFICATION>\n"
+
+        return output
+
+    @staticmethod
+    def _unparse_specification_type(specification: ReqIFSpecification):
+        output = ""
+        output += (
+            "          <TYPE>\n"
+            "            <SPECIFICATION-TYPE-REF>"
+            f"{specification.specification_type}"
+            "</SPECIFICATION-TYPE-REF>\n"
+            "          </TYPE>\n"
+        )
+        return output
+
+    @staticmethod
+    def _unparse_specification_children(specification: ReqIFSpecification):
+        output = ""
         output += "          <CHILDREN>\n"
 
         for hierarchy in specification.children:
             output += ReqIFSpecHierarchyParser.unparse(hierarchy)
 
         output += "          </CHILDREN>\n"
-        output += "        </SPECIFICATION>\n"
-
         return output

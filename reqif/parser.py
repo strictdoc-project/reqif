@@ -70,7 +70,6 @@ class ReqIFParser:
             else None
         )
         schema_namespace = namespace_info.get("xsi")
-
         xml_reqif_root_nons = ReqIFParser.strip_namespace_from_xml(
             xml_reqif_root
         )
@@ -83,12 +82,17 @@ class ReqIFParser:
             schema_location_attribute = f"{{{schema_namespace}}}schemaLocation"
             if schema_location_attribute in xml_reqif.attrib:
                 schema_location = xml_reqif.attrib[schema_location_attribute]
-
+        language: Optional[str] = None
+        xml_namespace = "http://www.w3.org/XML/1998/namespace"
+        language_attribute = f"{{{xml_namespace}}}lang"
+        if language_attribute in xml_reqif.attrib:
+            language = xml_reqif.attrib[language_attribute]
         namespace_info = ReqIFNamespaceInfo(
             namespace=namespace,
             configuration=configuration,
             schema_namespace=schema_namespace,
             schema_location=schema_location,
+            language=language,
         )
 
         # ReqIF element naming convention: element_xyz where xyz is the name of
@@ -220,6 +224,16 @@ class ReqIFParser:
                 spec_objects.append(spec_object)
                 spec_objects_lookup[spec_object.identifier] = spec_object
 
+        # <SPEC-RELATION-GROUPS>
+        spec_relation_groups: Optional[List] = None
+        xml_spec_relation_groups = xml_req_if_content.find(
+            "SPEC-RELATION-GROUPS"
+        )
+        if xml_spec_relation_groups is not None:
+            spec_relation_groups = []
+            if len(xml_spec_relation_groups) != 0:
+                raise NotImplementedError(xml_spec_relation_groups) from None
+
         lookup = ReqIFObjectLookup(
             spec_objects_lookup=spec_objects_lookup,
             spec_relations_parent_lookup=spec_relations_parent_lookup,
@@ -230,6 +244,7 @@ class ReqIFParser:
             spec_objects=spec_objects,
             spec_relations=spec_relations,
             specifications=specifications,
+            spec_relation_groups=spec_relation_groups,
         )
         return reqif_content, lookup
 

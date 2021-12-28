@@ -5,9 +5,11 @@ from reqif.models.reqif_spec_hierarchy import (
 )
 
 
-class ReqIFSpecification:
+class ReqIFSpecification:  # pylint: disable=too-many-instance-attributes
     def __init__(  # pylint: disable=too-many-arguments
         self,
+        type_then_children_order: bool,
+        description: Optional[str],
         identifier: str,
         last_change: Optional[str],
         long_name: Optional[str],
@@ -15,6 +17,8 @@ class ReqIFSpecification:
         specification_type: Optional[str],
         children: List[ReqIFSpecHierarchy],
     ):
+        self.type_then_children_order: bool = type_then_children_order
+        self.description: Optional[str] = description
         self.identifier: str = identifier
         self.last_change: Optional[str] = last_change
         self.long_name: Optional[str] = long_name

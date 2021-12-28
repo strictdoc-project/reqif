@@ -14,9 +14,11 @@ class ReqIFReqIFContent:
         spec_objects: Optional[List[ReqIFSpecObject]],
         spec_relations: Optional[List[ReqIFSpecRelation]],
         specifications: Optional[List[ReqIFSpecification]],
+        spec_relation_groups: Optional[List],
     ):
         self.data_types: Optional[List] = data_types
         self.spec_types: Optional[List[ReqIFSpecObjectType]] = spec_types
         self.spec_objects: Optional[List[ReqIFSpecObject]] = spec_objects
         self.spec_relations: Optional[List[ReqIFSpecRelation]] = spec_relations
         self.specifications: Optional[List[ReqIFSpecification]] = specifications
+        self.spec_relation_groups: Optional[List] = spec_relation_groups

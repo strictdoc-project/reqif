@@ -11,20 +11,22 @@ class SpecAttributeDefinition:  # pylint: disable=too-many-instance-attributes
         identifier: str,
         last_change: Optional[str],
         datatype_definition: str,
-        long_name: str,
+        long_name: Optional[str],
         editable: Optional[bool],
         default_value: Optional[bool],
+        multi_valued: Optional[bool],
     ):
         self.attribute_type: SpecObjectAttributeType = attribute_type
         self.description: Optional[str] = description
         self.identifier: str = identifier
         self.last_change: Optional[str] = last_change
         self.datatype_definition: str = datatype_definition
-        self.long_name: str = long_name
+        self.long_name: Optional[str] = long_name
         self.editable: Optional[bool] = (
             editable == "true" if editable is not None else None
         )
         self.default_value: Optional[bool] = default_value
+        self.multi_valued: Optional[bool] = multi_valued
 
     def __str__(self) -> str:
         return (
@@ -56,15 +58,15 @@ class ReqIFSpecObjectType:
         identifier: str,
         last_change: str,
         long_name,
-        attribute_definitions: List[SpecAttributeDefinition],
+        attribute_definitions: Optional[List[SpecAttributeDefinition]],
         attribute_map,
     ):
         self.description: Optional[str] = description
         self.identifier: str = identifier
         self.last_change: str = last_change
         self.long_name = long_name
-        self.attribute_definitions: List[
-            SpecAttributeDefinition
+        self.attribute_definitions: Optional[
+            List[SpecAttributeDefinition]
         ] = attribute_definitions
         self.attribute_map = attribute_map
 
