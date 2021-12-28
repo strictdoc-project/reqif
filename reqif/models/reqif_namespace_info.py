@@ -2,17 +2,19 @@ from typing import Optional
 
 
 class ReqIFNamespaceInfo:
-    def __init__(
+    def __init__(  # pylint: disable=too-many-arguments
         self,
         namespace: str,
         configuration: str,
         schema_namespace: Optional[str],
         schema_location: Optional[str],
+        language: Optional[str],
     ):
         self.namespace: str = namespace
         self.configuration: str = configuration
         self.schema_namespace: Optional[str] = schema_namespace
         self.schema_location: Optional[str] = schema_location
+        self.language: Optional[str] = language
 
     def __str__(self) -> str:
         return (
@@ -46,4 +48,5 @@ class ReqIFNamespaceInfo:
             configuration=configuration_or_default,
             schema_namespace=None,
             schema_location=None,
+            language=None,
         )

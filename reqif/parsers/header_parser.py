@@ -1,3 +1,5 @@
+from typing import Optional
+
 from reqif.models.reqif_reqif_header import ReqIFReqIFHeader
 
 
@@ -18,6 +20,7 @@ class ReqIFHeaderParser:
 
         comment = None
         creation_time = None
+        repository_id: Optional[str] = None
         req_if_tool_id = None
         req_if_version = None
         source_tool_id = None
@@ -30,6 +33,10 @@ class ReqIFHeaderParser:
         xml_creation_time = xml_reqif_header.find("CREATION-TIME")
         if xml_creation_time is not None:
             creation_time = xml_creation_time.text
+
+        xml_repository_id = xml_reqif_header.find("REPOSITORY-ID")
+        if xml_repository_id is not None:
+            repository_id = xml_repository_id.text
 
         xml_req_if_tool_id = xml_reqif_header.find("REQ-IF-TOOL-ID")
         if xml_req_if_tool_id is not None:
@@ -51,6 +58,7 @@ class ReqIFHeaderParser:
             identifier=identifier,
             comment=comment,
             creation_time=creation_time,
+            repository_id=repository_id,
             req_if_tool_id=req_if_tool_id,
             req_if_version=req_if_version,
             source_tool_id=source_tool_id,
@@ -74,6 +82,13 @@ class ReqIFHeaderParser:
                     "<CREATION-TIME>"
                     f"{header.creation_time}"
                     "</CREATION-TIME>\n"
+                )
+            if header.repository_id:
+                output += (
+                    "      "
+                    "<REPOSITORY-ID>"
+                    f"{header.repository_id}"
+                    "</REPOSITORY-ID>\n"
                 )
             if header.req_if_tool_id:
                 output += (

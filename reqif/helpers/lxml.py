@@ -1,5 +1,6 @@
 from itertools import chain
 
+from lxml import etree
 from lxml.etree import tostring
 
 
@@ -19,3 +20,8 @@ def stringify_children(node):
         )
         if chunk
     )
+
+
+def is_self_closed_tag(xml):
+    data_type_string = etree.tostring(xml, pretty_print=True).decode("utf-8")
+    return data_type_string.find(f"</{xml.tag}>") == -1

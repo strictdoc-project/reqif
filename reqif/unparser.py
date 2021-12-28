@@ -93,6 +93,10 @@ class ReqIFUnparser:
 
                     reqif_xml_output += "      </SPECIFICATIONS>\n"
 
+                if reqif_content.spec_relation_groups is not None:
+                    reqif_xml_output += "      <SPEC-RELATION-GROUPS>\n"
+                    reqif_xml_output += "      </SPEC-RELATION-GROUPS>\n"
+
                 reqif_xml_output += "    </REQ-IF-CONTENT>\n"
             reqif_xml_output += "  </CORE-CONTENT>\n"
 
@@ -123,6 +127,8 @@ class ReqIFUnparser:
             namespace_components.append(
                 f'xsi:schemaLocation="{namespace_info.schema_location}"'
             )
+        if namespace_info.language is not None:
+            namespace_components.append(f'xml:lang="{namespace_info.language}"')
         assert (
             len(namespace_components) > 0
         ), "Expect at least one namespace component, got none."

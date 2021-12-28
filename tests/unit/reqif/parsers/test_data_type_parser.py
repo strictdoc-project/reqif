@@ -1,9 +1,8 @@
-from xml.etree import ElementTree as etree
+from lxml import etree
 
 from reqif.models.reqif_data_type import (
     ReqIFDataTypeDefinitionEnumeration,
 )
-
 from reqif.models.reqif_data_type import (
     ReqIFDataTypeDefinitionString,
 )
@@ -18,11 +17,9 @@ def test_01_string_type() -> None:
         IDENTIFIER="TEST_DATATYPE_IDENTIFIER"
         LAST-CHANGE="2021-10-14T10:11:59.495+02:00"
         LONG-NAME="T_String32k"
-        MAX-LENGTH="32000"
-    />
+        MAX-LENGTH="32000"/>
     """
     spec_type_xml = etree.fromstring(spec_type_string)
-
     data_type = DataTypeParser.parse(spec_type_xml)
     assert isinstance(data_type, ReqIFDataTypeDefinitionString)
 
@@ -34,8 +31,7 @@ def test_02_enumeration_type():
 <DATATYPE-DEFINITION-ENUMERATION
   IDENTIFIER="NODE_TYPE"
   LAST-CHANGE="2015-12-14T02:04:51.764+01:00"
-  LONG-NAME="T_Kind"
->
+  LONG-NAME="T_Kind">
   <SPECIFIED-VALUES>
     <ENUM-VALUE
       IDENTIFIER="NODE_TYPE_SECTION"
