@@ -35,7 +35,6 @@
             </ATTRIBUTE-DEFINITION-INTEGER>
           </SPEC-ATTRIBUTES>
         </SPEC-OBJECT-TYPE>
-        <SPEC-RELATION-TYPE IDENTIFIER="_WYTuPdaVEeCyV-qeruTLwA" LONG-NAME="SpecRelationType1"/>
       </SPEC-TYPES>
       <SPEC-OBJECTS>
         <SPEC-OBJECT IDENTIFIER="2c84e85a-59d1-11da-8ef5-afdbd01c7a79" LAST-CHANGE="2005-05-30T17:22:47+02:00">
@@ -73,19 +72,6 @@
           </TYPE>
         </SPEC-OBJECT>
       </SPEC-OBJECTS>
-      <SPEC-RELATIONS>
-        <SPEC-RELATION IDENTIFIER="_RaVYU9aVEeCyV-qeruTLwA">
-          <TYPE>
-            <SPEC-RELATION-TYPE-REF>_WYTuPdaVEeCyV-qeruTLwA</SPEC-RELATION-TYPE-REF>
-          </TYPE>
-          <SOURCE>
-            <SPEC-OBJECT-REF>2c84e85a-59d1-11da-8ef5-afdbd01c7a79</SPEC-OBJECT-REF>
-          </SOURCE>
-          <TARGET>
-            <SPEC-OBJECT-REF>2c84e85a-59d1-11da-8ef5-afdbd01c7a71</SPEC-OBJECT-REF>
-          </TARGET>
-        </SPEC-RELATION>
-      </SPEC-RELATIONS>
       <SPECIFICATIONS>
         <SPECIFICATION IDENTIFIER="spec-12345">
           <CHILDREN>

@@ -109,12 +109,12 @@ class ReqIFUnparser:
         # assert 0, namespace_info
 
         namespace_components: List[str] = []
+        if namespace_info.namespace is not None:
+            namespace_components.append(f'xmlns="{namespace_info.namespace}"')
         if namespace_info.schema_namespace is not None:
             namespace_components.append(
                 f'xmlns:xsi="{namespace_info.schema_namespace}"'
             )
-        if namespace_info.namespace is not None:
-            namespace_components.append(f'xmlns="{namespace_info.namespace}"')
         if namespace_info.configuration is not None:
             namespace_components.append(
                 f'xmlns:configuration="{namespace_info.configuration}"'
