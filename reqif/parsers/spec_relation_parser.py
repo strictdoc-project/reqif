@@ -29,3 +29,27 @@ class SpecRelationParser:
             target=spec_relation_target,
         )
         return spec_relation
+
+    @staticmethod
+    def unparse(spec_relation: ReqIFSpecRelation):
+        output = (
+            f'        <SPEC-RELATION IDENTIFIER="{spec_relation.identifier}">\n'
+        )
+        output += "          <TYPE>\n"
+        output += "            "
+        output += (
+            "<SPEC-RELATION-TYPE-REF>"
+            f"{spec_relation.relation_type_ref}"
+            "</SPEC-RELATION-TYPE-REF>\n"
+        )
+        output += "          </TYPE>\n"
+        output += "          <SOURCE>\n"
+        output += "            "
+        output += f"<SPEC-OBJECT-REF>{spec_relation.source}</SPEC-OBJECT-REF>\n"
+        output += "          </SOURCE>\n"
+        output += "          <TARGET>\n"
+        output += "            "
+        output += f"<SPEC-OBJECT-REF>{spec_relation.target}</SPEC-OBJECT-REF>\n"
+        output += "          </TARGET>\n"
+        output += "        </SPEC-RELATION>\n"
+        return output

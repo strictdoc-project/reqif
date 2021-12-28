@@ -1,9 +1,13 @@
+from typing import List
+
+from reqif.models.reqif_namespace_info import ReqIFNamespaceInfo
 from reqif.models.reqif_spec_object_type import ReqIFSpecObjectType
 from reqif.models.reqif_spec_relation_type import ReqIFSpecRelationType
 from reqif.models.reqif_specification_type import ReqIFSpecificationType
 from reqif.parsers.data_type_parser import DataTypeParser
 from reqif.parsers.header_parser import ReqIFHeaderParser
 from reqif.parsers.spec_object_parser import SpecObjectParser
+from reqif.parsers.spec_relation_parser import SpecRelationParser
 from reqif.parsers.spec_types.spec_object_type_parser import (
     SpecObjectTypeParser,
 )
@@ -21,15 +25,10 @@ class ReqIFWriter:
     @staticmethod
     def write(bundle: ReqIFBundle) -> str:
         reqif_xml_output = '<?xml version="1.0" encoding="UTF-8"?>\n'
-        if bundle.namespace is not None and bundle.configuration is not None:
-            reqif_xml_output += (
-                f"<REQ-IF "
-                f'xmlns="{bundle.namespace}" '
-                f'xmlns:configuration="{bundle.configuration}">'
-                "\n"
-            )
-        else:
-            raise NotImplementedError
+
+        reqif_xml_output += ReqIFWriter.unparse_namespace_info(
+            bundle.namespace_info
+        )
 
         if bundle.req_if_header is not None:
             reqif_xml_output += ReqIFHeaderParser.unparse(bundle.req_if_header)
@@ -76,6 +75,12 @@ class ReqIFWriter:
 
                 if reqif_content.spec_relations is not None:
                     reqif_xml_output += "      <SPEC-RELATIONS>\n"
+
+                    for spec_relation in reqif_content.spec_relations:
+                        reqif_xml_output += SpecRelationParser.unparse(
+                            spec_relation
+                        )
+
                     reqif_xml_output += "      </SPEC-RELATIONS>\n"
 
                 if reqif_content.specifications is not None:
@@ -97,3 +102,31 @@ class ReqIFWriter:
 
         reqif_xml_output += "</REQ-IF>" "\n"
         return reqif_xml_output
+
+    @staticmethod
+    def unparse_namespace_info(namespace_info: ReqIFNamespaceInfo) -> str:
+        xml_output = "<REQ-IF "
+        # assert 0, namespace_info
+
+        namespace_components: List[str] = []
+        if namespace_info.schema_namespace is not None:
+            namespace_components.append(
+                f'xmlns:xsi="{namespace_info.schema_namespace}"'
+            )
+        if namespace_info.namespace is not None:
+            namespace_components.append(f'xmlns="{namespace_info.namespace}"')
+        if namespace_info.configuration is not None:
+            namespace_components.append(
+                f'xmlns:configuration="{namespace_info.configuration}"'
+            )
+        if namespace_info.schema_location is not None:
+            namespace_components.append(
+                f'xsi:schemaLocation="{namespace_info.schema_location}"'
+            )
+        assert (
+            len(namespace_components) > 0
+        ), "Expect at least one namespace component, got none."
+        xml_output += " ".join(namespace_components)
+
+        xml_output += ">\n"
+        return xml_output

@@ -1,4 +1,4 @@
-from typing import List
+from typing import List, Optional
 
 from reqif.models.reqif_spec_object_type import (
     ReqIFSpecObjectType,
@@ -16,6 +16,9 @@ class SpecObjectTypeParser:
         attribute_map = {}
 
         xml_attributes = spec_object_type_xml.attrib
+        spec_description: Optional[str] = (
+            xml_attributes["DESC"] if "DESC" in xml_attributes else None
+        )
         try:
             spec_type_id = xml_attributes["IDENTIFIER"]
         except Exception:
@@ -34,6 +37,11 @@ class SpecObjectTypeParser:
         for attribute_definition in spec_attributes:
             long_name = attribute_definition.attrib["LONG-NAME"]
             identifier = attribute_definition.attrib["IDENTIFIER"]
+            description: Optional[str] = (
+                attribute_definition.attrib["DESC"]
+                if "DESC" in attribute_definition.attrib
+                else None
+            )
             last_change = (
                 attribute_definition.attrib["LAST-CHANGE"]
                 if "LAST-CHANGE" in attribute_definition.attrib
@@ -44,6 +52,7 @@ class SpecObjectTypeParser:
                 if "IS-EDITABLE" in attribute_definition.attrib
                 else None
             )
+            default_value: Optional[str] = None
             if attribute_definition.tag == "ATTRIBUTE-DEFINITION-STRING":
                 attribute_type = SpecObjectAttributeType.STRING
                 try:
@@ -54,6 +63,14 @@ class SpecObjectTypeParser:
                     )
                 except Exception:
                     raise NotImplementedError(attribute_definition) from None
+
+                xml_default_value = attribute_definition.find("DEFAULT-VALUE")
+                if xml_default_value is not None:
+                    xml_attribute_value = xml_default_value.find(
+                        "ATTRIBUTE-VALUE-STRING"
+                    )
+                    if xml_attribute_value is not None:
+                        default_value = xml_attribute_value.attrib["THE-VALUE"]
 
             elif attribute_definition.tag == "ATTRIBUTE-DEFINITION-INTEGER":
                 attribute_type = SpecObjectAttributeType.INTEGER
@@ -67,6 +84,15 @@ class SpecObjectTypeParser:
                     raise NotImplementedError(
                         attribute_definition
                     ) from exception
+
+                xml_default_value = attribute_definition.find("DEFAULT-VALUE")
+                if xml_default_value is not None:
+                    xml_attribute_value = xml_default_value.find(
+                        "ATTRIBUTE-VALUE-INTEGER"
+                    )
+                    assert xml_attribute_value is not None
+                    default_value = xml_attribute_value.attrib["THE-VALUE"]
+
             elif attribute_definition.tag == "ATTRIBUTE-DEFINITION-BOOLEAN":
                 attribute_type = SpecObjectAttributeType.BOOLEAN
                 try:
@@ -108,16 +134,19 @@ class SpecObjectTypeParser:
                 raise NotImplementedError(attribute_definition) from None
             attribute_definition = SpecAttributeDefinition(
                 attribute_type=attribute_type,
+                description=description,
                 identifier=identifier,
                 last_change=last_change,
                 datatype_definition=datatype_definition,
                 long_name=long_name,
                 editable=editable,
+                default_value=default_value,
             )
             attribute_definitions.append(attribute_definition)
             attribute_map[identifier] = long_name
 
         return ReqIFSpecObjectType(
+            description=spec_description,
             identifier=spec_type_id,
             last_change=spec_last_change,
             long_name=spec_type_long_name,
@@ -129,9 +158,10 @@ class SpecObjectTypeParser:
     def unparse(spec_type: ReqIFSpecObjectType) -> str:
         output = ""
 
+        output += "        " "<SPEC-OBJECT-TYPE"
+        if spec_type.description is not None:
+            output += f' DESC="{spec_type.description}"'
         output += (
-            "        "
-            "<SPEC-OBJECT-TYPE"
             f' IDENTIFIER="{spec_type.identifier}"'
             f' LAST-CHANGE="{spec_type.last_change}"'
             f' LONG-NAME="{spec_type.long_name}"'
@@ -146,8 +176,11 @@ class SpecObjectTypeParser:
                 "            "
                 "<"
                 f"{attribute.attribute_type.get_spec_type_tag()}"
-                f' IDENTIFIER="{attribute.identifier}"'
             )
+            if attribute.description:
+                output += f' DESC="{attribute.description}"'
+
+            output += f' IDENTIFIER="{attribute.identifier}"'
             if attribute.last_change:
                 output += f' LAST-CHANGE="{attribute.last_change}"'
             output += f' LONG-NAME="{attribute.long_name}"'
@@ -155,6 +188,15 @@ class SpecObjectTypeParser:
                 editable_value = "true" if attribute.editable else "false"
                 output += f' IS-EDITABLE="{editable_value}"'
             output += ">" "\n"
+
+            if attribute.default_value:
+                output += (
+                    "              <DEFAULT-VALUE>\n"
+                    f"                "
+                    f"<{attribute.attribute_type.get_attribute_value_tag()}"
+                    f' THE-VALUE="{attribute.default_value}"/>\n'
+                    "              </DEFAULT-VALUE>\n"
+                )
             output += "              <TYPE>\n"
             output += (
                 "                "

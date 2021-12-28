@@ -1,13 +1,11 @@
-from typing import List
+from typing import List, Optional
 
-from reqif.models.reqif_spec_hierarchy import ReqIFSpecHierarchy
 from reqif.models.reqif_specification import (
     ReqIFSpecification,
 )
 from reqif.parsers.spec_hierarchy_parser import (
     ReqIFSpecHierarchyParser,
 )
-from reqif.specification_iterator import SpecificationIterator
 
 
 class ReqIFSpecificationParser:
@@ -18,23 +16,35 @@ class ReqIFSpecificationParser:
         try:
             identifier = attributes["IDENTIFIER"]
         except Exception:
-            raise NotImplementedError(specification_xml) from None
-        try:
-            long_name = attributes["LONG-NAME"]
-        except Exception:
-            raise NotImplementedError(specification_xml) from None
+            raise NotImplementedError(attributes) from None
 
-        try:
-            specification_type = (
-                specification_xml.find("TYPE")
-                .find("SPECIFICATION-TYPE-REF")
-                .text
+        # LAST-CHANGE is optional
+        last_change = (
+            attributes["LAST-CHANGE"] if "LAST-CHANGE" in attributes else None
+        )
+
+        # LONG-NAME is optional
+        long_name = (
+            attributes["LONG-NAME"] if "LONG-NAME" in attributes else None
+        )
+
+        values: Optional[List] = None
+        xml_values = specification_xml.find("VALUES")
+        if xml_values is not None:
+            if len(xml_values) != 0:
+                raise NotImplementedError(xml_values)
+            values = []
+
+        specification_type: Optional[str] = None
+        xml_specification_type = specification_xml.find("TYPE")
+        if xml_specification_type is not None:
+            xml_specification_type_ref = xml_specification_type.find(
+                "SPECIFICATION-TYPE-REF"
             )
-        except Exception:
-            raise NotImplementedError(specification_xml) from None
+            if xml_specification_type_ref is not None:
+                specification_type = xml_specification_type_ref.text
 
         specification_children_xml = list(specification_xml)
-        # type_xml = None
         children_xml = None
         for specification_child_xml in specification_children_xml:
             if specification_child_xml.tag == "TYPE":
@@ -50,7 +60,9 @@ class ReqIFSpecificationParser:
                 children.append(spec_hierarchy_xml)
         return ReqIFSpecification(
             identifier=identifier,
+            last_change=last_change,
             long_name=long_name,
+            values=values,
             specification_type=specification_type,
             children=children,
         )
@@ -60,14 +72,22 @@ class ReqIFSpecificationParser:
         output = ""
 
         output += (
-            "        <SPECIFICATION "
-            f'IDENTIFIER="{specification.identifier}" '
-            'LAST-CHANGE="2021-10-14T10:11:59.495+02:00" '
-            f'LONG-NAME="{specification.long_name}">\n'
+            f'        <SPECIFICATION IDENTIFIER="{specification.identifier}"'
         )
+        if specification.last_change is not None:
+            output += f' LAST-CHANGE="{specification.last_change}"'
+        if specification.long_name:
+            output += f' LONG-NAME="{specification.long_name}"'
+        output += ">\n"
 
-        output += f"""\
-          <VALUES/>
+        specification_values = specification.values
+        if specification_values is not None:
+            if len(specification_values) != 0:
+                raise NotImplementedError(specification_values)
+            output += "          <VALUES/>\n"
+
+        if specification.specification_type:
+            output += f"""\
           <TYPE>
             <SPECIFICATION-TYPE-REF>\
 {specification.specification_type}\
@@ -77,67 +97,10 @@ class ReqIFSpecificationParser:
 
         output += "          <CHILDREN>\n"
 
-        closing_tags: List[ReqIFSpecHierarchy] = []
-        for current_hierarchy in SpecificationIterator.iterate_specification(
-            specification
-        ):
-            while (
-                len(closing_tags) > 0
-                and current_hierarchy.level <= closing_tags[-1].level
-            ):
-                hierarchy = closing_tags.pop()
-                output += ReqIFSpecificationParser.print_closing_tag(hierarchy)
-
-            output += ReqIFSpecificationParser.print_spec_hierarchy(
-                current_hierarchy
-            )
-            closing_tags.append(current_hierarchy)
-
-        while len(closing_tags) > 0:
-            hierarchy = closing_tags.pop()
-            output += ReqIFSpecificationParser.print_closing_tag(hierarchy)
+        for hierarchy in specification.children:
+            output += ReqIFSpecHierarchyParser.unparse(hierarchy)
 
         output += "          </CHILDREN>\n"
-
         output += "        </SPECIFICATION>\n"
-
-        return output
-
-    @staticmethod
-    def print_spec_hierarchy(hierarchy: ReqIFSpecHierarchy) -> str:
-        base_level = 10 + hierarchy.level * 2
-        base_level_str = " " * base_level
-        output = (
-            base_level_str + f"<SPEC-HIERARCHY "
-            f'IDENTIFIER="{hierarchy.identifier}" '
-            f'LAST-CHANGE="2021-10-15T09:21:00.153+02:00">\n'
-        )
-
-        output += base_level_str + "  <OBJECT>\n"
-        output += (
-            base_level_str + "    "
-            f"<SPEC-OBJECT-REF>{hierarchy.spec_object}</SPEC-OBJECT-REF>\n"
-        )
-        output += base_level_str + "  </OBJECT>\n"
-
-        if hierarchy.children is not None:
-            output += base_level_str + "  <CHILDREN>\n"
-
-        return output
-
-    @staticmethod
-    def print_closing_tag(hierarchy: ReqIFSpecHierarchy) -> str:
-        base_level = 10 + hierarchy.level * 2
-        base_level_str = " " * base_level
-
-        output = ""
-
-        if hierarchy.children is not None:
-            output += base_level_str + "  </CHILDREN>\n"
-
-        output += base_level_str
-        output += "</SPEC-HIERARCHY>\n"
-        # output += " " * (10 + level * 2)
-        # output += "</CHILDREN>\n"
 
         return output

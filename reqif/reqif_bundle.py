@@ -2,6 +2,7 @@ import collections
 from typing import List, Deque, Optional
 
 from reqif.models.reqif_core_content import ReqIFCoreContent
+from reqif.models.reqif_namespace_info import ReqIFNamespaceInfo
 from reqif.models.reqif_reqif_header import ReqIFReqIFHeader
 from reqif.models.reqif_spec_hierarchy import (
     ReqIFSpecHierarchy,
@@ -19,8 +20,9 @@ class ReqIFBundle:  # pylint: disable=too-many-instance-attributes
         configuration: Optional[str],
     ) -> "ReqIFBundle":
         return ReqIFBundle(
-            namespace=namespace,
-            configuration=configuration,
+            namespace_info=ReqIFNamespaceInfo.empty(
+                namespace=namespace, configuration=configuration
+            ),
             req_if_header=None,
             core_content=None,
             tool_extensions_tag_exists=False,
@@ -29,15 +31,13 @@ class ReqIFBundle:  # pylint: disable=too-many-instance-attributes
 
     def __init__(
         self,
-        namespace: Optional[str],
-        configuration: Optional[str],
+        namespace_info: ReqIFNamespaceInfo,
         req_if_header: Optional[ReqIFReqIFHeader],
         core_content: Optional[ReqIFCoreContent],
         tool_extensions_tag_exists: bool,
         lookup: ReqIFObjectLookup,
     ):  # pylint: disable=too-many-arguments
-        self.namespace: Optional[str] = namespace
-        self.configuration: Optional[str] = configuration
+        self.namespace_info: ReqIFNamespaceInfo = namespace_info
         self.req_if_header: Optional[ReqIFReqIFHeader] = req_if_header
         self.core_content: Optional[ReqIFCoreContent] = core_content
         self.tool_extensions_tag_exists = tool_extensions_tag_exists

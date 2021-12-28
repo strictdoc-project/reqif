@@ -1,4 +1,4 @@
-from typing import List
+from typing import List, Optional
 
 from reqif.models.reqif_spec_object_type import (
     SpecAttributeDefinition,
@@ -34,6 +34,11 @@ class SpecificationTypeParser:
         for attribute_definition in spec_attributes:
             long_name = attribute_definition.attrib["LONG-NAME"]
             identifier = attribute_definition.attrib["IDENTIFIER"]
+            description: Optional[str] = (
+                attribute_definition.attrib["DESC"]
+                if "DESC" in attribute_definition.attrib
+                else None
+            )
             last_change = (
                 attribute_definition.attrib["LAST-CHANGE"]
                 if "LAST-CHANGE" in attribute_definition.attrib
@@ -108,11 +113,13 @@ class SpecificationTypeParser:
                 raise NotImplementedError(attribute_definition) from None
             attribute_definition = SpecAttributeDefinition(
                 attribute_type=attribute_type,
+                description=description,
                 identifier=identifier,
                 last_change=last_change,
                 datatype_definition=datatype_definition,
                 long_name=long_name,
                 editable=editable,
+                default_value=None,
             )
             attribute_definitions.append(attribute_definition)
             attribute_map[identifier] = long_name

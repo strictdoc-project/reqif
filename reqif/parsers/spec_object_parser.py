@@ -1,4 +1,4 @@
-from typing import List
+from typing import List, Optional
 
 from lxml import etree
 
@@ -16,6 +16,14 @@ ATTRIBUTE_STRING_TEMPLATE = """\
                 <ATTRIBUTE-DEFINITION-STRING-REF>{name}</ATTRIBUTE-DEFINITION-STRING-REF>
               </DEFINITION>
             </ATTRIBUTE-VALUE-STRING>
+"""
+
+ATTRIBUTE_INTEGER_TEMPLATE = """\
+            <ATTRIBUTE-VALUE-INTEGER THE-VALUE="{value}">
+              <DEFINITION>
+                <ATTRIBUTE-DEFINITION-INTEGER-REF>{name}</ATTRIBUTE-DEFINITION-INTEGER-REF>
+              </DEFINITION>
+            </ATTRIBUTE-VALUE-INTEGER>
 """
 
 ATTRIBUTE_ENUMERATION_TEMPLATE = """\
@@ -40,7 +48,11 @@ class SpecObjectParser:
             identifier = xml_attributes["IDENTIFIER"]
         except Exception:
             raise NotImplementedError from None
-
+        spec_object_last_change: Optional[str] = (
+            xml_attributes["LAST-CHANGE"]
+            if "LAST-CHANGE" in xml_attributes
+            else None
+        )
         spec_object_type = (
             spec_object_xml.find("TYPE").find("SPEC-OBJECT-TYPE-REF").text
         )
@@ -116,7 +128,11 @@ class SpecObjectParser:
             attribute_map[attribute_name] = attribute_value
 
         return ReqIFSpecObject(
-            identifier, spec_object_type, attributes, attribute_map
+            identifier=identifier,
+            last_change=spec_object_last_change,
+            spec_object_type=spec_object_type,
+            attributes=attributes,
+            attribute_map=attribute_map,
         )
 
     @staticmethod
@@ -124,14 +140,18 @@ class SpecObjectParser:
         output = ""
 
         output += (
-            "        <SPEC-OBJECT "
-            f'IDENTIFIER="{spec_object.identifier}" '
-            'LAST-CHANGE="2021-10-15T11:34:36.007+02:00">\n'
+            "        <SPEC-OBJECT" f' IDENTIFIER="{spec_object.identifier}"'
         )
+        if spec_object.last_change:
+            output += f' LAST-CHANGE="{spec_object.last_change}">\n'
         output += "          <VALUES>\n"
         for attribute in spec_object.attributes:
             if attribute.attribute_type == SpecObjectAttributeType.STRING:
                 output += ATTRIBUTE_STRING_TEMPLATE.format(
+                    name=attribute.name, value=attribute.value
+                )
+            elif attribute.attribute_type == SpecObjectAttributeType.INTEGER:
+                output += ATTRIBUTE_INTEGER_TEMPLATE.format(
                     name=attribute.name, value=attribute.value
                 )
             elif (
