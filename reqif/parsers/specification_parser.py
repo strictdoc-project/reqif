@@ -44,8 +44,8 @@ class ReqIFSpecificationParser:
         values: Optional[List] = None
         xml_values = specification_xml.find("VALUES")
         if xml_values is not None:
-            if len(xml_values) != 0:
-                raise NotImplementedError(xml_values)
+            # if len(xml_values) != 0:
+            #     raise NotImplementedError(xml_values)
             values = []
 
         specification_type: Optional[str] = None
