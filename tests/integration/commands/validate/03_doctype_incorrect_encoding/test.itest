@@ -1,0 +1,4 @@
+RUN: %reqif validate %S/sample.reqif | filecheck %s --dump-input=fail
+
+CHECK: warning: ReqIF Implementation Guide recommends using UTF-8 encoding for ReqIF files. Every ReqIF document should have the following line: <?xml version="1.0" encoding="UTF-8"?>
+CHECK: Validation complete with 0 errors, 1 warnings found.

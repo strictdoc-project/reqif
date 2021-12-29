@@ -13,6 +13,7 @@ try:
     from reqif.commands.dump.dump import DumpCommand
     from reqif.commands.format.format import FormatCommand
     from reqif.commands.passthrough.passthrough import PassthroughCommand
+    from reqif.commands.validate.validate import ValidateCommand
 
 except FileNotFoundError:
     print("error: could not locate reqif's root folder.")
@@ -35,6 +36,8 @@ def main():
         DumpCommand.execute(parser.get_dump_config())
     elif parser.is_format_command:
         FormatCommand.execute(parser.get_format_config())
+    elif parser.is_validate_command:
+        ValidateCommand.execute(parser.get_validate_config())
     else:
         raise NotImplementedError(parser) from None
 
