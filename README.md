@@ -10,7 +10,15 @@ TBD
 
 ## Usage
 
+### Passthrough command
+
+TBD
+
 ### HTML dump
+
+TBD
+
+### Formatting ReqIF
 
 TBD
 
