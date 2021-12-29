@@ -243,6 +243,7 @@ class ReqIFParser:
                 raise NotImplementedError(xml_spec_relation_groups) from None
 
         lookup = ReqIFObjectLookup(
+            data_types_lookup=data_types_lookup,
             spec_objects_lookup=spec_objects_lookup,
             spec_relations_parent_lookup=spec_relations_parent_lookup,
         )

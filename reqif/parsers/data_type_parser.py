@@ -20,7 +20,7 @@ class DataTypeParser:
         ReqIFDataTypeDefinitionInteger,
         ReqIFDataTypeDefinitionEnumeration,
     ]:
-        assert "DATATYPE-DEFINITION-" in data_type_xml.tag
+        assert "DATATYPE-DEFINITION-" in data_type_xml.tag, f"{data_type_xml}"
 
         is_self_closed = is_self_closed_tag(data_type_xml)
 
