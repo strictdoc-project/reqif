@@ -59,7 +59,8 @@ class ReqIFBundle:  # pylint: disable=too-many-instance-attributes
 
             yield current
 
-            task_list.extendleft(reversed(current.children))
+            if current.children is not None:
+                task_list.extendleft(reversed(current.children))
 
     def get_spec_object_by_ref(self, ref) -> ReqIFSpecObject:
         return self.lookup.get_spec_object_by_ref(ref)
