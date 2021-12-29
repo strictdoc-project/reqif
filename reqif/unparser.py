@@ -23,7 +23,7 @@ from reqif.reqif_bundle import ReqIFBundle
 
 class ReqIFUnparser:
     @staticmethod
-    def write(bundle: ReqIFBundle) -> str:
+    def unparse(bundle: ReqIFBundle) -> str:
         reqif_xml_output = '<?xml version="1.0" encoding="UTF-8"?>\n'
 
         reqif_xml_output += ReqIFUnparser.unparse_namespace_info(

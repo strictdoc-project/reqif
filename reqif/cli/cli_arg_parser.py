@@ -56,9 +56,18 @@ def cli_args_parser() -> argparse.ArgumentParser:
     command_parser_format.add_argument(
         "input_file", type=str, help="Path to an input ReqIF file"
     )
-
     command_parser_format.add_argument(
         "output_file", type=str, help="Path to an output ReqIF file"
+    )
+
+    # Command: Validate
+    command_parser_validate = command_subparsers.add_parser(
+        "validate",
+        help=("Read a ReqIF file and validate its content."),
+        formatter_class=formatter,
+    )
+    command_parser_validate.add_argument(
+        "input_file", type=str, help="Path to an input ReqIF file"
     )
 
     return main_parser
@@ -82,6 +91,11 @@ class FormatCommandConfig:
         self.output_file: str = output_file
 
 
+class ValidateCommandConfig:
+    def __init__(self, input_file: str):
+        self.input_file: str = input_file
+
+
 class ReqIFArgsParser:
     def __init__(self, args):
         self.args = args
@@ -98,6 +112,10 @@ class ReqIFArgsParser:
     def is_format_command(self):
         return self.args.command == "format"
 
+    @property
+    def is_validate_command(self):
+        return self.args.command == "validate"
+
     def get_passthrough_config(self) -> PassthroughCommandConfig:
         return PassthroughCommandConfig(
             self.args.input_file, self.args.output_file
@@ -108,6 +126,9 @@ class ReqIFArgsParser:
 
     def get_format_config(self) -> FormatCommandConfig:
         return FormatCommandConfig(self.args.input_file, self.args.output_file)
+
+    def get_validate_config(self) -> ValidateCommandConfig:
+        return ValidateCommandConfig(self.args.input_file)
 
 
 def create_reqif_args_parser(testing_args=None) -> ReqIFArgsParser:

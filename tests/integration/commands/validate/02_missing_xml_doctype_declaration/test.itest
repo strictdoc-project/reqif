@@ -1,0 +1,4 @@
+RUN: %reqif validate %S/sample.reqif | filecheck %s --dump-input=fail
+
+CHECK: warning: Document is missing a valid XML declaration.
+CHECK: Validation complete with 0 errors, 1 warnings found.

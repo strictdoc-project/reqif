@@ -4,6 +4,7 @@ from collections import defaultdict
 from typing import List, Optional, Dict
 
 from lxml import etree
+from lxml.etree import DocInfo
 
 from reqif.models.reqif_core_content import ReqIFCoreContent
 from reqif.models.reqif_namespace_info import ReqIFNamespaceInfo
@@ -50,7 +51,6 @@ class ReqIFParser:
             # Parse XML.
             # https://github.com/eerohele/sublime-lxml/issues/5#issuecomment-209781719
             xml_reqif_root = etree.parse(io.BytesIO(bytes(content, "UTF-8")))
-
         except Exception as exception:  # pylint: disable=broad-except
             # TODO: handle
             print(f"error: problem parsing file: {exception}")
@@ -62,6 +62,12 @@ class ReqIFParser:
 
     @staticmethod
     def parse_reqif(xml_reqif_root) -> ReqIFBundle:
+        docinfo: DocInfo = xml_reqif_root.docinfo
+
+        # There should be a better way of detecting if the whole
+        # <?xml version="1.0" encoding="UTF-8"?> line is missing.
+        doctype_is_present = docinfo.standalone is not None
+
         namespace_info = xml_reqif_root.getroot().nsmap
         namespace: Optional[str] = namespace_info[None]
         configuration: Optional[str] = (
@@ -88,6 +94,8 @@ class ReqIFParser:
         if language_attribute in xml_reqif.attrib:
             language = xml_reqif.attrib[language_attribute]
         namespace_info = ReqIFNamespaceInfo(
+            doctype_is_present=doctype_is_present,
+            encoding=docinfo.encoding,
             namespace=namespace,
             configuration=configuration,
             schema_namespace=schema_namespace,

@@ -4,12 +4,16 @@ from typing import Optional
 class ReqIFNamespaceInfo:
     def __init__(  # pylint: disable=too-many-arguments
         self,
+        doctype_is_present: bool,
+        encoding: str,
         namespace: str,
         configuration: str,
         schema_namespace: Optional[str],
         schema_location: Optional[str],
         language: Optional[str],
     ):
+        self.doctype_is_present: bool = doctype_is_present
+        self.encoding: str = encoding
         self.namespace: str = namespace
         self.configuration: str = configuration
         self.schema_namespace: Optional[str] = schema_namespace
@@ -19,6 +23,8 @@ class ReqIFNamespaceInfo:
     def __str__(self) -> str:
         return (
             f"ReqIFNamespaceInfo("
+            f"encoding={self.encoding}"
+            ", "
             f"namespace={self.namespace}"
             ", "
             f"configuration={self.configuration}"
@@ -44,6 +50,8 @@ class ReqIFNamespaceInfo:
         )
         configuration_or_default = configuration if configuration else "TBD"
         return ReqIFNamespaceInfo(
+            doctype_is_present=True,
+            encoding="UTF-8",
             namespace=namespace_or_default,
             configuration=configuration_or_default,
             schema_namespace=None,
