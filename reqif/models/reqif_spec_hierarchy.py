@@ -12,6 +12,8 @@ class ReqIFSpecHierarchy:
         ref_then_children_order: bool,
         level: int,
     ):
+        assert level >= 0
+
         self.identifier = identifier
         self.last_change: Optional[str] = last_change
         self.long_name: Optional[str] = long_name
@@ -35,12 +37,36 @@ class ReqIFSpecHierarchy:
             f", "
             f"long_name: {self.long_name}"
             f", "
+            f"spec_object: {self.spec_object}"
+            f", "
+            f"children:{self.children}"
+            f", "
             f"level: {self.level}"
             f")"
         )
 
     def __repr__(self) -> str:
         return self.__str__()
+
+    def add_child(self, spec_hierarchy):
+        assert (self.level + 1) == spec_hierarchy.level, (
+            f"Broken parent-child level relationship.\n"
+            f"Parent: {self.dump()}\nChild: {spec_hierarchy.dump()}"
+        )
+        self.children.append(spec_hierarchy)
+
+    def dump(self) -> str:
+        assert self.level >= 0
+        level_str = " " * ((self.level) * 2)
+        dump = f"{level_str}ReqIFSpecHierarchy(\n"
+        dump += f"{level_str}  level: {self.level}\n"
+        dump += f"{level_str}  identifier: {self.identifier}\n"
+        dump += f"{level_str}  spec_object: {self.spec_object}\n"
+        if self.children is not None:
+            for child in self.children:
+                dump += f"{child.dump()}"
+        dump += f"{level_str})\n"
+        return dump
 
     def calculate_base_level(self) -> int:
         assert self.level > 0, f"{self.level}"
