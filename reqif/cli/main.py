@@ -12,7 +12,7 @@ try:
     from reqif.cli.cli_arg_parser import create_reqif_args_parser
     from reqif.commands.dump.dump import DumpCommand
     from reqif.commands.format.format import FormatCommand
-    from reqif.passthrough import ReqIFPassthrough
+    from reqif.commands.passthrough.passthrough import PassthroughCommand
 
 except FileNotFoundError:
     print("error: could not locate reqif's root folder.")
@@ -30,22 +30,7 @@ def main():
     parser = create_reqif_args_parser()
 
     if parser.is_passthrough_command:
-        config = parser.get_passthrough_config()
-        input_file = config.input_file
-        if not os.path.isfile(input_file):
-            sys.stdout.flush()
-            message = "error: passthrough command's input file does not exist"
-            print(f"{message}: {input_file}")
-            sys.exit(1)
-
-        output = ReqIFPassthrough.pass_through(config)
-        output_file = config.output_file
-        output_dir = os.path.dirname(output_file)
-        if not os.path.isdir(output_dir):
-            print(f"error: output directory does not exist: {output_file}")
-            sys.exit(1)
-        with open(output_file, "w", encoding="UTF-8") as file:
-            file.write(output)
+        PassthroughCommand.execute(parser.get_passthrough_config())
     elif parser.is_dump_command:
         DumpCommand.execute(parser.get_dump_config())
     elif parser.is_format_command:
