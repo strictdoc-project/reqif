@@ -1,0 +1,6 @@
+REQUIRES: PLATFORM_IS_NOT_WINDOWS
+
+RUN: mkdir -p %S/output
+RUN: %reqif format %S/sample.reqif %S/output/sample.reqif
+
+RUN: diff %S/expected/sample.reqif %S/output/sample.reqif
