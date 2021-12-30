@@ -1,26 +1,78 @@
 # ReqIF
 
-ReqIF is a Python library for working ReqIF format.
+ReqIF is a Python library for working with ReqIF format.
+
+Supported features:
+
+- Parsing/unparsing ReqIF
+- Formatting (pretty-printing) ReqIF
+
+To be implemented:
+
+- Validating ReqIF
+- Converting from/to Excel and other formats
 
 **The project is under construction.**
 
 ## Getting started
 
-TBD
+```bash
+pip install reqif
+```
 
-## Usage
+## Using ReqIF as a library
+
+### Parsing ReqIF
+
+```py
+reqif_bundle = ReqIFParser.parse(input_file_path)
+for specification in reqif_bundle.core_content.req_if_content.specifications
+    print(specification.long_name)
+
+    for current_hierarchy in reqif_bundle.iterate_specification_hierarchy(specification):
+        print(current_hierarchy)
+```
+
+### Unparsing ReqIF
+
+```py
+reqif_bundle = ReqIFParser.parse(input_file_path)
+reqif_xml_output = ReqIFUnparser.unparse(reqif_bundle)
+with open(output_file_path, "w", encoding="UTF-8") as output_file:
+    output_file.write(reqif_xml_output)
+```
+
+The contents of `reqif_xml_output` should be the same as that the `input_file`.
+
+## Using ReqIF as a command-line tool
 
 ### Passthrough command
 
-TBD
+Before using the ReqIF library, it is useful to check if it fully understands a
+particular ReqIF file format that a user has in hand. The `passthrough` command
+first parses the ReqIF XML into in-memory Python objects and then unparses
+these Python objects back to an output ReqIF file.
 
-### HTML dump
+If everything goes fine, the output of the passthrough command should be
+identical to the contents of the input file.
 
-TBD
+`tests/integration/examples` contains samples of ReqIF files found on the 
+internet. The integration tests ensure that for these samples, the passthrough
+command always produces outputs that are identical to inputs. 
 
 ### Formatting ReqIF
 
-TBD
+This command is similar to `clang-format` for C/C++ files or `cmake-format` for
+CMake files. The input file is parsed and then pretty-printed back to an output
+file.
+
+This command is useful when dealing with ReqIF files that are hand-written or
+ReqIF files produced by the ReqIF tools that do not generate a well-formed XML
+with consistent indentation.  
+
+The `tests/integration/commands/format` contains typical examples of
+incorrectly formatted ReqIF files. The integration tests ensure that the
+`format` command fixes these issues.
 
 ## Implementation details
 
