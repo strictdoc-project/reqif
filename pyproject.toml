@@ -1,7 +1,7 @@
 [tool.poetry]
-name = "strictdoc-reqif"
+name = "reqif"
 version = "0.0.1"
-description = "ReqIF Export/Import library."
+description = "Python library for ReqIF format. ReqIF parsing and unparsing."
 authors = ["Stanislav Pankevich <s.pankevich@gmail.com>"]
 maintainers = ["Stanislav Pankevich <s.pankevich@gmail.com>"]
 license = "Apache 2"
@@ -10,7 +10,8 @@ homepage = ""
 repository = "https://github.com/strictdoc-project/reqif"
 documentation = "https://reqif.readthedocs.io/en/latest/index.html"
 keywords = [
-    "Documentation",
+    "ReqIF",
+    "Requirements",
     "Requirements management"
 ]
 
