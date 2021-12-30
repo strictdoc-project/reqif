@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "reqif"
+name = "strictdoc-reqif"
 version = "0.0.1"
 description = "ReqIF Export/Import library."
 authors = ["Stanislav Pankevich <s.pankevich@gmail.com>"]
