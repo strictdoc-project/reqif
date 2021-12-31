@@ -56,14 +56,14 @@ class ReqIFSpecObjectType:
         self,
         description: Optional[str],
         identifier: str,
-        last_change: str,
+        last_change: Optional[str],
         long_name,
         attribute_definitions: Optional[List[SpecAttributeDefinition]],
         attribute_map,
     ):
         self.description: Optional[str] = description
         self.identifier: str = identifier
-        self.last_change: str = last_change
+        self.last_change: Optional[str] = last_change
         self.long_name = long_name
         self.attribute_definitions: Optional[
             List[SpecAttributeDefinition]
@@ -76,6 +76,10 @@ class ReqIFSpecObjectType:
             f"description: {self.description}"
             ", "
             f"identifier: {self.identifier}"
+            ", "
+            f"last_change: {self.last_change}"
+            ", "
+            f"long_name: {self.long_name}"
             ", "
             f"attribute_definitions: {self.attribute_definitions}"
             ", "

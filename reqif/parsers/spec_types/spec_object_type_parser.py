@@ -24,10 +24,11 @@ class SpecObjectTypeParser:
             spec_type_id = xml_attributes["IDENTIFIER"]
         except Exception:
             raise NotImplementedError from None
-        try:
-            spec_last_change = xml_attributes["LAST-CHANGE"]
-        except Exception:
-            raise NotImplementedError from None
+        spec_last_change = (
+            xml_attributes["LAST-CHANGE"]
+            if "LAST-CHANGE" in xml_attributes
+            else None
+        )
         try:
             spec_type_long_name = xml_attributes["LONG-NAME"]
         except Exception:
@@ -192,13 +193,10 @@ class SpecObjectTypeParser:
         output += "        " "<SPEC-OBJECT-TYPE"
         if spec_type.description is not None:
             output += f' DESC="{html.escape(spec_type.description)}"'
-        output += (
-            f' IDENTIFIER="{spec_type.identifier}"'
-            f' LAST-CHANGE="{spec_type.last_change}"'
-            f' LONG-NAME="{spec_type.long_name}"'
-            f">"
-            "\n"
-        )
+        output += f' IDENTIFIER="{spec_type.identifier}"'
+        if spec_type.last_change is not None:
+            output += f' LAST-CHANGE="{spec_type.last_change}"'
+        output += f' LONG-NAME="{spec_type.long_name}"' f">" "\n"
 
         if spec_type.attribute_definitions is not None:
             output += "          <SPEC-ATTRIBUTES>\n"

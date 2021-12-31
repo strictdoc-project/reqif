@@ -42,7 +42,8 @@ with open(output_file_path, "w", encoding="UTF-8") as output_file:
     output_file.write(reqif_xml_output)
 ```
 
-The contents of `reqif_xml_output` should be the same as that the `input_file`.
+The contents of `reqif_xml_output` should be the same as the contents of the 
+`input_file`.
 
 ## Using ReqIF as a command-line tool
 
@@ -62,9 +63,9 @@ command always produces outputs that are identical to inputs.
 
 ### Formatting ReqIF
 
-This command is similar to `clang-format` for C/C++ files or `cmake-format` for
-CMake files. The input file is parsed and then pretty-printed back to an output
-file.
+The `format` command is similar to `clang-format` for C/C++ files or 
+`cmake-format` for CMake files. The input file is parsed and then pretty-printed
+back to an output file.
 
 This command is useful when dealing with ReqIF files that are hand-written or
 ReqIF files produced by the ReqIF tools that do not generate a well-formed XML
