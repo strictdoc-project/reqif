@@ -2,7 +2,9 @@
 
 ReqIF is a Python library for working with ReqIF format.
 
-Supported features:
+**The project is under construction.**
+
+## Supported features
 
 - Parsing/unparsing ReqIF
 - Formatting (pretty-printing) ReqIF
@@ -11,8 +13,6 @@ To be implemented:
 
 - Validating ReqIF
 - Converting from/to Excel and other formats
-
-**The project is under construction.**
 
 ## Getting started
 
@@ -77,6 +77,30 @@ incorrectly formatted ReqIF files. The integration tests ensure that the
 
 ## Implementation details
 
+The core of the library is a **ReqIF first-stage parser** that only transforms
+the contents of a ReqIF XML file into a ReqIF in-memory representation. The
+in-memory representation is a tree of Python objects that map directly to the 
+objects of the ReqIF XML file structure (e.g, Spec Objects, Spec Types, Data
+Types, Specifications, etc.).
+
+### Parsing: Converting from ReqIF to other formats
+
+The first-stage parser (implemented by the class `ReqIFParser`) can be used by
+user's second-stage parser/converter scripts that convert the ReqIF in-memory
+structure into a desired format such as Excel, HTML or other formats. The
+two-stage process allows the first stage parsing to focus solely on creating an
+in-memory ReqIF object tree, while the second stage parsing can further parse
+the ReqIF object tree according to the logical structure of user's documents as
+encoded in the ReqIF XML file that was produced by user's requirements
+management tool.
+
+### Unparsing: Converting from other formats to ReqIF
+
+The reverse process is also possible. A user's script converts another format's
+contents into a ReqIF in-memory representation. The ReqIF un-parser
+(implemented by the class `ReqIFUnparser`) can be used to render the in-memory
+objects to the ReqIF XML file.
+
 ### Tolerance
 
 The first-stage parser is made tolerant against possible issues in ReqIF.
@@ -84,7 +108,7 @@ It should be possible to parse a ReqIF file even if it is missing important
 information. A separate validation command shall be used to confirm the validity
 of the ReqIF contents.
 
-## A bottom-up overview of the ReqIF format
+### A bottom-up overview of the ReqIF format
 
 - ReqIF is a standard. See reference document [RD01](#rd01-reqif-standard).
 - ReqIF has a fixed structure (see "What is common for all ReqIF documents" 

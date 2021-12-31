@@ -230,6 +230,16 @@ def check(_):
     pass
 
 
+@task
+def release(context):
+    command = one_line_command(
+        """
+            poetry publish --build
+        """
+    )
+    run_invoke_cmd(context, command)
+
+
 # https://github.com/github-changelog-generator/github-changelog-generator
 # gem install github_changelog_generator
 @task
