@@ -233,7 +233,7 @@ def check(_):
 @task
 def release(context):
     command = one_line_command(
-        f"""
+        """
             poetry publish --build
         """
     )
