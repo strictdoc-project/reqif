@@ -1,6 +1,8 @@
 import os
 import sys
 
+from reqif.commands.process.process import ProcessCommand
+
 try:
     ROOT_PATH = os.path.abspath(
         os.path.join(os.path.dirname(__file__), "..", "..")
@@ -32,6 +34,8 @@ def main():
 
     if parser.is_passthrough_command:
         PassthroughCommand.execute(parser.get_passthrough_config())
+    elif parser.is_process_command:
+        ProcessCommand.execute(parser.get_process_config())
     elif parser.is_dump_command:
         DumpCommand.execute(parser.get_dump_config())
     elif parser.is_format_command:

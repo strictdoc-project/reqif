@@ -20,6 +20,7 @@ python = "^3.6.2"
 beautifulsoup4 = '^4.9.3'
 lxml = '^4.6.2'
 jinja2 = "^2.11.2"
+pandas = "*"
 
 [tool.poetry.dev-dependencies]
 black = "21.9b0"

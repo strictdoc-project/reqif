@@ -1,0 +1,2 @@
+RUN: mkdir -p %S/output
+RUN: %reqif process %S/sample.reqif

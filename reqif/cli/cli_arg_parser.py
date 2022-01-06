@@ -30,6 +30,20 @@ def cli_args_parser() -> argparse.ArgumentParser:
         "output_file", type=str, help="Path to the output ReqIF file"
     )
 
+    # Command: Process
+    command_parser_process = command_subparsers.add_parser(
+        "process",
+        help="TODO",
+        formatter_class=formatter,
+    )
+    command_parser_process.add_argument(
+        "input_file", type=str, help="Path to the input ReqIF file"
+    )
+
+    # command_parser_process.add_argument(
+    #     "output_file", type=str, help="Path to the output ReqIF file"
+    # )
+
     # Command: Dump
     command_parser_dump = command_subparsers.add_parser(
         "dump",
@@ -79,6 +93,12 @@ class PassthroughCommandConfig:
         self.output_file: str = output_file
 
 
+class ProcessCommandConfig:
+    def __init__(self, input_file: str):
+        self.input_file: str = input_file
+        # self.output_file: str = output_file
+
+
 class DumpCommandConfig:
     def __init__(self, input_file: str, output_file: str):
         self.input_file: str = input_file
@@ -105,6 +125,10 @@ class ReqIFArgsParser:
         return self.args.command == "passthrough"
 
     @property
+    def is_process_command(self):
+        return self.args.command == "process"
+
+    @property
     def is_dump_command(self):
         return self.args.command == "dump"
 
@@ -120,6 +144,9 @@ class ReqIFArgsParser:
         return PassthroughCommandConfig(
             self.args.input_file, self.args.output_file
         )
+
+    def get_process_config(self) -> ProcessCommandConfig:
+        return ProcessCommandConfig(self.args.input_file)
 
     def get_dump_config(self) -> DumpCommandConfig:
         return DumpCommandConfig(self.args.input_file, self.args.output_file)
