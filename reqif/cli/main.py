@@ -10,7 +10,7 @@ try:
     sys.path.append(ROOT_PATH)
 
     from reqif.cli.cli_arg_parser import create_reqif_args_parser
-    from reqif.commands.anonimize.anonimize import AnonimizeCommand
+    from reqif.commands.anonimize.anonimize import AnonymizeCommand
     from reqif.commands.dump.dump import DumpCommand
     from reqif.commands.format.format import FormatCommand
     from reqif.commands.passthrough.passthrough import PassthroughCommand
@@ -34,7 +34,7 @@ def main():
     if parser.is_passthrough_command:
         PassthroughCommand.execute(parser.get_passthrough_config())
     elif parser.is_anonimize_command:
-        AnonimizeCommand.execute(parser.get_anonimize_config())
+        AnonymizeCommand.execute(parser.get_anonimize_config())
     elif parser.is_dump_command:
         DumpCommand.execute(parser.get_dump_config())
     elif parser.is_format_command:

@@ -1,8 +1,12 @@
 from typing import Optional
 
+from reqif.helpers.lxml import dump_xml_node
+from reqif.models.reqif_spec_object import SpecObjectAttribute
 from reqif.models.reqif_spec_relation import (
     ReqIFSpecRelation,
 )
+from reqif.models.reqif_types import SpecObjectAttributeType
+from reqif.parsers.spec_object_parser import ATTRIBUTE_STRING_TEMPLATE
 
 
 class SpecRelationParser:
@@ -11,11 +15,9 @@ class SpecRelationParser:
         assert xml_spec_relation.tag == "SPEC-RELATION"
 
         children_tags = list(map(lambda el: el.tag, list(xml_spec_relation)))
-        type_then_source_order = True
-        if "TYPE" in children_tags and "SOURCE" in children_tags:
-            type_then_source_order = children_tags.index(
-                "TYPE"
-            ) < children_tags.index("SOURCE")
+        assert "TYPE" in children_tags
+        assert "SOURCE" in children_tags, f"{dump_xml_node(xml_spec_relation)}"
+        assert "TARGET" in children_tags, f"{dump_xml_node(xml_spec_relation)}"
 
         attributes = xml_spec_relation.attrib
         assert "IDENTIFIER" in attributes, f"{attributes}"
@@ -32,21 +34,38 @@ class SpecRelationParser:
         relation_type_ref = (
             xml_spec_relation.find("TYPE").find("SPEC-RELATION-TYPE-REF").text
         )
+
         spec_relation_source = (
             xml_spec_relation.find("SOURCE").find("SPEC-OBJECT-REF").text
         )
+
         spec_relation_target = (
             xml_spec_relation.find("TARGET").find("SPEC-OBJECT-REF").text
         )
 
+        values_attribute: Optional[SpecObjectAttribute] = None
+        xml_values = xml_spec_relation.find("VALUES")
+        if xml_values is not None:
+            xml_string_attribute = xml_values.find("ATTRIBUTE-VALUE-STRING")
+            assert xml_string_attribute is not None
+            attribute_value = xml_string_attribute.attrib["THE-VALUE"]
+            attribute_name = xml_string_attribute[0][0].text
+            values_attribute = SpecObjectAttribute(
+                SpecObjectAttributeType.STRING,
+                attribute_name,
+                attribute_value,
+                enum_values_then_definition_order=None,
+            )
+
         spec_relation = ReqIFSpecRelation(
-            type_then_source_order=type_then_source_order,
+            children_tags=children_tags,
             description=description,
             identifier=identifier,
             last_change=last_change,
             relation_type_ref=relation_type_ref,
             source=spec_relation_source,
             target=spec_relation_target,
+            values_attribute=values_attribute,
         )
         return spec_relation
 
@@ -60,24 +79,31 @@ class SpecRelationParser:
             output += f' LAST-CHANGE="{spec_relation.last_change}"'
         output += ">\n"
 
-        if spec_relation.type_then_source_order:
-            output += SpecRelationParser._unparse_spec_relation_type(
-                spec_relation
-            )
-            output += (
-                SpecRelationParser._unparse_spec_relation_source_and_target(
+        for tag in spec_relation.children_tags:
+            if tag == "TYPE":
+                output += SpecRelationParser._unparse_spec_relation_type(
                     spec_relation
                 )
-            )
-        else:
-            output += (
-                SpecRelationParser._unparse_spec_relation_source_and_target(
+            elif tag == "SOURCE":
+                output += SpecRelationParser._unparse_spec_relation_source(
                     spec_relation
                 )
-            )
-            output += SpecRelationParser._unparse_spec_relation_type(
-                spec_relation
-            )
+            elif tag == "TARGET":
+                output += SpecRelationParser._unparse_spec_relation_target(
+                    spec_relation
+                )
+            elif tag == "VALUES":
+                values_attribute = spec_relation.values_attribute
+                if values_attribute is not None:
+                    output += "          <VALUES>\n"
+                    output += ATTRIBUTE_STRING_TEMPLATE.format(
+                        name=values_attribute.name, value=values_attribute.value
+                    )
+                    output += "          </VALUES>\n"
+                else:
+                    raise NotImplementedError
+            else:
+                raise NotImplementedError(tag)
 
         output += "        </SPEC-RELATION>\n"
         return output
@@ -96,7 +122,7 @@ class SpecRelationParser:
         return output
 
     @staticmethod
-    def _unparse_spec_relation_source_and_target(
+    def _unparse_spec_relation_source(
         spec_relation: ReqIFSpecRelation,
     ) -> str:
         output = ""
@@ -104,6 +130,13 @@ class SpecRelationParser:
         output += "            "
         output += f"<SPEC-OBJECT-REF>{spec_relation.source}</SPEC-OBJECT-REF>\n"
         output += "          </SOURCE>\n"
+        return output
+
+    @staticmethod
+    def _unparse_spec_relation_target(
+        spec_relation: ReqIFSpecRelation,
+    ) -> str:
+        output = ""
         output += "          <TARGET>\n"
         output += "            "
         output += f"<SPEC-OBJECT-REF>{spec_relation.target}</SPEC-OBJECT-REF>\n"

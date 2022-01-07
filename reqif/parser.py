@@ -70,11 +70,19 @@ class ReqIFParser:
 
         namespace_info = xml_reqif_root.getroot().nsmap
         namespace: Optional[str] = namespace_info[None]
+
         configuration: Optional[str] = (
             namespace_info["configuration"]
             if "configuration" in namespace_info
             else None
         )
+        namespace_id: Optional[str] = (
+            namespace_info["id"] if "id" in namespace_info else None
+        )
+        namespace_xhtml: Optional[str] = (
+            namespace_info["xhtml"] if "xhtml" in namespace_info else None
+        )
+
         schema_namespace = namespace_info.get("xsi")
         xml_reqif_root_nons = ReqIFParser.strip_namespace_from_xml(
             xml_reqif_root
@@ -98,6 +106,8 @@ class ReqIFParser:
             encoding=docinfo.encoding,
             namespace=namespace,
             configuration=configuration,
+            namespace_id=namespace_id,
+            namespace_xhtml=namespace_xhtml,
             schema_namespace=schema_namespace,
             schema_location=schema_location,
             language=language,
@@ -260,9 +270,12 @@ class ReqIFParser:
     @staticmethod
     def strip_namespace_from_xml(root_xml):
         for elem in root_xml.getiterator():
-            # Remove a namespace URI in the element's name
+            # Remove an XML namespace URI in the element's name but keep the
+            # namespaces in the HTML content as found in the
+            # <ATTRIBUTE-VALUE-XHTML> of ReqIF XML.
+            if "http://www.w3.org/1999/xhtml" in elem.tag:
+                continue
             elem.tag = etree.QName(elem).localname
-
         # Remove unused namespace declarations
         etree.cleanup_namespaces(root_xml)
         return root_xml

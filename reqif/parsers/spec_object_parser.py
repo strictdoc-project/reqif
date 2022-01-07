@@ -1,14 +1,14 @@
+import html
 from typing import List, Optional
 
+import lxml
 from lxml import etree
 
-from reqif.helpers.lxml import stringify_children
 from reqif.models.reqif_spec_object import (
     ReqIFSpecObject,
     SpecObjectAttribute,
     SpecObjectAttributeType,
 )
-
 
 ATTRIBUTE_STRING_TEMPLATE = """\
             <ATTRIBUTE-VALUE-STRING THE-VALUE="{value}">
@@ -45,6 +45,17 @@ ATTRIBUTE_ENUMERATION_TEMPLATE_REVERSE = """\
                 <ENUM-VALUE-REF>{value}</ENUM-VALUE-REF>
               </VALUES>
             </ATTRIBUTE-VALUE-ENUMERATION>
+"""
+
+ATTRIBUTE_XHTML_TEMPLATE = """\
+            <ATTRIBUTE-VALUE-XHTML>
+              <DEFINITION>
+                <ATTRIBUTE-DEFINITION-XHTML-REF>{name}</ATTRIBUTE-DEFINITION-XHTML-REF>
+              </DEFINITION>
+              <THE-VALUE>
+{value}
+              </THE-VALUE>
+            </ATTRIBUTE-VALUE-XHTML>
 """
 
 
@@ -144,8 +155,19 @@ class SpecObjectParser:
                     enum_values_then_definition_order=None,
                 )
             elif attribute_xml.tag == "ATTRIBUTE-VALUE-XHTML":
-                attribute_value = stringify_children(
-                    attribute_xml.find("THE-VALUE")
+                the_value = attribute_xml.find("THE-VALUE")
+                # TODO: This does not work:
+                # <THE-VALUE xmlns:xhtml="http://www.w3.org/1999/xhtml">
+                # is printed.
+                # the_value.tag = etree.QName(the_value).localname
+                # etree.cleanup_namespaces(the_value)
+                attribute_value_decoded_lines = (
+                    lxml.etree.tostring(the_value, method="xml")
+                    .decode("utf8")
+                    .rstrip()
+                )
+                attribute_value = "\n".join(
+                    attribute_value_decoded_lines.split("\n")[1:-1]
                 )
                 attribute_name = (
                     attribute_xml.find("DEFINITION")
@@ -219,9 +241,10 @@ class SpecObjectParser:
         output = ""
         output += "          <VALUES>\n"
         for attribute in spec_object.attributes:
+            attribute_value = html.escape(attribute.value)
             if attribute.attribute_type == SpecObjectAttributeType.STRING:
                 output += ATTRIBUTE_STRING_TEMPLATE.format(
-                    name=attribute.name, value=attribute.value
+                    name=attribute.name, value=attribute_value
                 )
             elif attribute.attribute_type == SpecObjectAttributeType.INTEGER:
                 output += ATTRIBUTE_INTEGER_TEMPLATE.format(
@@ -239,5 +262,10 @@ class SpecObjectParser:
                     output += ATTRIBUTE_ENUMERATION_TEMPLATE_REVERSE.format(
                         name=attribute.name, value=attribute.value
                     )
+            elif attribute.attribute_type == SpecObjectAttributeType.XHTML:
+                output += ATTRIBUTE_XHTML_TEMPLATE.format(
+                    name=attribute.name, value=attribute.value
+                )
+
         output += "          </VALUES>\n"
         return output

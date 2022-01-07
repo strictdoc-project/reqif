@@ -1,9 +1,10 @@
 from typing import List, Optional
 
 
-class ReqIFSpecHierarchy:
+class ReqIFSpecHierarchy:  # pylint: disable=too-many-instance-attributes
     def __init__(  # pylint: disable=too-many-arguments
         self,
+        is_self_closed: bool,
         identifier: str,
         last_change: Optional[str],
         long_name: Optional[str],
@@ -14,6 +15,7 @@ class ReqIFSpecHierarchy:
     ):
         assert level >= 0
 
+        self.is_self_closed = is_self_closed
         self.identifier = identifier
         self.last_change: Optional[str] = last_change
         self.long_name: Optional[str] = long_name

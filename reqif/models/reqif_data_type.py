@@ -69,3 +69,19 @@ class ReqIFDataTypeDefinitionEnumeration:  # pylint: disable=too-many-instance-a
         self.multi_valued: Optional[bool] = multi_valued
         self.values: Optional[List[ReqIFEnumValue]] = values
         self.values_map = values_map
+
+
+class ReqIFDataTypeDefinitionXHTML:
+    def __init__(  # pylint: disable=too-many-arguments
+        self,
+        is_self_closed: bool,
+        description: Optional[str],
+        identifier: str,
+        last_change: Optional[str],
+        long_name: Optional[str],
+    ):
+        self.is_self_closed: bool = is_self_closed
+        self.description: Optional[str] = description
+        self.identifier: str = identifier
+        self.last_change: Optional[str] = last_change
+        self.long_name: Optional[str] = long_name

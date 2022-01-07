@@ -1,11 +1,16 @@
-from typing import List, Optional
+from typing import List, Optional, Union
 
 from reqif.models.reqif_types import SpecObjectAttributeType
+
+
+class DefaultValueEmptySelfClosedTag:
+    pass
 
 
 class SpecAttributeDefinition:  # pylint: disable=too-many-instance-attributes
     def __init__(  # pylint: disable=too-many-arguments
         self,
+        children_tags: List[str],
         attribute_type: SpecObjectAttributeType,
         description: Optional[str],
         identifier: str,
@@ -13,9 +18,10 @@ class SpecAttributeDefinition:  # pylint: disable=too-many-instance-attributes
         datatype_definition: str,
         long_name: Optional[str],
         editable: Optional[bool],
-        default_value: Optional[bool],
+        default_value: Union[None, DefaultValueEmptySelfClosedTag, str],
         multi_valued: Optional[bool],
     ):
+        self.children_tags: List[str] = children_tags
         self.attribute_type: SpecObjectAttributeType = attribute_type
         self.description: Optional[str] = description
         self.identifier: str = identifier
@@ -25,7 +31,7 @@ class SpecAttributeDefinition:  # pylint: disable=too-many-instance-attributes
         self.editable: Optional[bool] = (
             editable == "true" if editable is not None else None
         )
-        self.default_value: Optional[bool] = default_value
+        self.default_value: Optional[str] = default_value
         self.multi_valued: Optional[bool] = multi_valued
 
     def __str__(self) -> str:

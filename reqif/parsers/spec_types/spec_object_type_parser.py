@@ -1,9 +1,11 @@
 import html
-from typing import List, Optional
+from typing import List, Optional, Union
 
+from reqif.helpers.lxml import is_self_closed_tag
 from reqif.models.reqif_spec_object_type import (
     ReqIFSpecObjectType,
     SpecAttributeDefinition,
+    DefaultValueEmptySelfClosedTag,
 )
 from reqif.models.reqif_types import SpecObjectAttributeType
 
@@ -61,7 +63,14 @@ class SpecObjectTypeParser:
                     if "IS-EDITABLE" in attribute_definition.attrib
                     else None
                 )
-                default_value: Optional[str] = None
+
+                children_tags = list(
+                    map(lambda el: el.tag, list(attribute_definition))
+                )
+
+                default_value: Union[
+                    None, DefaultValueEmptySelfClosedTag, str
+                ] = None
                 multi_valued: Optional[bool] = None
                 if attribute_definition.tag == "ATTRIBUTE-DEFINITION-STRING":
                     attribute_type = SpecObjectAttributeType.STRING
@@ -80,13 +89,18 @@ class SpecObjectTypeParser:
                         "DEFAULT-VALUE"
                     )
                     if xml_default_value is not None:
-                        xml_attribute_value = xml_default_value.find(
-                            "ATTRIBUTE-VALUE-STRING"
-                        )
-                        if xml_attribute_value is not None:
-                            default_value = xml_attribute_value.attrib[
-                                "THE-VALUE"
-                            ]
+                        if is_self_closed_tag(xml_default_value):
+                            default_value = DefaultValueEmptySelfClosedTag()
+                        else:
+                            xml_attribute_value = xml_default_value.find(
+                                "ATTRIBUTE-VALUE-STRING"
+                            )
+                            if xml_attribute_value is not None:
+                                default_value = xml_attribute_value.attrib[
+                                    "THE-VALUE"
+                                ]
+                            else:
+                                raise NotImplementedError
 
                 elif attribute_definition.tag == "ATTRIBUTE-DEFINITION-INTEGER":
                     attribute_type = SpecObjectAttributeType.INTEGER
@@ -164,6 +178,7 @@ class SpecObjectTypeParser:
                 else:
                     raise NotImplementedError(attribute_definition) from None
                 attribute_definition = SpecAttributeDefinition(
+                    children_tags=children_tags,
                     attribute_type=attribute_type,
                     description=description,
                     identifier=identifier,
@@ -202,52 +217,90 @@ class SpecObjectTypeParser:
             output += "          <SPEC-ATTRIBUTES>\n"
 
             for attribute in spec_type.attribute_definitions:
-                output += (
-                    "            "
-                    "<"
-                    f"{attribute.attribute_type.get_spec_type_tag()}"
+                output += SpecObjectTypeParser._unparse_attribute_definition(
+                    attribute
                 )
-                if attribute.description:
-                    output += f' DESC="{attribute.description}"'
-
-                output += f' IDENTIFIER="{attribute.identifier}"'
-                if attribute.last_change:
-                    output += f' LAST-CHANGE="{attribute.last_change}"'
-                if attribute.long_name:
-                    output += f' LONG-NAME="{attribute.long_name}"'
-                if attribute.multi_valued is not None:
-                    multi_valued_value = (
-                        "true" if attribute.multi_valued else "false"
-                    )
-                    output += f' MULTI-VALUED="{multi_valued_value}"'
-                if attribute.editable is not None:
-                    editable_value = "true" if attribute.editable else "false"
-                    output += f' IS-EDITABLE="{editable_value}"'
-                output += ">" "\n"
-
-                if attribute.default_value:
-                    output += (
-                        "              <DEFAULT-VALUE>\n"
-                        f"                "
-                        f"<{attribute.attribute_type.get_attribute_value_tag()}"
-                        f' THE-VALUE="{attribute.default_value}"/>\n'
-                        "              </DEFAULT-VALUE>\n"
-                    )
-                output += "              <TYPE>\n"
-                output += (
-                    "                "
-                    f"<{attribute.attribute_type.get_definition_tag()}>"
-                    f"{attribute.datatype_definition}"
-                    f"</{attribute.attribute_type.get_definition_tag()}>"
-                    "\n"
-                )
-                output += "              </TYPE>\n"
-                output += "            </"
-                output += f"{attribute.attribute_type.get_spec_type_tag()}"
-                output += ">\n"
 
             output += "          </SPEC-ATTRIBUTES>\n"
 
         output += "        </SPEC-OBJECT-TYPE>\n"
 
+        return output
+
+    @staticmethod
+    def _unparse_attribute_definition(attribute: SpecAttributeDefinition):
+        output = ""
+        output += (
+            "            " "<" f"{attribute.attribute_type.get_spec_type_tag()}"
+        )
+        if attribute.description:
+            output += f' DESC="{attribute.description}"'
+
+        output += f' IDENTIFIER="{attribute.identifier}"'
+        if attribute.last_change:
+            output += f' LAST-CHANGE="{attribute.last_change}"'
+        if attribute.long_name:
+            output += f' LONG-NAME="{attribute.long_name}"'
+        if attribute.multi_valued is not None:
+            multi_valued_value = "true" if attribute.multi_valued else "false"
+            output += f' MULTI-VALUED="{multi_valued_value}"'
+        if attribute.editable is not None:
+            editable_value = "true" if attribute.editable else "false"
+            output += f' IS-EDITABLE="{editable_value}"'
+        output += ">" "\n"
+
+        for tag in attribute.children_tags:
+            if tag == "DEFAULT-VALUE":
+                attribute_default_value = attribute.default_value
+                assert attribute_default_value is not None
+                if attribute_default_value:
+                    output += (
+                        SpecObjectTypeParser._unparse_attribute_default_value(
+                            attribute, attribute_default_value
+                        )
+                    )
+            elif tag == "TYPE":
+                output += SpecObjectTypeParser._unparse_attribute_type(
+                    attribute
+                )
+            else:
+                raise NotImplementedError(tag)
+
+        output += "            </"
+        output += f"{attribute.attribute_type.get_spec_type_tag()}"
+        output += ">\n"
+        return output
+
+    @staticmethod
+    def _unparse_attribute_type(
+        attribute: SpecAttributeDefinition,
+    ):
+        output = ""
+        output += "              <TYPE>\n"
+        output += (
+            "                "
+            f"<{attribute.attribute_type.get_definition_tag()}>"
+            f"{attribute.datatype_definition}"
+            f"</{attribute.attribute_type.get_definition_tag()}>"
+            "\n"
+        )
+        output += "              </TYPE>\n"
+        return output
+
+    @staticmethod
+    def _unparse_attribute_default_value(
+        attribute: SpecAttributeDefinition,
+        default_value: Union[DefaultValueEmptySelfClosedTag, str],
+    ):
+        output = ""
+        if isinstance(default_value, DefaultValueEmptySelfClosedTag):
+            output += "              <DEFAULT-VALUE/>\n"
+        else:
+            output += (
+                "              <DEFAULT-VALUE>\n"
+                f"                "
+                f"<{attribute.attribute_type.get_attribute_value_tag()}"
+                f' THE-VALUE="{attribute.default_value}"/>\n'
+                "              </DEFAULT-VALUE>\n"
+            )
         return output
