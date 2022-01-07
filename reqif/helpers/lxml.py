@@ -4,6 +4,10 @@ from lxml import etree
 from lxml.etree import tostring
 
 
+def dump_xml_node(node):
+    return etree.tostring(node, method="xml").decode("utf8")
+
+
 # https://stackoverflow.com/a/4624146/598057
 def stringify_children(node):
     return "".join(
