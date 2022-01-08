@@ -1,0 +1,6 @@
+RUN: %reqif validate %S/sample.reqif | filecheck %s --dump-input=fail
+
+CHECK: warning: semantic error: schema error: A <SPEC-RELATION>'s <SOURCE> contains a link to a non-existing <SPEC-OBJECT>: NON_EXISTING_UID
+CHECK: Affected fragment:
+CHECK: <SPEC-RELATION IDENTIFIER="_67JkkGyBEeuM1tJZu08zdg" LAST-CHANGE="2021-02-11T16:57:54.293+01:00">
+CHECK: Validation complete with 0 errors, 0 schema issues found, 1 semantic issues found.

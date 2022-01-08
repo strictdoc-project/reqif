@@ -22,6 +22,9 @@ class ReqIFObjectLookup:
             spec_relations_parent_lookup={},
         )
 
+    def spec_object_exists(self, ref) -> bool:
+        return ref in self.spec_objects_lookup
+
     def get_data_type_by_ref(self, ref) -> Any:
         return self.data_types_lookup[ref]
 
