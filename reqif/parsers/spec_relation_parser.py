@@ -65,6 +65,7 @@ class SpecRelationParser:
 
         spec_relation = ReqIFSpecRelation(
             children_tags=children_tags,
+            xml_node=xml_spec_relation,
             description=description,
             identifier=identifier,
             last_change=last_change,

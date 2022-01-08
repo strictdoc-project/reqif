@@ -243,11 +243,10 @@ class ReqIFParser:
 
         # <SPEC-OBJECTS>
         spec_objects: Optional[List[ReqIFSpecObject]] = None
-        spec_objects_lookup: Optional[Dict[str, ReqIFSpecObject]] = None
+        spec_objects_lookup: Optional[Dict[str, ReqIFSpecObject]] = {}
         xml_spec_objects = xml_req_if_content.find("SPEC-OBJECTS")
         if xml_spec_objects is not None:
             spec_objects = []
-            spec_objects_lookup = {}
             for xml_spec_object in xml_spec_objects:
                 spec_object = SpecObjectParser.parse(xml_spec_object)
                 spec_objects.append(spec_object)
