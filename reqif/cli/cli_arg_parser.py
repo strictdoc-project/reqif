@@ -31,16 +31,16 @@ def cli_args_parser() -> argparse.ArgumentParser:
     )
 
     # Command: Anonimize
-    command_parser_anonimize = command_subparsers.add_parser(
-        "anonimize",
-        help="Read an SDoc file, anonimize it, then output it again.",
+    command_parser_anonymize = command_subparsers.add_parser(
+        "anonymize",
+        help="Read an SDoc file, anonymize it, then output it again.",
         formatter_class=formatter,
     )
-    command_parser_anonimize.add_argument(
+    command_parser_anonymize.add_argument(
         "input_file", type=str, help="Path to the input ReqIF file"
     )
-    command_parser_anonimize.add_argument(
-        "output_file", type=str, help="Path to the anonimized output ReqIF file"
+    command_parser_anonymize.add_argument(
+        "output_file", type=str, help="Path to the anonymized output ReqIF file"
     )
 
     # Command: Dump
@@ -124,8 +124,8 @@ class ReqIFArgsParser:
         return self.args.command == "passthrough"
 
     @property
-    def is_anonimize_command(self):
-        return self.args.command == "anonimize"
+    def is_anonymize_command(self):
+        return self.args.command == "anonymize"
 
     @property
     def is_dump_command(self):
@@ -144,7 +144,7 @@ class ReqIFArgsParser:
             self.args.input_file, self.args.output_file
         )
 
-    def get_anonimize_config(self) -> AnonimizeCommandConfig:
+    def get_anonymize_config(self) -> AnonimizeCommandConfig:
         return AnonimizeCommandConfig(
             self.args.input_file, self.args.output_file
         )
