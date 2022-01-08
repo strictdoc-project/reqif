@@ -24,7 +24,7 @@ class AnonymizeCommand:
             print(f"{message}: {input_file}")
             sys.exit(1)
 
-        output = AnonymizeCommand._anonimize(config)
+        output = AnonymizeCommand._anonymize(config)
         output_file = config.output_file
         output_dir = os.path.dirname(output_file)
         if not os.path.isdir(output_dir):
@@ -34,7 +34,7 @@ class AnonymizeCommand:
             file.write(output)
 
     @staticmethod
-    def _anonimize(passthrough_config: AnonimizeCommandConfig):
+    def _anonymize(passthrough_config: AnonimizeCommandConfig):
         reqif_bundle = ReqIFParser.parse(passthrough_config.input_file)
 
         req_if_header = reqif_bundle.req_if_header
