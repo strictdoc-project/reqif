@@ -1,6 +1,6 @@
 from typing import Optional
 
-from reqif.helpers.lxml import dump_xml_node
+from reqif.models.error_handling import ReqIFMissingTagException
 from reqif.models.reqif_spec_object import SpecObjectAttribute
 from reqif.models.reqif_spec_relation import (
     ReqIFSpecRelation,
@@ -16,8 +16,14 @@ class SpecRelationParser:
 
         children_tags = list(map(lambda el: el.tag, list(xml_spec_relation)))
         assert "TYPE" in children_tags
-        assert "SOURCE" in children_tags, f"{dump_xml_node(xml_spec_relation)}"
-        assert "TARGET" in children_tags, f"{dump_xml_node(xml_spec_relation)}"
+        if "SOURCE" not in children_tags:
+            raise ReqIFMissingTagException(
+                xml_node=xml_spec_relation, tag="SOURCE"
+            ) from None
+        if "TARGET" not in children_tags:
+            raise ReqIFMissingTagException(
+                xml_node=xml_spec_relation, tag="TARGET"
+            ) from None
 
         attributes = xml_spec_relation.attrib
         assert "IDENTIFIER" in attributes, f"{attributes}"

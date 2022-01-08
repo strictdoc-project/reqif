@@ -1,4 +1,4 @@
 RUN: %reqif validate %S/sample.reqif | filecheck %s --dump-input=fail
 
-CHECK: warning: Document is missing a valid XML declaration.
-CHECK: Validation complete with 0 errors, 1 warnings found.
+CHECK: warning: semantic error: Document is missing a valid XML declaration.
+CHECK: Validation complete with 0 errors, 0 schema issues found, 1 semantic issues found.
