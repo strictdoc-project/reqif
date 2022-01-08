@@ -1,11 +1,16 @@
 from typing import List, Optional
 
+import lxml
+
+from reqif.models.reqif_spec_object import SpecObjectAttribute
 from reqif.models.reqif_specification import (
     ReqIFSpecification,
 )
+from reqif.models.reqif_types import SpecObjectAttributeType
 from reqif.parsers.spec_hierarchy_parser import (
     ReqIFSpecHierarchyParser,
 )
+from reqif.parsers.spec_object_parser import ATTRIBUTE_XHTML_TEMPLATE
 
 
 class ReqIFSpecificationParser:
@@ -14,11 +19,6 @@ class ReqIFSpecificationParser:
         assert "SPECIFICATION" in specification_xml.tag, f"{specification_xml}"
 
         children_tags = list(map(lambda el: el.tag, list(specification_xml)))
-        type_then_children_order = True
-        if "TYPE" in children_tags and "CHILDREN" in children_tags:
-            type_then_children_order = children_tags.index(
-                "TYPE"
-            ) < children_tags.index("CHILDREN")
 
         attributes = specification_xml.attrib
         try:
@@ -41,13 +41,6 @@ class ReqIFSpecificationParser:
             attributes["LONG-NAME"] if "LONG-NAME" in attributes else None
         )
 
-        values: Optional[List] = None
-        xml_values = specification_xml.find("VALUES")
-        if xml_values is not None:
-            # if len(xml_values) != 0:
-            #     raise NotImplementedError(xml_values)
-            values = []
-
         specification_type: Optional[str] = None
         xml_specification_type = specification_xml.find("TYPE")
         if xml_specification_type is not None:
@@ -64,15 +57,60 @@ class ReqIFSpecificationParser:
                 pass  # type_xml = specification_child_xml
             elif specification_child_xml.tag == "CHILDREN":
                 children_xml = specification_child_xml
-        assert children_xml is not None
 
-        children = []
+        children = None
         if children_xml is not None and len(children_xml):
+            children = []
             for child_xml in children_xml:
                 spec_hierarchy_xml = ReqIFSpecHierarchyParser.parse(child_xml)
                 children.append(spec_hierarchy_xml)
+
+        values: Optional[List[SpecObjectAttribute]] = None
+        xml_values = specification_xml.find("VALUES")
+        if xml_values is not None:
+            values = []
+            if len(xml_values) > 0:
+                xml_attribute = xml_values[0]
+                if xml_attribute.tag == "ATTRIBUTE-VALUE-STRING":
+                    attribute_value = xml_attribute.attrib["THE-VALUE"]
+                    attribute_name = xml_attribute[0][0].text
+                    values_attribute = SpecObjectAttribute(
+                        SpecObjectAttributeType.STRING,
+                        attribute_name,
+                        attribute_value,
+                        enum_values_then_definition_order=None,
+                    )
+                    values.append(values_attribute)
+                elif xml_attribute.tag == "ATTRIBUTE-VALUE-XHTML":
+                    the_value = xml_attribute.find("THE-VALUE")
+                    # TODO: This does not work:
+                    # <THE-VALUE xmlns:xhtml="http://www.w3.org/1999/xhtml">
+                    # is printed.
+                    # the_value.tag = etree.QName(the_value).localname
+                    # etree.cleanup_namespaces(the_value)
+                    attribute_value_decoded_lines = (
+                        lxml.etree.tostring(the_value, method="xml")
+                        .decode("utf8")
+                        .rstrip()
+                    )
+                    attribute_value = "\n".join(
+                        attribute_value_decoded_lines.split("\n")[1:-1]
+                    )
+                    attribute_name = (
+                        xml_attribute.find("DEFINITION")
+                        .find("ATTRIBUTE-DEFINITION-XHTML-REF")
+                        .text
+                    )
+                    values_attribute = SpecObjectAttribute(
+                        SpecObjectAttributeType.XHTML,
+                        attribute_name,
+                        attribute_value,
+                        enum_values_then_definition_order=None,
+                    )
+                    values.append(values_attribute)
+
         return ReqIFSpecification(
-            type_then_children_order=type_then_children_order,
+            children_tags=children_tags,
             description=description,
             identifier=identifier,
             last_change=last_change,
@@ -98,29 +136,45 @@ class ReqIFSpecificationParser:
             output += f' LONG-NAME="{specification.long_name}"'
         output += ">\n"
 
-        specification_values = specification.values
-        if specification_values is not None:
-            if len(specification_values) != 0:
-                raise NotImplementedError(specification_values)
-            output += "          <VALUES/>\n"
-
-        if specification.type_then_children_order:
-            if specification.specification_type:
-                output += ReqIFSpecificationParser._unparse_specification_type(
-                    specification
-                )
-            output += ReqIFSpecificationParser._unparse_specification_children(
-                specification
-            )
-        else:
-            output += ReqIFSpecificationParser._unparse_specification_children(
-                specification
-            )
-            if specification.specification_type:
-                output += ReqIFSpecificationParser._unparse_specification_type(
-                    specification
-                )
-
+        for tag in specification.children_tags:
+            if tag == "TYPE":
+                if specification.specification_type:
+                    output += (
+                        ReqIFSpecificationParser._unparse_specification_type(
+                            specification
+                        )
+                    )
+            elif tag == "CHILDREN":
+                if specification.children is not None:
+                    # fmt: off
+                    output += (
+                        ReqIFSpecificationParser
+                        ._unparse_specification_children(
+                            specification
+                        )
+                    )
+                    # fmt: on
+            elif tag == "VALUES":
+                xml_values_attributes = specification.values
+                if xml_values_attributes is not None:
+                    if len(xml_values_attributes) == 0:
+                        output += "          <VALUES/>\n"
+                    else:
+                        output += "          <VALUES>\n"
+                        for xml_attribute in xml_values_attributes:
+                            if (
+                                xml_attribute.attribute_type
+                                == SpecObjectAttributeType.XHTML
+                            ):
+                                output += ATTRIBUTE_XHTML_TEMPLATE.format(
+                                    name=xml_attribute.name,
+                                    value=xml_attribute.value,
+                                )
+                            else:
+                                raise NotImplementedError
+                        output += "          </VALUES>\n"
+                else:
+                    raise NotImplementedError
         output += "        </SPECIFICATION>\n"
 
         return output

@@ -1,4 +1,4 @@
-from xml.etree import ElementTree as etree
+from lxml import etree
 
 from reqif.models.reqif_spec_object_type import (
     ReqIFSpecObjectType,

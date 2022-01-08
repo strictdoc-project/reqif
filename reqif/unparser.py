@@ -123,6 +123,14 @@ class ReqIFUnparser:
             namespace_components.append(
                 f'xmlns:configuration="{namespace_info.configuration}"'
             )
+        if namespace_info.namespace_id is not None:
+            namespace_components.append(
+                f'xmlns:id="{namespace_info.namespace_id}"'
+            )
+        if namespace_info.namespace_xhtml is not None:
+            namespace_components.append(
+                f'xmlns:xhtml="{namespace_info.namespace_xhtml}"'
+            )
         if namespace_info.schema_location is not None:
             namespace_components.append(
                 f'xsi:schemaLocation="{namespace_info.schema_location}"'

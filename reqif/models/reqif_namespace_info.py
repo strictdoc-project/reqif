@@ -1,13 +1,15 @@
 from typing import Optional
 
 
-class ReqIFNamespaceInfo:
+class ReqIFNamespaceInfo:  # pylint: disable=too-many-instance-attributes
     def __init__(  # pylint: disable=too-many-arguments
         self,
         doctype_is_present: bool,
         encoding: str,
         namespace: str,
         configuration: str,
+        namespace_id: Optional[str],
+        namespace_xhtml: Optional[str],
         schema_namespace: Optional[str],
         schema_location: Optional[str],
         language: Optional[str],
@@ -16,6 +18,8 @@ class ReqIFNamespaceInfo:
         self.encoding: str = encoding
         self.namespace: str = namespace
         self.configuration: str = configuration
+        self.namespace_id: Optional[str] = namespace_id
+        self.namespace_xhtml: Optional[str] = namespace_xhtml
         self.schema_namespace: Optional[str] = schema_namespace
         self.schema_location: Optional[str] = schema_location
         self.language: Optional[str] = language
@@ -54,6 +58,8 @@ class ReqIFNamespaceInfo:
             encoding="UTF-8",
             namespace=namespace_or_default,
             configuration=configuration_or_default,
+            namespace_id=None,
+            namespace_xhtml=None,
             schema_namespace=None,
             schema_location=None,
             language=None,

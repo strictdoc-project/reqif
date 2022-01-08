@@ -3,28 +3,29 @@ from typing import List, Optional
 from reqif.models.reqif_spec_hierarchy import (
     ReqIFSpecHierarchy,
 )
+from reqif.models.reqif_spec_object import SpecObjectAttribute
 
 
 class ReqIFSpecification:  # pylint: disable=too-many-instance-attributes
     def __init__(  # pylint: disable=too-many-arguments
         self,
-        type_then_children_order: bool,
+        children_tags: List[str],
         description: Optional[str],
         identifier: str,
         last_change: Optional[str],
         long_name: Optional[str],
-        values: Optional[List],
+        values: Optional[List[SpecObjectAttribute]],
         specification_type: Optional[str],
-        children: List[ReqIFSpecHierarchy],
+        children: Optional[List[ReqIFSpecHierarchy]],
     ):
-        self.type_then_children_order: bool = type_then_children_order
+        self.children_tags: List[str] = children_tags
         self.description: Optional[str] = description
         self.identifier: str = identifier
         self.last_change: Optional[str] = last_change
         self.long_name: Optional[str] = long_name
-        self.values: Optional[List] = values
+        self.values: Optional[List[SpecObjectAttribute]] = values
         self.specification_type: Optional[str] = specification_type
-        self.children: List[ReqIFSpecHierarchy] = children
+        self.children: Optional[List[ReqIFSpecHierarchy]] = children
 
     def __str__(self) -> str:
         return (

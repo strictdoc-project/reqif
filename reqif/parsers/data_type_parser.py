@@ -8,6 +8,7 @@ from reqif.models.reqif_data_type import (
     ReqIFDataTypeDefinitionEnumeration,
     ReqIFDataTypeDefinitionInteger,
     ReqIFEnumValue,
+    ReqIFDataTypeDefinitionXHTML,
 )
 
 
@@ -19,6 +20,7 @@ class DataTypeParser:
         ReqIFDataTypeDefinitionString,
         ReqIFDataTypeDefinitionInteger,
         ReqIFDataTypeDefinitionEnumeration,
+        ReqIFDataTypeDefinitionXHTML,
     ]:
         assert "DATATYPE-DEFINITION-" in data_type_xml.tag, f"{data_type_xml}"
 
@@ -118,17 +120,16 @@ class DataTypeParser:
                 long_name=long_name,
             )
 
-        # TODO: All the following is parsed to just String.
         if data_type_xml.tag == "DATATYPE-DEFINITION-XHTML":
-            return ReqIFDataTypeDefinitionString(
-                is_self_closed=False,
+            return ReqIFDataTypeDefinitionXHTML(
+                is_self_closed=is_self_closed,
                 description=description,
                 identifier=identifier,
                 last_change=last_change,
                 long_name=long_name,
-                max_length=None,
             )
 
+        # TODO: All the following is parsed to just String.
         if data_type_xml.tag == "DATATYPE-DEFINITION-BOOLEAN":
             return ReqIFDataTypeDefinitionString(
                 is_self_closed=False,
@@ -220,4 +221,22 @@ class DataTypeParser:
             if not data_type_definition.is_self_closed:
                 output += "        </DATATYPE-DEFINITION-ENUMERATION>\n"
             return output
+
+        if isinstance(data_type_definition, ReqIFDataTypeDefinitionXHTML):
+            output = "        <DATATYPE-DEFINITION-XHTML"
+            if data_type_definition.description:
+                output += f' DESC="{data_type_definition.description}"'
+
+            output += f' IDENTIFIER="{data_type_definition.identifier}"'
+            if data_type_definition.last_change:
+                output += f' LAST-CHANGE="{data_type_definition.last_change}"'
+            if data_type_definition.long_name:
+                output += f' LONG-NAME="{data_type_definition.long_name}"'
+            if data_type_definition.is_self_closed:
+                output += "/>\n"
+            else:
+                output += ">\n"
+                output += "        </DATATYPE-DEFINITION-XHTML>\n"
+            return output
+
         raise NotImplementedError(data_type_definition) from None

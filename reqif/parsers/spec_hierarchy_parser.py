@@ -1,5 +1,6 @@
 from typing import Optional, List
 
+from reqif.helpers.lxml import is_self_closed_tag
 from reqif.models.reqif_spec_hierarchy import (
     ReqIFSpecHierarchy,
 )
@@ -9,6 +10,7 @@ class ReqIFSpecHierarchyParser:
     @staticmethod
     def parse(spec_hierarchy_xml, level=1) -> ReqIFSpecHierarchy:
         assert spec_hierarchy_xml.tag == "SPEC-HIERARCHY"
+        is_self_closed = False
         attributes = spec_hierarchy_xml.attrib
         try:
             identifier = attributes["IDENTIFIER"]
@@ -33,12 +35,15 @@ class ReqIFSpecHierarchyParser:
         xml_spec_hierarchy_children = spec_hierarchy_xml.find("CHILDREN")
         if xml_spec_hierarchy_children is not None:
             spec_hierarchy_children = []
+            if len(xml_spec_hierarchy_children) == 0:
+                is_self_closed = is_self_closed_tag(xml_spec_hierarchy_children)
             for child_spec_hierarchy_xml in xml_spec_hierarchy_children:
                 child_spec_hierarchy = ReqIFSpecHierarchyParser.parse(
                     child_spec_hierarchy_xml, level + 1
                 )
                 spec_hierarchy_children.append(child_spec_hierarchy)
         return ReqIFSpecHierarchy(
+            is_self_closed=is_self_closed,
             identifier=identifier,
             last_change=last_change,
             long_name=long_name,
@@ -73,6 +78,10 @@ class ReqIFSpecHierarchyParser:
 
         def print_children():
             children_output = ""
+            if len(hierarchy.children) == 0:
+                if hierarchy.is_self_closed:
+                    children_output += base_level_str + "  <CHILDREN/>\n"
+                    return children_output
             children_output += base_level_str + "  <CHILDREN>\n"
             for child in hierarchy.children:
                 children_output += ReqIFSpecHierarchyParser.unparse(child)
