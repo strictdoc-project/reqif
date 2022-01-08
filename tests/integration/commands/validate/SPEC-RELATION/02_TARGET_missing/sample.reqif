@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<REQ-IF xmlns="http://www.omg.org/spec/ReqIF/20110401/reqif.xsd" xmlns:configuration="http://eclipse.org/rmf/pror/toolextensions/1.0">
+  <CORE-CONTENT>
+    <REQ-IF-CONTENT>
+      <SPEC-RELATIONS>
+        <SPEC-RELATION IDENTIFIER="_67JkkGyBEeuM1tJZu08zdg" LAST-CHANGE="2021-02-11T16:57:54.293+01:00">
+          <VALUES>
+            <ATTRIBUTE-VALUE-STRING THE-VALUE="LNK-1">
+              <DEFINITION>
+                <ATTRIBUTE-DEFINITION-STRING-REF>_gFhrYmojEeuExICsU7Acmg</ATTRIBUTE-DEFINITION-STRING-REF>
+              </DEFINITION>
+            </ATTRIBUTE-VALUE-STRING>
+          </VALUES>
+          <SOURCE>
+            <SPEC-OBJECT-REF>_TPBuEGxUEeuaU7fHySy8Bw</SPEC-OBJECT-REF>
+          </SOURCE>
+          <TYPE>
+            <SPEC-RELATION-TYPE-REF>_gFhrYGojEeuExICsU7Acmg</SPEC-RELATION-TYPE-REF>
+          </TYPE>
+        </SPEC-RELATION>
+      </SPEC-RELATIONS>
+    </REQ-IF-CONTENT>
+  </CORE-CONTENT>
+</REQ-IF>

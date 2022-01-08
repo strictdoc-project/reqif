@@ -1,6 +1,7 @@
 import collections
 from typing import List, Deque, Optional
 
+from reqif.models.error_handling import ReqIFSchemaError
 from reqif.models.reqif_core_content import ReqIFCoreContent
 from reqif.models.reqif_namespace_info import ReqIFNamespaceInfo
 from reqif.models.reqif_reqif_header import ReqIFReqIFHeader
@@ -27,6 +28,7 @@ class ReqIFBundle:  # pylint: disable=too-many-instance-attributes
             core_content=None,
             tool_extensions_tag_exists=False,
             lookup=ReqIFObjectLookup.empty(),
+            exceptions=[],
         )
 
     def __init__(
@@ -36,12 +38,14 @@ class ReqIFBundle:  # pylint: disable=too-many-instance-attributes
         core_content: Optional[ReqIFCoreContent],
         tool_extensions_tag_exists: bool,
         lookup: ReqIFObjectLookup,
+        exceptions: List[ReqIFSchemaError],
     ):  # pylint: disable=too-many-arguments
         self.namespace_info: ReqIFNamespaceInfo = namespace_info
         self.req_if_header: Optional[ReqIFReqIFHeader] = req_if_header
         self.core_content: Optional[ReqIFCoreContent] = core_content
         self.tool_extensions_tag_exists = tool_extensions_tag_exists
         self.lookup = lookup
+        self.exceptions: List[ReqIFSchemaError] = exceptions
 
     def iterate_specification_hierarchy(self, specification):
         assert self.core_content
