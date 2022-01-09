@@ -4,6 +4,7 @@ from typing import List, Optional
 class ReqIFSpecHierarchy:  # pylint: disable=too-many-instance-attributes
     def __init__(  # pylint: disable=too-many-arguments
         self,
+        xml_node,
         is_self_closed: bool,
         identifier: str,
         last_change: Optional[str],
@@ -15,6 +16,7 @@ class ReqIFSpecHierarchy:  # pylint: disable=too-many-instance-attributes
     ):
         assert level >= 0
 
+        self.xml_node = xml_node
         self.is_self_closed = is_self_closed
         self.identifier = identifier
         self.last_change: Optional[str] = last_change
