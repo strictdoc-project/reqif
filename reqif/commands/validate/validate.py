@@ -135,7 +135,7 @@ class ValidateCommand:
                 ):
                     warnings.append(
                         ReqIFSpecHierarchyMissingSpecObjectException(
-                            xml_node=specification.xml_node,
+                            xml_node=hierarchy.xml_node,
                             spec_object_identifier=hierarchy.spec_object,
                         )
                     )

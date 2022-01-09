@@ -43,6 +43,7 @@ class ReqIFSpecHierarchyParser:
                 )
                 spec_hierarchy_children.append(child_spec_hierarchy)
         return ReqIFSpecHierarchy(
+            xml_node=spec_hierarchy_xml,
             is_self_closed=is_self_closed,
             identifier=identifier,
             last_change=last_change,

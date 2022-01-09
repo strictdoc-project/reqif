@@ -58,7 +58,7 @@ class ReqIFSpecHierarchyMissingSpecObjectException(ReqIFSemanticError):
 
     def get_description(self) -> str:
         return (
-            f"schema error: A <{self.xml_node.tag}>'s <SPEC-OBJECT-REF> "
+            f"schema error: A <SPEC-HIERARCHY>'s <SPEC-OBJECT-REF> "
             "contains a link to a non-existing <SPEC-OBJECT>: "
             f"{self.spec_object_identifier}\n"
             f"Affected fragment:\n{dump_xml_node(self.xml_node)}"
