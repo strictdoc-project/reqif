@@ -110,6 +110,7 @@ class ReqIFSpecificationParser:
                     values.append(values_attribute)
 
         return ReqIFSpecification(
+            xml_node=specification_xml,
             children_tags=children_tags,
             description=description,
             identifier=identifier,

@@ -9,6 +9,7 @@ from reqif.models.reqif_spec_object import SpecObjectAttribute
 class ReqIFSpecification:  # pylint: disable=too-many-instance-attributes
     def __init__(  # pylint: disable=too-many-arguments
         self,
+        xml_node,
         children_tags: List[str],
         description: Optional[str],
         identifier: str,
@@ -18,6 +19,7 @@ class ReqIFSpecification:  # pylint: disable=too-many-instance-attributes
         specification_type: Optional[str],
         children: Optional[List[ReqIFSpecHierarchy]],
     ):
+        self.xml_node = xml_node
         self.children_tags: List[str] = children_tags
         self.description: Optional[str] = description
         self.identifier: str = identifier

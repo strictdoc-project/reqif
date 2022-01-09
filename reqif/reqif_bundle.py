@@ -52,6 +52,9 @@ class ReqIFBundle:  # pylint: disable=too-many-instance-attributes
         assert self.core_content.req_if_content
         assert specification in self.core_content.req_if_content.specifications
 
+        if specification.children is None:
+            return
+
         task_list: Deque[ReqIFSpecHierarchy] = collections.deque(
             specification.children
         )
