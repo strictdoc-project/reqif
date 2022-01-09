@@ -1,0 +1,5 @@
+RUN: %reqif validate %S/sample.reqif | filecheck %s --dump-input=fail
+
+CHECK: warning: semantic error: schema error: A <SPECIFICATION>'s <SPEC-OBJECT-REF> contains a link to a non-existing <SPEC-OBJECT>: _gFhrY2ojEeuExICsU7Acmg
+CHECK: Affected fragment:
+CHECK: <SPECIFICATION IDENTIFIER="_gFhra2ojEeuExICsU7Acmg" LAST-CHANGE="2021-02-08T16:37:07.454+01:00" LONG-NAME="...Anonymized...">

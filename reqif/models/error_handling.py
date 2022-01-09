@@ -48,3 +48,18 @@ class ReqIFSpecRelationMissingSpecObjectException(ReqIFSemanticError):
             f"{self.spec_object_identifier}\n"
             f"Affected fragment:\n{dump_xml_node(self.xml_node)}"
         )
+
+
+class ReqIFSpecHierarchyMissingSpecObjectException(ReqIFSemanticError):
+    def __init__(self, xml_node, spec_object_identifier: str):
+        super().__init__(xml_node)
+        self.xml_node = xml_node
+        self.spec_object_identifier: str = spec_object_identifier
+
+    def get_description(self) -> str:
+        return (
+            f"schema error: A <{self.xml_node.tag}>'s <SPEC-OBJECT-REF> "
+            "contains a link to a non-existing <SPEC-OBJECT>: "
+            f"{self.spec_object_identifier}\n"
+            f"Affected fragment:\n{dump_xml_node(self.xml_node)}"
+        )

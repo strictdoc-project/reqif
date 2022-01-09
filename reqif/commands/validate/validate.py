@@ -8,8 +8,10 @@ from reqif.models.error_handling import (
     ReqIFSpecRelationMissingSpecObjectException,
     ReqIFSemanticError,
     ReqIFGeneralSemanticError,
+    ReqIFSpecHierarchyMissingSpecObjectException,
 )
 from reqif.models.reqif_spec_relation import ReqIFSpecRelation
+from reqif.models.reqif_specification import ReqIFSpecification
 from reqif.parser import ReqIFParser
 from reqif.reqif_bundle import ReqIFBundle
 
@@ -80,7 +82,15 @@ class ValidateCommand:
                         )
                     )
                     semantic_warnings.extend(spec_relation_semantic_errors)
-
+                specifications = req_if_content.specifications
+                if specifications is not None:
+                    spec_relation_semantic_errors = (
+                        ValidateCommand._validate_specifications(
+                            specifications=specifications,
+                            reqif_bundle=reqif_bundle,
+                        )
+                    )
+                    semantic_warnings.extend(spec_relation_semantic_errors)
         return ReqIFErrorBundle(
             schema_errors=reqif_bundle.exceptions,
             semantic_warnings=semantic_warnings,
@@ -108,3 +118,25 @@ class ValidateCommand:
                 )
                 semantic_errors.append(error)
         return semantic_errors
+
+    @staticmethod
+    def _validate_specifications(
+        specifications: List[ReqIFSpecification],
+        reqif_bundle: ReqIFBundle,
+    ) -> List[ReqIFSemanticError]:
+        warnings: List[ReqIFSemanticError] = []
+
+        for specification in specifications:
+            for hierarchy in reqif_bundle.iterate_specification_hierarchy(
+                specification
+            ):
+                if not reqif_bundle.lookup.spec_object_exists(
+                    hierarchy.spec_object
+                ):
+                    warnings.append(
+                        ReqIFSpecHierarchyMissingSpecObjectException(
+                            xml_node=specification.xml_node,
+                            spec_object_identifier=hierarchy.spec_object,
+                        )
+                    )
+        return warnings
