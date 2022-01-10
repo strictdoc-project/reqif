@@ -190,6 +190,7 @@ class ReqIFParser:
                 data_types_lookup[data_type.identifier] = data_type
 
         spec_types = None
+        spec_types_lookup: Dict = {}
         xml_spec_types = xml_req_if_content.find("SPEC-TYPES")
         if xml_spec_types is not None:
             spec_types = []
@@ -210,6 +211,7 @@ class ReqIFParser:
                     raise NotImplementedError(
                         xml_spec_object_type_xml
                     ) from None
+                spec_types_lookup[spec_type.identifier] = spec_type
                 spec_types.append(spec_type)
 
         # <SPECIFICATIONS>
@@ -264,6 +266,7 @@ class ReqIFParser:
 
         lookup = ReqIFObjectLookup(
             data_types_lookup=data_types_lookup,
+            spec_types_lookup=spec_types_lookup,
             spec_objects_lookup=spec_objects_lookup,
             spec_relations_parent_lookup=spec_relations_parent_lookup,
         )
