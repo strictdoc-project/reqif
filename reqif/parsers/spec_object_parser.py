@@ -13,7 +13,7 @@ from reqif.models.reqif_spec_object import (
 ATTRIBUTE_STRING_TEMPLATE = """\
             <ATTRIBUTE-VALUE-STRING THE-VALUE="{value}">
               <DEFINITION>
-                <ATTRIBUTE-DEFINITION-STRING-REF>{name}</ATTRIBUTE-DEFINITION-STRING-REF>
+                <ATTRIBUTE-DEFINITION-STRING-REF>{definition_ref}</ATTRIBUTE-DEFINITION-STRING-REF>
               </DEFINITION>
             </ATTRIBUTE-VALUE-STRING>
 """
@@ -21,7 +21,7 @@ ATTRIBUTE_STRING_TEMPLATE = """\
 ATTRIBUTE_INTEGER_TEMPLATE = """\
             <ATTRIBUTE-VALUE-INTEGER THE-VALUE="{value}">
               <DEFINITION>
-                <ATTRIBUTE-DEFINITION-INTEGER-REF>{name}</ATTRIBUTE-DEFINITION-INTEGER-REF>
+                <ATTRIBUTE-DEFINITION-INTEGER-REF>{definition_ref}</ATTRIBUTE-DEFINITION-INTEGER-REF>
               </DEFINITION>
             </ATTRIBUTE-VALUE-INTEGER>
 """
@@ -32,14 +32,14 @@ ATTRIBUTE_ENUMERATION_TEMPLATE = """\
                 <ENUM-VALUE-REF>{value}</ENUM-VALUE-REF>
               </VALUES>
               <DEFINITION>
-                <ATTRIBUTE-DEFINITION-ENUMERATION-REF>{name}</ATTRIBUTE-DEFINITION-ENUMERATION-REF>
+                <ATTRIBUTE-DEFINITION-ENUMERATION-REF>{definition_ref}</ATTRIBUTE-DEFINITION-ENUMERATION-REF>
               </DEFINITION>
             </ATTRIBUTE-VALUE-ENUMERATION>
 """
 ATTRIBUTE_ENUMERATION_TEMPLATE_REVERSE = """\
             <ATTRIBUTE-VALUE-ENUMERATION>
               <DEFINITION>
-                <ATTRIBUTE-DEFINITION-ENUMERATION-REF>{name}</ATTRIBUTE-DEFINITION-ENUMERATION-REF>
+                <ATTRIBUTE-DEFINITION-ENUMERATION-REF>{definition_ref}</ATTRIBUTE-DEFINITION-ENUMERATION-REF>
               </DEFINITION>
               <VALUES>
                 <ENUM-VALUE-REF>{value}</ENUM-VALUE-REF>
@@ -50,7 +50,7 @@ ATTRIBUTE_ENUMERATION_TEMPLATE_REVERSE = """\
 ATTRIBUTE_XHTML_TEMPLATE = """\
             <ATTRIBUTE-VALUE-XHTML>
               <DEFINITION>
-                <ATTRIBUTE-DEFINITION-XHTML-REF>{name}</ATTRIBUTE-DEFINITION-XHTML-REF>
+                <ATTRIBUTE-DEFINITION-XHTML-REF>{definition_ref}</ATTRIBUTE-DEFINITION-XHTML-REF>
               </DEFINITION>
               <THE-VALUE>
 {value}
@@ -244,11 +244,13 @@ class SpecObjectParser:
             attribute_value = html.escape(attribute.value)
             if attribute.attribute_type == SpecObjectAttributeType.STRING:
                 output += ATTRIBUTE_STRING_TEMPLATE.format(
-                    name=attribute.name, value=attribute_value
+                    definition_ref=attribute.definition_ref,
+                    value=attribute_value,
                 )
             elif attribute.attribute_type == SpecObjectAttributeType.INTEGER:
                 output += ATTRIBUTE_INTEGER_TEMPLATE.format(
-                    name=attribute.name, value=attribute.value
+                    definition_ref=attribute.definition_ref,
+                    value=attribute.value,
                 )
             elif (
                 attribute.attribute_type == SpecObjectAttributeType.ENUMERATION
@@ -256,15 +258,18 @@ class SpecObjectParser:
                 assert attribute.enum_values_then_definition_order is not None
                 if attribute.enum_values_then_definition_order:
                     output += ATTRIBUTE_ENUMERATION_TEMPLATE.format(
-                        name=attribute.name, value=attribute.value
+                        definition_ref=attribute.definition_ref,
+                        value=attribute.value,
                     )
                 else:
                     output += ATTRIBUTE_ENUMERATION_TEMPLATE_REVERSE.format(
-                        name=attribute.name, value=attribute.value
+                        definition_ref=attribute.definition_ref,
+                        value=attribute.value,
                     )
             elif attribute.attribute_type == SpecObjectAttributeType.XHTML:
                 output += ATTRIBUTE_XHTML_TEMPLATE.format(
-                    name=attribute.name, value=attribute.value
+                    definition_ref=attribute.definition_ref,
+                    value=attribute.value,
                 )
 
         output += "          </VALUES>\n"

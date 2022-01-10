@@ -168,7 +168,7 @@ class ReqIFSpecificationParser:
                                 == SpecObjectAttributeType.XHTML
                             ):
                                 output += ATTRIBUTE_XHTML_TEMPLATE.format(
-                                    name=xml_attribute.name,
+                                    definition_ref=xml_attribute.definition_ref,
                                     value=xml_attribute.value,
                                 )
                             else:
