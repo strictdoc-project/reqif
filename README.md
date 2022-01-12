@@ -147,4 +147,4 @@ The latest version is 1.2:
 
 ### [RD02] ReqIF Implementation Guide 
 
-[ReqIF Implementation Guide](https://www.prostep.org/fileadmin/downloads/PSI_ImplementationGuide_ReqIF_V1-7.pdf)
+[ReqIF Implementation Guide v1.8](https://www.prostep.org/fileadmin/downloads/prostep-ivip_ImplementationGuide_ReqIF_V1-8.pdf)
