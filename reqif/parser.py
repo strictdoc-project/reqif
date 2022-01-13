@@ -1,12 +1,15 @@
 import io
 import sys
 from collections import defaultdict
-from typing import List, Optional, Dict
+from typing import List, Optional, Dict, Any, Tuple
 
 from lxml import etree
 from lxml.etree import DocInfo
 
-from reqif.models.error_handling import ReqIFMissingTagException
+from reqif.models.error_handling import (
+    ReqIFMissingTagException,
+    ReqIFSchemaError,
+)
 from reqif.models.reqif_core_content import ReqIFCoreContent
 from reqif.models.reqif_namespace_info import ReqIFNamespaceInfo
 from reqif.models.reqif_req_if_content import ReqIFReqIFContent
@@ -70,7 +73,7 @@ class ReqIFParser:
         doctype_is_present = docinfo.standalone is not None
 
         namespace_info = xml_reqif_root.getroot().nsmap
-        namespace: Optional[str] = namespace_info[None]
+        namespace: str = namespace_info[None]
 
         configuration: Optional[str] = (
             namespace_info["configuration"]
@@ -126,7 +129,7 @@ class ReqIFParser:
                 namespace=namespace, configuration=configuration
             )
 
-        exceptions: List[Exception] = []
+        exceptions: List[ReqIFSchemaError] = []
 
         # <THE-HEADER>
         req_if_header: Optional[ReqIFReqIFHeader] = None
@@ -137,7 +140,7 @@ class ReqIFParser:
         # <CORE-CONTENT>
         # <REQ-IF-CONTENT>
         core_content: Optional[ReqIFCoreContent] = None
-        lookup: Optional[ReqIFObjectLookup] = None
+        lookup: ReqIFObjectLookup = ReqIFObjectLookup.empty()
         xml_core_content = xml_reqif.find("CORE-CONTENT")
         if xml_core_content is not None:
             xml_req_if_content = xml_core_content.find("REQ-IF-CONTENT")
@@ -173,17 +176,16 @@ class ReqIFParser:
     @staticmethod
     def parse_reqif_content(
         xml_req_if_content,
-    ) -> (ReqIFReqIFContent, ReqIFObjectLookup, List[Exception]):
+    ) -> Tuple[ReqIFReqIFContent, ReqIFObjectLookup, List[ReqIFSchemaError]]:
         assert xml_req_if_content is not None
         assert xml_req_if_content.tag == "REQ-IF-CONTENT"
 
-        exceptions: List[Exception] = []
+        exceptions: List[ReqIFSchemaError] = []
         data_types: Optional[List] = None
-        data_types_lookup: Optional[Dict] = None
+        data_types_lookup: Dict[str, Any] = {}
         xml_data_types = xml_req_if_content.find("DATATYPES")
         if xml_data_types is not None:
             data_types = []
-            data_types_lookup = {}
             for xml_data_type in list(xml_data_types):
                 data_type = DataTypeParser.parse(xml_data_type)
                 data_types.append(data_type)
@@ -227,11 +229,10 @@ class ReqIFParser:
 
         # <SPEC-RELATIONS>
         spec_relations: Optional[List[ReqIFSpecRelation]] = None
-        spec_relations_parent_lookup: Optional[Dict[str, List[str]]] = None
+        spec_relations_parent_lookup: Dict[str, List[str]] = defaultdict(list)
         xml_spec_relations = xml_req_if_content.find("SPEC-RELATIONS")
         if xml_spec_relations is not None:
             spec_relations = []
-            spec_relations_parent_lookup = defaultdict(list)
 
             for xml_spec_relation in xml_spec_relations:
                 try:
@@ -245,7 +246,7 @@ class ReqIFParser:
 
         # <SPEC-OBJECTS>
         spec_objects: Optional[List[ReqIFSpecObject]] = None
-        spec_objects_lookup: Optional[Dict[str, ReqIFSpecObject]] = {}
+        spec_objects_lookup: Dict[str, ReqIFSpecObject] = {}
         xml_spec_objects = xml_req_if_content.find("SPEC-OBJECTS")
         if xml_spec_objects is not None:
             spec_objects = []

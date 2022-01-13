@@ -35,8 +35,9 @@ def test_01_nominal_case():
     spec_object = SpecObjectParser.parse(spec_object_xml)
     assert spec_object.identifier == "TEST_SPEC_OBJECT_ID"
     assert spec_object.spec_object_type == "TEST_SPEC_OBJECT_TYPE"
-    assert spec_object.attribute_map == {
-        "TEST_FIELD_UID": "SR001",
-        "TEST_FIELD_STATUS": "Draft",
-        "TEST_FIELD_STATEMENT": "Test statement",
-    }
+    assert spec_object.attribute_map["TEST_FIELD_UID"].value == "SR001"
+    assert spec_object.attribute_map["TEST_FIELD_STATUS"].value == "Draft"
+    assert (
+        spec_object.attribute_map["TEST_FIELD_STATEMENT"].value
+        == "Test statement"
+    )

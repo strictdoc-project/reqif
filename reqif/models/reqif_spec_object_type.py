@@ -31,7 +31,9 @@ class SpecAttributeDefinition:  # pylint: disable=too-many-instance-attributes
         self.editable: Optional[bool] = (
             editable == "true" if editable is not None else None
         )
-        self.default_value: Optional[str] = default_value
+        self.default_value: Union[
+            None, DefaultValueEmptySelfClosedTag, str
+        ] = default_value
         self.multi_valued: Optional[bool] = multi_valued
 
     def __str__(self) -> str:

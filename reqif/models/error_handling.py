@@ -12,9 +12,9 @@ class ReqIFSemanticError(Exception):
 
 
 class ReqIFGeneralSemanticError(ReqIFSemanticError):
-    def __init__(self, description):
+    def __init__(self, description: str):
         super().__init__(description)
-        self.description = description
+        self.description: str = description
 
     def get_description(self) -> str:
         return self.description
