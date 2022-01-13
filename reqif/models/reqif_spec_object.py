@@ -7,16 +7,28 @@ class SpecObjectAttribute:
     def __init__(
         self,
         attribute_type: SpecObjectAttributeType,
-        name: str,
+        definition_ref: str,
         value: str,
         enum_values_then_definition_order: Optional[bool],
     ):
         self.attribute_type: SpecObjectAttributeType = attribute_type
-        self.name: str = name
+        self.definition_ref: str = definition_ref
         self.value: str = value
         self.enum_values_then_definition_order: Optional[
             bool
         ] = enum_values_then_definition_order
+
+    def __str__(self) -> str:
+        return (
+            f"SpecObjectAttribute("
+            f"attribute_type: {self.attribute_type}"
+            ", "
+            f"definition_ref: {self.definition_ref}"
+            f")"
+        )
+
+    def __repr__(self) -> str:
+        return self.__str__()
 
 
 class ReqIFSpecObject:  # pylint: disable=too-many-instance-attributes

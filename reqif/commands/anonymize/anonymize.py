@@ -77,7 +77,7 @@ class AnonymizeCommand:
         assert isinstance(attribute, SpecObjectAttribute), f"{attribute}"
         if attribute.attribute_type == SpecObjectAttributeType.STRING:
             attribute.value = ANONYMIZED
-        elif attribute.attribute_type == (SpecObjectAttributeType.XHTML):
+        elif attribute.attribute_type == SpecObjectAttributeType.XHTML:
             attribute.value = (
                 "                " f"<xhtml:div>{ANONYMIZED}</xhtml:div>"
             )

@@ -104,7 +104,8 @@ class SpecRelationParser:
                 if values_attribute is not None:
                     output += "          <VALUES>\n"
                     output += ATTRIBUTE_STRING_TEMPLATE.format(
-                        name=values_attribute.name, value=values_attribute.value
+                        definition_ref=values_attribute.definition_ref,
+                        value=values_attribute.value,
                     )
                     output += "          </VALUES>\n"
                 else:
