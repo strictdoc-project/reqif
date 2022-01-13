@@ -201,12 +201,11 @@ def lint_mypy(context):
         context,
         one_line_command(
             """
-        mypy reqif/ tests/unit/
+        mypy reqif/
             --show-error-codes
             --disable-error-code=import
             --disable-error-code=no-untyped-call
-            --strict
-        """
+        """  # --strict
         ),
     )
 
@@ -215,6 +214,7 @@ def lint_mypy(context):
     lint_black_diff,
     lint_pylint,
     lint_flake8,
+    lint_mypy,
 )
 def lint(_):
     pass

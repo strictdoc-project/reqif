@@ -197,8 +197,10 @@ class ReqIFSpecificationParser:
         output = ""
         output += "          <CHILDREN>\n"
 
-        for hierarchy in specification.children:
-            output += ReqIFSpecHierarchyParser.unparse(hierarchy)
+        specification_children = specification.children
+        if specification_children is not None:
+            for hierarchy in specification_children:
+                output += ReqIFSpecHierarchyParser.unparse(hierarchy)
 
         output += "          </CHILDREN>\n"
         return output

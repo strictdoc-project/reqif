@@ -16,7 +16,7 @@ ANONYMIZED = "...Anonymized..."
 
 class AnonymizeCommand:
     @classmethod
-    def execute(cls, config: AnonimizeCommandConfig):
+    def execute(cls, config: AnonimizeCommandConfig) -> None:
         input_file = config.input_file
         if not os.path.isfile(input_file):
             sys.stdout.flush()

@@ -97,10 +97,10 @@ class SpecObjectParser:
         for attribute_xml in xml_spec_values:
             if attribute_xml.tag == "ATTRIBUTE-VALUE-STRING":
                 attribute_value = attribute_xml.attrib["THE-VALUE"]
-                attribute_name = attribute_xml[0][0].text
+                attribute_definition_ref = attribute_xml[0][0].text
                 attribute = SpecObjectAttribute(
                     SpecObjectAttributeType.STRING,
-                    attribute_name,
+                    attribute_definition_ref,
                     attribute_value,
                     enum_values_then_definition_order=None,
                 )
@@ -115,42 +115,42 @@ class SpecObjectParser:
                 attribute_value = (
                     attribute_xml.find("VALUES").find("ENUM-VALUE-REF").text
                 )
-                attribute_name = (
+                attribute_definition_ref = (
                     attribute_xml.find("DEFINITION")
                     .find("ATTRIBUTE-DEFINITION-ENUMERATION-REF")
                     .text
                 )
                 attribute = SpecObjectAttribute(
                     SpecObjectAttributeType.ENUMERATION,
-                    attribute_name,
+                    attribute_definition_ref,
                     attribute_value,
                     enum_values_then_definition_order,
                 )
             elif attribute_xml.tag == "ATTRIBUTE-VALUE-INTEGER":
                 attribute_value = attribute_xml.attrib["THE-VALUE"]
 
-                attribute_name = (
+                attribute_definition_ref = (
                     attribute_xml.find("DEFINITION")
                     .find("ATTRIBUTE-DEFINITION-INTEGER-REF")
                     .text
                 )
                 attribute = SpecObjectAttribute(
                     SpecObjectAttributeType.INTEGER,
-                    attribute_name,
+                    attribute_definition_ref,
                     attribute_value,
                     enum_values_then_definition_order=None,
                 )
             elif attribute_xml.tag == "ATTRIBUTE-VALUE-BOOLEAN":
                 attribute_value = attribute_xml.attrib["THE-VALUE"]
 
-                attribute_name = (
+                attribute_definition_ref = (
                     attribute_xml.find("DEFINITION")
                     .find("ATTRIBUTE-DEFINITION-BOOLEAN-REF")
                     .text
                 )
                 attribute = SpecObjectAttribute(
                     SpecObjectAttributeType.BOOLEAN,
-                    attribute_name,
+                    attribute_definition_ref,
                     attribute_value,
                     enum_values_then_definition_order=None,
                 )
@@ -169,21 +169,21 @@ class SpecObjectParser:
                 attribute_value = "\n".join(
                     attribute_value_decoded_lines.split("\n")[1:-1]
                 )
-                attribute_name = (
+                attribute_definition_ref = (
                     attribute_xml.find("DEFINITION")
                     .find("ATTRIBUTE-DEFINITION-XHTML-REF")
                     .text
                 )
                 attribute = SpecObjectAttribute(
-                    SpecObjectAttributeType.XHTML,
-                    attribute_name,
-                    attribute_value,
+                    attribute_type=SpecObjectAttributeType.XHTML,
+                    definition_ref=attribute_definition_ref,
+                    value=attribute_value,
                     enum_values_then_definition_order=None,
                 )
             else:
                 raise NotImplementedError(etree.tostring(attribute_xml))
             attributes.append(attribute)
-            attribute_map[attribute_name] = attribute_value
+            attribute_map[attribute_definition_ref] = attribute
 
         return ReqIFSpecObject(
             description=spec_object_description,

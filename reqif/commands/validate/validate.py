@@ -19,7 +19,7 @@ from reqif.reqif_bundle import ReqIFBundle
 class ReqIFErrorBundle:
     def __init__(
         self,
-        schema_errors: List[Exception],
+        schema_errors: List[ReqIFSchemaError],
         semantic_warnings: List[ReqIFSemanticError],
     ):
         self.schema_errors: List[ReqIFSchemaError] = schema_errors
@@ -37,10 +37,12 @@ class ValidateCommand:
             sys.exit(1)
 
         error_bundle = ValidateCommand._validate(config)
-        for warning in error_bundle.schema_errors:
-            print(f"warning: {warning.get_description()}")
-        for warning in error_bundle.semantic_warnings:
-            print(f"warning: semantic error: {warning.get_description()}")
+        for schema_warning in error_bundle.schema_errors:
+            print(f"warning: {schema_warning.get_description()}")
+        for semantic_warning in error_bundle.semantic_warnings:
+            print(
+                f"warning: semantic error: {semantic_warning.get_description()}"
+            )
         print(
             f"Validation complete with 0 errors, "
             f"{len(error_bundle.schema_errors)} schema issues found, "
@@ -101,7 +103,7 @@ class ValidateCommand:
         spec_relations: List[ReqIFSpecRelation],
         reqif_bundle: ReqIFBundle,
     ) -> List[ReqIFSemanticError]:
-        semantic_errors = []
+        semantic_errors: List[ReqIFSemanticError] = []
         for spec_relation in spec_relations:
             if not reqif_bundle.lookup.spec_object_exists(spec_relation.source):
                 error = ReqIFSpecRelationMissingSpecObjectException(

@@ -39,7 +39,7 @@ class SpecificationTypeParser:
             for attribute_definition in xml_spec_attributes:
                 long_name = attribute_definition.attrib["LONG-NAME"]
                 identifier = attribute_definition.attrib["IDENTIFIER"]
-                description: Optional[str] = (
+                attribute_description: Optional[str] = (
                     attribute_definition.attrib["DESC"]
                     if "DESC" in attribute_definition.attrib
                     else None
@@ -126,7 +126,7 @@ class SpecificationTypeParser:
                         map(lambda el: el.tag, list(attribute_definition))
                     ),
                     attribute_type=attribute_type,
-                    description=description,
+                    description=attribute_description,
                     identifier=identifier,
                     last_change=last_change,
                     datatype_definition=datatype_definition,
