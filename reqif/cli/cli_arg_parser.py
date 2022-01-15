@@ -83,6 +83,12 @@ def cli_args_parser() -> argparse.ArgumentParser:
         "input_file", type=str, help="Path to an input ReqIF file"
     )
 
+    # Command: Version
+    command_subparsers.add_parser(
+        "version",
+        help="Print the version of StrictDoc.",
+        formatter_class=formatter,
+    )
     return main_parser
 
 
@@ -138,6 +144,10 @@ class ReqIFArgsParser:
     @property
     def is_validate_command(self):
         return self.args.command == "validate"
+
+    @property
+    def is_version_command(self):
+        return self.args.command == "version"
 
     def get_passthrough_config(self) -> PassthroughCommandConfig:
         return PassthroughCommandConfig(

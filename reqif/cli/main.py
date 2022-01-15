@@ -15,6 +15,7 @@ try:
     from reqif.commands.format.format import FormatCommand
     from reqif.commands.passthrough.passthrough import PassthroughCommand
     from reqif.commands.validate.validate import ValidateCommand
+    from reqif.commands.version.version_command import VersionCommand
 
 except FileNotFoundError:
     print("error: could not locate reqif's root folder.")
@@ -41,6 +42,8 @@ def main() -> None:
         FormatCommand.execute(parser.get_format_config())
     elif parser.is_validate_command:
         ValidateCommand.execute(parser.get_validate_config())
+    elif parser.is_version_command:
+        VersionCommand.execute()
     else:
         raise NotImplementedError(parser) from None
 
