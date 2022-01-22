@@ -71,12 +71,12 @@ class ReqIFSpecificationParser:
                 xml_attribute = xml_values[0]
                 if xml_attribute.tag == "ATTRIBUTE-VALUE-STRING":
                     attribute_value = xml_attribute.attrib["THE-VALUE"]
-                    attribute_name = xml_attribute[0][0].text
+                    definition_ref = xml_attribute[0][0].text
                     values_attribute = SpecObjectAttribute(
-                        SpecObjectAttributeType.STRING,
-                        attribute_name,
-                        attribute_value,
-                        enum_values_then_definition_order=None,
+                        xml_node=xml_attribute,
+                        attribute_type=SpecObjectAttributeType.STRING,
+                        definition_ref=definition_ref,
+                        value=attribute_value,
                     )
                     values.append(values_attribute)
                 elif xml_attribute.tag == "ATTRIBUTE-VALUE-XHTML":
@@ -100,10 +100,10 @@ class ReqIFSpecificationParser:
                         .text
                     )
                     values_attribute = SpecObjectAttribute(
-                        SpecObjectAttributeType.XHTML,
-                        attribute_name,
-                        attribute_value,
-                        enum_values_then_definition_order=None,
+                        xml_node=xml_attribute,
+                        attribute_type=SpecObjectAttributeType.XHTML,
+                        definition_ref=attribute_name,
+                        value=attribute_value,
                     )
                     values.append(values_attribute)
 

@@ -6,17 +6,15 @@ from reqif.models.reqif_types import SpecObjectAttributeType
 class SpecObjectAttribute:
     def __init__(
         self,
+        xml_node: Optional[Any],
         attribute_type: SpecObjectAttributeType,
         definition_ref: str,
         value: str,
-        enum_values_then_definition_order: Optional[bool],
     ):
+        self.xml_node: Optional[Any] = xml_node
         self.attribute_type: SpecObjectAttributeType = attribute_type
         self.definition_ref: str = definition_ref
         self.value: str = value
-        self.enum_values_then_definition_order: Optional[
-            bool
-        ] = enum_values_then_definition_order
 
     def __str__(self) -> str:
         return (

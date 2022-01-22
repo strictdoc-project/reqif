@@ -55,12 +55,12 @@ class SpecRelationParser:
             xml_string_attribute = xml_values.find("ATTRIBUTE-VALUE-STRING")
             assert xml_string_attribute is not None
             attribute_value = xml_string_attribute.attrib["THE-VALUE"]
-            attribute_name = xml_string_attribute[0][0].text
+            definition_ref = xml_string_attribute[0][0].text
             values_attribute = SpecObjectAttribute(
-                SpecObjectAttributeType.STRING,
-                attribute_name,
-                attribute_value,
-                enum_values_then_definition_order=None,
+                xml_node=xml_string_attribute,
+                attribute_type=SpecObjectAttributeType.STRING,
+                definition_ref=definition_ref,
+                value=attribute_value,
             )
 
         spec_relation = ReqIFSpecRelation(
