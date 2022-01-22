@@ -64,10 +64,6 @@ class SpecObjectTypeParser:
                     else None
                 )
 
-                children_tags = list(
-                    map(lambda el: el.tag, list(attribute_definition))
-                )
-
                 default_value: Union[
                     None, DefaultValueEmptySelfClosedTag, str
                 ] = None
@@ -178,7 +174,7 @@ class SpecObjectTypeParser:
                 else:
                     raise NotImplementedError(attribute_definition) from None
                 attribute_definition = SpecAttributeDefinition(
-                    children_tags=children_tags,
+                    xml_node=attribute_definition,
                     attribute_type=attribute_type,
                     description=description,
                     identifier=identifier,
@@ -249,7 +245,14 @@ class SpecObjectTypeParser:
             output += f' IS-EDITABLE="{editable_value}"'
         output += ">" "\n"
 
-        for tag in attribute.children_tags:
+        children_tags: List[str]
+        if attribute.xml_node is not None:
+            children_tags = list(
+                map(lambda el: el.tag, list(attribute.xml_node))
+            )
+        else:
+            children_tags = ["DEFAULT-VALUE", "TYPE"]
+        for tag in children_tags:
             if tag == "DEFAULT-VALUE":
                 attribute_default_value = attribute.default_value
                 assert attribute_default_value is not None

@@ -122,9 +122,7 @@ class SpecificationTypeParser:
                 else:
                     raise NotImplementedError(attribute_definition) from None
                 attribute_definition = SpecAttributeDefinition(
-                    children_tags=list(
-                        map(lambda el: el.tag, list(attribute_definition))
-                    ),
+                    xml_node=attribute_definition,
                     attribute_type=attribute_type,
                     description=attribute_description,
                     identifier=identifier,

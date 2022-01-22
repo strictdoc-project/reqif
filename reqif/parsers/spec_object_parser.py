@@ -65,10 +65,6 @@ class SpecObjectParser:
         assert "SPEC-OBJECT" in spec_object_xml.tag
         xml_attributes = spec_object_xml.attrib
 
-        children_tags = list(map(lambda el: el.tag, list(spec_object_xml)))
-        assert len(children_tags) == 2
-        values_then_type_order = children_tags == ["VALUES", "TYPE"]
-
         spec_object_description: Optional[str] = (
             xml_attributes["DESC"] if "DESC" in xml_attributes else None
         )
@@ -186,6 +182,7 @@ class SpecObjectParser:
             attribute_map[attribute_definition_ref] = attribute
 
         return ReqIFSpecObject(
+            xml_node=spec_object_xml,
             description=spec_object_description,
             identifier=identifier,
             last_change=spec_object_last_change,
@@ -193,7 +190,6 @@ class SpecObjectParser:
             spec_object_type=spec_object_type,
             attributes=attributes,
             attribute_map=attribute_map,
-            values_then_type_order=values_then_type_order,
         )
 
     @staticmethod
@@ -212,12 +208,23 @@ class SpecObjectParser:
             output += f' LONG-NAME="{spec_object.long_name}"'
         output += ">\n"
 
-        if spec_object.values_then_type_order:
-            output += SpecObjectParser._unparse_spec_values(spec_object)
-            output += SpecObjectParser._unparse_spec_object_type(spec_object)
+        if spec_object.xml_node is not None:
+            children_tags = list(
+                map(lambda el: el.tag, list(spec_object.xml_node))
+            )
+            assert len(children_tags) == 2
         else:
-            output += SpecObjectParser._unparse_spec_object_type(spec_object)
-            output += SpecObjectParser._unparse_spec_values(spec_object)
+            children_tags = ["VALUES", "TYPE"]
+
+        for child_tag in children_tags:
+            if child_tag == "VALUES":
+                output += SpecObjectParser._unparse_spec_values(spec_object)
+            elif child_tag == "TYPE":
+                output += SpecObjectParser._unparse_spec_object_type(
+                    spec_object
+                )
+            else:
+                raise NotImplementedError
 
         output += "        </SPEC-OBJECT>\n"
 
