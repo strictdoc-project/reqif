@@ -1,4 +1,4 @@
-from typing import Optional
+from typing import Optional, List
 
 from reqif.models.error_handling import ReqIFMissingTagException
 from reqif.models.reqif_spec_object import SpecObjectAttribute
@@ -64,7 +64,6 @@ class SpecRelationParser:
             )
 
         spec_relation = ReqIFSpecRelation(
-            children_tags=children_tags,
             xml_node=xml_spec_relation,
             description=description,
             identifier=identifier,
@@ -86,7 +85,14 @@ class SpecRelationParser:
             output += f' LAST-CHANGE="{spec_relation.last_change}"'
         output += ">\n"
 
-        for tag in spec_relation.children_tags:
+        children_tags: List[str]
+        if spec_relation.xml_node is not None:
+            children_tags = list(
+                map(lambda el: el.tag, list(spec_relation.xml_node))
+            )
+        else:
+            children_tags = ["TYPE", "SOURCE", "TARGET", "VALUES"]
+        for tag in children_tags:
             if tag == "TYPE":
                 output += SpecRelationParser._unparse_spec_relation_type(
                     spec_relation
