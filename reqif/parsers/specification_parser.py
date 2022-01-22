@@ -178,8 +178,6 @@ class ReqIFSpecificationParser:
                             else:
                                 raise NotImplementedError
                         output += "          </VALUES>\n"
-                else:
-                    raise NotImplementedError
         output += "        </SPECIFICATION>\n"
 
         return output
