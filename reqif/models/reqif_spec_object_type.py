@@ -1,4 +1,4 @@
-from typing import List, Optional, Union
+from typing import List, Optional, Union, Any
 
 from reqif.models.reqif_types import SpecObjectAttributeType
 
@@ -10,7 +10,7 @@ class DefaultValueEmptySelfClosedTag:
 class SpecAttributeDefinition:  # pylint: disable=too-many-instance-attributes
     def __init__(  # pylint: disable=too-many-arguments
         self,
-        children_tags: List[str],
+        xml_node: Optional[Any],
         attribute_type: SpecObjectAttributeType,
         description: Optional[str],
         identifier: str,
@@ -21,7 +21,7 @@ class SpecAttributeDefinition:  # pylint: disable=too-many-instance-attributes
         default_value: Union[None, DefaultValueEmptySelfClosedTag, str],
         multi_valued: Optional[bool],
     ):
-        self.children_tags: List[str] = children_tags
+        self.xml_node: Optional[Any] = xml_node
         self.attribute_type: SpecObjectAttributeType = attribute_type
         self.description: Optional[str] = description
         self.identifier: str = identifier

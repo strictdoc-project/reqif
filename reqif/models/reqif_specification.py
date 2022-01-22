@@ -10,7 +10,6 @@ class ReqIFSpecification:  # pylint: disable=too-many-instance-attributes
     def __init__(  # pylint: disable=too-many-arguments
         self,
         xml_node,
-        children_tags: List[str],
         description: Optional[str],
         identifier: str,
         last_change: Optional[str],
@@ -20,7 +19,6 @@ class ReqIFSpecification:  # pylint: disable=too-many-instance-attributes
         children: Optional[List[ReqIFSpecHierarchy]],
     ):
         self.xml_node = xml_node
-        self.children_tags: List[str] = children_tags
         self.description: Optional[str] = description
         self.identifier: str = identifier
         self.last_change: Optional[str] = last_change

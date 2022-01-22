@@ -18,8 +18,6 @@ class ReqIFSpecificationParser:
     def parse(specification_xml):
         assert "SPECIFICATION" in specification_xml.tag, f"{specification_xml}"
 
-        children_tags = list(map(lambda el: el.tag, list(specification_xml)))
-
         attributes = specification_xml.attrib
         try:
             identifier = attributes["IDENTIFIER"]
@@ -73,12 +71,12 @@ class ReqIFSpecificationParser:
                 xml_attribute = xml_values[0]
                 if xml_attribute.tag == "ATTRIBUTE-VALUE-STRING":
                     attribute_value = xml_attribute.attrib["THE-VALUE"]
-                    attribute_name = xml_attribute[0][0].text
+                    definition_ref = xml_attribute[0][0].text
                     values_attribute = SpecObjectAttribute(
-                        SpecObjectAttributeType.STRING,
-                        attribute_name,
-                        attribute_value,
-                        enum_values_then_definition_order=None,
+                        xml_node=xml_attribute,
+                        attribute_type=SpecObjectAttributeType.STRING,
+                        definition_ref=definition_ref,
+                        value=attribute_value,
                     )
                     values.append(values_attribute)
                 elif xml_attribute.tag == "ATTRIBUTE-VALUE-XHTML":
@@ -102,16 +100,15 @@ class ReqIFSpecificationParser:
                         .text
                     )
                     values_attribute = SpecObjectAttribute(
-                        SpecObjectAttributeType.XHTML,
-                        attribute_name,
-                        attribute_value,
-                        enum_values_then_definition_order=None,
+                        xml_node=xml_attribute,
+                        attribute_type=SpecObjectAttributeType.XHTML,
+                        definition_ref=attribute_name,
+                        value=attribute_value,
                     )
                     values.append(values_attribute)
 
         return ReqIFSpecification(
             xml_node=specification_xml,
-            children_tags=children_tags,
             description=description,
             identifier=identifier,
             last_change=last_change,
@@ -137,7 +134,14 @@ class ReqIFSpecificationParser:
             output += f' LONG-NAME="{specification.long_name}"'
         output += ">\n"
 
-        for tag in specification.children_tags:
+        if specification.xml_node is not None:
+            children_tags = list(
+                map(lambda el: el.tag, list(specification.xml_node))
+            )
+        else:
+            children_tags = ["TYPE", "CHILDREN", "VALUES"]
+
+        for tag in children_tags:
             if tag == "TYPE":
                 if specification.specification_type:
                     output += (

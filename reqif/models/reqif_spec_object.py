@@ -1,4 +1,4 @@
-from typing import Dict, List, Optional
+from typing import Dict, List, Optional, Any
 
 from reqif.models.reqif_types import SpecObjectAttributeType
 
@@ -6,17 +6,15 @@ from reqif.models.reqif_types import SpecObjectAttributeType
 class SpecObjectAttribute:
     def __init__(
         self,
+        xml_node: Optional[Any],
         attribute_type: SpecObjectAttributeType,
         definition_ref: str,
         value: str,
-        enum_values_then_definition_order: Optional[bool],
     ):
+        self.xml_node: Optional[Any] = xml_node
         self.attribute_type: SpecObjectAttributeType = attribute_type
         self.definition_ref: str = definition_ref
         self.value: str = value
-        self.enum_values_then_definition_order: Optional[
-            bool
-        ] = enum_values_then_definition_order
 
     def __str__(self) -> str:
         return (
@@ -34,6 +32,7 @@ class SpecObjectAttribute:
 class ReqIFSpecObject:  # pylint: disable=too-many-instance-attributes
     def __init__(  # pylint: disable=too-many-arguments
         self,
+        xml_node: Optional[Any],
         description: Optional[str],
         identifier: str,
         last_change: Optional[str],
@@ -41,8 +40,8 @@ class ReqIFSpecObject:  # pylint: disable=too-many-instance-attributes
         spec_object_type,
         attributes: List[SpecObjectAttribute],
         attribute_map: Dict[str, SpecObjectAttribute],
-        values_then_type_order: bool,
     ):
+        self.xml_node: Optional[Any] = xml_node
         self.description: Optional[str] = description
         self.identifier: str = identifier
         self.last_change: Optional[str] = last_change
@@ -50,7 +49,6 @@ class ReqIFSpecObject:  # pylint: disable=too-many-instance-attributes
         self.spec_object_type = spec_object_type
         self.attributes: List[SpecObjectAttribute] = attributes
         self.attribute_map: Dict[str, SpecObjectAttribute] = attribute_map
-        self.values_then_type_order = values_then_type_order
 
     def __str__(self) -> str:
         return (

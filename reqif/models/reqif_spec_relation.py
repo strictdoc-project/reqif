@@ -1,4 +1,4 @@
-from typing import Optional, List
+from typing import Optional, Any
 
 from reqif.models.reqif_spec_object import SpecObjectAttribute
 
@@ -6,8 +6,7 @@ from reqif.models.reqif_spec_object import SpecObjectAttribute
 class ReqIFSpecRelation:  # pylint: disable=too-many-instance-attributes
     def __init__(  # pylint: disable=too-many-arguments
         self,
-        children_tags: List[str],
-        xml_node,
+        xml_node: Optional[Any],
         description: Optional[str],
         identifier: str,
         last_change: Optional[str],
@@ -16,8 +15,7 @@ class ReqIFSpecRelation:  # pylint: disable=too-many-instance-attributes
         target: str,
         values_attribute: Optional[SpecObjectAttribute],
     ):
-        self.children_tags: List[str] = children_tags
-        self.xml_node = xml_node
+        self.xml_node: Optional[Any] = xml_node
         self.description: Optional[str] = description
         self.identifier: str = identifier
         self.last_change: Optional[str] = last_change
