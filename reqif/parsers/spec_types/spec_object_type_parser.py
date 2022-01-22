@@ -255,8 +255,7 @@ class SpecObjectTypeParser:
         for tag in children_tags:
             if tag == "DEFAULT-VALUE":
                 attribute_default_value = attribute.default_value
-                assert attribute_default_value is not None
-                if attribute_default_value:
+                if attribute_default_value is not None:
                     output += (
                         SpecObjectTypeParser._unparse_attribute_default_value(
                             attribute, attribute_default_value
