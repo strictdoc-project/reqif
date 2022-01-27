@@ -41,14 +41,14 @@ class ReqIFEnumValue:
         last_change: Optional[str],
         key: str,
         other_content: Optional[str],
-        long_name: str,
+        long_name: Optional[str],
     ):
         self.description: Optional[str] = description
         self.identifier: str = identifier
         self.last_change: Optional[str] = last_change
         self.key: str = key
         self.other_content: Optional[str] = other_content
-        self.long_name: str = long_name
+        self.long_name: Optional[str] = long_name
 
 
 class ReqIFDataTypeDefinitionEnumeration:  # pylint: disable=too-many-instance-attributes # noqa:E501
