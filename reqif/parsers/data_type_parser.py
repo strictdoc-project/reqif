@@ -66,6 +66,11 @@ class DataTypeParser:
                         if "LAST-CHANGE" in specified_value_attributes
                         else None
                     )
+                    specified_value_long_name = (
+                        specified_value_attributes["LONG-NAME"]
+                        if "LONG-NAME" in specified_value_attributes
+                        else None
+                    )
                     properties = xml_specified_value.find("PROPERTIES")
 
                     embedded_value = properties.find("EMBEDDED-VALUE")
@@ -84,6 +89,7 @@ class DataTypeParser:
                             last_change=specified_value_last_change,
                             key=embedded_value_key,
                             other_content=embedded_value_other_content,
+                            long_name=specified_value_long_name,
                         )
                     )
                     values_map[specified_value_identifier] = embedded_value_key
@@ -203,6 +209,8 @@ class DataTypeParser:
                     output += f' IDENTIFIER="{value.identifier}"'
                     if value.last_change is not None:
                         output += f' LAST-CHANGE="{value.last_change}"'
+                    if value.long_name is not None:
+                        output += f' LONG-NAME="{value.long_name}"'
                     output += ">\n"
 
                     output += "              <PROPERTIES>\n"
