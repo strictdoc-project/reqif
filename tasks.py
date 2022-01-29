@@ -126,9 +126,9 @@ def install_local(context):
     run_invoke_cmd(
         context,
         one_line_command(
-        """
-        rm -rf dist/ && poetry build
-        """
+            """
+                rm -rf dist/ && poetry build
+            """
         ),
     )
     run_invoke_cmd(
