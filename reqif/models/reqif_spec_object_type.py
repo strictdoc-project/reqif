@@ -1,4 +1,4 @@
-from typing import List, Optional, Union, Any
+from typing import List, Optional, Union, Any, Dict
 
 from reqif.models.reqif_types import SpecObjectAttributeType
 
@@ -36,6 +36,27 @@ class SpecAttributeDefinition:  # pylint: disable=too-many-instance-attributes
         ] = default_value
         self.multi_valued: Optional[bool] = multi_valued
 
+    @staticmethod
+    def create(
+        attribute_type: SpecObjectAttributeType,
+        identifier: str,
+        datatype_definition: str,
+        long_name: Optional[str] = None,
+        multi_valued: Optional[bool] = None,
+    ):
+        return SpecAttributeDefinition(
+            xml_node=None,
+            attribute_type=attribute_type,
+            description=None,
+            identifier=identifier,
+            last_change=None,
+            datatype_definition=datatype_definition,
+            long_name=long_name,
+            editable=None,
+            default_value=None,
+            multi_valued=multi_valued,
+        )
+
     def __str__(self) -> str:
         return (
             f"SpecAttributeDefinition("
@@ -67,7 +88,7 @@ class ReqIFSpecObjectType:
         last_change: Optional[str],
         long_name,
         attribute_definitions: Optional[List[SpecAttributeDefinition]],
-        attribute_map,
+        attribute_map: Optional[Dict[str, SpecAttributeDefinition]],
     ):
         self.description: Optional[str] = description
         self.identifier: str = identifier
@@ -76,7 +97,27 @@ class ReqIFSpecObjectType:
         self.attribute_definitions: Optional[
             List[SpecAttributeDefinition]
         ] = attribute_definitions
-        self.attribute_map = attribute_map
+        self.attribute_map: Optional[
+            Dict[str, SpecAttributeDefinition]
+        ] = attribute_map
+
+    @staticmethod
+    def create(  # pylint: disable=too-many-arguments
+        identifier: str,
+        long_name: str,
+        description: Optional[str] = None,
+        last_change: Optional[str] = None,
+        attribute_definitions: Optional[List[SpecAttributeDefinition]] = None,
+        attribute_map: Optional[Dict[str, SpecAttributeDefinition]] = None,
+    ):
+        return ReqIFSpecObjectType(
+            description=description,
+            identifier=identifier,
+            last_change=last_change,
+            long_name=long_name,
+            attribute_definitions=attribute_definitions,
+            attribute_map=attribute_map,
+        )
 
     def __str__(self) -> str:
         return (

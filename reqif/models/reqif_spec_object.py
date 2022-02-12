@@ -50,6 +50,24 @@ class ReqIFSpecObject:  # pylint: disable=too-many-instance-attributes
         self.attributes: List[SpecObjectAttribute] = attributes
         self.attribute_map: Dict[str, SpecObjectAttribute] = attribute_map
 
+    @staticmethod
+    def create(
+        identifier: str,
+        spec_object_type: str,
+        attributes: List[SpecObjectAttribute],
+        attribute_map: Dict[str, SpecObjectAttribute],
+    ):
+        return ReqIFSpecObject(
+            xml_node=None,
+            description=None,
+            identifier=identifier,
+            last_change=None,
+            long_name=None,
+            spec_object_type=spec_object_type,
+            attributes=attributes,
+            attribute_map=attribute_map,
+        )
+
     def __str__(self) -> str:
         return (
             f"ReqIFSpecObject("

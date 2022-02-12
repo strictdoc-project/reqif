@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "reqif"
-version = "0.0.13"
+version = "0.0.16"
 description = "Python library for ReqIF format. ReqIF parsing and unparsing."
 authors = ["Stanislav Pankevich <s.pankevich@gmail.com>"]
 maintainers = ["Stanislav Pankevich <s.pankevich@gmail.com>"]

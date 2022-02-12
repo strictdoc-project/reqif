@@ -61,12 +61,12 @@ class DataTypeParser:
                         if "DESC" in specified_value_attributes
                         else None
                     )
-                    specified_value_last_change = (
+                    specified_value_last_change: Optional[str] = (
                         specified_value_attributes["LAST-CHANGE"]
                         if "LAST-CHANGE" in specified_value_attributes
                         else None
                     )
-                    specified_value_long_name = (
+                    specified_value_long_name: Optional[str] = (
                         specified_value_attributes["LONG-NAME"]
                         if "LONG-NAME" in specified_value_attributes
                         else None

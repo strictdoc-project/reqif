@@ -34,8 +34,11 @@ def test_01_nominal_case() -> None:
     assert reqif_spec_object_type.long_name == "TEST_SPEC_OBJECT_TYPE_LONG_NAME"
     attribute_map = reqif_spec_object_type.attribute_map
     assert len(attribute_map) == 2
-    assert attribute_map.get("_gFhrW2ojEeuExICsU7Acmg") == "ReqIF.ForeignID"
-    assert attribute_map.get("_aqZG4GxpEeuaU7fHySy8Bw") == "NOTES"
+    assert (
+        attribute_map.get("_gFhrW2ojEeuExICsU7Acmg").long_name
+        == "ReqIF.ForeignID"
+    )
+    assert attribute_map.get("_aqZG4GxpEeuaU7fHySy8Bw").long_name == "NOTES"
 
 
 def test_02_integer_attribute_definition() -> None:
@@ -59,7 +62,8 @@ def test_02_integer_attribute_definition() -> None:
     attribute_map = reqif_spec_object_type.attribute_map
     assert len(attribute_map) == 1
     assert (
-        attribute_map.get("TEST_INTEGER_ATTRIBUTE_ID") == "IntegerAttributeId"
+        attribute_map.get("TEST_INTEGER_ATTRIBUTE_ID").long_name
+        == "IntegerAttributeId"
     )
 
 
@@ -91,7 +95,8 @@ def test_03_boolean_attribute_definition() -> None:
     attribute_map = reqif_spec_object_type.attribute_map
     assert len(attribute_map) == 1
     assert (
-        attribute_map.get("TEST_BOOLEAN_ATTRIBUTE_ID") == "BooleanAttributeId"
+        attribute_map.get("TEST_BOOLEAN_ATTRIBUTE_ID").long_name
+        == "BooleanAttributeId"
     )
 
 
@@ -115,7 +120,7 @@ def test_04_xhtml_attribute_definition() -> None:
     assert reqif_spec_object_type.long_name == "TEST_SPEC_OBJECT_TYPE_LONG_NAME"
     attribute_map = reqif_spec_object_type.attribute_map
     assert (
-        attribute_map.get("TEST_XHTML_ATTRIBUTE_ID")
+        attribute_map.get("TEST_XHTML_ATTRIBUTE_ID").long_name
         == "TEST_XHTML_ATTRIBUTE_LONG_NAME"
     )
 
@@ -140,7 +145,7 @@ def test_05_enumeration_attribute_definition() -> None:
     assert reqif_spec_object_type.long_name == "TEST_SPEC_OBJECT_TYPE_LONG_NAME"
     attribute_map = reqif_spec_object_type.attribute_map
     assert (
-        attribute_map.get("TEST_ENUMERATION_ATTRIBUTE_ID")
+        attribute_map.get("TEST_ENUMERATION_ATTRIBUTE_ID").long_name
         == "TEST_ENUMERATION_ATTRIBUTE_LONG_NAME"
     )
 
@@ -168,7 +173,7 @@ def test_06_string_attribute_default_value() -> None:
     assert reqif_spec_object_type.long_name == "TEST_SPEC_OBJECT_TYPE_LONG_NAME"
     attribute_map = reqif_spec_object_type.attribute_map
     assert (
-        attribute_map.get("TEST_STRING_ATTRIBUTE_ID")
+        attribute_map.get("TEST_STRING_ATTRIBUTE_ID").long_name
         == "TEST_STRING_ATTRIBUTE_LONG_NAME"
     )
     assert (
