@@ -89,7 +89,6 @@ class SpecObjectParser:
 
         xml_spec_values = spec_object_xml.find("VALUES")
         attributes: List[SpecObjectAttribute] = []
-        attribute_map = {}
         for attribute_xml in xml_spec_values:
             if attribute_xml.tag == "ATTRIBUTE-VALUE-STRING":
                 attribute_value = attribute_xml.attrib["THE-VALUE"]
@@ -172,7 +171,6 @@ class SpecObjectParser:
             else:
                 raise NotImplementedError(etree.tostring(attribute_xml))
             attributes.append(attribute)
-            attribute_map[attribute_definition_ref] = attribute
 
         return ReqIFSpecObject(
             xml_node=spec_object_xml,
@@ -182,7 +180,6 @@ class SpecObjectParser:
             long_name=spec_object_long_name,
             spec_object_type=spec_object_type,
             attributes=attributes,
-            attribute_map=attribute_map,
         )
 
     @staticmethod

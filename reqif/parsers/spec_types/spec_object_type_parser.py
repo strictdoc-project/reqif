@@ -1,5 +1,5 @@
 import html
-from typing import List, Optional, Union, Dict
+from typing import List, Optional, Union
 
 from reqif.helpers.lxml import is_self_closed_tag
 from reqif.models.reqif_spec_object_type import (
@@ -16,7 +16,6 @@ class SpecObjectTypeParser:
         assert (
             spec_object_type_xml.tag == "SPEC-OBJECT-TYPE"
         ), f"{spec_object_type_xml}"
-        attribute_map: Dict[str, SpecAttributeDefinition] = {}
 
         xml_attributes = spec_object_type_xml.attrib
         spec_description: Optional[str] = (
@@ -186,7 +185,6 @@ class SpecObjectTypeParser:
                     multi_valued=multi_valued,
                 )
                 attribute_definitions.append(attribute_definition)
-                attribute_map[identifier] = attribute_definition
 
         return ReqIFSpecObjectType(
             description=spec_description,
@@ -194,7 +192,6 @@ class SpecObjectTypeParser:
             last_change=spec_last_change,
             long_name=spec_type_long_name,
             attribute_definitions=attribute_definitions,
-            attribute_map=attribute_map,
         )
 
     @staticmethod

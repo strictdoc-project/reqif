@@ -88,7 +88,6 @@ class ReqIFSpecObjectType:
         last_change: Optional[str],
         long_name,
         attribute_definitions: Optional[List[SpecAttributeDefinition]],
-        attribute_map: Optional[Dict[str, SpecAttributeDefinition]],
     ):
         self.description: Optional[str] = description
         self.identifier: str = identifier
@@ -97,9 +96,13 @@ class ReqIFSpecObjectType:
         self.attribute_definitions: Optional[
             List[SpecAttributeDefinition]
         ] = attribute_definitions
-        self.attribute_map: Optional[
-            Dict[str, SpecAttributeDefinition]
-        ] = attribute_map
+
+        self.attribute_map: Dict[str, SpecAttributeDefinition] = {}
+        if attribute_definitions is not None:
+            for attribute_definition in attribute_definitions:
+                self.attribute_map[
+                    attribute_definition.identifier
+                ] = attribute_definition
 
     @staticmethod
     def create(  # pylint: disable=too-many-arguments
@@ -108,7 +111,6 @@ class ReqIFSpecObjectType:
         description: Optional[str] = None,
         last_change: Optional[str] = None,
         attribute_definitions: Optional[List[SpecAttributeDefinition]] = None,
-        attribute_map: Optional[Dict[str, SpecAttributeDefinition]] = None,
     ):
         return ReqIFSpecObjectType(
             description=description,
@@ -116,7 +118,6 @@ class ReqIFSpecObjectType:
             last_change=last_change,
             long_name=long_name,
             attribute_definitions=attribute_definitions,
-            attribute_map=attribute_map,
         )
 
     def __str__(self) -> str:
