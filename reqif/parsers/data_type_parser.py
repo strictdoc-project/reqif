@@ -36,7 +36,6 @@ class DataTypeParser:
         )
 
         description = attributes["DESC"] if "DESC" in attributes else None
-        values_map = {}
 
         if data_type_xml.tag == "DATATYPE-DEFINITION-ENUMERATION":
             multi_valued_string = (
@@ -92,7 +91,6 @@ class DataTypeParser:
                             long_name=specified_value_long_name,
                         )
                     )
-                    values_map[specified_value_identifier] = embedded_value_key
             return ReqIFDataTypeDefinitionEnumeration(
                 is_self_closed=is_self_closed,
                 description=description,
@@ -101,7 +99,6 @@ class DataTypeParser:
                 long_name=long_name,
                 multi_valued=multi_valued,
                 values=values,
-                values_map=values_map,
             )
 
         if data_type_xml.tag == "DATATYPE-DEFINITION-STRING":

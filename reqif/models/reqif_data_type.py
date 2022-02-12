@@ -1,4 +1,4 @@
-from typing import Optional, List
+from typing import Optional, List, Dict
 
 
 class ReqIFDataTypeDefinitionString:
@@ -85,7 +85,6 @@ class ReqIFDataTypeDefinitionEnumeration:  # pylint: disable=too-many-instance-a
         long_name: Optional[str],
         multi_valued: Optional[bool],
         values: Optional[List[ReqIFEnumValue]],
-        values_map,
     ):
         self.is_self_closed: bool = is_self_closed
         self.description: Optional[str] = description
@@ -94,7 +93,10 @@ class ReqIFDataTypeDefinitionEnumeration:  # pylint: disable=too-many-instance-a
         self.long_name: Optional[str] = long_name
         self.multi_valued: Optional[bool] = multi_valued
         self.values: Optional[List[ReqIFEnumValue]] = values
-        self.values_map = values_map
+        self.values_map: Dict[str, str] = {}
+        if values is not None:
+            for value in values:
+                self.values_map[value.identifier] = value.key
 
     @staticmethod
     def create(identifier: str, values: Optional[List[ReqIFEnumValue]]):
@@ -106,7 +108,6 @@ class ReqIFDataTypeDefinitionEnumeration:  # pylint: disable=too-many-instance-a
             long_name=None,
             multi_valued=False,
             values=values,
-            values_map={},
         )
 
 

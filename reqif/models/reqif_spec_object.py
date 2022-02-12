@@ -39,7 +39,6 @@ class ReqIFSpecObject:  # pylint: disable=too-many-instance-attributes
         long_name: Optional[str],
         spec_object_type,
         attributes: List[SpecObjectAttribute],
-        attribute_map: Dict[str, SpecObjectAttribute],
     ):
         self.xml_node: Optional[Any] = xml_node
         self.description: Optional[str] = description
@@ -48,14 +47,15 @@ class ReqIFSpecObject:  # pylint: disable=too-many-instance-attributes
         self.long_name: Optional[str] = long_name
         self.spec_object_type = spec_object_type
         self.attributes: List[SpecObjectAttribute] = attributes
-        self.attribute_map: Dict[str, SpecObjectAttribute] = attribute_map
+        self.attribute_map: Dict[str, SpecObjectAttribute] = {}
+        for attribute in attributes:
+            self.attribute_map[attribute.definition_ref] = attribute
 
     @staticmethod
     def create(
         identifier: str,
         spec_object_type: str,
         attributes: List[SpecObjectAttribute],
-        attribute_map: Dict[str, SpecObjectAttribute],
     ):
         return ReqIFSpecObject(
             xml_node=None,
@@ -65,7 +65,6 @@ class ReqIFSpecObject:  # pylint: disable=too-many-instance-attributes
             long_name=None,
             spec_object_type=spec_object_type,
             attributes=attributes,
-            attribute_map=attribute_map,
         )
 
     def __str__(self) -> str:
