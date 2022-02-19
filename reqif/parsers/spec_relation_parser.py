@@ -114,8 +114,6 @@ class SpecRelationParser:
                         value=values_attribute.value,
                     )
                     output += "          </VALUES>\n"
-                else:
-                    raise NotImplementedError
             else:
                 raise NotImplementedError(tag)
 
