@@ -9,6 +9,7 @@ from reqif.models.error_handling import (
     ReqIFSemanticError,
     ReqIFGeneralSemanticError,
     ReqIFSpecHierarchyMissingSpecObjectException,
+    ReqIFXMLParsingError,
 )
 from reqif.models.reqif_spec_relation import ReqIFSpecRelation
 from reqif.models.reqif_specification import ReqIFSpecification
@@ -19,9 +20,11 @@ from reqif.reqif_bundle import ReqIFBundle
 class ReqIFErrorBundle:
     def __init__(
         self,
+        xml_errors: List[ReqIFXMLParsingError],
         schema_errors: List[ReqIFSchemaError],
         semantic_warnings: List[ReqIFSemanticError],
     ):
+        self.xml_errors: List[ReqIFXMLParsingError] = xml_errors
         self.schema_errors: List[ReqIFSchemaError] = schema_errors
         self.semantic_warnings: List[ReqIFSemanticError] = semantic_warnings
 
@@ -37,6 +40,8 @@ class ValidateCommand:
             sys.exit(1)
 
         error_bundle = ValidateCommand._validate(config)
+        for xml_error in error_bundle.xml_errors:
+            print(f"error: {xml_error}")
         for schema_warning in error_bundle.schema_errors:
             print(f"warning: {schema_warning.get_description()}")
         for semantic_warning in error_bundle.semantic_warnings:
@@ -44,7 +49,7 @@ class ValidateCommand:
                 f"warning: semantic error: {semantic_warning.get_description()}"
             )
         print(
-            f"Validation complete with 0 errors, "
+            f"Validation complete with {len(error_bundle.xml_errors)} errors, "
             f"{len(error_bundle.schema_errors)} schema issues found, "
             f"{len(error_bundle.semantic_warnings)} semantic issues found."
         )
@@ -54,7 +59,15 @@ class ValidateCommand:
         passthrough_config: ValidateCommandConfig,
     ) -> ReqIFErrorBundle:
         semantic_warnings: List[ReqIFSemanticError] = []
-        reqif_bundle = ReqIFParser.parse(passthrough_config.input_file)
+        try:
+            reqif_bundle = ReqIFParser.parse(passthrough_config.input_file)
+        except ReqIFXMLParsingError as exception:
+            return ReqIFErrorBundle(
+                xml_errors=[exception],
+                schema_errors=[],
+                semantic_warnings=[],
+            )
+
         if not reqif_bundle.namespace_info.doctype_is_present:
             warning = ReqIFGeneralSemanticError(
                 "Document is missing a valid XML declaration. Every ReqIF"
@@ -94,6 +107,7 @@ class ValidateCommand:
                     )
                     semantic_warnings.extend(spec_relation_semantic_errors)
         return ReqIFErrorBundle(
+            xml_errors=[],
             schema_errors=reqif_bundle.exceptions,
             semantic_warnings=semantic_warnings,
         )

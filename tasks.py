@@ -173,7 +173,7 @@ def lint_pylint(context):
           --rcfile=.pylint.ini
           --disable=c-extension-no-member
           reqif/ tasks.py
-        """  # pylint: disable=line-too-long
+        """
     )
     try:
         run_invoke_cmd(context, command)
@@ -231,10 +231,10 @@ def check(_):
 
 
 @task
-def release(context):
+def release(context, password):
     command = one_line_command(
-        """
-            poetry publish --build
+        f"""
+            poetry publish --build -u stanislaw -p {password}
         """
     )
     run_invoke_cmd(context, command)

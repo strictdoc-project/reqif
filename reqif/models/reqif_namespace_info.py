@@ -6,7 +6,7 @@ class ReqIFNamespaceInfo:  # pylint: disable=too-many-instance-attributes
         self,
         doctype_is_present: bool,
         encoding: str,
-        namespace: str,
+        namespace: Optional[str],
         configuration: Optional[str],
         namespace_id: Optional[str],
         namespace_xhtml: Optional[str],
@@ -16,7 +16,7 @@ class ReqIFNamespaceInfo:  # pylint: disable=too-many-instance-attributes
     ):
         self.doctype_is_present: bool = doctype_is_present
         self.encoding: str = encoding
-        self.namespace: str = namespace
+        self.namespace: Optional[str] = namespace
         self.configuration: Optional[str] = configuration
         self.namespace_id: Optional[str] = namespace_id
         self.namespace_xhtml: Optional[str] = namespace_xhtml
@@ -47,17 +47,11 @@ class ReqIFNamespaceInfo:  # pylint: disable=too-many-instance-attributes
         namespace: Optional[str],
         configuration: Optional[str],
     ):
-        namespace_or_default = (
-            namespace
-            if namespace
-            else "http://www.omg.org/spec/ReqIF/20110401/reqif.xsd"
-        )
-        configuration_or_default = configuration if configuration else "TBD"
         return ReqIFNamespaceInfo(
             doctype_is_present=True,
             encoding="UTF-8",
-            namespace=namespace_or_default,
-            configuration=configuration_or_default,
+            namespace=namespace,
+            configuration=configuration,
             namespace_id=None,
             namespace_xhtml=None,
             schema_namespace=None,

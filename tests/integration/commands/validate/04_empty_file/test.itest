@@ -1,0 +1,4 @@
+RUN: %reqif validate %S/sample.reqif | filecheck %s --dump-input=fail
+
+CHECK: error: Document is empty, line 1, column 1 (<string>, line 1)
+CHECK: Validation complete with 1 errors, 0 schema issues found, 0 semantic issues found.

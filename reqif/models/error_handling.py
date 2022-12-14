@@ -1,6 +1,10 @@
 from reqif.helpers.lxml import dump_xml_node
 
 
+class ReqIFXMLParsingError(Exception):
+    pass
+
+
 class ReqIFSchemaError(Exception):
     def get_description(self) -> str:
         raise NotImplementedError
