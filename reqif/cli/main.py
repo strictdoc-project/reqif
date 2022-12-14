@@ -6,7 +6,7 @@ try:
         os.path.join(os.path.dirname(__file__), "..", "..")
     )
     if not os.path.isdir(ROOT_PATH):
-        raise FileNotFoundError
+        raise FileNotFoundError(ROOT_PATH)
     sys.path.append(ROOT_PATH)
 
     from reqif.cli.cli_arg_parser import create_reqif_args_parser

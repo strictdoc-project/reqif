@@ -1,5 +1,4 @@
 import io
-import sys
 from collections import defaultdict
 from typing import List, Optional, Dict, Any, Tuple
 
@@ -9,6 +8,7 @@ from lxml.etree import DocInfo
 from reqif.models.error_handling import (
     ReqIFMissingTagException,
     ReqIFSchemaError,
+    ReqIFXMLParsingError,
 )
 from reqif.models.reqif_core_content import ReqIFCoreContent
 from reqif.models.reqif_namespace_info import ReqIFNamespaceInfo
@@ -48,24 +48,27 @@ from reqif.reqif_bundle import ReqIFBundle
 class ReqIFParser:
     @staticmethod
     def parse(input_path: str) -> ReqIFBundle:
-        # Import file.
         with open(input_path, "r", encoding="UTF-8") as file:
             content = file.read()
+        return ReqIFParser.parse_from_string(content)
+
+    @staticmethod
+    def parse_from_string(reqif_content: str) -> ReqIFBundle:
         try:
             # Parse XML.
             # https://github.com/eerohele/sublime-lxml/issues/5#issuecomment-209781719
-            xml_reqif_root = etree.parse(io.BytesIO(bytes(content, "UTF-8")))
+            xml_reqif_root = etree.parse(
+                io.BytesIO(bytes(reqif_content, "UTF-8"))
+            )
         except Exception as exception:  # pylint: disable=broad-except
-            # TODO: handle
-            print(f"error: problem parsing file: {exception}")
-            sys.exit(1)
+            raise ReqIFXMLParsingError(str(exception)) from None
 
         # Build ReqIF bundle.
-        reqif_bundle = ReqIFParser.parse_reqif(xml_reqif_root)
+        reqif_bundle = ReqIFParser._parse_reqif(xml_reqif_root)
         return reqif_bundle
 
     @staticmethod
-    def parse_reqif(xml_reqif_root) -> ReqIFBundle:
+    def _parse_reqif(xml_reqif_root) -> ReqIFBundle:
         docinfo: DocInfo = xml_reqif_root.docinfo
 
         # There should be a better way of detecting if the whole
@@ -73,7 +76,10 @@ class ReqIFParser:
         doctype_is_present = docinfo.standalone is not None
 
         namespace_info = xml_reqif_root.getroot().nsmap
-        namespace: str = namespace_info[None]
+
+        namespace: Optional[str] = (
+            namespace_info[None] if None in namespace_info else None
+        )
 
         configuration: Optional[str] = (
             namespace_info["configuration"]
@@ -88,12 +94,19 @@ class ReqIFParser:
         )
 
         schema_namespace = namespace_info.get("xsi")
-        xml_reqif_root_nons = ReqIFParser.strip_namespace_from_xml(
-            xml_reqif_root
+        xml_reqif_root_nons = (
+            ReqIFParser._strip_namespace_from_xml(xml_reqif_root)
+            if namespace is not None
+            else xml_reqif_root
         )
+
         xml_reqif = xml_reqif_root_nons.getroot()
         if xml_reqif is None:
             raise NotImplementedError(xml_reqif) from None
+        if xml_reqif.tag != "REQ-IF":
+            raise ReqIFXMLParsingError(
+                f"Expected root tag to be REQ-IF, got: {xml_reqif.tag}."
+            ) from None
 
         schema_location: Optional[str] = None
         if schema_namespace:
@@ -149,7 +162,7 @@ class ReqIFParser:
                     reqif_content,
                     lookup,
                     content_exceptions,
-                ) = ReqIFParser.parse_reqif_content(xml_req_if_content)
+                ) = ReqIFParser._parse_reqif_content(xml_req_if_content)
                 core_content = ReqIFCoreContent(req_if_content=reqif_content)
                 exceptions.extend(content_exceptions)
             else:
@@ -174,7 +187,7 @@ class ReqIFParser:
         )
 
     @staticmethod
-    def parse_reqif_content(
+    def _parse_reqif_content(
         xml_req_if_content,
     ) -> Tuple[ReqIFReqIFContent, ReqIFObjectLookup, List[ReqIFSchemaError]]:
         assert xml_req_if_content is not None
@@ -282,7 +295,7 @@ class ReqIFParser:
         return reqif_content, lookup, exceptions
 
     @staticmethod
-    def strip_namespace_from_xml(root_xml):
+    def _strip_namespace_from_xml(root_xml):
         for elem in root_xml.getiterator():
             # Remove an XML namespace URI in the element's name but keep the
             # namespaces in the HTML content as found in the
