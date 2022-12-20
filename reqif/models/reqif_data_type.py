@@ -1,5 +1,7 @@
 from typing import Optional, List, Dict
 
+from reqif.helpers.debug import auto_describe_object
+
 
 class ReqIFDataTypeDefinitionString:
     def __init__(  # pylint: disable=too-many-arguments
@@ -125,3 +127,25 @@ class ReqIFDataTypeDefinitionXHTML:
         self.identifier: str = identifier
         self.last_change: Optional[str] = last_change
         self.long_name: Optional[str] = long_name
+
+
+class ReqIFDataTypeDefinitionDateIdentifier:
+    def __init__(  # pylint: disable=too-many-arguments
+        self,
+        is_self_closed: bool,
+        description: Optional[str],
+        identifier: str,
+        last_change: Optional[str],
+        long_name: Optional[str],
+    ):
+        self.is_self_closed: bool = is_self_closed
+        self.description: Optional[str] = description
+        self.identifier: str = identifier
+        self.last_change: Optional[str] = last_change
+        self.long_name: Optional[str] = long_name
+
+    def __repr__(self):
+        return auto_describe_object(self)
+
+    def __str__(self):
+        return self.__repr__()

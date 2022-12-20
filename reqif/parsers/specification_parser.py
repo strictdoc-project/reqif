@@ -10,7 +10,10 @@ from reqif.models.reqif_types import SpecObjectAttributeType
 from reqif.parsers.spec_hierarchy_parser import (
     ReqIFSpecHierarchyParser,
 )
-from reqif.parsers.spec_object_parser import ATTRIBUTE_XHTML_TEMPLATE
+from reqif.parsers.spec_object_parser import (
+    ATTRIBUTE_XHTML_TEMPLATE,
+    ATTRIBUTE_DATE_TEMPLATE,
+)
 
 
 class ReqIFSpecificationParser:
@@ -57,7 +60,7 @@ class ReqIFSpecificationParser:
                 children_xml = specification_child_xml
 
         children = None
-        if children_xml is not None and len(children_xml):
+        if children_xml is not None:
             children = []
             for child_xml in children_xml:
                 spec_hierarchy_xml = ReqIFSpecHierarchyParser.parse(child_xml)
@@ -75,6 +78,16 @@ class ReqIFSpecificationParser:
                     values_attribute = SpecObjectAttribute(
                         xml_node=xml_attribute,
                         attribute_type=SpecObjectAttributeType.STRING,
+                        definition_ref=definition_ref,
+                        value=attribute_value,
+                    )
+                    values.append(values_attribute)
+                if xml_attribute.tag == "ATTRIBUTE-VALUE-DATE":
+                    attribute_value = xml_attribute.attrib["THE-VALUE"]
+                    definition_ref = xml_attribute[0][0].text
+                    values_attribute = SpecObjectAttribute(
+                        xml_node=xml_attribute,
+                        attribute_type=SpecObjectAttributeType.DATE,
                         definition_ref=definition_ref,
                         value=attribute_value,
                     )
@@ -106,7 +119,8 @@ class ReqIFSpecificationParser:
                         value=attribute_value,
                     )
                     values.append(values_attribute)
-
+                else:
+                    raise NotImplementedError(xml_attribute)
         return ReqIFSpecification(
             xml_node=specification_xml,
             description=description,
@@ -169,6 +183,14 @@ class ReqIFSpecificationParser:
                         for xml_attribute in xml_values_attributes:
                             if (
                                 xml_attribute.attribute_type
+                                == SpecObjectAttributeType.DATE
+                            ):
+                                output += ATTRIBUTE_DATE_TEMPLATE.format(
+                                    definition_ref=xml_attribute.definition_ref,
+                                    value=xml_attribute.value,
+                                )
+                            elif (
+                                xml_attribute.attribute_type
                                 == SpecObjectAttributeType.XHTML
                             ):
                                 output += ATTRIBUTE_XHTML_TEMPLATE.format(
@@ -176,7 +198,7 @@ class ReqIFSpecificationParser:
                                     value=xml_attribute.value,
                                 )
                             else:
-                                raise NotImplementedError
+                                raise NotImplementedError(xml_attribute)
                         output += "          </VALUES>\n"
         output += "        </SPECIFICATION>\n"
 

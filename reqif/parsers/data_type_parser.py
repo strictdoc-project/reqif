@@ -9,6 +9,7 @@ from reqif.models.reqif_data_type import (
     ReqIFDataTypeDefinitionInteger,
     ReqIFEnumValue,
     ReqIFDataTypeDefinitionXHTML,
+    ReqIFDataTypeDefinitionDateIdentifier,
 )
 
 
@@ -20,6 +21,7 @@ class DataTypeParser:
         ReqIFDataTypeDefinitionString,
         ReqIFDataTypeDefinitionInteger,
         ReqIFDataTypeDefinitionEnumeration,
+        ReqIFDataTypeDefinitionDateIdentifier,
         ReqIFDataTypeDefinitionXHTML,
     ]:
         assert "DATATYPE-DEFINITION-" in data_type_xml.tag, f"{data_type_xml}"
@@ -132,6 +134,15 @@ class DataTypeParser:
                 long_name=long_name,
             )
 
+        if data_type_xml.tag == "DATATYPE-DEFINITION-DATE":
+            return ReqIFDataTypeDefinitionDateIdentifier(
+                is_self_closed=is_self_closed,
+                description=description,
+                identifier=identifier,
+                last_change=last_change,
+                long_name=long_name,
+            )
+
         # TODO: All the following is parsed to just String.
         if data_type_xml.tag == "DATATYPE-DEFINITION-BOOLEAN":
             return ReqIFDataTypeDefinitionString(
@@ -226,7 +237,24 @@ class DataTypeParser:
             if not data_type_definition.is_self_closed:
                 output += "        </DATATYPE-DEFINITION-ENUMERATION>\n"
             return output
+        if isinstance(
+            data_type_definition, ReqIFDataTypeDefinitionDateIdentifier
+        ):
+            output = "        <DATATYPE-DEFINITION-DATE"
+            if data_type_definition.description:
+                output += f' DESC="{data_type_definition.description}"'
 
+            output += f' IDENTIFIER="{data_type_definition.identifier}"'
+            if data_type_definition.last_change:
+                output += f' LAST-CHANGE="{data_type_definition.last_change}"'
+            if data_type_definition.long_name:
+                output += f' LONG-NAME="{data_type_definition.long_name}"'
+            if data_type_definition.is_self_closed:
+                output += "/>\n"
+            else:
+                output += ">\n"
+                output += "        </DATATYPE-DEFINITION-DATE>\n"
+            return output
         if isinstance(data_type_definition, ReqIFDataTypeDefinitionXHTML):
             output = "        <DATATYPE-DEFINITION-XHTML"
             if data_type_definition.description:

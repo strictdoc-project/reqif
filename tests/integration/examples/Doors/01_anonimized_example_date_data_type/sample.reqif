@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<REQ-IF xmlns="http://www.omg.org/spec/ReqIF/20110401/reqif.xsd" xmlns:doors="http://www.ibm.com/rdm/doors/REQIF/xmlns/1.0" xmlns:reqif="http://www.omg.org/spec/ReqIF/20110401/reqif.xsd" xmlns:reqif-common="http://www.prostep.org/reqif" xmlns:reqif-xhtml="http://www.w3.org/1999/xhtml" xmlns:rm="http://www.ibm.com/rm" xmlns:rm-reqif="http://www.ibm.com/rm/reqif" xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <THE-HEADER>
+    <REQ-IF-HEADER IDENTIFIER="_9dfa817c-bae7-4b33-b3df-7815500b0ff7">
+      <CREATION-TIME>2018-10-12T16:43:58</CREATION-TIME>
+      <REPOSITORY-ID>5b6cc2367b684c19</REPOSITORY-ID>
+      <REQ-IF-TOOL-ID>dummy from doors</REQ-IF-TOOL-ID>
+      <REQ-IF-VERSION>1.0</REQ-IF-VERSION>
+      <SOURCE-TOOL-ID>dummy from doors</SOURCE-TOOL-ID>
+      <TITLE>dummy from doors, 12 October 2018</TITLE>
+    </REQ-IF-HEADER>
+  </THE-HEADER>
+  <CORE-CONTENT>
+    <REQ-IF-CONTENT>
+      <DATATYPES>
+        <DATATYPE-DEFINITION-DATE IDENTIFIER="_37894a8b-4c87-4b7c-9805-4f8b45c75ab8" LAST-CHANGE="2018-10-12T16:43:58" LONG-NAME="Date">
+        </DATATYPE-DEFINITION-DATE>
+      </DATATYPES>
+      <SPEC-TYPES>
+        <SPEC-OBJECT-TYPE IDENTIFIER="_d1cbf7fe-5d6f-4d0a-b14a-c83e3b64477e" LAST-CHANGE="2018-10-12T16:43:58">
+          <SPEC-ATTRIBUTES>
+            <ATTRIBUTE-DEFINITION-DATE DESC="System Attribute" IDENTIFIER="_d1cbf7fe-5d6f-4d0a-b14a-c83e3b64477e_CREATEDON" LAST-CHANGE="2018-10-12T16:43:58" LONG-NAME="ReqIF.ForeignCreatedOn" IS-EDITABLE="true">
+              <TYPE>
+                <DATATYPE-DEFINITION-DATE-REF>_37894a8b-4c87-4b7c-9805-4f8b45c75ab8</DATATYPE-DEFINITION-DATE-REF>
+              </TYPE>
+            </ATTRIBUTE-DEFINITION-DATE>
+          </SPEC-ATTRIBUTES>
+        </SPEC-OBJECT-TYPE>
+      </SPEC-TYPES>
+      <SPEC-OBJECTS>
+        <SPEC-OBJECT IDENTIFIER="_1_173759ff-cc02-4b85-8c95-457b785181b9" LAST-CHANGE="2018-10-12T16:43:58">
+          <TYPE>
+            <SPEC-OBJECT-TYPE-REF>_d1cbf7fe-5d6f-4d0a-b14a-c83e3b64477e</SPEC-OBJECT-TYPE-REF>
+          </TYPE>
+          <VALUES>
+            <ATTRIBUTE-VALUE-DATE THE-VALUE="2010-05-21T00:00:00">
+              <DEFINITION>
+                <ATTRIBUTE-DEFINITION-DATE-REF>_d1cbf7fe-5d6f-4d0a-b14a-c83e3b64477e_CREATEDON</ATTRIBUTE-DEFINITION-DATE-REF>
+              </DEFINITION>
+            </ATTRIBUTE-VALUE-DATE>
+          </VALUES>
+        </SPEC-OBJECT>
+      </SPEC-OBJECTS>
+      <SPEC-RELATIONS>
+      </SPEC-RELATIONS>
+      <SPECIFICATIONS>
+        <SPECIFICATION IDENTIFIER="_2dbf1d4f-fd3e-4a66-87f3-5e1b5aed8fb9" LAST-CHANGE="2018-10-12T16:43:58" LONG-NAME="Automated Meter Reader System Requirements">
+          <TYPE>
+            <SPECIFICATION-TYPE-REF>_9e869d18-b121-4f58-a3b0-3a3aba2ccfe6</SPECIFICATION-TYPE-REF>
+          </TYPE>
+          <VALUES>
+            <ATTRIBUTE-VALUE-DATE THE-VALUE="2010-05-21T00:00:00">
+              <DEFINITION>
+                <ATTRIBUTE-DEFINITION-DATE-REF>_d1cbf7fe-5d6f-4d0a-b14a-c83e3b64477e_CREATEDON-DOORS-MODULE</ATTRIBUTE-DEFINITION-DATE-REF>
+              </DEFINITION>
+            </ATTRIBUTE-VALUE-DATE>
+          </VALUES>
+          <CHILDREN>
+          </CHILDREN>
+        </SPECIFICATION>
+      </SPECIFICATIONS>
+      <SPEC-RELATION-GROUPS>
+      </SPEC-RELATION-GROUPS>
+    </REQ-IF-CONTENT>
+  </CORE-CONTENT>
+  <TOOL-EXTENSIONS>
+  </TOOL-EXTENSIONS>
+</REQ-IF>

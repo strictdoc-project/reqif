@@ -86,13 +86,13 @@ class ReqIFSpecObjectType:
         description: Optional[str],
         identifier: str,
         last_change: Optional[str],
-        long_name,
+        long_name: Optional[str],
         attribute_definitions: Optional[List[SpecAttributeDefinition]],
     ):
         self.description: Optional[str] = description
         self.identifier: str = identifier
         self.last_change: Optional[str] = last_change
-        self.long_name = long_name
+        self.long_name: Optional[str] = long_name
         self.attribute_definitions: Optional[
             List[SpecAttributeDefinition]
         ] = attribute_definitions
@@ -107,7 +107,7 @@ class ReqIFSpecObjectType:
     @staticmethod
     def create(  # pylint: disable=too-many-arguments
         identifier: str,
-        long_name: str,
+        long_name: Optional[str] = None,
         description: Optional[str] = None,
         last_change: Optional[str] = None,
         attribute_definitions: Optional[List[SpecAttributeDefinition]] = None,
