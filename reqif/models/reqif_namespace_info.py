@@ -4,6 +4,7 @@ from typing import Optional
 class ReqIFNamespaceInfo:  # pylint: disable=too-many-instance-attributes
     def __init__(  # pylint: disable=too-many-arguments
         self,
+        original_reqif_tag_dump: Optional[str],
         doctype_is_present: bool,
         encoding: str,
         namespace: Optional[str],
@@ -14,6 +15,7 @@ class ReqIFNamespaceInfo:  # pylint: disable=too-many-instance-attributes
         schema_location: Optional[str],
         language: Optional[str],
     ):
+        self.original_reqif_tag_dump: Optional[str] = original_reqif_tag_dump
         self.doctype_is_present: bool = doctype_is_present
         self.encoding: str = encoding
         self.namespace: Optional[str] = namespace
@@ -48,6 +50,7 @@ class ReqIFNamespaceInfo:  # pylint: disable=too-many-instance-attributes
         configuration: Optional[str],
     ):
         return ReqIFNamespaceInfo(
+            original_reqif_tag_dump=None,
             doctype_is_present=True,
             encoding="UTF-8",
             namespace=namespace,

@@ -109,8 +109,12 @@ class ReqIFUnparser:
 
     @staticmethod
     def unparse_namespace_info(namespace_info: ReqIFNamespaceInfo) -> str:
+        assert isinstance(namespace_info, ReqIFNamespaceInfo)
+
+        if namespace_info.original_reqif_tag_dump is not None:
+            return namespace_info.original_reqif_tag_dump + "\n"
+
         xml_output = "<REQ-IF "
-        # assert 0, namespace_info
 
         namespace_components: List[str] = []
         if namespace_info.namespace is not None:

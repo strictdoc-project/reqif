@@ -30,11 +30,11 @@ class SpecObjectTypeParser:
             if "LAST-CHANGE" in xml_attributes
             else None
         )
-        try:
-            spec_type_long_name = xml_attributes["LONG-NAME"]
-        except Exception:
-            raise NotImplementedError from None
-
+        spec_type_long_name: Optional[str] = (
+            xml_attributes["LONG-NAME"]
+            if "LONG-NAME" in xml_attributes
+            else None
+        )
         attribute_definitions: Optional[List[SpecAttributeDefinition]] = None
         xml_spec_attributes = spec_object_type_xml.find("SPEC-ATTRIBUTES")
         if xml_spec_attributes is not None:
@@ -170,6 +170,18 @@ class SpecObjectTypeParser:
                         raise NotImplementedError(
                             attribute_definition
                         ) from exception
+                elif attribute_definition.tag == "ATTRIBUTE-DEFINITION-DATE":
+                    attribute_type = SpecObjectAttributeType.DATE
+                    try:
+                        datatype_definition = (
+                            attribute_definition.find("TYPE")
+                            .find("DATATYPE-DEFINITION-DATE-REF")
+                            .text
+                        )
+                    except Exception as exception:
+                        raise NotImplementedError(
+                            attribute_definition
+                        ) from exception
                 else:
                     raise NotImplementedError(attribute_definition) from None
                 attribute_definition = SpecAttributeDefinition(
@@ -204,7 +216,9 @@ class SpecObjectTypeParser:
         output += f' IDENTIFIER="{spec_type.identifier}"'
         if spec_type.last_change is not None:
             output += f' LAST-CHANGE="{spec_type.last_change}"'
-        output += f' LONG-NAME="{spec_type.long_name}"' f">" "\n"
+        if spec_type.long_name is not None:
+            output += f' LONG-NAME="{spec_type.long_name}"'
+        output += ">" "\n"
 
         if spec_type.attribute_definitions is not None:
             output += "          <SPEC-ATTRIBUTES>\n"

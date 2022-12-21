@@ -1,5 +1,6 @@
+import copy
 import io
-from collections import defaultdict
+from collections import defaultdict, OrderedDict
 from typing import List, Optional, Dict, Any, Tuple
 
 from lxml import etree
@@ -68,14 +69,14 @@ class ReqIFParser:
         return reqif_bundle
 
     @staticmethod
-    def _parse_reqif(xml_reqif_root) -> ReqIFBundle:
-        docinfo: DocInfo = xml_reqif_root.docinfo
+    def _parse_reqif(xml_reqif) -> ReqIFBundle:
+        docinfo: DocInfo = xml_reqif.docinfo
 
         # There should be a better way of detecting if the whole
         # <?xml version="1.0" encoding="UTF-8"?> line is missing.
         doctype_is_present = docinfo.standalone is not None
 
-        namespace_info = xml_reqif_root.getroot().nsmap
+        namespace_info = OrderedDict(xml_reqif.getroot().nsmap)
 
         namespace: Optional[str] = (
             namespace_info[None] if None in namespace_info else None
@@ -94,31 +95,49 @@ class ReqIFParser:
         )
 
         schema_namespace = namespace_info.get("xsi")
-        xml_reqif_root_nons = (
-            ReqIFParser._strip_namespace_from_xml(xml_reqif_root)
+
+        xml_reqif_nons = (
+            ReqIFParser._strip_namespace_from_xml(copy.deepcopy(xml_reqif))
             if namespace is not None
-            else xml_reqif_root
+            else xml_reqif
         )
 
-        xml_reqif = xml_reqif_root_nons.getroot()
-        if xml_reqif is None:
-            raise NotImplementedError(xml_reqif) from None
-        if xml_reqif.tag != "REQ-IF":
+        xml_reqif_nons_root = xml_reqif_nons.getroot()
+        if xml_reqif_nons_root is None:
+            raise NotImplementedError(xml_reqif_nons_root) from None
+        if xml_reqif_nons_root.tag != "REQ-IF":
             raise ReqIFXMLParsingError(
-                f"Expected root tag to be REQ-IF, got: {xml_reqif.tag}."
+                "Expected root tag to be REQ-IF, got: "
+                f"{xml_reqif_nons_root.tag}."
             ) from None
+
+        # The best workaround I could find for getting the exact content of
+        # the namespaces and attributes of the <REQ-IF ...> tag.
+        # https://stackoverflow.com/questions/74879238
+        xml_reqif_root_2 = xml_reqif.getroot()
+        for child in list(xml_reqif_root_2):
+            xml_reqif_root_2.remove(child)
+        original_reqif_tag_dump = etree.tostring(
+            xml_reqif_root_2, pretty_print=True
+        ).decode("utf8")
+        original_reqif_tag_dump = original_reqif_tag_dump.replace(
+            "</REQ-IF>", ""
+        ).strip()
 
         schema_location: Optional[str] = None
         if schema_namespace:
             schema_location_attribute = f"{{{schema_namespace}}}schemaLocation"
-            if schema_location_attribute in xml_reqif.attrib:
-                schema_location = xml_reqif.attrib[schema_location_attribute]
+            if schema_location_attribute in xml_reqif_nons_root.attrib:
+                schema_location = xml_reqif_nons_root.attrib[
+                    schema_location_attribute
+                ]
         language: Optional[str] = None
         xml_namespace = "http://www.w3.org/XML/1998/namespace"
         language_attribute = f"{{{xml_namespace}}}lang"
-        if language_attribute in xml_reqif.attrib:
-            language = xml_reqif.attrib[language_attribute]
-        namespace_info = ReqIFNamespaceInfo(
+        if language_attribute in xml_reqif_nons_root.attrib:
+            language = xml_reqif_nons_root.attrib[language_attribute]
+        namespace_info_container = ReqIFNamespaceInfo(
+            original_reqif_tag_dump=original_reqif_tag_dump,
             doctype_is_present=doctype_is_present,
             encoding=docinfo.encoding,
             namespace=namespace,
@@ -132,12 +151,12 @@ class ReqIFParser:
 
         # ReqIF element naming convention: element_xyz where xyz is the name of
         # the reqif(xml) tag. Dashes are turned into underscores.
-        if xml_reqif is None:
+        if xml_reqif_nons_root is None:
             raise NotImplementedError
-        if xml_reqif.tag != "REQ-IF":
+        if xml_reqif_nons_root.tag != "REQ-IF":
             raise NotImplementedError
 
-        if len(xml_reqif) == 0:
+        if len(xml_reqif_nons_root) == 0:
             return ReqIFBundle.create_empty(
                 namespace=namespace, configuration=configuration
             )
@@ -146,7 +165,7 @@ class ReqIFParser:
 
         # <THE-HEADER>
         req_if_header: Optional[ReqIFReqIFHeader] = None
-        xml_the_header = xml_reqif.find("THE-HEADER")
+        xml_the_header = xml_reqif_nons_root.find("THE-HEADER")
         if xml_the_header is not None:
             req_if_header = ReqIFHeaderParser.parse(xml_the_header)
 
@@ -154,7 +173,7 @@ class ReqIFParser:
         # <REQ-IF-CONTENT>
         core_content: Optional[ReqIFCoreContent] = None
         lookup: ReqIFObjectLookup = ReqIFObjectLookup.empty()
-        xml_core_content = xml_reqif.find("CORE-CONTENT")
+        xml_core_content = xml_reqif_nons_root.find("CORE-CONTENT")
         if xml_core_content is not None:
             xml_req_if_content = xml_core_content.find("REQ-IF-CONTENT")
             if xml_req_if_content is not None:
@@ -170,15 +189,15 @@ class ReqIFParser:
 
         # TODO: Tool extensions contains information specific to the tool used
         # to create the ReqIF file.
-        # element_tool_extensions = xml_reqif.find(
+        # element_tool_extensions = xml_reqif_nons_root.find(
         #     "TOOL-EXTENSIONS", namespace_dict
         # )
         tool_extensions_tag_exists = (
-            xml_reqif.find("TOOL-EXTENSIONS") is not None
+            xml_reqif_nons_root.find("TOOL-EXTENSIONS") is not None
         )
 
         return ReqIFBundle(
-            namespace_info=namespace_info,
+            namespace_info=namespace_info_container,
             req_if_header=req_if_header,
             core_content=core_content,
             tool_extensions_tag_exists=tool_extensions_tag_exists,

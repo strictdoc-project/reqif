@@ -47,6 +47,14 @@ ATTRIBUTE_ENUMERATION_TEMPLATE_REVERSE = """\
             </ATTRIBUTE-VALUE-ENUMERATION>
 """
 
+ATTRIBUTE_DATE_TEMPLATE = """\
+            <ATTRIBUTE-VALUE-DATE THE-VALUE="{value}">
+              <DEFINITION>
+                <ATTRIBUTE-DEFINITION-DATE-REF>{definition_ref}</ATTRIBUTE-DEFINITION-DATE-REF>
+              </DEFINITION>
+            </ATTRIBUTE-VALUE-DATE>
+"""
+
 ATTRIBUTE_XHTML_TEMPLATE = """\
             <ATTRIBUTE-VALUE-XHTML>
               <DEFINITION>
@@ -139,6 +147,20 @@ class SpecObjectParser:
                 attribute = SpecObjectAttribute(
                     xml_node=attribute_xml,
                     attribute_type=SpecObjectAttributeType.BOOLEAN,
+                    definition_ref=attribute_definition_ref,
+                    value=attribute_value,
+                )
+            elif attribute_xml.tag == "ATTRIBUTE-VALUE-DATE":
+                attribute_value = attribute_xml.attrib["THE-VALUE"]
+
+                attribute_definition_ref = (
+                    attribute_xml.find("DEFINITION")
+                    .find("ATTRIBUTE-DEFINITION-DATE-REF")
+                    .text
+                )
+                attribute = SpecObjectAttribute(
+                    xml_node=attribute_xml,
+                    attribute_type=SpecObjectAttributeType.DATE,
                     definition_ref=attribute_definition_ref,
                     value=attribute_value,
                 )
@@ -272,11 +294,18 @@ class SpecObjectParser:
                         definition_ref=attribute.definition_ref,
                         value=attribute.value,
                     )
+            elif attribute.attribute_type == SpecObjectAttributeType.DATE:
+                output += ATTRIBUTE_DATE_TEMPLATE.format(
+                    definition_ref=attribute.definition_ref,
+                    value=attribute.value,
+                )
             elif attribute.attribute_type == SpecObjectAttributeType.XHTML:
                 output += ATTRIBUTE_XHTML_TEMPLATE.format(
                     definition_ref=attribute.definition_ref,
                     value=attribute.value,
                 )
+            else:
+                raise NotImplementedError(attribute)
 
         output += "          </VALUES>\n"
         return output
