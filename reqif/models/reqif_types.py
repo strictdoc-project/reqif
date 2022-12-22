@@ -5,15 +5,18 @@ class SpecObjectAttributeType(Enum):
     STRING = 1
     ENUMERATION = 2
     INTEGER = 3
-    BOOLEAN = 4
-    DATE = 5
-    XHTML = 6
+    REAL = 4
+    BOOLEAN = 5
+    DATE = 6
+    XHTML = 7
 
     def get_spec_type_tag(self):
         if self == SpecObjectAttributeType.STRING:
             return "ATTRIBUTE-DEFINITION-STRING"
         if self == SpecObjectAttributeType.INTEGER:
             return "ATTRIBUTE-DEFINITION-INTEGER"
+        if self == SpecObjectAttributeType.REAL:
+            return "ATTRIBUTE-DEFINITION-REAL"
         if self == SpecObjectAttributeType.BOOLEAN:
             return "ATTRIBUTE-DEFINITION-BOOLEAN"
         if self == SpecObjectAttributeType.DATE:

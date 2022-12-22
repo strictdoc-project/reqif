@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<REQ-IF xmlns="http://www.omg.org/spec/ReqIF/20110401/reqif.xsd" xmlns:configuration="http://eclipse.org/rmf/pror/toolextensions/1.0">
+  <CORE-CONTENT>
+    <REQ-IF-CONTENT>
+      <SPEC-TYPES>
+        <SPEC-OBJECT-TYPE IDENTIFIER="TEST_SPEC_OBJECT_TYPE_IDENTIFIER_FUNCTIONAL" LAST-CHANGE="2021-10-15T08:59:33.583+02:00" LONG-NAME="technical">
+          <SPEC-ATTRIBUTES>
+            <ATTRIBUTE-DEFINITION-REAL IDENTIFIER="TEST_REAL_ATTRIBUTE_ID" LONG-NAME="RealAttributeId">
+              <TYPE>
+                <DATATYPE-DEFINITION-REAL-REF>TEST_REAL_TYPE</DATATYPE-DEFINITION-REAL-REF>
+              </TYPE>
+            </ATTRIBUTE-DEFINITION-REAL>
+          </SPEC-ATTRIBUTES>
+        </SPEC-OBJECT-TYPE>
+      </SPEC-TYPES>
+    </REQ-IF-CONTENT>
+  </CORE-CONTENT>
+</REQ-IF>
