@@ -10,7 +10,7 @@ class SpecObjectAttributeType(Enum):
     DATE = 6
     XHTML = 7
 
-    def get_spec_type_tag(self):
+    def get_spec_type_tag(self):  # pylint: disable=too-many-return-statements
         if self == SpecObjectAttributeType.STRING:
             return "ATTRIBUTE-DEFINITION-STRING"
         if self == SpecObjectAttributeType.INTEGER:

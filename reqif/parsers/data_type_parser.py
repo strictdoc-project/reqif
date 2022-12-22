@@ -16,7 +16,7 @@ from reqif.models.reqif_data_type import (
 
 class DataTypeParser:
     @staticmethod
-    def parse(
+    def parse(  # pylint: disable=too-many-return-statements
         data_type_xml,
     ) -> Union[
         ReqIFDataTypeDefinitionString,
@@ -133,8 +133,12 @@ class DataTypeParser:
                 if "ACCURACY" in attributes
                 else None
             )
-            max = float(attributes["MAX"]) if "MAX" in attributes else None
-            min = float(attributes["MIN"]) if "MIN" in attributes else None
+            max_value = (
+                float(attributes["MAX"]) if "MAX" in attributes else None
+            )
+            min_value = (
+                float(attributes["MIN"]) if "MIN" in attributes else None
+            )
 
             return ReqIFDataTypeDefinitionReal(
                 is_self_closed=is_self_closed,
@@ -143,8 +147,8 @@ class DataTypeParser:
                 identifier=identifier,
                 last_change=last_change,
                 long_name=long_name,
-                max=max,
-                min=min,
+                max_value=max_value,
+                min_value=min_value,
             )
 
         if data_type_xml.tag == "DATATYPE-DEFINITION-XHTML":
@@ -231,18 +235,18 @@ class DataTypeParser:
             if data_type_definition.long_name is not None:
                 output += f' LONG-NAME="{data_type_definition.long_name}"'
 
-            if data_type_definition.max is not None:
-                max_str = "{:.{accuracy}f}".format(
-                    data_type_definition.max, accuracy=accuracy
+            if data_type_definition.max_value is not None:
+                max_str = "{:.{accuracy}f}".format(  # pylint: disable=consider-using-f-string  # noqa: E501
+                    data_type_definition.max_value, accuracy=accuracy
                 )
-                if data_type_definition.max > 0:
+                if data_type_definition.max_value > 0:
                     max_str = "+" + max_str
                 output += f' MAX="{max_str}"'
-            if data_type_definition.min is not None:
-                min_str = "{:.{accuracy}f}".format(
-                    data_type_definition.min, accuracy=accuracy
+            if data_type_definition.min_value is not None:
+                min_str = "{:.{accuracy}f}".format(  # pylint: disable=consider-using-f-string  # noqa: E501
+                    data_type_definition.min_value, accuracy=accuracy
                 )
-                if data_type_definition.min > 0:
+                if data_type_definition.min_value > 0:
                     min_str = "+" + min_str
                 output += f' MIN="{min_str}"'
 

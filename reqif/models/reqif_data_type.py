@@ -48,7 +48,7 @@ class ReqIFDataTypeDefinitionInteger:
         self.long_name: str = long_name
 
 
-class ReqIFDataTypeDefinitionReal:
+class ReqIFDataTypeDefinitionReal:  # pylint: disable=too-many-instance-attributes  # noqa: E501
     def __init__(  # pylint: disable=too-many-arguments
         self,
         is_self_closed: bool,
@@ -57,8 +57,8 @@ class ReqIFDataTypeDefinitionReal:
         identifier: str,
         last_change: Optional[str],
         long_name: Optional[str],
-        max: Optional[float],
-        min: Optional[float],
+        max_value: Optional[float],
+        min_value: Optional[float],
     ):
         self.is_self_closed: bool = is_self_closed
         self.accuracy: Optional[int] = accuracy
@@ -66,8 +66,8 @@ class ReqIFDataTypeDefinitionReal:
         self.identifier: str = identifier
         self.last_change: Optional[str] = last_change
         self.long_name: Optional[str] = long_name
-        self.max: Optional[float] = max
-        self.min: Optional[float] = min
+        self.max_value: Optional[float] = max_value
+        self.min_value: Optional[float] = min_value
 
 
 class ReqIFEnumValue:
