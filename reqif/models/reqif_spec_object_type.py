@@ -1,5 +1,6 @@
 from typing import List, Optional, Union, Any, Dict
 
+from reqif.helpers.debug import auto_str
 from reqif.models.reqif_types import SpecObjectAttributeType
 
 
@@ -57,27 +58,11 @@ class SpecAttributeDefinition:  # pylint: disable=too-many-instance-attributes
             multi_valued=multi_valued,
         )
 
-    def __str__(self) -> str:
-        return (
-            f"SpecAttributeDefinition("
-            f"attribute_type={self.attribute_type}"
-            ", "
-            f"description={self.description}"
-            ", "
-            f"identifier={self.identifier}"
-            ", "
-            f"last_change={self.last_change}"
-            ", "
-            f"datatype_definition={self.datatype_definition}"
-            ", "
-            f"long_name={self.long_name}"
-            ", "
-            f"default_value={self.default_value}"
-            f")"
-        )
+    def __str__(self):
+        return auto_str(self)
 
-    def __repr__(self) -> str:
-        return self.__str__()
+    def __repr__(self):
+        return auto_str(self)
 
 
 class ReqIFSpecObjectType:
@@ -120,22 +105,8 @@ class ReqIFSpecObjectType:
             attribute_definitions=attribute_definitions,
         )
 
-    def __str__(self) -> str:
-        return (
-            f"ReqIFSpecObjectType("
-            f"description: {self.description}"
-            ", "
-            f"identifier: {self.identifier}"
-            ", "
-            f"last_change: {self.last_change}"
-            ", "
-            f"long_name: {self.long_name}"
-            ", "
-            f"attribute_definitions: {self.attribute_definitions}"
-            ", "
-            f"attribute_map: {self.attribute_map}"
-            f")"
-        )
+    def __str__(self):
+        return auto_str(self)
 
-    def __repr__(self) -> str:
-        return self.__str__()
+    def __repr__(self):
+        return auto_str(self)

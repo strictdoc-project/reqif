@@ -1,5 +1,7 @@
 from typing import List, Optional
 
+from reqif.helpers.debug import auto_str
+
 
 class ReqIFSpecHierarchy:  # pylint: disable=too-many-instance-attributes
     def __init__(  # pylint: disable=too-many-arguments
@@ -32,30 +34,16 @@ class ReqIFSpecHierarchy:  # pylint: disable=too-many-instance-attributes
         # Not part of ReqIF, but helpful to calculate the section depth levels.
         self.level = level
 
-    def __str__(self) -> str:
-        return (
-            f"ReqIFSpecHierarchy("
-            f"identifier: {self.identifier}"
-            f", "
-            f"last_change: {self.last_change}"
-            f", "
-            f"long_name: {self.long_name}"
-            f", "
-            f"spec_object: {self.spec_object}"
-            f", "
-            f"children:{self.children}"
-            f", "
-            f"level: {self.level}"
-            f")"
-        )
+    def __str__(self):
+        return auto_str(self)
 
-    def __repr__(self) -> str:
-        return self.__str__()
+    def __repr__(self):
+        return auto_str(self)
 
     def add_child(self, spec_hierarchy):
         assert (self.level + 1) == spec_hierarchy.level, (
             f"Broken parent-child level relationship.\n"
-            f"Parent: {self.dump()}\nChild: {spec_hierarchy.dump()}"
+            f"Parent: {self.dump()}\nChild: {spec_hierarchy.auto_dump()}"
         )
         self.children.append(spec_hierarchy)
 
@@ -68,7 +56,7 @@ class ReqIFSpecHierarchy:  # pylint: disable=too-many-instance-attributes
         dump += f"{level_str}  spec_object: {self.spec_object}\n"
         if self.children is not None:
             for child in self.children:
-                dump += f"{child.dump()}"
+                dump += f"{child.auto_dump()}"
         dump += f"{level_str})\n"
         return dump
 

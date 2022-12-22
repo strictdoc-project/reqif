@@ -1,5 +1,6 @@
 from typing import List, Dict, Optional
 
+from reqif.helpers.debug import auto_str
 from reqif.models.reqif_spec_object_type import SpecAttributeDefinition
 
 
@@ -22,14 +23,8 @@ class ReqIFSpecificationType:
         ] = spec_attributes
         self.spec_attribute_map = spec_attribute_map
 
-    def __str__(self) -> str:
-        return (
-            f"ReqIFSpecificationType("
-            f"description={self.description}"
-            ", "
-            f"identifier={self.identifier}"
-            f")"
-        )
+    def __str__(self):
+        return auto_str(self)
 
-    def __repr__(self) -> str:
-        return self.__str__()
+    def __repr__(self):
+        return auto_str(self)

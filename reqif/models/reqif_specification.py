@@ -1,5 +1,6 @@
 from typing import List, Optional
 
+from reqif.helpers.debug import auto_str
 from reqif.models.reqif_spec_hierarchy import (
     ReqIFSpecHierarchy,
 )
@@ -27,16 +28,8 @@ class ReqIFSpecification:  # pylint: disable=too-many-instance-attributes
         self.specification_type: Optional[str] = specification_type
         self.children: Optional[List[ReqIFSpecHierarchy]] = children
 
-    def __str__(self) -> str:
-        return (
-            f"ReqIFSpecification("
-            f"identifier: {self.identifier},"
-            f"last_change: {self.last_change},"
-            f"long_name: {self.long_name},"
-            f"values: {self.values},"
-            f"children: {self.children},"
-            f")"
-        )
+    def __str__(self):
+        return auto_str(self)
 
-    def __repr__(self) -> str:
-        return self.__str__()
+    def __repr__(self):
+        return auto_str(self)

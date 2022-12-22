@@ -1,6 +1,7 @@
 import collections
 from typing import List, Deque, Optional
 
+from reqif.helpers.debug import auto_str
 from reqif.models.error_handling import ReqIFSchemaError
 from reqif.models.reqif_core_content import ReqIFCoreContent
 from reqif.models.reqif_namespace_info import ReqIFNamespaceInfo
@@ -46,6 +47,12 @@ class ReqIFBundle:  # pylint: disable=too-many-instance-attributes
         self.tool_extensions_tag_exists = tool_extensions_tag_exists
         self.lookup = lookup
         self.exceptions: List[ReqIFSchemaError] = exceptions
+
+    def __str__(self):
+        return auto_str(self)
+
+    def __repr__(self):
+        return auto_str(self)
 
     def iterate_specification_hierarchy(self, specification):
         assert self.core_content
