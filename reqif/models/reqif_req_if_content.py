@@ -1,5 +1,6 @@
 from typing import Optional, List
 
+from reqif.helpers.debug import auto_str
 from reqif.models.reqif_spec_object import ReqIFSpecObject
 from reqif.models.reqif_spec_object_type import ReqIFSpecObjectType
 from reqif.models.reqif_spec_relation import ReqIFSpecRelation
@@ -22,3 +23,9 @@ class ReqIFReqIFContent:
         self.spec_relations: Optional[List[ReqIFSpecRelation]] = spec_relations
         self.specifications: Optional[List[ReqIFSpecification]] = specifications
         self.spec_relation_groups: Optional[List] = spec_relation_groups
+
+    def __str__(self):
+        return auto_str(self)
+
+    def __repr__(self):
+        return auto_str(self)

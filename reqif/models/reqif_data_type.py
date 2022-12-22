@@ -1,6 +1,6 @@
 from typing import Optional, List, Dict
 
-from reqif.helpers.debug import auto_describe_object
+from reqif.helpers.debug import auto_str
 
 
 class ReqIFDataTypeDefinitionString:
@@ -167,7 +167,7 @@ class ReqIFDataTypeDefinitionDateIdentifier:
         self.long_name: Optional[str] = long_name
 
     def __repr__(self):
-        return auto_describe_object(self)
+        return auto_str(self)
 
     def __str__(self):
         return self.__repr__()

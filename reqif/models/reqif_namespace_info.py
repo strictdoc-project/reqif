@@ -1,5 +1,7 @@
 from typing import Optional
 
+from reqif.helpers.debug import auto_str
+
 
 class ReqIFNamespaceInfo:  # pylint: disable=too-many-instance-attributes
     def __init__(  # pylint: disable=too-many-arguments
@@ -26,24 +28,6 @@ class ReqIFNamespaceInfo:  # pylint: disable=too-many-instance-attributes
         self.schema_location: Optional[str] = schema_location
         self.language: Optional[str] = language
 
-    def __str__(self) -> str:
-        return (
-            f"ReqIFNamespaceInfo("
-            f"encoding={self.encoding}"
-            ", "
-            f"namespace={self.namespace}"
-            ", "
-            f"configuration={self.configuration}"
-            ", "
-            f"schema_namespace={self.schema_namespace}"
-            ", "
-            f"schema_location={self.schema_location}"
-            f")"
-        )
-
-    def __repr__(self) -> str:
-        return self.__str__()
-
     @staticmethod
     def empty(
         namespace: Optional[str],
@@ -61,3 +45,9 @@ class ReqIFNamespaceInfo:  # pylint: disable=too-many-instance-attributes
             schema_location=None,
             language=None,
         )
+
+    def __str__(self):
+        return auto_str(self)
+
+    def __repr__(self):
+        return auto_str(self)

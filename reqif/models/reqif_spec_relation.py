@@ -1,5 +1,6 @@
 from typing import Optional, Any
 
+from reqif.helpers.debug import auto_str
 from reqif.models.reqif_spec_object import SpecObjectAttribute
 
 
@@ -24,24 +25,8 @@ class ReqIFSpecRelation:  # pylint: disable=too-many-instance-attributes
         self.target: str = target
         self.values_attribute: Optional[SpecObjectAttribute] = values_attribute
 
-    def __str__(self) -> str:
-        return (
-            f"ReqIFSpecRelation("
-            f"description: {self.description}"
-            ", "
-            f"identifier: {self.identifier}"
-            ", "
-            f"last_change: {self.last_change}"
-            ", "
-            f"relation_type_ref: {self.relation_type_ref}"
-            ", "
-            f"source: {self.source}"
-            ", "
-            f"target: {self.target}"
-            ", "
-            f"values_attribute: {self.values_attribute}"
-            f")"
-        )
+    def __str__(self):
+        return auto_str(self)
 
-    def __repr__(self) -> str:
-        return self.__str__()
+    def __repr__(self):
+        return auto_str(self)

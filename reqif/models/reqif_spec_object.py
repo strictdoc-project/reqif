@@ -1,5 +1,6 @@
 from typing import Dict, List, Optional, Any
 
+from reqif.helpers.debug import auto_str
 from reqif.models.reqif_types import SpecObjectAttributeType
 
 
@@ -16,17 +17,11 @@ class SpecObjectAttribute:
         self.definition_ref: str = definition_ref
         self.value: str = value
 
-    def __str__(self) -> str:
-        return (
-            f"SpecObjectAttribute("
-            f"attribute_type: {self.attribute_type}"
-            ", "
-            f"definition_ref: {self.definition_ref}"
-            f")"
-        )
+    def __str__(self):
+        return auto_str(self)
 
-    def __repr__(self) -> str:
-        return self.__str__()
+    def __repr__(self):
+        return auto_str(self)
 
 
 class ReqIFSpecObject:  # pylint: disable=too-many-instance-attributes
@@ -67,20 +62,8 @@ class ReqIFSpecObject:  # pylint: disable=too-many-instance-attributes
             attributes=attributes,
         )
 
-    def __str__(self) -> str:
-        return (
-            f"ReqIFSpecObject("
-            f"description: {self.description}"
-            ", "
-            f"identifier: {self.identifier}"
-            ", "
-            f"spec_object_type: {self.spec_object_type}"
-            ", "
-            f"attributes: {self.attributes}"
-            ", "
-            f"attribute_map: {self.attribute_map}"
-            f")"
-        )
+    def __str__(self):
+        return auto_str(self)
 
-    def __repr__(self) -> str:
-        return self.__str__()
+    def __repr__(self):
+        return auto_str(self)
