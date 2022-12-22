@@ -26,6 +26,14 @@ ATTRIBUTE_INTEGER_TEMPLATE = """\
             </ATTRIBUTE-VALUE-INTEGER>
 """
 
+ATTRIBUTE_REAL_TEMPLATE = """\
+            <ATTRIBUTE-VALUE-REAL THE-VALUE="{value}">
+              <DEFINITION>
+                <ATTRIBUTE-DEFINITION-REAL-REF>{definition_ref}</ATTRIBUTE-DEFINITION-REAL-REF>
+              </DEFINITION>
+            </ATTRIBUTE-VALUE-REAL>
+"""
+
 ATTRIBUTE_ENUMERATION_TEMPLATE = """\
             <ATTRIBUTE-VALUE-ENUMERATION>
               <VALUES>
@@ -133,6 +141,20 @@ class SpecObjectParser:
                 attribute = SpecObjectAttribute(
                     xml_node=attribute_xml,
                     attribute_type=SpecObjectAttributeType.INTEGER,
+                    definition_ref=attribute_definition_ref,
+                    value=attribute_value,
+                )
+            elif attribute_xml.tag == "ATTRIBUTE-VALUE-REAL":
+                attribute_value = attribute_xml.attrib["THE-VALUE"]
+
+                attribute_definition_ref = (
+                    attribute_xml.find("DEFINITION")
+                    .find("ATTRIBUTE-DEFINITION-REAL-REF")
+                    .text
+                )
+                attribute = SpecObjectAttribute(
+                    xml_node=attribute_xml,
+                    attribute_type=SpecObjectAttributeType.REAL,
                     definition_ref=attribute_definition_ref,
                     value=attribute_value,
                 )
@@ -268,6 +290,11 @@ class SpecObjectParser:
                 )
             elif attribute.attribute_type == SpecObjectAttributeType.INTEGER:
                 output += ATTRIBUTE_INTEGER_TEMPLATE.format(
+                    definition_ref=attribute.definition_ref,
+                    value=attribute.value,
+                )
+            elif attribute.attribute_type == SpecObjectAttributeType.REAL:
+                output += ATTRIBUTE_REAL_TEMPLATE.format(
                     definition_ref=attribute.definition_ref,
                     value=attribute.value,
                 )

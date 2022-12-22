@@ -10,6 +10,7 @@ from reqif.models.reqif_data_type import (
     ReqIFEnumValue,
     ReqIFDataTypeDefinitionXHTML,
     ReqIFDataTypeDefinitionDateIdentifier,
+    ReqIFDataTypeDefinitionReal,
 )
 
 
@@ -20,6 +21,7 @@ class DataTypeParser:
     ) -> Union[
         ReqIFDataTypeDefinitionString,
         ReqIFDataTypeDefinitionInteger,
+        ReqIFDataTypeDefinitionReal,
         ReqIFDataTypeDefinitionEnumeration,
         ReqIFDataTypeDefinitionDateIdentifier,
         ReqIFDataTypeDefinitionXHTML,
@@ -125,6 +127,26 @@ class DataTypeParser:
                 long_name=long_name,
             )
 
+        if data_type_xml.tag == "DATATYPE-DEFINITION-REAL":
+            accuracy = (
+                int(attributes["ACCURACY"])
+                if "ACCURACY" in attributes
+                else None
+            )
+            max = float(attributes["MAX"]) if "MAX" in attributes else None
+            min = float(attributes["MIN"]) if "MIN" in attributes else None
+
+            return ReqIFDataTypeDefinitionReal(
+                is_self_closed=is_self_closed,
+                accuracy=accuracy,
+                description=description,
+                identifier=identifier,
+                last_change=last_change,
+                long_name=long_name,
+                max=max,
+                min=min,
+            )
+
         if data_type_xml.tag == "DATATYPE-DEFINITION-XHTML":
             return ReqIFDataTypeDefinitionXHTML(
                 is_self_closed=is_self_closed,
@@ -190,6 +212,40 @@ class DataTypeParser:
                 output += f' LAST-CHANGE="{data_type_definition.last_change}"'
             if data_type_definition.long_name:
                 output += f' LONG-NAME="{data_type_definition.long_name}"'
+            output += "/>\n"
+            return output
+        if isinstance(data_type_definition, ReqIFDataTypeDefinitionReal):
+            output = "        <DATATYPE-DEFINITION-REAL"
+            accuracy = 2
+            if data_type_definition.accuracy is not None:
+                output += f' ACCURACY="{data_type_definition.accuracy}"'
+                accuracy = data_type_definition.accuracy
+
+            if data_type_definition.description is not None:
+                output += f' DESC="{data_type_definition.description}"'
+
+            output += f' IDENTIFIER="{data_type_definition.identifier}"'
+
+            if data_type_definition.last_change is not None:
+                output += f' LAST-CHANGE="{data_type_definition.last_change}"'
+            if data_type_definition.long_name is not None:
+                output += f' LONG-NAME="{data_type_definition.long_name}"'
+
+            if data_type_definition.max is not None:
+                max_str = "{:.{accuracy}f}".format(
+                    data_type_definition.max, accuracy=accuracy
+                )
+                if data_type_definition.max > 0:
+                    max_str = "+" + max_str
+                output += f' MAX="{max_str}"'
+            if data_type_definition.min is not None:
+                min_str = "{:.{accuracy}f}".format(
+                    data_type_definition.min, accuracy=accuracy
+                )
+                if data_type_definition.min > 0:
+                    min_str = "+" + min_str
+                output += f' MIN="{min_str}"'
+
             output += "/>\n"
             return output
         if isinstance(data_type_definition, ReqIFDataTypeDefinitionEnumeration):

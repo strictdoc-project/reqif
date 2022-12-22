@@ -120,6 +120,29 @@ class SpecObjectTypeParser:
                         assert xml_attribute_value is not None
                         default_value = xml_attribute_value.attrib["THE-VALUE"]
 
+                elif attribute_definition.tag == "ATTRIBUTE-DEFINITION-REAL":
+                    attribute_type = SpecObjectAttributeType.REAL
+                    try:
+                        datatype_definition = (
+                            attribute_definition.find("TYPE")
+                            .find("DATATYPE-DEFINITION-REAL-REF")
+                            .text
+                        )
+                    except Exception as exception:
+                        raise NotImplementedError(
+                            attribute_definition
+                        ) from exception
+
+                    xml_default_value = attribute_definition.find(
+                        "DEFAULT-VALUE"
+                    )
+                    if xml_default_value is not None:
+                        xml_attribute_value = xml_default_value.find(
+                            "ATTRIBUTE-VALUE-INTEGER"
+                        )
+                        assert xml_attribute_value is not None
+                        default_value = xml_attribute_value.attrib["THE-VALUE"]
+
                 elif attribute_definition.tag == "ATTRIBUTE-DEFINITION-BOOLEAN":
                     attribute_type = SpecObjectAttributeType.BOOLEAN
                     try:
