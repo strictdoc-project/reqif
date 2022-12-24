@@ -1,9 +1,10 @@
 from typing import Dict, List, Any
 
-from reqif.helpers.debug import auto_str
+from reqif.helpers.debug import auto_described
 from reqif.models.reqif_spec_object import ReqIFSpecObject
 
 
+@auto_described
 class ReqIFObjectLookup:
     def __init__(
         self,
@@ -25,12 +26,6 @@ class ReqIFObjectLookup:
             spec_objects_lookup={},
             spec_relations_parent_lookup={},
         )
-
-    def __str__(self):
-        return auto_str(self)
-
-    def __repr__(self):
-        return auto_str(self)
 
     def spec_object_exists(self, ref) -> bool:
         return ref in self.spec_objects_lookup

@@ -1,8 +1,9 @@
 from typing import Optional, List, Dict
 
-from reqif.helpers.debug import auto_str
+from reqif.helpers.debug import auto_described
 
 
+@auto_described
 class ReqIFDataTypeDefinitionString:
     def __init__(  # pylint: disable=too-many-arguments
         self,
@@ -34,6 +35,7 @@ class ReqIFDataTypeDefinitionString:
         )
 
 
+@auto_described
 class ReqIFDataTypeDefinitionInteger:
     def __init__(
         self,
@@ -48,6 +50,7 @@ class ReqIFDataTypeDefinitionInteger:
         self.long_name: str = long_name
 
 
+@auto_described
 class ReqIFDataTypeDefinitionReal:  # pylint: disable=too-many-instance-attributes  # noqa: E501
     def __init__(  # pylint: disable=too-many-arguments
         self,
@@ -70,6 +73,7 @@ class ReqIFDataTypeDefinitionReal:  # pylint: disable=too-many-instance-attribut
         self.min_value: Optional[float] = min_value
 
 
+@auto_described
 class ReqIFEnumValue:
     def __init__(  # pylint: disable=too-many-arguments
         self,
@@ -99,6 +103,7 @@ class ReqIFEnumValue:
         )
 
 
+@auto_described
 class ReqIFDataTypeDefinitionEnumeration:  # pylint: disable=too-many-instance-attributes # noqa:E501
     def __init__(  # pylint: disable=too-many-arguments
         self,
@@ -135,6 +140,7 @@ class ReqIFDataTypeDefinitionEnumeration:  # pylint: disable=too-many-instance-a
         )
 
 
+@auto_described
 class ReqIFDataTypeDefinitionXHTML:
     def __init__(  # pylint: disable=too-many-arguments
         self,
@@ -151,6 +157,7 @@ class ReqIFDataTypeDefinitionXHTML:
         self.long_name: Optional[str] = long_name
 
 
+@auto_described
 class ReqIFDataTypeDefinitionDateIdentifier:
     def __init__(  # pylint: disable=too-many-arguments
         self,
@@ -165,9 +172,3 @@ class ReqIFDataTypeDefinitionDateIdentifier:
         self.identifier: str = identifier
         self.last_change: Optional[str] = last_change
         self.long_name: Optional[str] = long_name
-
-    def __repr__(self):
-        return auto_str(self)
-
-    def __str__(self):
-        return self.__repr__()
