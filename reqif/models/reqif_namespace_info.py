@@ -1,8 +1,9 @@
 from typing import Optional
 
-from reqif.helpers.debug import auto_str
+from reqif.helpers.debug import auto_described
 
 
+@auto_described
 class ReqIFNamespaceInfo:  # pylint: disable=too-many-instance-attributes
     def __init__(  # pylint: disable=too-many-arguments
         self,
@@ -45,9 +46,3 @@ class ReqIFNamespaceInfo:  # pylint: disable=too-many-instance-attributes
             schema_location=None,
             language=None,
         )
-
-    def __str__(self):
-        return auto_str(self)
-
-    def __repr__(self):
-        return auto_str(self)

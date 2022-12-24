@@ -1,8 +1,9 @@
 from typing import List, Optional
 
-from reqif.helpers.debug import auto_str
+from reqif.helpers.debug import auto_described
 
 
+@auto_described
 class ReqIFSpecHierarchy:  # pylint: disable=too-many-instance-attributes
     def __init__(  # pylint: disable=too-many-arguments
         self,
@@ -34,12 +35,6 @@ class ReqIFSpecHierarchy:  # pylint: disable=too-many-instance-attributes
         # Not part of ReqIF, but helpful to calculate the section depth levels.
         self.level = level
 
-    def __str__(self):
-        return auto_str(self)
-
-    def __repr__(self):
-        return auto_str(self)
-
     def add_child(self, spec_hierarchy):
         assert (self.level + 1) == spec_hierarchy.level, (
             f"Broken parent-child level relationship.\n"
@@ -49,7 +44,7 @@ class ReqIFSpecHierarchy:  # pylint: disable=too-many-instance-attributes
 
     def dump(self) -> str:
         assert self.level >= 0
-        level_str = " " * ((self.level) * 2)
+        level_str = " " * (self.level * 2)
         dump = f"{level_str}ReqIFSpecHierarchy(\n"
         dump += f"{level_str}  level: {self.level}\n"
         dump += f"{level_str}  identifier: {self.identifier}\n"

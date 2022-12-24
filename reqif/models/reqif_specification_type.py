@@ -1,9 +1,10 @@
 from typing import List, Dict, Optional
 
-from reqif.helpers.debug import auto_str
+from reqif.helpers.debug import auto_described
 from reqif.models.reqif_spec_object_type import SpecAttributeDefinition
 
 
+@auto_described
 class ReqIFSpecificationType:
     def __init__(  # pylint: disable=too-many-arguments
         self,
@@ -22,9 +23,3 @@ class ReqIFSpecificationType:
             List[SpecAttributeDefinition]
         ] = spec_attributes
         self.spec_attribute_map = spec_attribute_map
-
-    def __str__(self):
-        return auto_str(self)
-
-    def __repr__(self):
-        return auto_str(self)

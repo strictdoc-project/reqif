@@ -1,8 +1,9 @@
 from typing import Optional
 
-from reqif.helpers.debug import auto_str
+from reqif.helpers.debug import auto_described
 
 
+@auto_described
 class ReqIFReqIFHeader:  # pylint: disable=too-many-instance-attributes
     def __init__(  # pylint: disable=too-many-arguments
         self,
@@ -23,9 +24,3 @@ class ReqIFReqIFHeader:  # pylint: disable=too-many-instance-attributes
         self.req_if_version: Optional[str] = req_if_version
         self.source_tool_id: Optional[str] = source_tool_id
         self.title: Optional[str] = title
-
-    def __str__(self):
-        return auto_str(self)
-
-    def __repr__(self):
-        return auto_str(self)

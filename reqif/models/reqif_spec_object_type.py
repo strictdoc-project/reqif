@@ -1,6 +1,6 @@
 from typing import List, Optional, Union, Any, Dict
 
-from reqif.helpers.debug import auto_str
+from reqif.helpers.debug import auto_described
 from reqif.models.reqif_types import SpecObjectAttributeType
 
 
@@ -8,6 +8,7 @@ class DefaultValueEmptySelfClosedTag:
     pass
 
 
+@auto_described
 class SpecAttributeDefinition:  # pylint: disable=too-many-instance-attributes
     def __init__(  # pylint: disable=too-many-arguments
         self,
@@ -58,13 +59,8 @@ class SpecAttributeDefinition:  # pylint: disable=too-many-instance-attributes
             multi_valued=multi_valued,
         )
 
-    def __str__(self):
-        return auto_str(self)
 
-    def __repr__(self):
-        return auto_str(self)
-
-
+@auto_described
 class ReqIFSpecObjectType:
     def __init__(  # pylint: disable=too-many-arguments
         self,
@@ -104,9 +100,3 @@ class ReqIFSpecObjectType:
             long_name=long_name,
             attribute_definitions=attribute_definitions,
         )
-
-    def __str__(self):
-        return auto_str(self)
-
-    def __repr__(self):
-        return auto_str(self)
