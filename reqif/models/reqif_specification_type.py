@@ -11,14 +11,14 @@ class ReqIFSpecificationType:
         description: Optional[str],
         identifier: str,
         last_change: str,
-        long_name: str,
+        long_name: Optional[str],
         spec_attributes: Optional[List[SpecAttributeDefinition]],
         spec_attribute_map: Dict[str, str],
     ):
         self.description: Optional[str] = description
         self.identifier: str = identifier
         self.last_change: str = last_change
-        self.long_name: str = long_name
+        self.long_name: Optional[str] = long_name
         self.spec_attributes: Optional[
             List[SpecAttributeDefinition]
         ] = spec_attributes

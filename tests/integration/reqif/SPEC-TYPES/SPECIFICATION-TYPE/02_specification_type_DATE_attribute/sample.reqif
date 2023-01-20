@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<REQ-IF xmlns="http://www.omg.org/spec/ReqIF/20110401/reqif.xsd" xmlns:configuration="http://eclipse.org/rmf/pror/toolextensions/1.0">
+  <CORE-CONTENT>
+    <REQ-IF-CONTENT>
+      <SPEC-TYPES>
+        <SPECIFICATION-TYPE IDENTIFIER="TEST_SPECIFICATION_TYPE_ID" LAST-CHANGE="2015-12-14T02:04:51.769+01:00" LONG-NAME="TEST_SPECIFICATION_TYPE_LONG_NAME">
+          <SPEC-ATTRIBUTES>
+            <ATTRIBUTE-DEFINITION-DATE DESC="System Attribute" IDENTIFIER="_a3970b22-a021-4b91-9b88-e343737458e9_CREATEDON-DOORS-MODULE" IS-EDITABLE="true" LAST-CHANGE="2018-10-12T16:43:58" LONG-NAME="ReqIF.ForeignCreatedOn">
+              <TYPE>
+                <DATATYPE-DEFINITION-DATE-REF>_2b3294ed-876a-4ae6-bc7e-3dd51f27798b</DATATYPE-DEFINITION-DATE-REF>
+              </TYPE>
+            </ATTRIBUTE-DEFINITION-DATE>
+          </SPEC-ATTRIBUTES>
+        </SPECIFICATION-TYPE>
+      </SPEC-TYPES>
+    </REQ-IF-CONTENT>
+  </CORE-CONTENT>
+</REQ-IF>

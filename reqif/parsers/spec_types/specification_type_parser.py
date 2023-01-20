@@ -27,10 +27,12 @@ class SpecificationTypeParser:
             spec_last_change = xml_attributes["LAST-CHANGE"]
         except Exception:
             raise NotImplementedError from None
-        try:
-            spec_type_long_name = xml_attributes["LONG-NAME"]
-        except Exception:
-            raise NotImplementedError from None
+
+        spec_type_long_name = (
+            xml_attributes["LONG-NAME"]
+            if "LONG-NAME" in xml_attributes
+            else None
+        )
 
         xml_spec_attributes = specification_type_xml.find("SPEC-ATTRIBUTES")
         attribute_definitions: Optional[List[SpecAttributeDefinition]] = None
@@ -119,6 +121,18 @@ class SpecificationTypeParser:
                         raise NotImplementedError(
                             attribute_definition
                         ) from exception
+                elif attribute_definition.tag == "ATTRIBUTE-DEFINITION-DATE":
+                    attribute_type = SpecObjectAttributeType.DATE
+                    try:
+                        datatype_definition = (
+                            attribute_definition.find("TYPE")
+                            .find("DATATYPE-DEFINITION-DATE-REF")
+                            .text
+                        )
+                    except Exception as exception:
+                        raise NotImplementedError(
+                            attribute_definition
+                        ) from exception
                 else:
                     raise NotImplementedError(attribute_definition) from None
                 attribute_definition = SpecAttributeDefinition(
@@ -153,12 +167,10 @@ class SpecificationTypeParser:
         if spec_type.description is not None:
             output += f' DESC="{spec_type.description}"'
         output += f' IDENTIFIER="{spec_type.identifier}"'
-        output += (
-            f' LAST-CHANGE="{spec_type.last_change}"'
-            f' LONG-NAME="{spec_type.long_name}"'
-            f">"
-            "\n"
-        )
+        output += f' LAST-CHANGE="{spec_type.last_change}"'
+        if spec_type.long_name is not None:
+            output += f' LONG-NAME="{spec_type.long_name}"'
+        output += ">\n"
 
         if spec_type.spec_attributes is not None:
             output += "          <SPEC-ATTRIBUTES>\n"
@@ -168,14 +180,16 @@ class SpecificationTypeParser:
                     "            "
                     "<"
                     f"{attribute.attribute_type.get_spec_type_tag()}"
-                    f' IDENTIFIER="{attribute.identifier}"'
                 )
-                if attribute.last_change:
-                    output += f' LAST-CHANGE="{attribute.last_change}"'
-                output += f' LONG-NAME="{attribute.long_name}"'
+                if attribute.description is not None:
+                    output += f' DESC="{attribute.description}"'
+                output += f' IDENTIFIER="{attribute.identifier}"'
                 if attribute.editable is not None:
                     editable_value = "true" if attribute.editable else "false"
                     output += f' IS-EDITABLE="{editable_value}"'
+                if attribute.last_change:
+                    output += f' LAST-CHANGE="{attribute.last_change}"'
+                output += f' LONG-NAME="{attribute.long_name}"'
                 output += ">" "\n"
                 output += "              <TYPE>\n"
                 output += (
