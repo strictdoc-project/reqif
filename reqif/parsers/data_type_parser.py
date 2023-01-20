@@ -11,6 +11,7 @@ from reqif.models.reqif_data_type import (
     ReqIFDataTypeDefinitionXHTML,
     ReqIFDataTypeDefinitionDateIdentifier,
     ReqIFDataTypeDefinitionReal,
+    ReqIFDataTypeDefinitionBoolean,
 )
 
 
@@ -20,6 +21,7 @@ class DataTypeParser:
         data_type_xml,
     ) -> Union[
         ReqIFDataTypeDefinitionString,
+        ReqIFDataTypeDefinitionBoolean,
         ReqIFDataTypeDefinitionInteger,
         ReqIFDataTypeDefinitionReal,
         ReqIFDataTypeDefinitionEnumeration,
@@ -120,11 +122,17 @@ class DataTypeParser:
             )
 
         if data_type_xml.tag == "DATATYPE-DEFINITION-INTEGER":
+            max_value = attributes["MAX"] if "MAX" in attributes else None
+            min_value = attributes["MIN"] if "MIN" in attributes else None
+
             return ReqIFDataTypeDefinitionInteger(
+                is_self_closed=is_self_closed,
                 description=description,
                 identifier=identifier,
                 last_change=last_change,
                 long_name=long_name,
+                max_value=max_value,
+                min_value=min_value,
             )
 
         if data_type_xml.tag == "DATATYPE-DEFINITION-REAL":
@@ -169,21 +177,19 @@ class DataTypeParser:
                 long_name=long_name,
             )
 
-        # TODO: All the following is parsed to just String.
         if data_type_xml.tag == "DATATYPE-DEFINITION-BOOLEAN":
-            return ReqIFDataTypeDefinitionString(
+            return ReqIFDataTypeDefinitionBoolean(
                 is_self_closed=False,
                 description=description,
                 identifier=identifier,
                 last_change=last_change,
                 long_name=long_name,
-                max_length=None,
             )
 
         raise NotImplementedError(etree.tostring(data_type_xml))
 
     @staticmethod
-    def unparse(
+    def unparse(  # pylint: disable=too-many-return-statements
         data_type_definition: Union[
             ReqIFDataTypeDefinitionString, ReqIFDataTypeDefinitionEnumeration
         ]
@@ -206,6 +212,22 @@ class DataTypeParser:
                 output += ">\n"
                 output += "        </DATATYPE-DEFINITION-STRING>\n"
             return output
+        if isinstance(data_type_definition, ReqIFDataTypeDefinitionBoolean):
+            output = "        <DATATYPE-DEFINITION-BOOLEAN"
+            if data_type_definition.description:
+                output += f' DESC="{data_type_definition.description}"'
+
+            output += f' IDENTIFIER="{data_type_definition.identifier}"'
+            if data_type_definition.last_change:
+                output += f' LAST-CHANGE="{data_type_definition.last_change}"'
+            if data_type_definition.long_name:
+                output += f' LONG-NAME="{data_type_definition.long_name}"'
+            if data_type_definition.is_self_closed:
+                output += "/>\n"
+            else:
+                output += ">\n"
+                output += "        </DATATYPE-DEFINITION-BOOLEAN>\n"
+            return output
         if isinstance(data_type_definition, ReqIFDataTypeDefinitionInteger):
             output = "        <DATATYPE-DEFINITION-INTEGER"
             if data_type_definition.description:
@@ -216,7 +238,15 @@ class DataTypeParser:
                 output += f' LAST-CHANGE="{data_type_definition.last_change}"'
             if data_type_definition.long_name:
                 output += f' LONG-NAME="{data_type_definition.long_name}"'
-            output += "/>\n"
+            if data_type_definition.max_value is not None:
+                output += f' MAX="{data_type_definition.max_value}"'
+            if data_type_definition.min_value is not None:
+                output += f' MIN="{data_type_definition.min_value}"'
+            if data_type_definition.is_self_closed:
+                output += "/>\n"
+            else:
+                output += ">\n"
+                output += "        </DATATYPE-DEFINITION-INTEGER>\n"
             return output
         if isinstance(data_type_definition, ReqIFDataTypeDefinitionReal):
             output = "        <DATATYPE-DEFINITION-REAL"
@@ -287,7 +317,7 @@ class DataTypeParser:
                     )
                     if value.other_content is not None:
                         output += f' OTHER-CONTENT="{value.other_content}"'
-                    output += " />\n"
+                    output += "/>\n"
                     output += "              </PROPERTIES>\n"
 
                     output += "            </ENUM-VALUE>\n"

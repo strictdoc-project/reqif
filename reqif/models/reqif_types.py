@@ -13,6 +13,8 @@ class SpecObjectAttributeType(Enum):
     def get_spec_type_tag(self):  # pylint: disable=too-many-return-statements
         if self == SpecObjectAttributeType.STRING:
             return "ATTRIBUTE-DEFINITION-STRING"
+        if self == SpecObjectAttributeType.ENUMERATION:
+            return "ATTRIBUTE-DEFINITION-ENUMERATION"
         if self == SpecObjectAttributeType.INTEGER:
             return "ATTRIBUTE-DEFINITION-INTEGER"
         if self == SpecObjectAttributeType.REAL:
@@ -23,9 +25,10 @@ class SpecObjectAttributeType(Enum):
             return "ATTRIBUTE-DEFINITION-DATE"
         if self == SpecObjectAttributeType.XHTML:
             return "ATTRIBUTE-DEFINITION-XHTML"
-        if self == SpecObjectAttributeType.ENUMERATION:
-            return "ATTRIBUTE-DEFINITION-ENUMERATION"
         raise NotImplementedError(self) from None
+
+    def get_spec_type_ref_tag(self):
+        return self.get_spec_type_tag() + "-REF"
 
     def get_definition_tag(self):
         return f"DATATYPE-DEFINITION-{self.name}-REF"

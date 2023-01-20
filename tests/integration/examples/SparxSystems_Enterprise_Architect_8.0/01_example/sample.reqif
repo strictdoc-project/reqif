@@ -20,27 +20,27 @@
           <SPECIFIED-VALUES>
             <ENUM-VALUE DESC="Requirement has been proposed." IDENTIFIER="Proposed" LAST-CHANGE="2011-06-13T00:00:00+01:00">
               <PROPERTIES>
-                <EMBEDDED-VALUE KEY="1" OTHER-CONTENT="foo" />
+                <EMBEDDED-VALUE KEY="1" OTHER-CONTENT="foo"/>
               </PROPERTIES>
             </ENUM-VALUE>
             <ENUM-VALUE DESC="Requirement has been accepted." IDENTIFIER="Accepted" LAST-CHANGE="2011-06-13T00:00:00+01:00">
               <PROPERTIES>
-                <EMBEDDED-VALUE KEY="2" OTHER-CONTENT="foo" />
+                <EMBEDDED-VALUE KEY="2" OTHER-CONTENT="foo"/>
               </PROPERTIES>
             </ENUM-VALUE>
             <ENUM-VALUE DESC="Requirement has been rejected or de-scoped." IDENTIFIER="Rejected" LAST-CHANGE="2011-06-13T00:00:00+01:00">
               <PROPERTIES>
-                <EMBEDDED-VALUE KEY="3" OTHER-CONTENT="foo" />
+                <EMBEDDED-VALUE KEY="3" OTHER-CONTENT="foo"/>
               </PROPERTIES>
             </ENUM-VALUE>
             <ENUM-VALUE DESC="Requirement has been satisfied by an implementation of system components." IDENTIFIER="Implemented" LAST-CHANGE="2011-06-13T00:00:00+01:00">
               <PROPERTIES>
-                <EMBEDDED-VALUE KEY="4" OTHER-CONTENT="foo" />
+                <EMBEDDED-VALUE KEY="4" OTHER-CONTENT="foo"/>
               </PROPERTIES>
             </ENUM-VALUE>
             <ENUM-VALUE DESC="Satisfaction of requirement has been approved by QA and customer/user." IDENTIFIER="Approved" LAST-CHANGE="2011-06-13T00:00:00+01:00">
               <PROPERTIES>
-                <EMBEDDED-VALUE KEY="5" OTHER-CONTENT="foo" />
+                <EMBEDDED-VALUE KEY="5" OTHER-CONTENT="foo"/>
               </PROPERTIES>
             </ENUM-VALUE>
           </SPECIFIED-VALUES>
@@ -49,17 +49,17 @@
           <SPECIFIED-VALUES>
             <ENUM-VALUE DESC="The fulfilment of the requirement is essential, i.e. in the event of non-fulfilment the system will not satisfy stakeholder needs or will result in a deficiency that cannot be ameliorated." IDENTIFIER="Mandatory" LAST-CHANGE="2011-06-13T00:00:00+01:00">
               <PROPERTIES>
-                <EMBEDDED-VALUE KEY="1" OTHER-CONTENT="foo" />
+                <EMBEDDED-VALUE KEY="1" OTHER-CONTENT="foo"/>
               </PROPERTIES>
             </ENUM-VALUE>
             <ENUM-VALUE DESC="The fulfilment of the requirement should be aspired, but non-fulfilment will not result in an inacceptable deficiency." IDENTIFIER="Worthwhile" LAST-CHANGE="2011-06-13T00:00:00+01:00">
               <PROPERTIES>
-                <EMBEDDED-VALUE KEY="2" OTHER-CONTENT="foo" />
+                <EMBEDDED-VALUE KEY="2" OTHER-CONTENT="foo"/>
               </PROPERTIES>
             </ENUM-VALUE>
             <ENUM-VALUE DESC="The requirement is a nice-to-have one, or it has growth potential for systems future stages of expansion." IDENTIFIER="Optional" LAST-CHANGE="2011-06-13T00:00:00+01:00">
               <PROPERTIES>
-                <EMBEDDED-VALUE KEY="3" OTHER-CONTENT="foo" />
+                <EMBEDDED-VALUE KEY="3" OTHER-CONTENT="foo"/>
               </PROPERTIES>
             </ENUM-VALUE>
           </SPECIFIED-VALUES>
