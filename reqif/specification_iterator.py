@@ -1,12 +1,12 @@
 import collections
-from typing import Deque
+from typing import Deque, Generator
 
 from reqif.models.reqif_spec_hierarchy import ReqIFSpecHierarchy
 
 
 class SpecificationIterator:
     @staticmethod
-    def iterate_specification(specification):
+    def iterate_specification(specification) -> Generator:
         task_list: Deque[ReqIFSpecHierarchy] = collections.deque(
             specification.children
         )
@@ -18,4 +18,5 @@ class SpecificationIterator:
 
             yield current
 
-            task_list.extendleft(reversed(current.children))
+            if current.children is not None:
+                task_list.extendleft(reversed(current.children))

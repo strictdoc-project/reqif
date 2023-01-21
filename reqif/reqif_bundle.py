@@ -1,10 +1,11 @@
 import collections
-from typing import List, Deque, Optional
+from typing import List, Deque, Optional, Generator
 
 from reqif.helpers.debug import auto_described
 from reqif.models.error_handling import ReqIFSchemaError
 from reqif.models.reqif_core_content import ReqIFCoreContent
 from reqif.models.reqif_namespace_info import ReqIFNamespaceInfo
+from reqif.models.reqif_req_if_content import ReqIFReqIFContent
 from reqif.models.reqif_reqif_header import ReqIFReqIFHeader
 from reqif.models.reqif_spec_hierarchy import (
     ReqIFSpecHierarchy,
@@ -49,9 +50,10 @@ class ReqIFBundle:  # pylint: disable=too-many-instance-attributes
         self.lookup = lookup
         self.exceptions: List[ReqIFSchemaError] = exceptions
 
-    def iterate_specification_hierarchy(self, specification):
-        assert self.core_content
-        assert self.core_content.req_if_content
+    def iterate_specification_hierarchy(self, specification) -> Generator:
+        assert isinstance(self.core_content, ReqIFCoreContent)
+        assert isinstance(self.core_content.req_if_content, ReqIFReqIFContent)
+        assert isinstance(self.core_content.req_if_content.specifications, list)
         assert specification in self.core_content.req_if_content.specifications
 
         if specification.children is None:

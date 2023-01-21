@@ -1,7 +1,7 @@
 import copy
 import io
 from collections import defaultdict, OrderedDict
-from typing import List, Optional, Dict, Any, Tuple
+from typing import List, Optional, Dict, Any, Tuple, Union
 
 from lxml import etree
 from lxml.etree import DocInfo
@@ -16,10 +16,13 @@ from reqif.models.reqif_namespace_info import ReqIFNamespaceInfo
 from reqif.models.reqif_req_if_content import ReqIFReqIFContent
 from reqif.models.reqif_reqif_header import ReqIFReqIFHeader
 from reqif.models.reqif_spec_object import ReqIFSpecObject
+from reqif.models.reqif_spec_object_type import ReqIFSpecObjectType
 from reqif.models.reqif_spec_relation import ReqIFSpecRelation
+from reqif.models.reqif_spec_relation_type import ReqIFSpecRelationType
 from reqif.models.reqif_specification import (
     ReqIFSpecification,
 )
+from reqif.models.reqif_specification_type import ReqIFSpecificationType
 from reqif.object_lookup import ReqIFObjectLookup
 from reqif.parsers.data_type_parser import (
     DataTypeParser,
@@ -229,6 +232,11 @@ class ReqIFParser:
         if xml_spec_types is not None:
             spec_types = []
             for xml_spec_object_type_xml in list(xml_spec_types):
+                spec_type: Union[
+                    ReqIFSpecObjectType,
+                    ReqIFSpecRelationType,
+                    ReqIFSpecificationType,
+                ]
                 if xml_spec_object_type_xml.tag == "SPEC-OBJECT-TYPE":
                     spec_type = SpecObjectTypeParser.parse(
                         xml_spec_object_type_xml

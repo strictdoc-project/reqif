@@ -18,7 +18,7 @@ from reqif.parsers.spec_object_parser import (
 
 class ReqIFSpecificationParser:
     @staticmethod
-    def parse(specification_xml):
+    def parse(specification_xml) -> ReqIFSpecification:
         assert "SPECIFICATION" in specification_xml.tag, f"{specification_xml}"
 
         attributes = specification_xml.attrib
