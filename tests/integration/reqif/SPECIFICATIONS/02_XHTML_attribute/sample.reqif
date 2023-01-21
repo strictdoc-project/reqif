@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<REQ-IF xmlns="http://www.omg.org/spec/ReqIF/20110401/reqif.xsd" xmlns:doors="http://www.ibm.com/rdm/doors/REQIF/xmlns/1.0" xmlns:reqif="http://www.omg.org/spec/ReqIF/20110401/reqif.xsd" xmlns:reqif-common="http://www.prostep.org/reqif" xmlns:reqif-xhtml="http://www.w3.org/1999/xhtml" xmlns:rm="http://www.ibm.com/rm" xmlns:rm-reqif="http://www.ibm.com/rm/reqif" xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <CORE-CONTENT>
+    <REQ-IF-CONTENT>
+      <SPECIFICATIONS>
+        <SPECIFICATION IDENTIFIER="_Z5pgiizGEey_QIvU1w5Ozg" LAST-CHANGE="2021-10-14T10:11:59.495+02:00" LONG-NAME="Specification Document">
+          <VALUES>
+            <ATTRIBUTE-VALUE-XHTML>
+              <DEFINITION>
+                <ATTRIBUTE-DEFINITION-XHTML-REF>_7f123ed4-98dd-4eed-b96a-edc8828963a8_CREATEDBY-DOORS-MODULE</ATTRIBUTE-DEFINITION-XHTML-REF>
+              </DEFINITION>
+              <THE-VALUE>
+                <reqif-xhtml:div>susan</reqif-xhtml:div>
+              </THE-VALUE>
+            </ATTRIBUTE-VALUE-XHTML>
+          </VALUES>
+        </SPECIFICATION>
+      </SPECIFICATIONS>
+    </REQ-IF-CONTENT>
+  </CORE-CONTENT>
+</REQ-IF>

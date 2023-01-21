@@ -8,6 +8,40 @@ def dump_xml_node(node):
     return etree.tostring(node, method="xml").decode("utf8")
 
 
+# Using this rather hacky version because I could not make lxml to print
+# the namespaced tags such as:
+# <reqif-xhtml:div>--/reqif-xhtml:div>
+# but at the same time NOT print the namespace declaration which is produced
+# when the etree.tostring(...) method is used:
+# <reqif-xhtml:div xmlns:reqif-xhtml="http://www.w3.org/1999/xhtml">--</reqif-xhtml:div>  # noqa: E501
+# FIXME: Would be great to better solution to this.
+def stringify_namespaced_children(node):
+    def _stringify_reqif_ns_node(node):
+        assert node is not None
+        nskey = next(iter(node.nsmap.keys()))
+        output = ""
+        node_no_ns_tag = etree.QName(node).localname
+        output += f"<{nskey}:{node_no_ns_tag}"
+        for attribute, attribute_value in node.attrib.items():
+            output += f' {attribute}="{attribute_value}"'
+        output += ">"
+        if node.text is not None:
+            output += node.text
+        for child in node.getchildren():
+            output += _stringify_reqif_ns_node(child)
+        output += f"</{nskey}:{node_no_ns_tag}>"
+        if node.tail is not None:
+            output += node.tail
+        return output
+
+    string = ""
+    if node.text is not None:
+        string += node.text
+    for child in node.getchildren():
+        string += _stringify_reqif_ns_node(child)
+    return string
+
+
 # https://stackoverflow.com/a/4624146/598057
 def stringify_children(node):
     return "".join(

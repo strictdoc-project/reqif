@@ -1,7 +1,7 @@
 import html
 from typing import List, Optional, Union
 
-from reqif.helpers.lxml import is_self_closed_tag
+from reqif.helpers.lxml import is_self_closed_tag, stringify_namespaced_children
 from reqif.models.reqif_spec_object_type import (
     ReqIFSpecObjectType,
     SpecAttributeDefinition,
@@ -63,6 +63,7 @@ class SpecObjectTypeParser:
                     else None
                 )
 
+                default_value_definition_ref: Optional[str] = None
                 default_value: Union[
                     None, DefaultValueEmptySelfClosedTag, str
                 ] = None
@@ -156,6 +157,25 @@ class SpecObjectTypeParser:
                             attribute_definition
                         ) from exception
 
+                    xml_default_value = attribute_definition.find(
+                        "DEFAULT-VALUE"
+                    )
+                    if xml_default_value is not None:
+                        xml_attribute_value = xml_default_value.find(
+                            "ATTRIBUTE-VALUE-BOOLEAN"
+                        )
+                        assert xml_attribute_value is not None
+                        default_value = xml_attribute_value.attrib["THE-VALUE"]
+
+                        xml_definition = xml_attribute_value.find("DEFINITION")
+                        if xml_definition is not None:
+                            xml_attribute_definition = xml_definition.find(
+                                "ATTRIBUTE-DEFINITION-BOOLEAN-REF"
+                            )
+                            if xml_attribute_definition is not None:
+                                default_value_definition_ref = (
+                                    xml_attribute_definition.text
+                                )
                 elif attribute_definition.tag == "ATTRIBUTE-DEFINITION-XHTML":
                     attribute_type = SpecObjectAttributeType.XHTML
                     try:
@@ -168,6 +188,36 @@ class SpecObjectTypeParser:
                         raise NotImplementedError(
                             attribute_definition
                         ) from exception
+
+                    xml_default_value = attribute_definition.find(
+                        "DEFAULT-VALUE"
+                    )
+                    if xml_default_value is None:
+                        pass
+                    elif is_self_closed_tag(xml_default_value):
+                        default_value = DefaultValueEmptySelfClosedTag()
+                    else:
+                        xml_attribute_value = xml_default_value.find(
+                            "ATTRIBUTE-VALUE-XHTML"
+                        )
+                        if xml_attribute_value is not None:
+                            xml_definition_value = xml_attribute_value.find(
+                                "DEFINITION"
+                            )
+                            if xml_definition_value is not None:
+                                xml_attribute_ref = xml_definition_value.find(
+                                    "ATTRIBUTE-DEFINITION-XHTML-REF"
+                                )
+                                assert xml_attribute_ref is not None
+                                default_value_definition_ref = (
+                                    xml_attribute_ref.text
+                                )
+                            xml_values = xml_attribute_value.find("THE-VALUE")
+                            default_value = stringify_namespaced_children(
+                                xml_values
+                            )
+                        else:
+                            raise NotImplementedError
                 elif (
                     attribute_definition.tag
                     == "ATTRIBUTE-DEFINITION-ENUMERATION"
@@ -193,6 +243,36 @@ class SpecObjectTypeParser:
                         raise NotImplementedError(
                             attribute_definition
                         ) from exception
+
+                    xml_default_value = attribute_definition.find(
+                        "DEFAULT-VALUE"
+                    )
+                    if xml_default_value is not None:
+                        if is_self_closed_tag(xml_default_value):
+                            default_value = DefaultValueEmptySelfClosedTag()
+                        else:
+                            xml_attribute_value = xml_default_value.find(
+                                "ATTRIBUTE-VALUE-ENUMERATION"
+                            )
+                            if xml_attribute_value is not None:
+                                xml_definition_value = xml_attribute_value.find(
+                                    "DEFINITION"
+                                )
+                                if xml_definition_value is not None:
+                                    xml_attribute_ref = xml_definition_value.find(  # noqa: E501
+                                        "ATTRIBUTE-DEFINITION-ENUMERATION-REF"
+                                    )
+                                    default_value_definition_ref = (
+                                        xml_attribute_ref.text
+                                    )
+                                xml_values = xml_attribute_value.find("VALUES")
+                                if xml_values is not None:
+                                    xml_enum_value_ref = xml_values.find(
+                                        "ENUM-VALUE-REF"
+                                    )
+                                    default_value = xml_enum_value_ref.text
+                            else:
+                                raise NotImplementedError
                 elif attribute_definition.tag == "ATTRIBUTE-DEFINITION-DATE":
                     attribute_type = SpecObjectAttributeType.DATE
                     try:
@@ -216,6 +296,7 @@ class SpecObjectTypeParser:
                     datatype_definition=datatype_definition,
                     long_name=long_name,
                     editable=editable,
+                    default_value_definition_ref=default_value_definition_ref,
                     default_value=default_value,
                     multi_valued=multi_valued,
                 )
@@ -263,10 +344,12 @@ class SpecObjectTypeParser:
         output += (
             "            " "<" f"{attribute.attribute_type.get_spec_type_tag()}"
         )
-        if attribute.description:
+        if attribute.description is not None:
             output += f' DESC="{attribute.description}"'
-
         output += f' IDENTIFIER="{attribute.identifier}"'
+        if attribute.editable is not None:
+            editable_value = "true" if attribute.editable else "false"
+            output += f' IS-EDITABLE="{editable_value}"'
         if attribute.last_change:
             output += f' LAST-CHANGE="{attribute.last_change}"'
         if attribute.long_name:
@@ -274,9 +357,6 @@ class SpecObjectTypeParser:
         if attribute.multi_valued is not None:
             multi_valued_value = "true" if attribute.multi_valued else "false"
             output += f' MULTI-VALUED="{multi_valued_value}"'
-        if attribute.editable is not None:
-            editable_value = "true" if attribute.editable else "false"
-            output += f' IS-EDITABLE="{editable_value}"'
         output += ">" "\n"
 
         children_tags: List[str]
@@ -290,11 +370,12 @@ class SpecObjectTypeParser:
             if tag == "DEFAULT-VALUE":
                 attribute_default_value = attribute.default_value
                 if attribute_default_value is not None:
-                    output += (
+                    unparsed_default_value = (
                         SpecObjectTypeParser._unparse_attribute_default_value(
                             attribute, attribute_default_value
                         )
                     )
+                    output += unparsed_default_value
             elif tag == "TYPE":
                 output += SpecObjectTypeParser._unparse_attribute_type(
                     attribute
@@ -331,6 +412,52 @@ class SpecObjectTypeParser:
         output = ""
         if isinstance(default_value, DefaultValueEmptySelfClosedTag):
             output += "              <DEFAULT-VALUE/>\n"
+            return output
+        if attribute.attribute_type == SpecObjectAttributeType.ENUMERATION:
+            output += (
+                "              <DEFAULT-VALUE>\n"
+                f"                "
+                f"<{attribute.attribute_type.get_attribute_value_tag()}>\n"
+                f"                  <DEFINITION>\n"
+                f"                    <ATTRIBUTE-DEFINITION-ENUMERATION-REF>"
+                f"{attribute.default_value_definition_ref}"
+                f"</ATTRIBUTE-DEFINITION-ENUMERATION-REF>\n"
+                f"                  </DEFINITION>\n"
+                f"                  <VALUES>\n"
+                f"                    <ENUM-VALUE-REF>"
+                f"{attribute.default_value}</ENUM-VALUE-REF>\n"
+                f"                  </VALUES>\n"
+                f"                "
+                f"</{attribute.attribute_type.get_attribute_value_tag()}>\n"
+                "              </DEFAULT-VALUE>\n"
+            )
+        elif attribute.attribute_type == SpecObjectAttributeType.XHTML:
+            output += (
+                "              <DEFAULT-VALUE>\n"
+                "                <ATTRIBUTE-VALUE-XHTML>\n"
+                "                  <DEFINITION>\n"
+                "                    <ATTRIBUTE-DEFINITION-XHTML-REF>"
+                f"{attribute.default_value_definition_ref}"
+                f"</ATTRIBUTE-DEFINITION-XHTML-REF>\n"
+                "                  </DEFINITION>\n"
+                f"                  <THE-VALUE>{attribute.default_value}"
+                "</THE-VALUE>\n"
+                "                </ATTRIBUTE-VALUE-XHTML>\n"
+                "              </DEFAULT-VALUE>\n"
+            )
+        elif attribute.attribute_type == SpecObjectAttributeType.BOOLEAN:
+            output += (
+                "              <DEFAULT-VALUE>\n"
+                f"                <ATTRIBUTE-VALUE-BOOLEAN "
+                f'THE-VALUE="{attribute.default_value}">\n'
+                "                  <DEFINITION>\n"
+                "                    <ATTRIBUTE-DEFINITION-BOOLEAN-REF>"
+                f"{attribute.default_value_definition_ref}"
+                f"</ATTRIBUTE-DEFINITION-BOOLEAN-REF>\n"
+                "                  </DEFINITION>\n"
+                "                </ATTRIBUTE-VALUE-BOOLEAN>\n"
+                "              </DEFAULT-VALUE>\n"
+            )
         else:
             output += (
                 "              <DEFAULT-VALUE>\n"

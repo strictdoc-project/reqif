@@ -144,6 +144,7 @@ class SpecificationTypeParser:
                     datatype_definition=datatype_definition,
                     long_name=long_name,
                     editable=editable,
+                    default_value_definition_ref=None,
                     default_value=None,
                     multi_valued=None,
                 )

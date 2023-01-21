@@ -22,6 +22,10 @@ class ReqIFSpecHierarchyParser:
         long_name: Optional[str] = (
             attributes["LONG-NAME"] if "LONG-NAME" in attributes else None
         )
+        editable: Optional[bool] = None
+        if "IS-EDITABLE" in attributes:
+            editable_str = attributes["IS-EDITABLE"]
+            editable = editable_str == "true"
         ref_then_children_order = list(
             map(lambda el: el.tag, list(spec_hierarchy_xml))
         ) == ["OBJECT", "CHILDREN"]
@@ -48,6 +52,7 @@ class ReqIFSpecHierarchyParser:
             identifier=identifier,
             last_change=last_change,
             long_name=long_name,
+            editable=editable,
             spec_object=spec_object_ref,
             children=spec_hierarchy_children,
             ref_then_children_order=ref_then_children_order,
@@ -62,6 +67,9 @@ class ReqIFSpecHierarchyParser:
             base_level_str + f"<SPEC-HIERARCHY"
             f' IDENTIFIER="{hierarchy.identifier}"'
         )
+        if hierarchy.editable is not None:
+            editable_value = "true" if hierarchy.editable else "false"
+            output += f' IS-EDITABLE="{editable_value}"'
         if hierarchy.last_change:
             output += f' LAST-CHANGE="{hierarchy.last_change}"'
         if hierarchy.long_name:

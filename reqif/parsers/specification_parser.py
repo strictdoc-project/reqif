@@ -70,8 +70,8 @@ class ReqIFSpecificationParser:
         xml_values = specification_xml.find("VALUES")
         if xml_values is not None:
             values = []
-            if len(xml_values) > 0:
-                xml_attribute = xml_values[0]
+            for xml_value in xml_values:
+                xml_attribute = xml_value
                 if xml_attribute.tag == "ATTRIBUTE-VALUE-STRING":
                     attribute_value = xml_attribute.attrib["THE-VALUE"]
                     definition_ref = xml_attribute[0][0].text
@@ -82,7 +82,7 @@ class ReqIFSpecificationParser:
                         value=attribute_value,
                     )
                     values.append(values_attribute)
-                if xml_attribute.tag == "ATTRIBUTE-VALUE-DATE":
+                elif xml_attribute.tag == "ATTRIBUTE-VALUE-DATE":
                     attribute_value = xml_attribute.attrib["THE-VALUE"]
                     definition_ref = xml_attribute[0][0].text
                     values_attribute = SpecObjectAttribute(

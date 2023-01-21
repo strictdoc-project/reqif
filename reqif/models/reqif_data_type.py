@@ -36,18 +36,53 @@ class ReqIFDataTypeDefinitionString:
 
 
 @auto_described
-class ReqIFDataTypeDefinitionInteger:
-    def __init__(
+class ReqIFDataTypeDefinitionBoolean:
+    def __init__(  # pylint: disable=too-many-arguments
         self,
+        is_self_closed: bool,
+        description: Optional[str],
+        identifier: str,
+        last_change: Optional[str],
+        long_name: Optional[str],
+    ):
+        self.is_self_closed: bool = is_self_closed
+        self.description: Optional[str] = description
+        self.identifier: str = identifier
+        self.last_change: Optional[str] = last_change
+        self.long_name: Optional[str] = long_name
+
+    @staticmethod
+    def create(
+        identifier: str,
+    ) -> "ReqIFDataTypeDefinitionBoolean":
+        return ReqIFDataTypeDefinitionBoolean(
+            is_self_closed=True,
+            description=None,
+            identifier=identifier,
+            last_change=None,
+            long_name=None,
+        )
+
+
+@auto_described
+class ReqIFDataTypeDefinitionInteger:
+    def __init__(  # pylint: disable=too-many-arguments
+        self,
+        is_self_closed: bool,
         description: Optional[str],
         identifier: str,
         last_change: Optional[str],
         long_name: str,
+        max_value: Optional[str],
+        min_value: Optional[str],
     ):
+        self.is_self_closed: bool = is_self_closed
         self.description: Optional[str] = description
         self.identifier: str = identifier
         self.last_change: Optional[str] = last_change
         self.long_name: str = long_name
+        self.max_value: Optional[str] = max_value
+        self.min_value: Optional[str] = min_value
 
 
 @auto_described

@@ -20,6 +20,7 @@ class SpecAttributeDefinition:  # pylint: disable=too-many-instance-attributes
         datatype_definition: str,
         long_name: Optional[str],
         editable: Optional[bool],
+        default_value_definition_ref: Optional[str],
         default_value: Union[None, DefaultValueEmptySelfClosedTag, str],
         multi_valued: Optional[bool],
     ):
@@ -33,6 +34,9 @@ class SpecAttributeDefinition:  # pylint: disable=too-many-instance-attributes
         self.editable: Optional[bool] = (
             editable == "true" if editable is not None else None
         )
+        self.default_value_definition_ref: Optional[
+            str
+        ] = default_value_definition_ref
         self.default_value: Union[
             None, DefaultValueEmptySelfClosedTag, str
         ] = default_value
@@ -55,6 +59,7 @@ class SpecAttributeDefinition:  # pylint: disable=too-many-instance-attributes
             datatype_definition=datatype_definition,
             long_name=long_name,
             editable=None,
+            default_value_definition_ref=None,
             default_value=None,
             multi_valued=multi_valued,
         )
