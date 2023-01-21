@@ -27,9 +27,6 @@ class SpecObjectAttributeType(Enum):
             return "ATTRIBUTE-DEFINITION-XHTML"
         raise NotImplementedError(self) from None
 
-    def get_spec_type_ref_tag(self):
-        return self.get_spec_type_tag() + "-REF"
-
     def get_definition_tag(self):
         return f"DATATYPE-DEFINITION-{self.name}-REF"
 
