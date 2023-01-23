@@ -1,9 +1,9 @@
 import html
 from typing import List, Optional
 
-import lxml
 from lxml import etree
 
+from reqif.helpers.lxml import stringify_namespaced_children
 from reqif.models.reqif_spec_object import (
     ReqIFSpecObject,
     SpecObjectAttribute,
@@ -68,9 +68,7 @@ ATTRIBUTE_XHTML_TEMPLATE = """\
               <DEFINITION>
                 <ATTRIBUTE-DEFINITION-XHTML-REF>{definition_ref}</ATTRIBUTE-DEFINITION-XHTML-REF>
               </DEFINITION>
-              <THE-VALUE>
-{value}
-              </THE-VALUE>
+              <THE-VALUE>{value}</THE-VALUE>
             </ATTRIBUTE-VALUE-XHTML>
 """
 
@@ -188,19 +186,7 @@ class SpecObjectParser:
                 )
             elif attribute_xml.tag == "ATTRIBUTE-VALUE-XHTML":
                 the_value = attribute_xml.find("THE-VALUE")
-                # TODO: This does not work:
-                # <THE-VALUE xmlns:xhtml="http://www.w3.org/1999/xhtml">
-                # is printed.
-                # the_value.tag = etree.QName(the_value).localname
-                # etree.cleanup_namespaces(the_value)
-                attribute_value_decoded_lines = (
-                    lxml.etree.tostring(the_value, method="xml")
-                    .decode("utf8")
-                    .rstrip()
-                )
-                attribute_value = "\n".join(
-                    attribute_value_decoded_lines.split("\n")[1:-1]
-                )
+                attribute_value = stringify_namespaced_children(the_value)
                 attribute_definition_ref = (
                     attribute_xml.find("DEFINITION")
                     .find("ATTRIBUTE-DEFINITION-XHTML-REF")
@@ -282,11 +268,10 @@ class SpecObjectParser:
         output = ""
         output += "          <VALUES>\n"
         for attribute in spec_object.attributes:
-            attribute_value = html.escape(attribute.value)
             if attribute.attribute_type == SpecObjectAttributeType.STRING:
                 output += ATTRIBUTE_STRING_TEMPLATE.format(
                     definition_ref=attribute.definition_ref,
-                    value=attribute_value,
+                    value=html.escape(attribute.value),
                 )
             elif attribute.attribute_type == SpecObjectAttributeType.INTEGER:
                 output += ATTRIBUTE_INTEGER_TEMPLATE.format(

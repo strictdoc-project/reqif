@@ -79,5 +79,7 @@ class AnonymizeCommand:
             attribute.value = ANONYMIZED
         elif attribute.attribute_type == SpecObjectAttributeType.XHTML:
             attribute.value = (
-                "                " f"<xhtml:div>{ANONYMIZED}</xhtml:div>"
+                "\n"
+                f"                <xhtml:div>{ANONYMIZED}</xhtml:div>\n"
+                "              "
             )
