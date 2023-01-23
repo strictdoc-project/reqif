@@ -1,3 +1,4 @@
+import html
 from itertools import chain
 
 from lxml import etree
@@ -14,7 +15,7 @@ def dump_xml_node(node):
 # but at the same time NOT print the namespace declaration which is produced
 # when the etree.tostring(...) method is used:
 # <reqif-xhtml:div xmlns:reqif-xhtml="http://www.w3.org/1999/xhtml">--</reqif-xhtml:div>  # noqa: E501
-# FIXME: Would be great to better solution to this.
+# FIXME: Would be great to find a better solution for this.
 def stringify_namespaced_children(node):
     def _stringify_reqif_ns_node(node):
         assert node is not None
@@ -26,7 +27,7 @@ def stringify_namespaced_children(node):
             output += f' {attribute}="{attribute_value}"'
         output += ">"
         if node.text is not None:
-            output += node.text
+            output += html.escape(node.text)
         for child in node.getchildren():
             output += _stringify_reqif_ns_node(child)
         output += f"</{nskey}:{node_no_ns_tag}>"
@@ -36,7 +37,7 @@ def stringify_namespaced_children(node):
 
     string = ""
     if node.text is not None:
-        string += node.text
+        string += html.escape(node.text)
     for child in node.getchildren():
         string += _stringify_reqif_ns_node(child)
     return string

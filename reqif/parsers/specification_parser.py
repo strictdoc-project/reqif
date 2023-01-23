@@ -1,7 +1,6 @@
 from typing import List, Optional
 
-import lxml
-
+from reqif.helpers.lxml import stringify_namespaced_children
 from reqif.models.reqif_spec_object import SpecObjectAttribute
 from reqif.models.reqif_specification import (
     ReqIFSpecification,
@@ -94,19 +93,7 @@ class ReqIFSpecificationParser:
                     values.append(values_attribute)
                 elif xml_attribute.tag == "ATTRIBUTE-VALUE-XHTML":
                     the_value = xml_attribute.find("THE-VALUE")
-                    # TODO: This does not work:
-                    # <THE-VALUE xmlns:xhtml="http://www.w3.org/1999/xhtml">
-                    # is printed.
-                    # the_value.tag = etree.QName(the_value).localname
-                    # etree.cleanup_namespaces(the_value)
-                    attribute_value_decoded_lines = (
-                        lxml.etree.tostring(the_value, method="xml")
-                        .decode("utf8")
-                        .rstrip()
-                    )
-                    attribute_value = "\n".join(
-                        attribute_value_decoded_lines.split("\n")[1:-1]
-                    )
+                    attribute_value = stringify_namespaced_children(the_value)
                     attribute_name = (
                         xml_attribute.find("DEFINITION")
                         .find("ATTRIBUTE-DEFINITION-XHTML-REF")
