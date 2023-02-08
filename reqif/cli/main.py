@@ -18,7 +18,7 @@ try:
     from reqif.commands.version.version_command import VersionCommand
 
 except FileNotFoundError:
-    print("error: could not locate reqif's root folder.")
+    print("error: could not locate reqif's root folder.")  # noqa: T201
     sys.exit(1)
 
 

@@ -1,7 +1,7 @@
 import copy
 import io
-from collections import defaultdict, OrderedDict
-from typing import List, Optional, Dict, Any, Tuple, Union
+from collections import OrderedDict, defaultdict
+from typing import Any, Dict, List, Optional, Tuple, Union
 
 from lxml import etree
 from lxml.etree import DocInfo
@@ -192,9 +192,6 @@ class ReqIFParser:
 
         # TODO: Tool extensions contains information specific to the tool used
         # to create the ReqIF file.
-        # element_tool_extensions = xml_reqif_nons_root.find(
-        #     "TOOL-EXTENSIONS", namespace_dict
-        # )
         tool_extensions_tag_exists = (
             xml_reqif_nons_root.find("TOOL-EXTENSIONS") is not None
         )
@@ -333,5 +330,3 @@ class ReqIFParser:
         # Remove unused namespace declarations
         etree.cleanup_namespaces(root_xml)
         return root_xml
-        # objectify.deannotate(root_xml, xsi_nil=True, cleanup_namespaces=True)
-        # return root_xml

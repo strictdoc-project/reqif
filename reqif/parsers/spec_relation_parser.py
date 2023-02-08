@@ -1,4 +1,4 @@
-from typing import Optional, List
+from typing import List, Optional
 
 from reqif.models.error_handling import ReqIFMissingTagException
 from reqif.models.reqif_spec_object import SpecObjectAttribute

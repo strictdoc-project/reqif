@@ -4,11 +4,11 @@ from typing import List
 
 from reqif.cli.cli_arg_parser import ValidateCommandConfig
 from reqif.models.error_handling import (
-    ReqIFSchemaError,
-    ReqIFSpecRelationMissingSpecObjectException,
-    ReqIFSemanticError,
     ReqIFGeneralSemanticError,
+    ReqIFSchemaError,
+    ReqIFSemanticError,
     ReqIFSpecHierarchyMissingSpecObjectException,
+    ReqIFSpecRelationMissingSpecObjectException,
     ReqIFXMLParsingError,
 )
 from reqif.models.reqif_spec_relation import ReqIFSpecRelation
@@ -36,19 +36,19 @@ class ValidateCommand:
         if not os.path.isfile(input_file):
             sys.stdout.flush()
             message = "error: passthrough command's input file does not exist"
-            print(f"{message}: {input_file}")
+            print(f"{message}: {input_file}")  # noqa: T201
             sys.exit(1)
 
         error_bundle = ValidateCommand._validate(config)
         for xml_error in error_bundle.xml_errors:
-            print(f"error: {xml_error}")
+            print(f"error: {xml_error}")  # noqa: T201
         for schema_warning in error_bundle.schema_errors:
-            print(f"warning: {schema_warning.get_description()}")
+            print(f"warning: {schema_warning.get_description()}")  # noqa: T201
         for semantic_warning in error_bundle.semantic_warnings:
-            print(
+            print(  # noqa: T201
                 f"warning: semantic error: {semantic_warning.get_description()}"
             )
-        print(
+        print(  # noqa: T201
             f"Validation complete with {len(error_bundle.xml_errors)} errors, "
             f"{len(error_bundle.schema_errors)} schema issues found, "
             f"{len(error_bundle.semantic_warnings)} semantic issues found."

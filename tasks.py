@@ -11,14 +11,18 @@ def one_line_command(string):
 
 def run_invoke_cmd(context, cmd) -> invoke.runners.Result:
     return context.run(
-        cmd, env=None, hide=False, warn=False, pty=False, echo=True
+        one_line_command(cmd),
+        env=None,
+        hide=False,
+        warn=False,
+        pty=False,
+        echo=True,
     )
 
 
 @task
 def clean(context):
-    find_command = one_line_command(
-        """
+    find_command = """
         find
             tests
             -type f \\(
@@ -32,14 +36,11 @@ def clean(context):
             \\)
             -not -path "**Expected**"
             -not -path "**Input**"
-        """
-    )
+    """
 
     find_result = run_invoke_cmd(context, find_command)
     find_result_stdout = find_result.stdout.strip()
-    echo_command = one_line_command(
-        f"""echo {find_result_stdout} | xargs rm -rfv"""
-    )
+    echo_command = f"""echo {find_result_stdout} | xargs rm -rfv"""
 
     run_invoke_cmd(context, echo_command)
 
@@ -48,23 +49,19 @@ def clean(context):
 def test_unit(context):
     run_invoke_cmd(
         context,
-        one_line_command(
-            """
+        """
         coverage run
             --rcfile=.coveragerc
             --branch
             -m pytest
             tests/unit/
-        """
-        ),
+        """,
     )
     run_invoke_cmd(
         context,
-        one_line_command(
-            """
-        coverage report --sort=cover
         """
-        ),
+        coverage report --sort=cover
+        """,
     )
 
 
@@ -72,11 +69,9 @@ def test_unit(context):
 def test_coverage_report(context):
     run_invoke_cmd(
         context,
-        one_line_command(
-            """
-        coverage html
         """
-        ),
+        coverage html
+        """,
     )
 
 
@@ -89,34 +84,15 @@ def test_integration(context, focus=None, debug=False):
     focus_or_none = f"--filter {focus}" if focus else ""
     debug_opts = "-vv --show-all" if debug else ""
 
-    command = one_line_command(
-        f"""
-        lit
-        --param REQIF_EXEC="{reqif_exec}"
-        -v
-        {debug_opts}
-        {focus_or_none}
-        {cwd}/tests/integration
+    command = f"""
+            lit
+            --param REQIF_EXEC="{reqif_exec}"
+            -v
+            {debug_opts}
+            {focus_or_none}
+            {cwd}/tests/integration
         """
-    )
     run_invoke_cmd(context, command)
-
-
-@task
-def export_pip_requirements(context):
-    run_invoke_cmd(
-        context,
-        one_line_command(
-            """
-        poetry
-            export
-                --dev
-                --without-hashes
-                --format requirements.txt
-                > requirements.txt
-        """
-        ),
-    )
 
 
 # Support generation of Poetry managed setup.py file #761
@@ -125,73 +101,72 @@ def export_pip_requirements(context):
 def install_local(context):
     run_invoke_cmd(
         context,
-        one_line_command(
-            """
-                rm -rf dist/ && poetry build
-            """
-        ),
+        """
+            rm -rf dist/ && poetry build
+        """,
     )
     run_invoke_cmd(
         context,
-        one_line_command(
-            """
+        """
         tar -xvf dist/*.tar.gz '*/setup.py'
-        """
-        ),
+        """,
     )
     run_invoke_cmd(
         context,
-        one_line_command(
-            """
-        pip install -e .
         """
-        ),
+        pip install -e .
+        """,
     )
 
 
 @task
 def lint_black_diff(context):
-    command = one_line_command(
-        """
+    command = """
         black . --color 2>&1
-        """
-    )
+    """
     result = run_invoke_cmd(context, command)
 
     # black always exits with 0, so we handle the output.
     if "reformatted" in result.stdout:
-        print("invoke: black found issues")
+        print("invoke: black found issues")  # noqa: T201
         result.exited = 1
         raise invoke.exceptions.UnexpectedExit(result)
 
 
 @task
 def lint_pylint(context):
-    command = one_line_command(
-        """
+    command = """
         pylint
           --rcfile=.pylint.ini
           --disable=c-extension-no-member
           reqif/ tasks.py
-        """
-    )
+    """
     try:
         run_invoke_cmd(context, command)
     except invoke.exceptions.UnexpectedExit as exc:
         # pylint doesn't show an error message when exit code != 0, so we do.
-        print(f"invoke: pylint exited with error code {exc.result.exited}")
+        print(  # noqa: T201
+            f"invoke: pylint exited with error code {exc.result.exited}"
+        )
         raise exc
 
 
 @task
 def lint_flake8(context):
-    command = one_line_command(
-        """
+    command = """
         flake8
             reqif/ tasks.py tests/unit/
             --statistics --max-line-length 80 --show-source
-        """
-    )
+    """
+    run_invoke_cmd(context, command)
+
+
+@task
+def lint_ruff(context, fix=False):
+    argument_fix = "--fix" if fix else ""
+    command = f"""
+        ruff . {argument_fix}
+    """
     run_invoke_cmd(context, command)
 
 
@@ -199,19 +174,18 @@ def lint_flake8(context):
 def lint_mypy(context):
     run_invoke_cmd(
         context,
-        one_line_command(
-            """
+        """
         mypy reqif/
             --show-error-codes
             --disable-error-code=import
             --disable-error-code=no-untyped-call
-        """  # --strict
-        ),
+        """,  # --strict
     )
 
 
 @task(
     lint_black_diff,
+    lint_ruff,
     lint_pylint,
     lint_flake8,
     lint_mypy,
@@ -232,11 +206,9 @@ def check(_):
 
 @task
 def release(context, password):
-    command = one_line_command(
-        f"""
-            poetry publish --build -u stanislaw -p {password}
-        """
-    )
+    command = f"""
+        poetry publish --build -u stanislaw -p {password}
+    """
     run_invoke_cmd(context, command)
 
 
@@ -244,12 +216,10 @@ def release(context, password):
 # gem install github_changelog_generator
 @task
 def changelog(context, github_token):
-    command = one_line_command(
-        f"""
+    command = f"""
         github_changelog_generator
         --token {github_token}
         --user strictdoc-project
         --project reqif
-        """
-    )
+    """
     run_invoke_cmd(context, command)
