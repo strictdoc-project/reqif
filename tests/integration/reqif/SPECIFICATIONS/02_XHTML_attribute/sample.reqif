@@ -10,7 +10,11 @@
                 <ATTRIBUTE-DEFINITION-XHTML-REF>_7f123ed4-98dd-4eed-b96a-edc8828963a8_CREATEDBY-DOORS-MODULE</ATTRIBUTE-DEFINITION-XHTML-REF>
               </DEFINITION>
               <THE-VALUE>
-                <reqif-xhtml:div>susan</reqif-xhtml:div>
+                <reqif-xhtml:div>
+                  A
+                  multiline
+                  text
+                </reqif-xhtml:div>
               </THE-VALUE>
             </ATTRIBUTE-VALUE-XHTML>
           </VALUES>

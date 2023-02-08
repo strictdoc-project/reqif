@@ -68,7 +68,9 @@ ATTRIBUTE_XHTML_TEMPLATE = """\
               <DEFINITION>
                 <ATTRIBUTE-DEFINITION-XHTML-REF>{definition_ref}</ATTRIBUTE-DEFINITION-XHTML-REF>
               </DEFINITION>
-              <THE-VALUE>{value}</THE-VALUE>
+              <THE-VALUE>
+                {value}
+              </THE-VALUE>
             </ATTRIBUTE-VALUE-XHTML>
 """
 
@@ -187,6 +189,7 @@ class SpecObjectParser:
             elif attribute_xml.tag == "ATTRIBUTE-VALUE-XHTML":
                 the_value = attribute_xml.find("THE-VALUE")
                 attribute_value = stringify_namespaced_children(the_value)
+                attribute_value = attribute_value.strip()
                 attribute_definition_ref = (
                     attribute_xml.find("DEFINITION")
                     .find("ATTRIBUTE-DEFINITION-XHTML-REF")
