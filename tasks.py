@@ -95,30 +95,6 @@ def test_integration(context, focus=None, debug=False):
     run_invoke_cmd(context, command)
 
 
-# Support generation of Poetry managed setup.py file #761
-# https://github.com/python-poetry/poetry/issues/761#issuecomment-689491920
-@task
-def install_local(context):
-    run_invoke_cmd(
-        context,
-        """
-            rm -rf dist/ && poetry build
-        """,
-    )
-    run_invoke_cmd(
-        context,
-        """
-        tar -xvf dist/*.tar.gz '*/setup.py'
-        """,
-    )
-    run_invoke_cmd(
-        context,
-        """
-        pip install -e .
-        """,
-    )
-
-
 @task
 def lint_black_diff(context):
     command = """
@@ -205,11 +181,26 @@ def check(_):
 
 
 @task
-def release(context, password):
+def release(context, username=None, password=None):
+    user_password = f"-u{username} -p{password}" if username is not None else ""
     command = f"""
-        poetry publish --build -u stanislaw -p {password}
+        rm -rfv dist/ &&
+        python3 -m build &&
+            twine check dist/* &&
+            twine upload dist/reqif-*.tar.gz
+                {user_password}
     """
     run_invoke_cmd(context, command)
+
+
+@task
+def release_local(context):
+    run_invoke_cmd(
+        context,
+        """
+        rm -rfv dist/ && pip install -e .
+        """,
+    )
 
 
 # https://github.com/github-changelog-generator/github-changelog-generator
