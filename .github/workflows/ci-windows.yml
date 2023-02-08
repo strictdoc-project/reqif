@@ -12,7 +12,7 @@ jobs:
 
     strategy:
       matrix:
-        python-version: ["3.7", "3.8", "3.9"]
+        python-version: ["3.7", "3.8", "3.9", "3.10"]
 
     steps:
     - uses: actions/checkout@v2
@@ -32,9 +32,10 @@ jobs:
       run: |
         python -m pip install --upgrade pip
 
-    - name: Install Pip dependencies from requirements.txt
+    - name: Install dependencies
       run: |
-        pip install -r requirements.txt
+        pip install .[development]
+        pip uninstall -y reqif
 
     - name: Run Lint tasks
       run: |
