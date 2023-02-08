@@ -1,47 +1,64 @@
-[tool.poetry]
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.version]
+path = "reqif/__init__.py"
+
+[project]
 name = "reqif"
-version = "0.0.23"
+dynamic = ["version"]
 description = "Python library for ReqIF format. ReqIF parsing and unparsing."
-authors = ["Stanislav Pankevich <s.pankevich@gmail.com>"]
-maintainers = ["Stanislav Pankevich <s.pankevich@gmail.com>"]
-license = "Apache 2"
 readme = "README.md"
-homepage = ""
-repository = "https://github.com/strictdoc-project/reqif"
-documentation = "https://reqif.readthedocs.io/en/latest/index.html"
-keywords = [
-    "ReqIF",
-    "Requirements",
-    "Requirements management"
+license = "Apache-2.0"
+requires-python = ">=3.7"
+authors = [
+    { name = "Stanislav Pankevich", email = "s.pankevich@gmail.com" },
+]
+classifiers = [
+    # "Development Status :: 4 - Beta",
+    # "Environment :: Web Environment",
+    # "Intended Audience :: Developers",
+    "License :: OSI Approved :: BSD License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.7",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: Implementation :: CPython",
+    "Programming Language :: Python :: Implementation :: PyPy",
+    # "Topic :: Internet :: WWW/HTTP",
+]
+dependencies = [
+    "lxml >= 4.6.2",
+    "jinja2 >= 2.11.2",
 ]
 
-[tool.poetry.dependencies]
-python = "^3.6.2"
-lxml = '>= 4.6.2'
-jinja2 = ">= 2.11.2"
-toml = ">= 0.10.2"
+[project.optional-dependencies]
+development = [
+  "black >= 21.9b0",
+  "coverage >= 5.4",
+  "filecheck >= 0.0.20",
+  "flake8 >= 3.9.2",
+  "invoke >= 1.4.1",
+  "lit >= 0.11.0.post1",
+  "mypy >= 0.910",
+  "pytest >= 6.2.2",
+  "pylint >= 2.11.1",
+  "html5lib >= 1.1",
+  "pytidylib >= 0.3.2",
+]
 
-[tool.poetry.dev-dependencies]
-black = ">= 21.9b0"
-coverage = ">= 5.4"
-filecheck = ">= 0.0.20"
-flake8 = ">= 3.9.2"
-invoke = ">= 1.4.1"
-lit = '>= 0.11.0.post1'
-mypy = ">= 0.910"
-pytest = ">= 6.2.2"
-pylint = ">= 2.11.1"
-html5lib = '>= 1.1'
-pytidylib = '>= 0.3.2'
-
-# https://python-poetry.org/blog/announcing-poetry-1-1-0.html#standalone-build-backend
-# https://github.com/python-poetry/poetry/issues/3153#issuecomment-727196619
-[build-system]
-requires = ["setuptools", "poetry-core>=1.0.0"]
-build-backend = "poetry.core.masonry.api"
-
-[tool.poetry.scripts]
+[project.scripts]
 reqif = "reqif.cli.main:main"
+
+[project.urls]
+Changelog = "https://github.com/strictdoc-project/reqif/blob/main/CHANGELOG.md"
+# Funding = "https://..."
+Homepage = "https://github.com/strictdoc-project/reqif"
+Source = "https://github.com/strictdoc-project/reqif"
 
 [tool.black]
 line-length = 80
