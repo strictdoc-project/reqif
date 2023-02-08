@@ -1,5 +1,5 @@
 import collections
-from typing import List, Deque, Optional, Generator
+from typing import Deque, Generator, List, Optional
 
 from reqif.helpers.debug import auto_described
 from reqif.models.error_handling import ReqIFSchemaError

@@ -2,8 +2,6 @@ from lxml import etree
 
 from reqif.models.reqif_data_type import (
     ReqIFDataTypeDefinitionEnumeration,
-)
-from reqif.models.reqif_data_type import (
     ReqIFDataTypeDefinitionString,
 )
 from reqif.parsers.data_type_parser import (

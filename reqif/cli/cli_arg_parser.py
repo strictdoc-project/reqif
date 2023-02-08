@@ -16,7 +16,7 @@ def cli_args_parser() -> argparse.ArgumentParser:
     )
     command_subparsers.required = True
 
-    # Command: Passthrough
+    # Command – Passthrough
     command_parser_passthrough = command_subparsers.add_parser(
         "passthrough",
         help="Read an SDoc file, then output it again. (used for testing)",
@@ -30,7 +30,7 @@ def cli_args_parser() -> argparse.ArgumentParser:
         "output_file", type=str, help="Path to the output ReqIF file"
     )
 
-    # Command: Anonimize
+    # Command – Anonimize
     command_parser_anonymize = command_subparsers.add_parser(
         "anonymize",
         help="Read an SDoc file, anonymize it, then output it again.",
@@ -43,7 +43,7 @@ def cli_args_parser() -> argparse.ArgumentParser:
         "output_file", type=str, help="Path to the anonymized output ReqIF file"
     )
 
-    # Command: Dump
+    # Command – Dump
     command_parser_dump = command_subparsers.add_parser(
         "dump",
         help="Read an SDoc file, dump its concents to a raw HTML page.",
@@ -57,7 +57,7 @@ def cli_args_parser() -> argparse.ArgumentParser:
         "output_file", type=str, help="Path to the output HTML file"
     )
 
-    # Command: Format
+    # Command – Format
     command_parser_format = command_subparsers.add_parser(
         "format",
         help=(
@@ -73,7 +73,7 @@ def cli_args_parser() -> argparse.ArgumentParser:
         "output_file", type=str, help="Path to an output ReqIF file"
     )
 
-    # Command: Validate
+    # Command – Validate
     command_parser_validate = command_subparsers.add_parser(
         "validate",
         help=("Read a ReqIF file and validate its content."),
@@ -83,7 +83,7 @@ def cli_args_parser() -> argparse.ArgumentParser:
         "input_file", type=str, help="Path to an input ReqIF file"
     )
 
-    # Command: Version
+    # Command – Version
     command_subparsers.add_parser(
         "version",
         help="Print the version of StrictDoc.",

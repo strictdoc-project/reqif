@@ -3,9 +3,9 @@ from typing import List, Optional, Union
 
 from reqif.helpers.lxml import is_self_closed_tag, stringify_namespaced_children
 from reqif.models.reqif_spec_object_type import (
+    DefaultValueEmptySelfClosedTag,
     ReqIFSpecObjectType,
     SpecAttributeDefinition,
-    DefaultValueEmptySelfClosedTag,
 )
 from reqif.models.reqif_types import SpecObjectAttributeType
 
@@ -315,7 +315,7 @@ class SpecObjectTypeParser:
     def unparse(spec_type: ReqIFSpecObjectType) -> str:
         output = ""
 
-        output += "        " "<SPEC-OBJECT-TYPE"
+        output += "        <SPEC-OBJECT-TYPE"
         if spec_type.description is not None:
             output += f' DESC="{html.escape(spec_type.description)}"'
         output += f' IDENTIFIER="{spec_type.identifier}"'
@@ -323,7 +323,7 @@ class SpecObjectTypeParser:
             output += f' LAST-CHANGE="{spec_type.last_change}"'
         if spec_type.long_name is not None:
             output += f' LONG-NAME="{spec_type.long_name}"'
-        output += ">" "\n"
+        output += ">\n"
 
         if spec_type.attribute_definitions is not None:
             output += "          <SPEC-ATTRIBUTES>\n"
@@ -342,9 +342,7 @@ class SpecObjectTypeParser:
     @staticmethod
     def _unparse_attribute_definition(attribute: SpecAttributeDefinition):
         output = ""
-        output += (
-            "            " "<" f"{attribute.attribute_type.get_spec_type_tag()}"
-        )
+        output += f"            <{attribute.attribute_type.get_spec_type_tag()}"
         if attribute.description is not None:
             output += f' DESC="{attribute.description}"'
         output += f' IDENTIFIER="{attribute.identifier}"'
@@ -358,7 +356,7 @@ class SpecObjectTypeParser:
         if attribute.multi_valued is not None:
             multi_valued_value = "true" if attribute.multi_valued else "false"
             output += f' MULTI-VALUED="{multi_valued_value}"'
-        output += ">" "\n"
+        output += ">\n"
 
         children_tags: List[str]
         if attribute.xml_node is not None:

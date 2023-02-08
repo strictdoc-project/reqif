@@ -164,7 +164,7 @@ class SpecificationTypeParser:
     def unparse(spec_type: ReqIFSpecificationType) -> str:
         output = ""
 
-        output += "        " "<SPECIFICATION-TYPE"
+        output += "        <SPECIFICATION-TYPE"
         if spec_type.description is not None:
             output += f' DESC="{spec_type.description}"'
         output += f' IDENTIFIER="{spec_type.identifier}"'
@@ -191,7 +191,7 @@ class SpecificationTypeParser:
                 if attribute.last_change:
                     output += f' LAST-CHANGE="{attribute.last_change}"'
                 output += f' LONG-NAME="{attribute.long_name}"'
-                output += ">" "\n"
+                output += ">\n"
                 output += "              <TYPE>\n"
                 output += (
                     "                "

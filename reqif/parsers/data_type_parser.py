@@ -1,17 +1,17 @@
-from typing import Union, Optional, List
+from typing import List, Optional, Union
 
 from lxml import etree
 
 from reqif.helpers.lxml import is_self_closed_tag
 from reqif.models.reqif_data_type import (
-    ReqIFDataTypeDefinitionString,
+    ReqIFDataTypeDefinitionBoolean,
+    ReqIFDataTypeDefinitionDateIdentifier,
     ReqIFDataTypeDefinitionEnumeration,
     ReqIFDataTypeDefinitionInteger,
-    ReqIFEnumValue,
-    ReqIFDataTypeDefinitionXHTML,
-    ReqIFDataTypeDefinitionDateIdentifier,
     ReqIFDataTypeDefinitionReal,
-    ReqIFDataTypeDefinitionBoolean,
+    ReqIFDataTypeDefinitionString,
+    ReqIFDataTypeDefinitionXHTML,
+    ReqIFEnumValue,
 )
 
 
@@ -313,7 +313,7 @@ class DataTypeParser:
 
                     output += "              <PROPERTIES>\n"
                     output += (
-                        "                " f'<EMBEDDED-VALUE KEY="{value.key}"'
+                        f'                <EMBEDDED-VALUE KEY="{value.key}"'
                     )
                     if value.other_content is not None:
                         output += f' OTHER-CONTENT="{value.other_content}"'

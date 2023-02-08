@@ -38,15 +38,25 @@ dependencies = [
 
 [project.optional-dependencies]
 development = [
-  "black >= 21.9b0",
-  "coverage >= 5.4",
-  "filecheck >= 0.0.20",
-  "flake8 >= 3.9.2",
+  # Developer tasks
   "invoke >= 1.4.1",
-  "lit >= 0.11.0.post1",
+
+  # Formatting
+  "black >= 21.9b0",
+
+  # Linters & static analysis
+  "flake8 >= 3.9.2",
   "mypy >= 0.910",
-  "pytest >= 6.2.2",
   "pylint >= 2.11.1",
+  "ruff >= 0.0.243",
+
+  # Unit tests
+  "pytest >= 6.2.2",
+  "coverage >= 5.4",
+
+  # Integration tests
+  "lit >= 0.11.0.post1",
+  "filecheck >= 0.0.20",
   "html5lib >= 1.1",
   "pytidylib >= 0.3.2",
 ]

@@ -10,8 +10,8 @@ from reqif.parsers.spec_hierarchy_parser import (
     ReqIFSpecHierarchyParser,
 )
 from reqif.parsers.spec_object_parser import (
-    ATTRIBUTE_XHTML_TEMPLATE,
     ATTRIBUTE_DATE_TEMPLATE,
+    ATTRIBUTE_XHTML_TEMPLATE,
 )
 
 

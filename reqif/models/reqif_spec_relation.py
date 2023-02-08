@@ -1,4 +1,4 @@
-from typing import Optional, Any
+from typing import Any, Optional
 
 from reqif.helpers.debug import auto_described
 from reqif.models.reqif_spec_object import SpecObjectAttribute

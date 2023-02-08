@@ -1,4 +1,4 @@
-from typing import Optional, List
+from typing import List, Optional
 
 from reqif.helpers.lxml import is_self_closed_tag
 from reqif.models.reqif_spec_hierarchy import (

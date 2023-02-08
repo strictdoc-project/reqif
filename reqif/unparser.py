@@ -104,7 +104,7 @@ class ReqIFUnparser:
             reqif_xml_output += "  <TOOL-EXTENSIONS>\n"
             reqif_xml_output += "  </TOOL-EXTENSIONS>\n"
 
-        reqif_xml_output += "</REQ-IF>" "\n"
+        reqif_xml_output += "</REQ-IF>\n"
         return reqif_xml_output
 
     @staticmethod

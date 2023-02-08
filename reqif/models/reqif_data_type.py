@@ -1,4 +1,4 @@
-from typing import Optional, List, Dict
+from typing import Dict, List, Optional
 
 from reqif.helpers.debug import auto_described
 
@@ -139,7 +139,7 @@ class ReqIFEnumValue:
 
 
 @auto_described
-class ReqIFDataTypeDefinitionEnumeration:  # pylint: disable=too-many-instance-attributes # noqa:E501
+class ReqIFDataTypeDefinitionEnumeration:  # pylint: disable=too-many-instance-attributes # noqa: E501
     def __init__(  # pylint: disable=too-many-arguments
         self,
         is_self_closed: bool,

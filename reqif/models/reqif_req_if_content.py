@@ -1,4 +1,4 @@
-from typing import Optional, List, Union
+from typing import List, Optional, Union
 
 from reqif.helpers.debug import auto_described
 from reqif.models.reqif_spec_object import ReqIFSpecObject

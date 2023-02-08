@@ -1,4 +1,4 @@
-from typing import List, Dict, Optional
+from typing import Dict, List, Optional
 
 from reqif.helpers.debug import auto_described
 from reqif.models.reqif_spec_object_type import SpecAttributeDefinition
