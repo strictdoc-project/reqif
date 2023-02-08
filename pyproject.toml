@@ -17,7 +17,6 @@ keywords = [
 
 [tool.poetry.dependencies]
 python = "^3.6.2"
-beautifulsoup4 = '>= 4.9.3'
 lxml = '>= 4.6.2'
 jinja2 = ">= 2.11.2"
 toml = ">= 0.10.2"

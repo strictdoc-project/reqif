@@ -135,7 +135,7 @@ def install_local(context):
         context,
         one_line_command(
             """
-        tar -xvf dist/*.tar.gz --wildcards --no-anchored '*/setup.py' --strip=1
+        tar -xvf dist/*.tar.gz '*/setup.py'
         """
         ),
     )

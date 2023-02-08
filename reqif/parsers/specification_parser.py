@@ -94,6 +94,7 @@ class ReqIFSpecificationParser:
                 elif xml_attribute.tag == "ATTRIBUTE-VALUE-XHTML":
                     the_value = xml_attribute.find("THE-VALUE")
                     attribute_value = stringify_namespaced_children(the_value)
+                    attribute_value = attribute_value.strip()
                     attribute_name = (
                         xml_attribute.find("DEFINITION")
                         .find("ATTRIBUTE-DEFINITION-XHTML-REF")

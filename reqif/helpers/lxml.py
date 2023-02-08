@@ -16,7 +16,7 @@ def dump_xml_node(node):
 # when the etree.tostring(...) method is used:
 # <reqif-xhtml:div xmlns:reqif-xhtml="http://www.w3.org/1999/xhtml">--</reqif-xhtml:div>  # noqa: E501
 # FIXME: Would be great to find a better solution for this.
-def stringify_namespaced_children(node):
+def stringify_namespaced_children(node) -> str:
     def _stringify_reqif_ns_node(node):
         assert node is not None
         nskey = next(iter(node.nsmap.keys()))

@@ -216,6 +216,7 @@ class SpecObjectTypeParser:
                             default_value = stringify_namespaced_children(
                                 xml_values
                             )
+                            default_value = default_value.strip()
                         else:
                             raise NotImplementedError
                 elif (
@@ -440,8 +441,9 @@ class SpecObjectTypeParser:
                 f"{attribute.default_value_definition_ref}"
                 f"</ATTRIBUTE-DEFINITION-XHTML-REF>\n"
                 "                  </DEFINITION>\n"
-                f"                  <THE-VALUE>{attribute.default_value}"
-                "</THE-VALUE>\n"
+                "                  <THE-VALUE>\n"
+                f"                    {attribute.default_value}\n"
+                "                  </THE-VALUE>\n"
                 "                </ATTRIBUTE-VALUE-XHTML>\n"
                 "              </DEFAULT-VALUE>\n"
             )
