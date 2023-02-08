@@ -1,4 +1,4 @@
-from typing import List, Optional
+from typing import List, Optional, Any
 
 from reqif.helpers.debug import auto_described
 
@@ -7,34 +7,37 @@ from reqif.helpers.debug import auto_described
 class ReqIFSpecHierarchy:  # pylint: disable=too-many-instance-attributes
     def __init__(  # pylint: disable=too-many-arguments
         self,
-        xml_node,
-        is_self_closed: bool,
+        *,
         identifier: str,
-        last_change: Optional[str],
-        long_name: Optional[str],
-        editable: Optional[bool],
         spec_object: str,
-        children: Optional[List],
-        ref_then_children_order: bool,
         level: int,
+        children: Optional[List] = None,
+        long_name: Optional[str] = None,
+        ref_then_children_order: bool = True,
+        last_change: Optional[str] = None,
+        editable: Optional[bool] = False,
+        is_self_closed: bool = True,
+        xml_node: Optional[Any] = None,
     ):
         assert level >= 0
 
-        self.xml_node = xml_node
-        self.is_self_closed = is_self_closed
-        self.identifier = identifier
-        self.last_change: Optional[str] = last_change
-        self.long_name: Optional[str] = long_name
-        self.editable: Optional[bool] = editable
-        self.spec_object = spec_object
-        self.children: Optional[List] = children
+        # Mandatory fields.
+        self.identifier: str = identifier
+        self.spec_object: str = spec_object
+        # Not part of ReqIF, but helpful to calculate the section depth levels.
+        self.level = level
 
+        # Optional fields.
+        self.children: Optional[List] = children
+        self.long_name: Optional[str] = long_name
         # Not part of REqIF, but helpful for printing the
         # <OBJECT> and <CHILDREN> tags depending on which tool produced the
         # ReqIF file.
         self.ref_then_children_order: bool = ref_then_children_order
-        # Not part of ReqIF, but helpful to calculate the section depth levels.
-        self.level = level
+        self.last_change: Optional[str] = last_change
+        self.editable: Optional[bool] = editable
+        self.is_self_closed: bool = is_self_closed
+        self.xml_node = xml_node
 
     def add_child(self, spec_hierarchy):
         assert (self.level + 1) == spec_hierarchy.level, (
