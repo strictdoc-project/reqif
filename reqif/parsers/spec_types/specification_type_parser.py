@@ -1,5 +1,6 @@
 from typing import List, Optional
 
+from reqif.helpers.lxml import is_self_closed_tag
 from reqif.models.reqif_spec_object_type import (
     SpecAttributeDefinition,
 )
@@ -13,6 +14,8 @@ class SpecificationTypeParser:
         assert (
             specification_type_xml.tag == "SPECIFICATION-TYPE"
         ), f"{specification_type_xml}"
+        is_self_closed = is_self_closed_tag(specification_type_xml)
+
         attribute_map = {}
 
         xml_attributes = specification_type_xml.attrib
@@ -158,6 +161,7 @@ class SpecificationTypeParser:
             long_name=spec_type_long_name,
             spec_attributes=attribute_definitions,
             spec_attribute_map=attribute_map,
+            is_self_closed=is_self_closed,
         )
 
     @staticmethod
@@ -171,7 +175,13 @@ class SpecificationTypeParser:
         output += f' LAST-CHANGE="{spec_type.last_change}"'
         if spec_type.long_name is not None:
             output += f' LONG-NAME="{spec_type.long_name}"'
-        output += ">\n"
+
+        # Some documents have a SPECIFICATION-TYPE without any SPEC-ATTRIBUTES.
+        if spec_type.is_self_closed:
+            output += "/>\n"
+            return output
+        else:
+            output += ">\n"
 
         if spec_type.spec_attributes is not None:
             output += "          <SPEC-ATTRIBUTES>\n"

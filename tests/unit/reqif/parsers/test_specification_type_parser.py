@@ -1,4 +1,4 @@
-from xml.etree import ElementTree as etree
+from lxml import etree
 
 from reqif.models.reqif_specification_type import ReqIFSpecificationType
 from reqif.parsers.spec_types.specification_type_parser import (
