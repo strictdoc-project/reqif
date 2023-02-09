@@ -141,12 +141,8 @@ class DataTypeParser:
                 if "ACCURACY" in attributes
                 else None
             )
-            max_value = (
-                float(attributes["MAX"]) if "MAX" in attributes else None
-            )
-            min_value = (
-                float(attributes["MIN"]) if "MIN" in attributes else None
-            )
+            max_value = attributes["MAX"] if "MAX" in attributes else None
+            min_value = attributes["MIN"] if "MIN" in attributes else None
 
             return ReqIFDataTypeDefinitionReal(
                 is_self_closed=is_self_closed,
@@ -250,10 +246,8 @@ class DataTypeParser:
             return output
         if isinstance(data_type_definition, ReqIFDataTypeDefinitionReal):
             output = "        <DATATYPE-DEFINITION-REAL"
-            accuracy = 2
             if data_type_definition.accuracy is not None:
                 output += f' ACCURACY="{data_type_definition.accuracy}"'
-                accuracy = data_type_definition.accuracy
 
             if data_type_definition.description is not None:
                 output += f' DESC="{data_type_definition.description}"'
@@ -266,19 +260,9 @@ class DataTypeParser:
                 output += f' LONG-NAME="{data_type_definition.long_name}"'
 
             if data_type_definition.max_value is not None:
-                max_str = "{:.{accuracy}f}".format(  # pylint: disable=consider-using-f-string  # noqa: E501
-                    data_type_definition.max_value, accuracy=accuracy
-                )
-                if data_type_definition.max_value > 0:
-                    max_str = "+" + max_str
-                output += f' MAX="{max_str}"'
+                output += f' MAX="{data_type_definition.max_value}"'
             if data_type_definition.min_value is not None:
-                min_str = "{:.{accuracy}f}".format(  # pylint: disable=consider-using-f-string  # noqa: E501
-                    data_type_definition.min_value, accuracy=accuracy
-                )
-                if data_type_definition.min_value > 0:
-                    min_str = "+" + min_str
-                output += f' MIN="{min_str}"'
+                output += f' MIN="{data_type_definition.min_value}"'
 
             output += "/>\n"
             return output

@@ -95,8 +95,8 @@ class ReqIFDataTypeDefinitionReal:  # pylint: disable=too-many-instance-attribut
         identifier: str,
         last_change: Optional[str],
         long_name: Optional[str],
-        max_value: Optional[float],
-        min_value: Optional[float],
+        max_value: Optional[str],
+        min_value: Optional[str],
     ):
         self.is_self_closed: bool = is_self_closed
         self.accuracy: Optional[int] = accuracy
@@ -104,8 +104,8 @@ class ReqIFDataTypeDefinitionReal:  # pylint: disable=too-many-instance-attribut
         self.identifier: str = identifier
         self.last_change: Optional[str] = last_change
         self.long_name: Optional[str] = long_name
-        self.max_value: Optional[float] = max_value
-        self.min_value: Optional[float] = min_value
+        self.max_value: Optional[str] = max_value
+        self.min_value: Optional[str] = min_value
 
 
 @auto_described
