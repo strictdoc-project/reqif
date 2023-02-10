@@ -175,7 +175,7 @@ class DataTypeParser:
 
         if data_type_xml.tag == "DATATYPE-DEFINITION-BOOLEAN":
             return ReqIFDataTypeDefinitionBoolean(
-                is_self_closed=False,
+                is_self_closed=is_self_closed,
                 description=description,
                 identifier=identifier,
                 last_change=last_change,

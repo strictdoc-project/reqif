@@ -1,0 +1,316 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<REQ-IF xmlns="http://www.omg.org/spec/ReqIF/20110401/reqif.xsd" xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  <THE-HEADER>
+    <REQ-IF-HEADER IDENTIFIER="ID_TC1100_ReqIfHeader">
+      <CREATION-TIME>2021-01-22T12:56:38.638Z</CREATION-TIME>
+      <REQ-IF-TOOL-ID>RMF - Requirements Modeling Framework (http://www.eclipse.org/rmf)</REQ-IF-TOOL-ID>
+      <REQ-IF-VERSION>1.0</REQ-IF-VERSION>
+      <SOURCE-TOOL-ID>RMF - Requirements Modeling Framework (http://www.eclipse.org/rmf)</SOURCE-TOOL-ID>
+      <TITLE>TC 1100 &#x27;Unformatted common system attributes &amp; SpecHierarchy&#x27;</TITLE>
+    </REQ-IF-HEADER>
+  </THE-HEADER>
+  <CORE-CONTENT>
+    <REQ-IF-CONTENT>
+      <DATATYPES>
+        <DATATYPE-DEFINITION-STRING IDENTIFIER="ID_TC1100_DatatypeDefinitionString" LAST-CHANGE="2012-04-07T01:51:37.112+02:00" LONG-NAME="TC1100 DatatypeDefinitionString" MAX-LENGTH="255"/>
+        <DATATYPE-DEFINITION-DATE IDENTIFIER="ID_TC1100_DatatypeDefinitionDate" LAST-CHANGE="2012-04-07T01:51:37.112+02:00" LONG-NAME="TC1100 DatatypeDefinitionDate"/>
+        <DATATYPE-DEFINITION-XHTML IDENTIFIER="ID_TC18xx_DatatypeDefinitionXhtml" LAST-CHANGE="2012-04-07T01:51:37.112+02:00" LONG-NAME="TC18xx DatatypeDefinitionXhtml"/>
+      </DATATYPES>
+      <SPEC-TYPES>
+        <SPEC-OBJECT-TYPE IDENTIFIER="ID_TC1100_SpecObjectType" LAST-CHANGE="2012-04-07T01:51:37.112+02:00" LONG-NAME="TC1100 SpecObjectType">
+          <SPEC-ATTRIBUTES>
+            <ATTRIBUTE-DEFINITION-STRING IDENTIFIER="ID_TC1100_SpecObjectTypeAttributeDefinitionString_ReqIF.ForeignID" LAST-CHANGE="2012-04-07T01:51:37.112+02:00" LONG-NAME="ReqIF.ForeignID">
+              <TYPE>
+                <DATATYPE-DEFINITION-STRING-REF>ID_TC1100_DatatypeDefinitionString</DATATYPE-DEFINITION-STRING-REF>
+              </TYPE>
+            </ATTRIBUTE-DEFINITION-STRING>
+            <ATTRIBUTE-DEFINITION-XHTML IDENTIFIER="ID_TC1100_SpecObjectTypeAttributeDefinitionXhtml_ReqIF.Name" LAST-CHANGE="2012-04-07T01:51:37.112+02:00" LONG-NAME="ReqIF.Name">
+              <TYPE>
+                <DATATYPE-DEFINITION-XHTML-REF>ID_TC18xx_DatatypeDefinitionXhtml</DATATYPE-DEFINITION-XHTML-REF>
+              </TYPE>
+            </ATTRIBUTE-DEFINITION-XHTML>
+            <ATTRIBUTE-DEFINITION-STRING IDENTIFIER="ID_TC1100_SpecObjectTypeAttributeDefinitionString_ReqIF.ForeignCreatedBy" LAST-CHANGE="2012-04-07T01:51:37.112+02:00" LONG-NAME="ReqIF.ForeignCreatedBy">
+              <TYPE>
+                <DATATYPE-DEFINITION-STRING-REF>ID_TC1100_DatatypeDefinitionString</DATATYPE-DEFINITION-STRING-REF>
+              </TYPE>
+            </ATTRIBUTE-DEFINITION-STRING>
+            <ATTRIBUTE-DEFINITION-DATE IDENTIFIER="ID_TC1100_SpecObjectTypeAttributeDefinitionDate_ReqIF.ForeignCreatedOn" LAST-CHANGE="2012-04-07T01:51:37.112+02:00" LONG-NAME="ReqIF.ForeignCreatedOn">
+              <TYPE>
+                <DATATYPE-DEFINITION-DATE-REF>ID_TC1100_DatatypeDefinitionDate</DATATYPE-DEFINITION-DATE-REF>
+              </TYPE>
+            </ATTRIBUTE-DEFINITION-DATE>
+            <ATTRIBUTE-DEFINITION-STRING IDENTIFIER="ID_TC1100_SpecObjectTypeAttributeDefinitionString_ReqIF.ForeignModifiedBy" LAST-CHANGE="2012-04-07T01:51:37.112+02:00" LONG-NAME="ReqIF.ForeignModifiedBy">
+              <TYPE>
+                <DATATYPE-DEFINITION-STRING-REF>ID_TC1100_DatatypeDefinitionString</DATATYPE-DEFINITION-STRING-REF>
+              </TYPE>
+            </ATTRIBUTE-DEFINITION-STRING>
+          </SPEC-ATTRIBUTES>
+        </SPEC-OBJECT-TYPE>
+        <SPECIFICATION-TYPE IDENTIFIER="ID_TC1100_SpecificationType" LAST-CHANGE="2012-04-07T01:51:37.112+02:00" LONG-NAME="TC1100 SpecificationType">
+          <SPEC-ATTRIBUTES>
+            <ATTRIBUTE-DEFINITION-XHTML IDENTIFIER="ID_TC1100_SpecificationTypeAttributeDefinitionXHTML_ReqIF.Name" LAST-CHANGE="2012-04-07T01:51:37.112+02:00" LONG-NAME="ReqIF.Name">
+              <TYPE>
+                <DATATYPE-DEFINITION-XHTML-REF>ID_TC18xx_DatatypeDefinitionXhtml</DATATYPE-DEFINITION-XHTML-REF>
+              </TYPE>
+            </ATTRIBUTE-DEFINITION-XHTML>
+            <ATTRIBUTE-DEFINITION-STRING IDENTIFIER="ID_TC1100_SpecificationTypeAttributeDefinitionString_ReqIF.ForeignCreatedBy" LAST-CHANGE="2012-04-07T01:51:37.112+02:00" LONG-NAME="ReqIF.ForeignCreatedBy">
+              <TYPE>
+                <DATATYPE-DEFINITION-STRING-REF>ID_TC1100_DatatypeDefinitionString</DATATYPE-DEFINITION-STRING-REF>
+              </TYPE>
+            </ATTRIBUTE-DEFINITION-STRING>
+            <ATTRIBUTE-DEFINITION-DATE IDENTIFIER="ID_TC1100_SpecificationTypeAttributeDefinitionDate_ReqIF.ForeignCreatedOn" LAST-CHANGE="2012-04-07T01:51:37.112+02:00" LONG-NAME="ReqIF.ForeignCreatedOn">
+              <TYPE>
+                <DATATYPE-DEFINITION-DATE-REF>ID_TC1100_DatatypeDefinitionDate</DATATYPE-DEFINITION-DATE-REF>
+              </TYPE>
+            </ATTRIBUTE-DEFINITION-DATE>
+            <ATTRIBUTE-DEFINITION-STRING IDENTIFIER="ID_TC1100_SpecificationTypeAttributeDefinitionString_ReqIF.ForeignModifiedBy" LAST-CHANGE="2012-04-07T01:51:37.112+02:00" LONG-NAME="ReqIF.ForeignModifiedBy">
+              <TYPE>
+                <DATATYPE-DEFINITION-STRING-REF>ID_TC1100_DatatypeDefinitionString</DATATYPE-DEFINITION-STRING-REF>
+              </TYPE>
+            </ATTRIBUTE-DEFINITION-STRING>
+          </SPEC-ATTRIBUTES>
+        </SPECIFICATION-TYPE>
+      </SPEC-TYPES>
+      <SPEC-OBJECTS>
+        <SPEC-OBJECT IDENTIFIER="ID_TC1100_SpecObject1" LAST-CHANGE="2012-04-07T01:51:37.112+02:00">
+          <VALUES>
+            <ATTRIBUTE-VALUE-STRING THE-VALUE="1">
+              <DEFINITION>
+                <ATTRIBUTE-DEFINITION-STRING-REF>ID_TC1100_SpecObjectTypeAttributeDefinitionString_ReqIF.ForeignID</ATTRIBUTE-DEFINITION-STRING-REF>
+              </DEFINITION>
+            </ATTRIBUTE-VALUE-STRING>
+            <ATTRIBUTE-VALUE-XHTML>
+              <DEFINITION>
+                <ATTRIBUTE-DEFINITION-XHTML-REF>ID_TC1100_SpecObjectTypeAttributeDefinitionXhtml_ReqIF.Name</ATTRIBUTE-DEFINITION-XHTML-REF>
+              </DEFINITION>
+              <THE-VALUE>
+                <xhtml:p>Obj1</xhtml:p>
+              </THE-VALUE>
+            </ATTRIBUTE-VALUE-XHTML>
+            <ATTRIBUTE-VALUE-STRING THE-VALUE="Max Mustermann">
+              <DEFINITION>
+                <ATTRIBUTE-DEFINITION-STRING-REF>ID_TC1100_SpecObjectTypeAttributeDefinitionString_ReqIF.ForeignCreatedBy</ATTRIBUTE-DEFINITION-STRING-REF>
+              </DEFINITION>
+            </ATTRIBUTE-VALUE-STRING>
+            <ATTRIBUTE-VALUE-DATE THE-VALUE="2002-01-01T00:00:00.000Z">
+              <DEFINITION>
+                <ATTRIBUTE-DEFINITION-DATE-REF>ID_TC1100_SpecObjectTypeAttributeDefinitionDate_ReqIF.ForeignCreatedOn</ATTRIBUTE-DEFINITION-DATE-REF>
+              </DEFINITION>
+            </ATTRIBUTE-VALUE-DATE>
+            <ATTRIBUTE-VALUE-STRING THE-VALUE="Jane Q. Public">
+              <DEFINITION>
+                <ATTRIBUTE-DEFINITION-STRING-REF>ID_TC1100_SpecObjectTypeAttributeDefinitionString_ReqIF.ForeignModifiedBy</ATTRIBUTE-DEFINITION-STRING-REF>
+              </DEFINITION>
+            </ATTRIBUTE-VALUE-STRING>
+          </VALUES>
+          <TYPE>
+            <SPEC-OBJECT-TYPE-REF>ID_TC1100_SpecObjectType</SPEC-OBJECT-TYPE-REF>
+          </TYPE>
+        </SPEC-OBJECT>
+        <SPEC-OBJECT IDENTIFIER="ID_TC1100_SpecObject11" LAST-CHANGE="2012-04-07T01:51:37.112+02:00">
+          <VALUES>
+            <ATTRIBUTE-VALUE-STRING THE-VALUE="1.1">
+              <DEFINITION>
+                <ATTRIBUTE-DEFINITION-STRING-REF>ID_TC1100_SpecObjectTypeAttributeDefinitionString_ReqIF.ForeignID</ATTRIBUTE-DEFINITION-STRING-REF>
+              </DEFINITION>
+            </ATTRIBUTE-VALUE-STRING>
+            <ATTRIBUTE-VALUE-XHTML>
+              <DEFINITION>
+                <ATTRIBUTE-DEFINITION-XHTML-REF>ID_TC1100_SpecObjectTypeAttributeDefinitionXhtml_ReqIF.Name</ATTRIBUTE-DEFINITION-XHTML-REF>
+              </DEFINITION>
+              <THE-VALUE>
+                <xhtml:p>Obj1.1</xhtml:p>
+              </THE-VALUE>
+            </ATTRIBUTE-VALUE-XHTML>
+            <ATTRIBUTE-VALUE-STRING THE-VALUE="Otto Normal">
+              <DEFINITION>
+                <ATTRIBUTE-DEFINITION-STRING-REF>ID_TC1100_SpecObjectTypeAttributeDefinitionString_ReqIF.ForeignCreatedBy</ATTRIBUTE-DEFINITION-STRING-REF>
+              </DEFINITION>
+            </ATTRIBUTE-VALUE-STRING>
+            <ATTRIBUTE-VALUE-DATE THE-VALUE="2003-02-02T00:00:00.000Z">
+              <DEFINITION>
+                <ATTRIBUTE-DEFINITION-DATE-REF>ID_TC1100_SpecObjectTypeAttributeDefinitionDate_ReqIF.ForeignCreatedOn</ATTRIBUTE-DEFINITION-DATE-REF>
+              </DEFINITION>
+            </ATTRIBUTE-VALUE-DATE>
+            <ATTRIBUTE-VALUE-STRING THE-VALUE="John Q. Public">
+              <DEFINITION>
+                <ATTRIBUTE-DEFINITION-STRING-REF>ID_TC1100_SpecObjectTypeAttributeDefinitionString_ReqIF.ForeignModifiedBy</ATTRIBUTE-DEFINITION-STRING-REF>
+              </DEFINITION>
+            </ATTRIBUTE-VALUE-STRING>
+          </VALUES>
+          <TYPE>
+            <SPEC-OBJECT-TYPE-REF>ID_TC1100_SpecObjectType</SPEC-OBJECT-TYPE-REF>
+          </TYPE>
+        </SPEC-OBJECT>
+        <SPEC-OBJECT IDENTIFIER="ID_TC1100_SpecObject111" LAST-CHANGE="2012-04-07T01:51:37.112+02:00">
+          <VALUES>
+            <ATTRIBUTE-VALUE-STRING THE-VALUE="1.1.1">
+              <DEFINITION>
+                <ATTRIBUTE-DEFINITION-STRING-REF>ID_TC1100_SpecObjectTypeAttributeDefinitionString_ReqIF.ForeignID</ATTRIBUTE-DEFINITION-STRING-REF>
+              </DEFINITION>
+            </ATTRIBUTE-VALUE-STRING>
+            <ATTRIBUTE-VALUE-XHTML>
+              <DEFINITION>
+                <ATTRIBUTE-DEFINITION-XHTML-REF>ID_TC1100_SpecObjectTypeAttributeDefinitionXhtml_ReqIF.Name</ATTRIBUTE-DEFINITION-XHTML-REF>
+              </DEFINITION>
+              <THE-VALUE>
+                <xhtml:p>Obj1.1.1</xhtml:p>
+              </THE-VALUE>
+            </ATTRIBUTE-VALUE-XHTML>
+            <ATTRIBUTE-VALUE-STRING THE-VALUE="Fulanito">
+              <DEFINITION>
+                <ATTRIBUTE-DEFINITION-STRING-REF>ID_TC1100_SpecObjectTypeAttributeDefinitionString_ReqIF.ForeignCreatedBy</ATTRIBUTE-DEFINITION-STRING-REF>
+              </DEFINITION>
+            </ATTRIBUTE-VALUE-STRING>
+            <ATTRIBUTE-VALUE-DATE THE-VALUE="2004-03-03T00:00:00.000Z">
+              <DEFINITION>
+                <ATTRIBUTE-DEFINITION-DATE-REF>ID_TC1100_SpecObjectTypeAttributeDefinitionDate_ReqIF.ForeignCreatedOn</ATTRIBUTE-DEFINITION-DATE-REF>
+              </DEFINITION>
+            </ATTRIBUTE-VALUE-DATE>
+            <ATTRIBUTE-VALUE-STRING THE-VALUE="John Doe">
+              <DEFINITION>
+                <ATTRIBUTE-DEFINITION-STRING-REF>ID_TC1100_SpecObjectTypeAttributeDefinitionString_ReqIF.ForeignModifiedBy</ATTRIBUTE-DEFINITION-STRING-REF>
+              </DEFINITION>
+            </ATTRIBUTE-VALUE-STRING>
+          </VALUES>
+          <TYPE>
+            <SPEC-OBJECT-TYPE-REF>ID_TC1100_SpecObjectType</SPEC-OBJECT-TYPE-REF>
+          </TYPE>
+        </SPEC-OBJECT>
+        <SPEC-OBJECT IDENTIFIER="ID_TC1100_SpecObject12" LAST-CHANGE="2012-04-07T01:51:37.112+02:00">
+          <VALUES>
+            <ATTRIBUTE-VALUE-STRING THE-VALUE="1.2">
+              <DEFINITION>
+                <ATTRIBUTE-DEFINITION-STRING-REF>ID_TC1100_SpecObjectTypeAttributeDefinitionString_ReqIF.ForeignID</ATTRIBUTE-DEFINITION-STRING-REF>
+              </DEFINITION>
+            </ATTRIBUTE-VALUE-STRING>
+            <ATTRIBUTE-VALUE-XHTML>
+              <DEFINITION>
+                <ATTRIBUTE-DEFINITION-XHTML-REF>ID_TC1100_SpecObjectTypeAttributeDefinitionXhtml_ReqIF.Name</ATTRIBUTE-DEFINITION-XHTML-REF>
+              </DEFINITION>
+              <THE-VALUE>
+                <xhtml:p>Obj1.2</xhtml:p>
+              </THE-VALUE>
+            </ATTRIBUTE-VALUE-XHTML>
+            <ATTRIBUTE-VALUE-STRING THE-VALUE="Juan Nadie">
+              <DEFINITION>
+                <ATTRIBUTE-DEFINITION-STRING-REF>ID_TC1100_SpecObjectTypeAttributeDefinitionString_ReqIF.ForeignCreatedBy</ATTRIBUTE-DEFINITION-STRING-REF>
+              </DEFINITION>
+            </ATTRIBUTE-VALUE-STRING>
+            <ATTRIBUTE-VALUE-DATE THE-VALUE="2005-04-04T00:00:00.000Z">
+              <DEFINITION>
+                <ATTRIBUTE-DEFINITION-DATE-REF>ID_TC1100_SpecObjectTypeAttributeDefinitionDate_ReqIF.ForeignCreatedOn</ATTRIBUTE-DEFINITION-DATE-REF>
+              </DEFINITION>
+            </ATTRIBUTE-VALUE-DATE>
+            <ATTRIBUTE-VALUE-STRING THE-VALUE="Jane Q. Citizen">
+              <DEFINITION>
+                <ATTRIBUTE-DEFINITION-STRING-REF>ID_TC1100_SpecObjectTypeAttributeDefinitionString_ReqIF.ForeignModifiedBy</ATTRIBUTE-DEFINITION-STRING-REF>
+              </DEFINITION>
+            </ATTRIBUTE-VALUE-STRING>
+          </VALUES>
+          <TYPE>
+            <SPEC-OBJECT-TYPE-REF>ID_TC1100_SpecObjectType</SPEC-OBJECT-TYPE-REF>
+          </TYPE>
+        </SPEC-OBJECT>
+        <SPEC-OBJECT IDENTIFIER="ID_TC1100_SpecObject2" LAST-CHANGE="2012-04-07T01:51:37.112+02:00">
+          <VALUES>
+            <ATTRIBUTE-VALUE-STRING THE-VALUE="2">
+              <DEFINITION>
+                <ATTRIBUTE-DEFINITION-STRING-REF>ID_TC1100_SpecObjectTypeAttributeDefinitionString_ReqIF.ForeignID</ATTRIBUTE-DEFINITION-STRING-REF>
+              </DEFINITION>
+            </ATTRIBUTE-VALUE-STRING>
+            <ATTRIBUTE-VALUE-XHTML>
+              <DEFINITION>
+                <ATTRIBUTE-DEFINITION-XHTML-REF>ID_TC1100_SpecObjectTypeAttributeDefinitionXhtml_ReqIF.Name</ATTRIBUTE-DEFINITION-XHTML-REF>
+              </DEFINITION>
+              <THE-VALUE>
+                <xhtml:p>Obj2</xhtml:p>
+              </THE-VALUE>
+            </ATTRIBUTE-VALUE-XHTML>
+            <ATTRIBUTE-VALUE-STRING THE-VALUE="Jean Dupont">
+              <DEFINITION>
+                <ATTRIBUTE-DEFINITION-STRING-REF>ID_TC1100_SpecObjectTypeAttributeDefinitionString_ReqIF.ForeignCreatedBy</ATTRIBUTE-DEFINITION-STRING-REF>
+              </DEFINITION>
+            </ATTRIBUTE-VALUE-STRING>
+            <ATTRIBUTE-VALUE-DATE THE-VALUE="2006-05-05T00:00:00.000Z">
+              <DEFINITION>
+                <ATTRIBUTE-DEFINITION-DATE-REF>ID_TC1100_SpecObjectTypeAttributeDefinitionDate_ReqIF.ForeignCreatedOn</ATTRIBUTE-DEFINITION-DATE-REF>
+              </DEFINITION>
+            </ATTRIBUTE-VALUE-DATE>
+            <ATTRIBUTE-VALUE-STRING THE-VALUE="John Q. Citizen">
+              <DEFINITION>
+                <ATTRIBUTE-DEFINITION-STRING-REF>ID_TC1100_SpecObjectTypeAttributeDefinitionString_ReqIF.ForeignModifiedBy</ATTRIBUTE-DEFINITION-STRING-REF>
+              </DEFINITION>
+            </ATTRIBUTE-VALUE-STRING>
+          </VALUES>
+          <TYPE>
+            <SPEC-OBJECT-TYPE-REF>ID_TC1100_SpecObjectType</SPEC-OBJECT-TYPE-REF>
+          </TYPE>
+        </SPEC-OBJECT>
+      </SPEC-OBJECTS>
+      <SPECIFICATIONS>
+        <SPECIFICATION IDENTIFIER="ID_TC1100_Specification" LAST-CHANGE="2012-04-07T01:51:37.112+02:00">
+          <VALUES>
+            <ATTRIBUTE-VALUE-XHTML>
+              <DEFINITION>
+                <ATTRIBUTE-DEFINITION-XHTML-REF>ID_TC1100_SpecificationTypeAttributeDefinitionXHTML_ReqIF.Name</ATTRIBUTE-DEFINITION-XHTML-REF>
+              </DEFINITION>
+              <THE-VALUE>
+                <xhtml:p>Specification1</xhtml:p>
+              </THE-VALUE>
+            </ATTRIBUTE-VALUE-XHTML>
+            <ATTRIBUTE-VALUE-STRING THE-VALUE="Fulanito">
+              <DEFINITION>
+                <ATTRIBUTE-DEFINITION-STRING-REF>ID_TC1100_SpecificationTypeAttributeDefinitionString_ReqIF.ForeignCreatedBy</ATTRIBUTE-DEFINITION-STRING-REF>
+              </DEFINITION>
+            </ATTRIBUTE-VALUE-STRING>
+            <ATTRIBUTE-VALUE-DATE THE-VALUE="2002-01-01T00:00:00.000Z">
+              <DEFINITION>
+                <ATTRIBUTE-DEFINITION-DATE-REF>ID_TC1100_SpecificationTypeAttributeDefinitionDate_ReqIF.ForeignCreatedOn</ATTRIBUTE-DEFINITION-DATE-REF>
+              </DEFINITION>
+            </ATTRIBUTE-VALUE-DATE>
+            <ATTRIBUTE-VALUE-STRING THE-VALUE="Jane Q. Public">
+              <DEFINITION>
+                <ATTRIBUTE-DEFINITION-STRING-REF>ID_TC1100_SpecificationTypeAttributeDefinitionString_ReqIF.ForeignModifiedBy</ATTRIBUTE-DEFINITION-STRING-REF>
+              </DEFINITION>
+            </ATTRIBUTE-VALUE-STRING>
+          </VALUES>
+          <TYPE>
+            <SPECIFICATION-TYPE-REF>ID_TC1100_SpecificationType</SPECIFICATION-TYPE-REF>
+          </TYPE>
+          <CHILDREN>
+            <SPEC-HIERARCHY IDENTIFIER="ID_TC1100_SpecHierarchy1" LAST-CHANGE="2012-04-07T01:51:37.112+02:00" LONG-NAME="TC1100 SpecHierarchy 1">
+              <OBJECT>
+                <SPEC-OBJECT-REF>ID_TC1100_SpecObject1</SPEC-OBJECT-REF>
+              </OBJECT>
+              <CHILDREN>
+                <SPEC-HIERARCHY IDENTIFIER="ID_TC1100_SpecHierarchy11" LAST-CHANGE="2012-04-07T01:51:37.112+02:00" LONG-NAME="TC1100 SpecHierarchy 11">
+                  <OBJECT>
+                    <SPEC-OBJECT-REF>ID_TC1100_SpecObject11</SPEC-OBJECT-REF>
+                  </OBJECT>
+                  <CHILDREN>
+                    <SPEC-HIERARCHY IDENTIFIER="ID_TC1100_SpecHierarchy111" LAST-CHANGE="2012-04-07T01:51:37.112+02:00" LONG-NAME="TC1100 SpecHierarchy 111">
+                      <OBJECT>
+                        <SPEC-OBJECT-REF>ID_TC1100_SpecObject111</SPEC-OBJECT-REF>
+                      </OBJECT>
+                    </SPEC-HIERARCHY>
+                  </CHILDREN>
+                </SPEC-HIERARCHY>
+                <SPEC-HIERARCHY IDENTIFIER="ID_TC1100_SpecHierarchy12" LAST-CHANGE="2012-04-07T01:51:37.112+02:00" LONG-NAME="TC1100 SpecHierarchy 12">
+                  <OBJECT>
+                    <SPEC-OBJECT-REF>ID_TC1100_SpecObject12</SPEC-OBJECT-REF>
+                  </OBJECT>
+                </SPEC-HIERARCHY>
+              </CHILDREN>
+            </SPEC-HIERARCHY>
+            <SPEC-HIERARCHY IDENTIFIER="ID_TC1100_SpecHierarchy2" LAST-CHANGE="2012-04-07T01:51:37.112+02:00" LONG-NAME="TC1100 SpecHierarchy 12">
+              <OBJECT>
+                <SPEC-OBJECT-REF>ID_TC1100_SpecObject2</SPEC-OBJECT-REF>
+              </OBJECT>
+            </SPEC-HIERARCHY>
+          </CHILDREN>
+        </SPECIFICATION>
+      </SPECIFICATIONS>
+    </REQ-IF-CONTENT>
+  </CORE-CONTENT>
+</REQ-IF>

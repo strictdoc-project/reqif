@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<REQ-IF xmlns="http://www.omg.org/spec/ReqIF/20110401/reqif.xsd">
+  <THE-HEADER>
+    <REQ-IF-HEADER IDENTIFIER="ID_TC1000_ReqIfHeader">
+      <CREATION-TIME>2021-01-22T12:56:38.364Z</CREATION-TIME>
+      <REQ-IF-TOOL-ID>RMF - Requirements Modeling Framework (http://www.eclipse.org/rmf)</REQ-IF-TOOL-ID>
+      <REQ-IF-VERSION>1.0</REQ-IF-VERSION>
+      <SOURCE-TOOL-ID>RMF - Requirements Modeling Framework (http://www.eclipse.org/rmf)</SOURCE-TOOL-ID>
+      <TITLE>TC 1000 &#x27;Simple Content&#x27;</TITLE>
+    </REQ-IF-HEADER>
+  </THE-HEADER>
+  <CORE-CONTENT>
+    <REQ-IF-CONTENT>
+      <DATATYPES>
+        <DATATYPE-DEFINITION-BOOLEAN IDENTIFIER="ID_TC1000_DatatypeDefinitionBoolean" LAST-CHANGE="2012-04-07T01:51:37.112+02:00" LONG-NAME="TC1000 DatatypeDefinitionBoolean"/>
+        <DATATYPE-DEFINITION-INTEGER IDENTIFIER="ID_TC1000_DatatypeDefinitionInteger" LAST-CHANGE="2012-04-07T01:51:37.112+02:00" LONG-NAME="TC1000 DatatypeDefinitionInteger" MAX="5000" MIN="-17496"/>
+        <DATATYPE-DEFINITION-STRING IDENTIFIER="ID_TC1000_DatatypeDefinitionString" LAST-CHANGE="2012-04-07T01:51:37.112+02:00" LONG-NAME="TC1000 DatatypeDefinitionString" MAX-LENGTH="256"/>
+        <DATATYPE-DEFINITION-REAL ACCURACY="10" IDENTIFIER="ID_TC1000_DatatypeDefinitionReal" LAST-CHANGE="2012-04-07T01:51:37.112+02:00" LONG-NAME="TC1000 DatatypeDefinitionReal" MAX="1234.5678" MIN="-1234.5678"/>
+        <DATATYPE-DEFINITION-DATE IDENTIFIER="ID_TC1000_DatatypeDefinitionDate" LAST-CHANGE="2012-04-07T01:51:37.112+02:00" LONG-NAME="TC1000 DatatypeDefinitionDate"/>
+        <DATATYPE-DEFINITION-ENUMERATION IDENTIFIER="ID_TC1000_DatatypeDefinitionEnumeration" LAST-CHANGE="2012-04-07T01:51:37.112+02:00" LONG-NAME="TC1000 DatatypeDefinitionEnumeration">
+          <SPECIFIED-VALUES>
+            <ENUM-VALUE IDENTIFIER="ID_TC1000_DatatypeDefinitionEnumeration_EnumValue_Red" LAST-CHANGE="2012-04-07T01:51:37.112+02:00" LONG-NAME="TC1000 Red">
+              <PROPERTIES>
+                <EMBEDDED-VALUE KEY="0" OTHER-CONTENT=""/>
+              </PROPERTIES>
+            </ENUM-VALUE>
+            <ENUM-VALUE IDENTIFIER="ID_TC1000_DatatypeDefinitionEnumeration_EnumValue_Green" LAST-CHANGE="2012-04-07T01:51:37.112+02:00" LONG-NAME="TC1000 Green">
+              <PROPERTIES>
+                <EMBEDDED-VALUE KEY="1" OTHER-CONTENT=""/>
+              </PROPERTIES>
+            </ENUM-VALUE>
+            <ENUM-VALUE IDENTIFIER="ID_TC1000_DatatypeDefinitionEnumeration_EnumValue_Yellow" LAST-CHANGE="2012-04-07T01:51:37.112+02:00" LONG-NAME="TC1000 Yellow">
+              <PROPERTIES>
+                <EMBEDDED-VALUE KEY="2" OTHER-CONTENT=""/>
+              </PROPERTIES>
+            </ENUM-VALUE>
+          </SPECIFIED-VALUES>
+        </DATATYPE-DEFINITION-ENUMERATION>
+      </DATATYPES>
+      <SPEC-TYPES>
+        <SPEC-OBJECT-TYPE IDENTIFIER="ID_TC1000_SpecObjectType" LAST-CHANGE="2012-04-07T01:51:37.112+02:00" LONG-NAME="TC1000 SpecObjectType">
+          <SPEC-ATTRIBUTES>
+            <ATTRIBUTE-DEFINITION-BOOLEAN IDENTIFIER="ID_TC1000_AttributeDefinitionBoolean_TC1000T" LAST-CHANGE="2012-04-07T01:51:37.112+02:00" LONG-NAME="TC1000T">
+              <TYPE>
+                <DATATYPE-DEFINITION-BOOLEAN-REF>ID_TC1000_DatatypeDefinitionBoolean</DATATYPE-DEFINITION-BOOLEAN-REF>
+              </TYPE>
+            </ATTRIBUTE-DEFINITION-BOOLEAN>
+            <ATTRIBUTE-DEFINITION-BOOLEAN IDENTIFIER="ID_TC1000_AttributeDefinitionBoolean_TC1000F" LAST-CHANGE="2012-04-07T01:51:37.112+02:00" LONG-NAME="TC1000F">
+              <TYPE>
+                <DATATYPE-DEFINITION-BOOLEAN-REF>ID_TC1000_DatatypeDefinitionBoolean</DATATYPE-DEFINITION-BOOLEAN-REF>
+              </TYPE>
+            </ATTRIBUTE-DEFINITION-BOOLEAN>
+            <ATTRIBUTE-DEFINITION-INTEGER IDENTIFIER="ID_TC1000_AttributeDefinitionInteger" LAST-CHANGE="2012-04-07T01:51:37.112+02:00" LONG-NAME="TC1000 Integer">
+              <TYPE>
+                <DATATYPE-DEFINITION-INTEGER-REF>ID_TC1000_DatatypeDefinitionInteger</DATATYPE-DEFINITION-INTEGER-REF>
+              </TYPE>
+            </ATTRIBUTE-DEFINITION-INTEGER>
+            <ATTRIBUTE-DEFINITION-STRING IDENTIFIER="ID_TC1000_AttributeDefinitionString" LAST-CHANGE="2012-04-07T01:51:37.112+02:00" LONG-NAME="TC1000 String">
+              <TYPE>
+                <DATATYPE-DEFINITION-STRING-REF>ID_TC1000_DatatypeDefinitionString</DATATYPE-DEFINITION-STRING-REF>
+              </TYPE>
+            </ATTRIBUTE-DEFINITION-STRING>
+            <ATTRIBUTE-DEFINITION-REAL IDENTIFIER="ID_TC1000_AttributeDefinitionReal" LAST-CHANGE="2012-04-07T01:51:37.112+02:00" LONG-NAME="TC1000 Real">
+              <TYPE>
+                <DATATYPE-DEFINITION-REAL-REF>ID_TC1000_DatatypeDefinitionReal</DATATYPE-DEFINITION-REAL-REF>
+              </TYPE>
+            </ATTRIBUTE-DEFINITION-REAL>
+            <ATTRIBUTE-DEFINITION-DATE IDENTIFIER="ID_TC1000_AttributeDefinitionDate" LAST-CHANGE="2012-04-07T01:51:37.112+02:00" LONG-NAME="TC1000 Date">
+              <TYPE>
+                <DATATYPE-DEFINITION-DATE-REF>ID_TC1000_DatatypeDefinitionDate</DATATYPE-DEFINITION-DATE-REF>
+              </TYPE>
+            </ATTRIBUTE-DEFINITION-DATE>
+            <ATTRIBUTE-DEFINITION-ENUMERATION IDENTIFIER="ID_TC1000_AttributeDefinitionEnumeration" LAST-CHANGE="2012-04-07T01:51:37.112+02:00" LONG-NAME="TC1000 Enum" MULTI-VALUED="false">
+              <TYPE>
+                <DATATYPE-DEFINITION-ENUMERATION-REF>ID_TC1000_DatatypeDefinitionEnumeration</DATATYPE-DEFINITION-ENUMERATION-REF>
+              </TYPE>
+            </ATTRIBUTE-DEFINITION-ENUMERATION>
+            <ATTRIBUTE-DEFINITION-ENUMERATION IDENTIFIER="ID_TC1000_AttributeDefinitionEnumerationMultiValue" LAST-CHANGE="2012-04-07T01:51:37.112+02:00" LONG-NAME="TC1000 Enum MultiValue" MULTI-VALUED="true">
+              <TYPE>
+                <DATATYPE-DEFINITION-ENUMERATION-REF>ID_TC1000_DatatypeDefinitionEnumeration</DATATYPE-DEFINITION-ENUMERATION-REF>
+              </TYPE>
+            </ATTRIBUTE-DEFINITION-ENUMERATION>
+          </SPEC-ATTRIBUTES>
+        </SPEC-OBJECT-TYPE>
+        <SPECIFICATION-TYPE IDENTIFIER="ID_TC1000_SpecificationType" LAST-CHANGE="2012-04-07T01:51:37.112+02:00" LONG-NAME="TC1000 SpecificationType"/>
+      </SPEC-TYPES>
+      <SPEC-OBJECTS>
+        <SPEC-OBJECT IDENTIFIER="ID_TC1000_SpecObject" LAST-CHANGE="2012-04-07T01:51:37.112+02:00">
+          <VALUES>
+            <ATTRIBUTE-VALUE-BOOLEAN THE-VALUE="true">
+              <DEFINITION>
+                <ATTRIBUTE-DEFINITION-BOOLEAN-REF>ID_TC1000_AttributeDefinitionBoolean_TC1000T</ATTRIBUTE-DEFINITION-BOOLEAN-REF>
+              </DEFINITION>
+            </ATTRIBUTE-VALUE-BOOLEAN>
+            <ATTRIBUTE-VALUE-BOOLEAN THE-VALUE="false">
+              <DEFINITION>
+                <ATTRIBUTE-DEFINITION-BOOLEAN-REF>ID_TC1000_AttributeDefinitionBoolean_TC1000F</ATTRIBUTE-DEFINITION-BOOLEAN-REF>
+              </DEFINITION>
+            </ATTRIBUTE-VALUE-BOOLEAN>
+            <ATTRIBUTE-VALUE-INTEGER THE-VALUE="5000">
+              <DEFINITION>
+                <ATTRIBUTE-DEFINITION-INTEGER-REF>ID_TC1000_AttributeDefinitionInteger</ATTRIBUTE-DEFINITION-INTEGER-REF>
+              </DEFINITION>
+            </ATTRIBUTE-VALUE-INTEGER>
+            <ATTRIBUTE-VALUE-STRING THE-VALUE="Plain">
+              <DEFINITION>
+                <ATTRIBUTE-DEFINITION-STRING-REF>ID_TC1000_AttributeDefinitionString</ATTRIBUTE-DEFINITION-STRING-REF>
+              </DEFINITION>
+            </ATTRIBUTE-VALUE-STRING>
+            <ATTRIBUTE-VALUE-REAL THE-VALUE="1234.5">
+              <DEFINITION>
+                <ATTRIBUTE-DEFINITION-REAL-REF>ID_TC1000_AttributeDefinitionReal</ATTRIBUTE-DEFINITION-REAL-REF>
+              </DEFINITION>
+            </ATTRIBUTE-VALUE-REAL>
+            <ATTRIBUTE-VALUE-DATE THE-VALUE="2002-05-30T09:30:10.000+06:00">
+              <DEFINITION>
+                <ATTRIBUTE-DEFINITION-DATE-REF>ID_TC1000_AttributeDefinitionDate</ATTRIBUTE-DEFINITION-DATE-REF>
+              </DEFINITION>
+            </ATTRIBUTE-VALUE-DATE>
+            <ATTRIBUTE-VALUE-ENUMERATION>
+              <VALUES>
+                <ENUM-VALUE-REF>ID_TC1000_DatatypeDefinitionEnumeration_EnumValue_Yellow</ENUM-VALUE-REF>
+              </VALUES>
+              <DEFINITION>
+                <ATTRIBUTE-DEFINITION-ENUMERATION-REF>ID_TC1000_AttributeDefinitionEnumeration</ATTRIBUTE-DEFINITION-ENUMERATION-REF>
+              </DEFINITION>
+            </ATTRIBUTE-VALUE-ENUMERATION>
+            <ATTRIBUTE-VALUE-ENUMERATION>
+              <VALUES>
+                <ENUM-VALUE-REF>ID_TC1000_DatatypeDefinitionEnumeration_EnumValue_Yellow</ENUM-VALUE-REF>
+                <ENUM-VALUE-REF>ID_TC1000_DatatypeDefinitionEnumeration_EnumValue_Red</ENUM-VALUE-REF>
+                <ENUM-VALUE-REF>ID_TC1000_DatatypeDefinitionEnumeration_EnumValue_Green</ENUM-VALUE-REF>
+              </VALUES>
+              <DEFINITION>
+                <ATTRIBUTE-DEFINITION-ENUMERATION-REF>ID_TC1000_AttributeDefinitionEnumerationMultiValue</ATTRIBUTE-DEFINITION-ENUMERATION-REF>
+              </DEFINITION>
+            </ATTRIBUTE-VALUE-ENUMERATION>
+          </VALUES>
+          <TYPE>
+            <SPEC-OBJECT-TYPE-REF>ID_TC1000_SpecObjectType</SPEC-OBJECT-TYPE-REF>
+          </TYPE>
+        </SPEC-OBJECT>
+      </SPEC-OBJECTS>
+      <SPECIFICATIONS>
+        <SPECIFICATION IDENTIFIER="ID_TC1000_Specification" LAST-CHANGE="2012-04-07T01:51:37.112+02:00">
+          <TYPE>
+            <SPECIFICATION-TYPE-REF>ID_TC1000_SpecificationType</SPECIFICATION-TYPE-REF>
+          </TYPE>
+          <CHILDREN>
+            <SPEC-HIERARCHY IDENTIFIER="ID_TC1000_SpecHierarchy" LAST-CHANGE="2012-04-07T01:51:37.112+02:00" LONG-NAME="TC1000 SpecHierarchy">
+              <OBJECT>
+                <SPEC-OBJECT-REF>ID_TC1000_SpecObject</SPEC-OBJECT-REF>
+              </OBJECT>
+            </SPEC-HIERARCHY>
+          </CHILDREN>
+        </SPECIFICATION>
+      </SPECIFICATIONS>
+    </REQ-IF-CONTENT>
+  </CORE-CONTENT>
+</REQ-IF>
