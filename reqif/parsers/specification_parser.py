@@ -11,7 +11,7 @@ from reqif.parsers.spec_hierarchy_parser import (
 )
 from reqif.parsers.spec_object_parser import (
     ATTRIBUTE_DATE_TEMPLATE,
-    ATTRIBUTE_XHTML_TEMPLATE,
+    ATTRIBUTE_XHTML_TEMPLATE, ATTRIBUTE_STRING_TEMPLATE,
 )
 
 
@@ -184,8 +184,18 @@ class ReqIFSpecificationParser:
                                     definition_ref=xml_attribute.definition_ref,
                                     value=xml_attribute.value,
                                 )
+                            elif (
+                                xml_attribute.attribute_type
+                                == SpecObjectAttributeType.STRING
+                            ):
+                                output += ATTRIBUTE_STRING_TEMPLATE.format(
+                                    definition_ref=xml_attribute.definition_ref,
+                                    value=xml_attribute.value,
+                                )
                             else:
-                                raise NotImplementedError(xml_attribute)
+                                raise NotImplementedError(
+                                    xml_attribute, xml_attribute.attribute_type
+                                )
                         output += "          </VALUES>\n"
         output += "        </SPECIFICATION>\n"
 
