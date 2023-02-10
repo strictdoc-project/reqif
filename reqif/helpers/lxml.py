@@ -1,4 +1,3 @@
-import html
 from itertools import chain
 
 from lxml import etree
@@ -7,6 +6,25 @@ from lxml.etree import tostring
 
 def dump_xml_node(node):
     return etree.tostring(node, method="xml").decode("utf8")
+
+
+# This code is taken from Python 3.7. The addition is escaping of the tab
+# character.
+def my_escape(string: str) -> str:
+    """
+    Replace special characters "&", "<" and ">" to HTML-safe sequences.
+    If the optional flag quote is true (the default), the quotation mark
+    characters, both double quote (") and single quote (') characters are also
+    translated.
+    """
+    string = string.replace("&", "&amp;")  # Must be done first!
+    string = string.replace("<", "&lt;")
+    string = string.replace(">", "&gt;")
+    string = string.replace('"', "&quot;")
+    string = string.replace("'", "&#x27;")
+    # Invisible tab character
+    string = string.replace("\t", "&#9;")
+    return string
 
 
 # Using this rather hacky version because I could not make lxml to print
@@ -25,19 +43,23 @@ def stringify_namespaced_children(node) -> str:
         output += f"<{nskey}:{node_no_ns_tag}"
         for attribute, attribute_value in node.attrib.items():
             output += f' {attribute}="{attribute_value}"'
-        output += ">"
-        if node.text is not None:
-            output += html.escape(node.text)
-        for child in node.getchildren():
-            output += _stringify_reqif_ns_node(child)
-        output += f"</{nskey}:{node_no_ns_tag}>"
+        if node.text is not None or len(node.getchildren()) > 0:
+            output += ">"
+            if node.text is not None:
+                output += my_escape(node.text)
+            for child in node.getchildren():
+                output += _stringify_reqif_ns_node(child)
+            output += f"</{nskey}:{node_no_ns_tag}>"
+        else:
+            output += "/>"
+
         if node.tail is not None:
-            output += node.tail
+            output += my_escape(node.tail)
         return output
 
     string = ""
     if node.text is not None:
-        string += html.escape(node.text)
+        string += my_escape(node.text)
     for child in node.getchildren():
         string += _stringify_reqif_ns_node(child)
     return string

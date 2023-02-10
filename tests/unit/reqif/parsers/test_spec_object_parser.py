@@ -67,7 +67,9 @@ def test_02_attributes_xhtml():
     spec_object = SpecObjectParser.parse(spec_object_xml)
     assert spec_object.identifier == "TEST_SPEC_OBJECT_ID"
 
-    expected_xhtml = "<reqif-xhtml:div>susan</reqif-xhtml:div>"
+    expected_xhtml = (
+        "\n        <reqif-xhtml:div>susan</reqif-xhtml:div>\n      "
+    )
     assert (
         spec_object.attribute_map[
             "_7f123ed4-98dd-4eed-b96a-edc8828963a8_CREATEDBY"
