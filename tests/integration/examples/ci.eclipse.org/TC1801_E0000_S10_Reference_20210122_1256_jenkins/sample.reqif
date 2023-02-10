@@ -1,0 +1,335 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<REQ-IF xmlns="http://www.omg.org/spec/ReqIF/20110401/reqif.xsd" xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  <THE-HEADER>
+    <REQ-IF-HEADER IDENTIFIER="_RB77YVyxEeumRtWSJE-orw">
+      <CREATION-TIME>2021-01-22T12:56:38.677Z</CREATION-TIME>
+      <REQ-IF-TOOL-ID>RMF - Requirements Modeling Framework (http://www.eclipse.org/rmf)</REQ-IF-TOOL-ID>
+      <REQ-IF-VERSION>1.0</REQ-IF-VERSION>
+      <SOURCE-TOOL-ID>RMF - Requirements Modeling Framework (http://www.eclipse.org/rmf)</SOURCE-TOOL-ID>
+      <TITLE>TC 1800 'HIS Exchange Process OEM -> SUP (initial)'</TITLE>
+    </REQ-IF-HEADER>
+  </THE-HEADER>
+  <CORE-CONTENT>
+    <REQ-IF-CONTENT>
+      <DATATYPES>
+        <DATATYPE-DEFINITION-STRING IDENTIFIER="_RB77Y1yxEeumRtWSJE-orw" LAST-CHANGE="2012-04-07T01:51:37.112+02:00" LONG-NAME="TC18xx DatatypeDefinitionString" MAX-LENGTH="255"/>
+        <DATATYPE-DEFINITION-XHTML IDENTIFIER="_RB77ZFyxEeumRtWSJE-orw" LAST-CHANGE="2012-04-07T01:51:37.112+02:00" LONG-NAME="TC18xx DatatypeDefinitionXhtml"/>
+        <DATATYPE-DEFINITION-ENUMERATION IDENTIFIER="_RB77ZVyxEeumRtWSJE-orw" LAST-CHANGE="2012-04-07T01:51:37.112+02:00" LONG-NAME="TC18xx DatatypeDefinitionEnumeration">
+          <SPECIFIED-VALUES>
+            <ENUM-VALUE IDENTIFIER="_RB77ZlyxEeumRtWSJE-orw" LAST-CHANGE="2012-04-07T01:51:37.112+02:00" LONG-NAME="one">
+              <PROPERTIES>
+                <EMBEDDED-VALUE KEY="1" OTHER-CONTENT="one"/>
+              </PROPERTIES>
+            </ENUM-VALUE>
+            <ENUM-VALUE IDENTIFIER="_RB77aFyxEeumRtWSJE-orw" LAST-CHANGE="2012-04-07T01:51:37.112+02:00" LONG-NAME="two">
+              <PROPERTIES>
+                <EMBEDDED-VALUE KEY="2" OTHER-CONTENT="two"/>
+              </PROPERTIES>
+            </ENUM-VALUE>
+          </SPECIFIED-VALUES>
+        </DATATYPE-DEFINITION-ENUMERATION>
+      </DATATYPES>
+      <SPEC-TYPES>
+        <SPEC-OBJECT-TYPE IDENTIFIER="_RB77alyxEeumRtWSJE-orw" LAST-CHANGE="2012-04-07T01:51:37.112+02:00" LONG-NAME="TC18xx SpecObjectType">
+          <SPEC-ATTRIBUTES>
+            <ATTRIBUTE-DEFINITION-XHTML IDENTIFIER="_RB77a1yxEeumRtWSJE-orw" LAST-CHANGE="2012-04-07T01:51:37.112+02:00" LONG-NAME="ReqIF.Name">
+              <TYPE>
+                <DATATYPE-DEFINITION-XHTML-REF>_RB77ZFyxEeumRtWSJE-orw</DATATYPE-DEFINITION-XHTML-REF>
+              </TYPE>
+            </ATTRIBUTE-DEFINITION-XHTML>
+            <ATTRIBUTE-DEFINITION-STRING IDENTIFIER="_RB77bFyxEeumRtWSJE-orw" LAST-CHANGE="2012-04-07T01:51:37.112+02:00" LONG-NAME="A1">
+              <TYPE>
+                <DATATYPE-DEFINITION-STRING-REF>_RB77Y1yxEeumRtWSJE-orw</DATATYPE-DEFINITION-STRING-REF>
+              </TYPE>
+            </ATTRIBUTE-DEFINITION-STRING>
+            <ATTRIBUTE-DEFINITION-STRING IDENTIFIER="_RB77bVyxEeumRtWSJE-orw" LAST-CHANGE="2012-04-07T01:51:37.112+02:00" LONG-NAME="A2">
+              <TYPE>
+                <DATATYPE-DEFINITION-STRING-REF>_RB77Y1yxEeumRtWSJE-orw</DATATYPE-DEFINITION-STRING-REF>
+              </TYPE>
+            </ATTRIBUTE-DEFINITION-STRING>
+            <ATTRIBUTE-DEFINITION-ENUMERATION IDENTIFIER="_RB77blyxEeumRtWSJE-orw" LAST-CHANGE="2012-04-07T01:51:37.112+02:00" LONG-NAME="E1" MULTI-VALUED="false">
+              <TYPE>
+                <DATATYPE-DEFINITION-ENUMERATION-REF>_RB77ZVyxEeumRtWSJE-orw</DATATYPE-DEFINITION-ENUMERATION-REF>
+              </TYPE>
+            </ATTRIBUTE-DEFINITION-ENUMERATION>
+          </SPEC-ATTRIBUTES>
+        </SPEC-OBJECT-TYPE>
+        <SPECIFICATION-TYPE IDENTIFIER="_RB77b1yxEeumRtWSJE-orw" LAST-CHANGE="2012-04-07T01:51:37.112+02:00" LONG-NAME="TC18xx SpecificationType">
+          <SPEC-ATTRIBUTES>
+            <ATTRIBUTE-DEFINITION-XHTML IDENTIFIER="_RB77cFyxEeumRtWSJE-orw" LAST-CHANGE="2012-04-07T01:51:37.112+02:00" LONG-NAME="ReqIF.Name">
+              <TYPE>
+                <DATATYPE-DEFINITION-XHTML-REF>_RB77ZFyxEeumRtWSJE-orw</DATATYPE-DEFINITION-XHTML-REF>
+              </TYPE>
+            </ATTRIBUTE-DEFINITION-XHTML>
+          </SPEC-ATTRIBUTES>
+        </SPECIFICATION-TYPE>
+      </SPEC-TYPES>
+      <SPEC-OBJECTS>
+        <SPEC-OBJECT IDENTIFIER="_RB77cVyxEeumRtWSJE-orw" LAST-CHANGE="2012-04-07T01:51:37.112+02:00">
+          <VALUES>
+            <ATTRIBUTE-VALUE-XHTML>
+              <DEFINITION>
+                <ATTRIBUTE-DEFINITION-XHTML-REF>_RB77a1yxEeumRtWSJE-orw</ATTRIBUTE-DEFINITION-XHTML-REF>
+              </DEFINITION>
+              <THE-VALUE>
+                <xhtml:p>Obj-01</xhtml:p>
+              </THE-VALUE>
+            </ATTRIBUTE-VALUE-XHTML>
+            <ATTRIBUTE-VALUE-STRING THE-VALUE="no change">
+              <DEFINITION>
+                <ATTRIBUTE-DEFINITION-STRING-REF>_RB77bFyxEeumRtWSJE-orw</ATTRIBUTE-DEFINITION-STRING-REF>
+              </DEFINITION>
+            </ATTRIBUTE-VALUE-STRING>
+            <ATTRIBUTE-VALUE-STRING THE-VALUE="no change">
+              <DEFINITION>
+                <ATTRIBUTE-DEFINITION-STRING-REF>_RB77bVyxEeumRtWSJE-orw</ATTRIBUTE-DEFINITION-STRING-REF>
+              </DEFINITION>
+            </ATTRIBUTE-VALUE-STRING>
+            <ATTRIBUTE-VALUE-ENUMERATION>
+              <VALUES>
+                <ENUM-VALUE-REF>_RB77ZlyxEeumRtWSJE-orw</ENUM-VALUE-REF>
+              </VALUES>
+              <DEFINITION>
+                <ATTRIBUTE-DEFINITION-ENUMERATION-REF>_RB77blyxEeumRtWSJE-orw</ATTRIBUTE-DEFINITION-ENUMERATION-REF>
+              </DEFINITION>
+            </ATTRIBUTE-VALUE-ENUMERATION>
+          </VALUES>
+          <TYPE>
+            <SPEC-OBJECT-TYPE-REF>_RB77alyxEeumRtWSJE-orw</SPEC-OBJECT-TYPE-REF>
+          </TYPE>
+        </SPEC-OBJECT>
+        <SPEC-OBJECT IDENTIFIER="_RB77eFyxEeumRtWSJE-orw" LAST-CHANGE="2012-04-08T01:51:37.112+02:00">
+          <VALUES>
+            <ATTRIBUTE-VALUE-XHTML>
+              <DEFINITION>
+                <ATTRIBUTE-DEFINITION-XHTML-REF>_RB77a1yxEeumRtWSJE-orw</ATTRIBUTE-DEFINITION-XHTML-REF>
+              </DEFINITION>
+              <THE-VALUE>
+                <xhtml:p>Obj-03</xhtml:p>
+              </THE-VALUE>
+            </ATTRIBUTE-VALUE-XHTML>
+            <ATTRIBUTE-VALUE-STRING THE-VALUE="O3.A1 initial">
+              <DEFINITION>
+                <ATTRIBUTE-DEFINITION-STRING-REF>_RB77bFyxEeumRtWSJE-orw</ATTRIBUTE-DEFINITION-STRING-REF>
+              </DEFINITION>
+            </ATTRIBUTE-VALUE-STRING>
+            <ATTRIBUTE-VALUE-STRING THE-VALUE="O3.A2 once">
+              <DEFINITION>
+                <ATTRIBUTE-DEFINITION-STRING-REF>_RB77bVyxEeumRtWSJE-orw</ATTRIBUTE-DEFINITION-STRING-REF>
+              </DEFINITION>
+            </ATTRIBUTE-VALUE-STRING>
+            <ATTRIBUTE-VALUE-ENUMERATION>
+              <VALUES>
+                <ENUM-VALUE-REF>_RB77ZlyxEeumRtWSJE-orw</ENUM-VALUE-REF>
+              </VALUES>
+              <DEFINITION>
+                <ATTRIBUTE-DEFINITION-ENUMERATION-REF>_RB77blyxEeumRtWSJE-orw</ATTRIBUTE-DEFINITION-ENUMERATION-REF>
+              </DEFINITION>
+            </ATTRIBUTE-VALUE-ENUMERATION>
+          </VALUES>
+          <TYPE>
+            <SPEC-OBJECT-TYPE-REF>_RB77alyxEeumRtWSJE-orw</SPEC-OBJECT-TYPE-REF>
+          </TYPE>
+        </SPEC-OBJECT>
+        <SPEC-OBJECT IDENTIFIER="_RCCCAFyxEeumRtWSJE-orw" LAST-CHANGE="2012-04-08T01:51:37.112+02:00">
+          <VALUES>
+            <ATTRIBUTE-VALUE-XHTML>
+              <DEFINITION>
+                <ATTRIBUTE-DEFINITION-XHTML-REF>_RB77a1yxEeumRtWSJE-orw</ATTRIBUTE-DEFINITION-XHTML-REF>
+              </DEFINITION>
+              <THE-VALUE>
+                <xhtml:p>Obj-04</xhtml:p>
+              </THE-VALUE>
+            </ATTRIBUTE-VALUE-XHTML>
+            <ATTRIBUTE-VALUE-STRING THE-VALUE="no change">
+              <DEFINITION>
+                <ATTRIBUTE-DEFINITION-STRING-REF>_RB77bFyxEeumRtWSJE-orw</ATTRIBUTE-DEFINITION-STRING-REF>
+              </DEFINITION>
+            </ATTRIBUTE-VALUE-STRING>
+            <ATTRIBUTE-VALUE-STRING THE-VALUE="no change">
+              <DEFINITION>
+                <ATTRIBUTE-DEFINITION-STRING-REF>_RB77bVyxEeumRtWSJE-orw</ATTRIBUTE-DEFINITION-STRING-REF>
+              </DEFINITION>
+            </ATTRIBUTE-VALUE-STRING>
+            <ATTRIBUTE-VALUE-ENUMERATION>
+              <VALUES>
+                <ENUM-VALUE-REF>_RB77ZlyxEeumRtWSJE-orw</ENUM-VALUE-REF>
+              </VALUES>
+              <DEFINITION>
+                <ATTRIBUTE-DEFINITION-ENUMERATION-REF>_RB77blyxEeumRtWSJE-orw</ATTRIBUTE-DEFINITION-ENUMERATION-REF>
+              </DEFINITION>
+            </ATTRIBUTE-VALUE-ENUMERATION>
+          </VALUES>
+          <TYPE>
+            <SPEC-OBJECT-TYPE-REF>_RB77alyxEeumRtWSJE-orw</SPEC-OBJECT-TYPE-REF>
+          </TYPE>
+        </SPEC-OBJECT>
+        <SPEC-OBJECT IDENTIFIER="_RB77hlyxEeumRtWSJE-orw" LAST-CHANGE="2012-04-07T01:51:37.112+02:00">
+          <VALUES>
+            <ATTRIBUTE-VALUE-XHTML>
+              <DEFINITION>
+                <ATTRIBUTE-DEFINITION-XHTML-REF>_RB77a1yxEeumRtWSJE-orw</ATTRIBUTE-DEFINITION-XHTML-REF>
+              </DEFINITION>
+              <THE-VALUE>
+                <xhtml:p>Obj-07</xhtml:p>
+              </THE-VALUE>
+            </ATTRIBUTE-VALUE-XHTML>
+            <ATTRIBUTE-VALUE-STRING THE-VALUE="no change">
+              <DEFINITION>
+                <ATTRIBUTE-DEFINITION-STRING-REF>_RB77bFyxEeumRtWSJE-orw</ATTRIBUTE-DEFINITION-STRING-REF>
+              </DEFINITION>
+            </ATTRIBUTE-VALUE-STRING>
+            <ATTRIBUTE-VALUE-STRING THE-VALUE="no change">
+              <DEFINITION>
+                <ATTRIBUTE-DEFINITION-STRING-REF>_RB77bVyxEeumRtWSJE-orw</ATTRIBUTE-DEFINITION-STRING-REF>
+              </DEFINITION>
+            </ATTRIBUTE-VALUE-STRING>
+            <ATTRIBUTE-VALUE-ENUMERATION>
+              <VALUES>
+                <ENUM-VALUE-REF>_RB77ZlyxEeumRtWSJE-orw</ENUM-VALUE-REF>
+              </VALUES>
+              <DEFINITION>
+                <ATTRIBUTE-DEFINITION-ENUMERATION-REF>_RB77blyxEeumRtWSJE-orw</ATTRIBUTE-DEFINITION-ENUMERATION-REF>
+              </DEFINITION>
+            </ATTRIBUTE-VALUE-ENUMERATION>
+          </VALUES>
+          <TYPE>
+            <SPEC-OBJECT-TYPE-REF>_RB77alyxEeumRtWSJE-orw</SPEC-OBJECT-TYPE-REF>
+          </TYPE>
+        </SPEC-OBJECT>
+        <SPEC-OBJECT IDENTIFIER="_RB77jVyxEeumRtWSJE-orw" LAST-CHANGE="2012-04-07T01:51:37.112+02:00">
+          <VALUES>
+            <ATTRIBUTE-VALUE-XHTML>
+              <DEFINITION>
+                <ATTRIBUTE-DEFINITION-XHTML-REF>_RB77a1yxEeumRtWSJE-orw</ATTRIBUTE-DEFINITION-XHTML-REF>
+              </DEFINITION>
+              <THE-VALUE>
+                <xhtml:p>Obj-08</xhtml:p>
+              </THE-VALUE>
+            </ATTRIBUTE-VALUE-XHTML>
+            <ATTRIBUTE-VALUE-STRING THE-VALUE="no change">
+              <DEFINITION>
+                <ATTRIBUTE-DEFINITION-STRING-REF>_RB77bFyxEeumRtWSJE-orw</ATTRIBUTE-DEFINITION-STRING-REF>
+              </DEFINITION>
+            </ATTRIBUTE-VALUE-STRING>
+            <ATTRIBUTE-VALUE-STRING THE-VALUE="no change">
+              <DEFINITION>
+                <ATTRIBUTE-DEFINITION-STRING-REF>_RB77bVyxEeumRtWSJE-orw</ATTRIBUTE-DEFINITION-STRING-REF>
+              </DEFINITION>
+            </ATTRIBUTE-VALUE-STRING>
+            <ATTRIBUTE-VALUE-ENUMERATION>
+              <VALUES>
+                <ENUM-VALUE-REF>_RB77ZlyxEeumRtWSJE-orw</ENUM-VALUE-REF>
+              </VALUES>
+              <DEFINITION>
+                <ATTRIBUTE-DEFINITION-ENUMERATION-REF>_RB77blyxEeumRtWSJE-orw</ATTRIBUTE-DEFINITION-ENUMERATION-REF>
+              </DEFINITION>
+            </ATTRIBUTE-VALUE-ENUMERATION>
+          </VALUES>
+          <TYPE>
+            <SPEC-OBJECT-TYPE-REF>_RB77alyxEeumRtWSJE-orw</SPEC-OBJECT-TYPE-REF>
+          </TYPE>
+        </SPEC-OBJECT>
+        <SPEC-OBJECT IDENTIFIER="_RB77lFyxEeumRtWSJE-orw" LAST-CHANGE="2012-04-07T01:51:37.112+02:00">
+          <VALUES>
+            <ATTRIBUTE-VALUE-XHTML>
+              <DEFINITION>
+                <ATTRIBUTE-DEFINITION-XHTML-REF>_RB77a1yxEeumRtWSJE-orw</ATTRIBUTE-DEFINITION-XHTML-REF>
+              </DEFINITION>
+              <THE-VALUE>
+                <xhtml:p>Obj-09</xhtml:p>
+              </THE-VALUE>
+            </ATTRIBUTE-VALUE-XHTML>
+            <ATTRIBUTE-VALUE-STRING THE-VALUE="no change">
+              <DEFINITION>
+                <ATTRIBUTE-DEFINITION-STRING-REF>_RB77bFyxEeumRtWSJE-orw</ATTRIBUTE-DEFINITION-STRING-REF>
+              </DEFINITION>
+            </ATTRIBUTE-VALUE-STRING>
+            <ATTRIBUTE-VALUE-STRING THE-VALUE="no change">
+              <DEFINITION>
+                <ATTRIBUTE-DEFINITION-STRING-REF>_RB77bVyxEeumRtWSJE-orw</ATTRIBUTE-DEFINITION-STRING-REF>
+              </DEFINITION>
+            </ATTRIBUTE-VALUE-STRING>
+            <ATTRIBUTE-VALUE-ENUMERATION>
+              <VALUES>
+                <ENUM-VALUE-REF>_RB77ZlyxEeumRtWSJE-orw</ENUM-VALUE-REF>
+              </VALUES>
+              <DEFINITION>
+                <ATTRIBUTE-DEFINITION-ENUMERATION-REF>_RB77blyxEeumRtWSJE-orw</ATTRIBUTE-DEFINITION-ENUMERATION-REF>
+              </DEFINITION>
+            </ATTRIBUTE-VALUE-ENUMERATION>
+          </VALUES>
+          <TYPE>
+            <SPEC-OBJECT-TYPE-REF>_RB77alyxEeumRtWSJE-orw</SPEC-OBJECT-TYPE-REF>
+          </TYPE>
+        </SPEC-OBJECT>
+      </SPEC-OBJECTS>
+      <SPECIFICATIONS>
+        <SPECIFICATION IDENTIFIER="_RB77m1yxEeumRtWSJE-orw" LAST-CHANGE="2012-04-07T01:51:37.112+02:00">
+          <VALUES>
+            <ATTRIBUTE-VALUE-XHTML>
+              <DEFINITION>
+                <ATTRIBUTE-DEFINITION-XHTML-REF>_RB77cFyxEeumRtWSJE-orw</ATTRIBUTE-DEFINITION-XHTML-REF>
+              </DEFINITION>
+              <THE-VALUE>
+                <xhtml:p>Spec1</xhtml:p>
+              </THE-VALUE>
+            </ATTRIBUTE-VALUE-XHTML>
+          </VALUES>
+          <TYPE>
+            <SPECIFICATION-TYPE-REF>_RB77b1yxEeumRtWSJE-orw</SPECIFICATION-TYPE-REF>
+          </TYPE>
+          <CHILDREN>
+            <SPEC-HIERARCHY IDENTIFIER="_RB77n1yxEeumRtWSJE-orw" LAST-CHANGE="2012-04-07T01:51:37.112+02:00">
+              <OBJECT>
+                <SPEC-OBJECT-REF>_RB77cVyxEeumRtWSJE-orw</SPEC-OBJECT-REF>
+              </OBJECT>
+            </SPEC-HIERARCHY>
+            <SPEC-HIERARCHY IDENTIFIER="_RB77oFyxEeumRtWSJE-orw" LAST-CHANGE="2012-04-07T01:51:37.112+02:00">
+              <OBJECT>
+                <SPEC-OBJECT-REF>_RB77eFyxEeumRtWSJE-orw</SPEC-OBJECT-REF>
+              </OBJECT>
+            </SPEC-HIERARCHY>
+            <SPEC-HIERARCHY IDENTIFIER="_RCCCB1yxEeumRtWSJE-orw" LAST-CHANGE="2012-04-08T01:51:37.112+02:00">
+              <OBJECT>
+                <SPEC-OBJECT-REF>_RCCCAFyxEeumRtWSJE-orw</SPEC-OBJECT-REF>
+              </OBJECT>
+            </SPEC-HIERARCHY>
+            <SPEC-HIERARCHY IDENTIFIER="_RB77olyxEeumRtWSJE-orw" LAST-CHANGE="2012-04-07T01:51:37.112+02:00">
+              <OBJECT>
+                <SPEC-OBJECT-REF>_RB77hlyxEeumRtWSJE-orw</SPEC-OBJECT-REF>
+              </OBJECT>
+            </SPEC-HIERARCHY>
+            <SPEC-HIERARCHY IDENTIFIER="_RB77pFyxEeumRtWSJE-orw" LAST-CHANGE="2012-04-07T01:51:37.112+02:00">
+              <OBJECT>
+                <SPEC-OBJECT-REF>_RB77lFyxEeumRtWSJE-orw</SPEC-OBJECT-REF>
+              </OBJECT>
+            </SPEC-HIERARCHY>
+          </CHILDREN>
+        </SPECIFICATION>
+        <SPECIFICATION IDENTIFIER="_RB77pVyxEeumRtWSJE-orw" LAST-CHANGE="2012-04-07T01:51:37.112+02:00">
+          <VALUES>
+            <ATTRIBUTE-VALUE-XHTML>
+              <DEFINITION>
+                <ATTRIBUTE-DEFINITION-XHTML-REF>_RB77cFyxEeumRtWSJE-orw</ATTRIBUTE-DEFINITION-XHTML-REF>
+              </DEFINITION>
+              <THE-VALUE>
+                <xhtml:p>Spec2</xhtml:p>
+              </THE-VALUE>
+            </ATTRIBUTE-VALUE-XHTML>
+          </VALUES>
+          <TYPE>
+            <SPECIFICATION-TYPE-REF>_RB77b1yxEeumRtWSJE-orw</SPECIFICATION-TYPE-REF>
+          </TYPE>
+          <CHILDREN>
+            <SPEC-HIERARCHY IDENTIFIER="_RCCCCFyxEeumRtWSJE-orw" LAST-CHANGE="2012-04-08T01:51:37.112+02:00">
+              <OBJECT>
+                <SPEC-OBJECT-REF>_RB77jVyxEeumRtWSJE-orw</SPEC-OBJECT-REF>
+              </OBJECT>
+            </SPEC-HIERARCHY>
+          </CHILDREN>
+        </SPECIFICATION>
+      </SPECIFICATIONS>
+    </REQ-IF-CONTENT>
+  </CORE-CONTENT>
+</REQ-IF>
