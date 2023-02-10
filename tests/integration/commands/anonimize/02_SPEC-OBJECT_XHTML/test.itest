@@ -1,0 +1,3 @@
+RUN: mkdir -p %S/output
+RUN: %reqif anonymize %S/sample.reqif %S/output/sample.reqif
+RUN: diff %S/output/sample.reqif %S/expected/sample.reqif

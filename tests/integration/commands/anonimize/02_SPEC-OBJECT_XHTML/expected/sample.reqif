@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<REQ-IF xmlns="http://www.omg.org/spec/ReqIF/20110401/reqif.xsd" xmlns:doors="http://www.ibm.com/rdm/doors/REQIF/xmlns/1.0" xmlns:reqif="http://www.omg.org/spec/ReqIF/20110401/reqif.xsd" xmlns:reqif-common="http://www.prostep.org/reqif" xmlns:reqif-xhtml="http://www.w3.org/1999/xhtml" xmlns:rm="http://www.ibm.com/rm" xmlns:rm-reqif="http://www.ibm.com/rm/reqif" xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <CORE-CONTENT>
+    <REQ-IF-CONTENT>
+      <SPEC-OBJECTS>
+        <SPEC-OBJECT IDENTIFIER="TEST_SPEC_OBJECT_IDENTIFIER" LAST-CHANGE="2021-10-15T11:34:36.007+02:00">
+          <VALUES>
+            <ATTRIBUTE-VALUE-XHTML>
+              <DEFINITION>
+                <ATTRIBUTE-DEFINITION-XHTML-REF>_424e8159-494a-474e-b3aa-e96757244cd7</ATTRIBUTE-DEFINITION-XHTML-REF>
+              </DEFINITION>
+              <THE-VALUE>...Anonymized-9366742693...</THE-VALUE>
+            </ATTRIBUTE-VALUE-XHTML>
+          </VALUES>
+          <TYPE>
+            <SPEC-OBJECT-TYPE-REF>TEST_SPEC_OBJECT_TYPE_IDENTIFIER_FUNCTIONAL</SPEC-OBJECT-TYPE-REF>
+          </TYPE>
+        </SPEC-OBJECT>
+      </SPEC-OBJECTS>
+    </REQ-IF-CONTENT>
+  </CORE-CONTENT>
+</REQ-IF>
