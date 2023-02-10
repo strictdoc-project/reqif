@@ -8,20 +8,21 @@ from reqif.models.reqif_spec_object_type import SpecAttributeDefinition
 class ReqIFSpecificationType:
     def __init__(  # pylint: disable=too-many-arguments
         self,
-        description: Optional[str],
         identifier: str,
-        last_change: str,
-        long_name: Optional[str],
-        spec_attributes: Optional[List[SpecAttributeDefinition]],
-        spec_attribute_map: Dict[str, str],
+        description: Optional[str] = None,
+        last_change: Optional[str] = None,
+        long_name: Optional[str] = None,
+        spec_attributes: Optional[List[SpecAttributeDefinition]] = None,
+        spec_attribute_map: Optional[Dict[str, str]] = None,
         is_self_closed: bool = False,
     ):
-        self.description: Optional[str] = description
         self.identifier: str = identifier
-        self.last_change: str = last_change
+
+        self.description: Optional[str] = description
+        self.last_change: Optional[str] = last_change
         self.long_name: Optional[str] = long_name
         self.spec_attributes: Optional[
             List[SpecAttributeDefinition]
         ] = spec_attributes
-        self.spec_attribute_map = spec_attribute_map
+        self.spec_attribute_map: Optional[Dict[str, str]] = spec_attribute_map
         self.is_self_closed: bool = is_self_closed

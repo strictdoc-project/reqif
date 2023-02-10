@@ -194,7 +194,6 @@ class DataTypeParser:
             output = "        <DATATYPE-DEFINITION-STRING"
             if data_type_definition.description:
                 output += f' DESC="{data_type_definition.description}"'
-
             output += f' IDENTIFIER="{data_type_definition.identifier}"'
             if data_type_definition.last_change:
                 output += f' LAST-CHANGE="{data_type_definition.last_change}"'
@@ -228,7 +227,6 @@ class DataTypeParser:
             output = "        <DATATYPE-DEFINITION-INTEGER"
             if data_type_definition.description:
                 output += f' DESC="{data_type_definition.description}"'
-
             output += f' IDENTIFIER="{data_type_definition.identifier}"'
             if data_type_definition.last_change:
                 output += f' LAST-CHANGE="{data_type_definition.last_change}"'

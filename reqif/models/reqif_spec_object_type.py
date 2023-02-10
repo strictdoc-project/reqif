@@ -12,24 +12,25 @@ class DefaultValueEmptySelfClosedTag:
 class SpecAttributeDefinition:  # pylint: disable=too-many-instance-attributes
     def __init__(  # pylint: disable=too-many-arguments
         self,
-        xml_node: Optional[Any],
         attribute_type: SpecObjectAttributeType,
-        description: Optional[str],
         identifier: str,
-        last_change: Optional[str],
         datatype_definition: str,
-        long_name: Optional[str],
-        editable: Optional[bool],
-        default_value_definition_ref: Optional[str],
-        default_value: Union[None, DefaultValueEmptySelfClosedTag, str],
-        multi_valued: Optional[bool],
+        xml_node: Optional[Any] = None,
+        description: Optional[str] = None,
+        last_change: Optional[str] = None,
+        long_name: Optional[str] = None,
+        editable: Optional[bool] = None,
+        default_value_definition_ref: Optional[str] = None,
+        default_value: Union[None, DefaultValueEmptySelfClosedTag, str] = None,
+        multi_valued: Optional[bool] = None,
     ):
-        self.xml_node: Optional[Any] = xml_node
         self.attribute_type: SpecObjectAttributeType = attribute_type
-        self.description: Optional[str] = description
         self.identifier: str = identifier
-        self.last_change: Optional[str] = last_change
         self.datatype_definition: str = datatype_definition
+
+        self.xml_node: Optional[Any] = xml_node
+        self.description: Optional[str] = description
+        self.last_change: Optional[str] = last_change
         self.long_name: Optional[str] = long_name
         self.editable: Optional[bool] = (
             editable == "true" if editable is not None else None
@@ -51,16 +52,10 @@ class SpecAttributeDefinition:  # pylint: disable=too-many-instance-attributes
         multi_valued: Optional[bool] = None,
     ):
         return SpecAttributeDefinition(
-            xml_node=None,
             attribute_type=attribute_type,
-            description=None,
             identifier=identifier,
-            last_change=None,
             datatype_definition=datatype_definition,
             long_name=long_name,
-            editable=None,
-            default_value_definition_ref=None,
-            default_value=None,
             multi_valued=multi_valued,
         )
 
@@ -69,14 +64,15 @@ class SpecAttributeDefinition:  # pylint: disable=too-many-instance-attributes
 class ReqIFSpecObjectType:
     def __init__(  # pylint: disable=too-many-arguments
         self,
-        description: Optional[str],
         identifier: str,
-        last_change: Optional[str],
-        long_name: Optional[str],
-        attribute_definitions: Optional[List[SpecAttributeDefinition]],
+        description: Optional[str] = None,
+        last_change: Optional[str] = None,
+        long_name: Optional[str] = None,
+        attribute_definitions: Optional[List[SpecAttributeDefinition]] = None,
     ):
-        self.description: Optional[str] = description
         self.identifier: str = identifier
+
+        self.description: Optional[str] = description
         self.last_change: Optional[str] = last_change
         self.long_name: Optional[str] = long_name
         self.attribute_definitions: Optional[
@@ -99,8 +95,8 @@ class ReqIFSpecObjectType:
         attribute_definitions: Optional[List[SpecAttributeDefinition]] = None,
     ):
         return ReqIFSpecObjectType(
-            description=description,
             identifier=identifier,
+            description=description,
             last_change=last_change,
             long_name=long_name,
             attribute_definitions=attribute_definitions,

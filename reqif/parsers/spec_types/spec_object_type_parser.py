@@ -412,6 +412,7 @@ class SpecObjectTypeParser:
             output += "              <DEFAULT-VALUE/>\n"
             return output
         if attribute.attribute_type == SpecObjectAttributeType.ENUMERATION:
+            assert attribute.default_value_definition_ref is not None, attribute
             output += (
                 "              <DEFAULT-VALUE>\n"
                 f"                "
@@ -430,6 +431,7 @@ class SpecObjectTypeParser:
                 "              </DEFAULT-VALUE>\n"
             )
         elif attribute.attribute_type == SpecObjectAttributeType.XHTML:
+            assert attribute.default_value_definition_ref is not None, attribute
             output += (
                 "              <DEFAULT-VALUE>\n"
                 "                <ATTRIBUTE-VALUE-XHTML>\n"
@@ -444,6 +446,7 @@ class SpecObjectTypeParser:
                 "              </DEFAULT-VALUE>\n"
             )
         elif attribute.attribute_type == SpecObjectAttributeType.BOOLEAN:
+            assert attribute.default_value_definition_ref is not None, attribute
             output += (
                 "              <DEFAULT-VALUE>\n"
                 f"                <ATTRIBUTE-VALUE-BOOLEAN "

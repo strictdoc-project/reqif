@@ -7,14 +7,14 @@ from reqif.helpers.debug import auto_described
 class ReqIFReqIFHeader:  # pylint: disable=too-many-instance-attributes
     def __init__(  # pylint: disable=too-many-arguments
         self,
-        identifier: Optional[str],
-        comment: Optional[str],
-        creation_time: Optional[str],
-        repository_id: Optional[str],
-        req_if_tool_id: Optional[str],
-        req_if_version: Optional[str],
-        source_tool_id: Optional[str],
-        title: Optional[str],
+        identifier: Optional[str] = None,
+        comment: Optional[str] = None,
+        creation_time: Optional[str] = None,
+        repository_id: Optional[str] = None,
+        req_if_tool_id: Optional[str] = None,
+        req_if_version: Optional[str] = None,
+        source_tool_id: Optional[str] = None,
+        title: Optional[str] = None,
     ):
         self.identifier: Optional[str] = identifier
         self.comment: Optional[str] = comment
