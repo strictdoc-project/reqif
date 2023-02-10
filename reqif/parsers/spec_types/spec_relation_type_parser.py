@@ -46,7 +46,8 @@ class SpecRelationTypeParser:
         output += f' IDENTIFIER="{spec_relation_type.identifier}"'
         if spec_relation_type.last_change is not None:
             output += f' LAST-CHANGE="{spec_relation_type.last_change}"'
-        output += f' LONG-NAME="{spec_relation_type.long_name}"'
+        if spec_relation_type.long_name is not None:
+            output += f' LONG-NAME="{spec_relation_type.long_name}"'
         if spec_relation_type.is_self_closed:
             output += "/>\n"
         else:
