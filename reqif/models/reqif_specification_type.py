@@ -14,7 +14,7 @@ class ReqIFSpecificationType:
         long_name: Optional[str],
         spec_attributes: Optional[List[SpecAttributeDefinition]],
         spec_attribute_map: Dict[str, str],
-        is_self_closed: bool = True,
+        is_self_closed: bool = False,
     ):
         self.description: Optional[str] = description
         self.identifier: str = identifier
