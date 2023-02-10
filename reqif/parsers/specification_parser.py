@@ -11,8 +11,8 @@ from reqif.parsers.spec_hierarchy_parser import (
 )
 from reqif.parsers.spec_object_parser import (
     ATTRIBUTE_DATE_TEMPLATE,
-    ATTRIBUTE_XHTML_TEMPLATE,
     ATTRIBUTE_STRING_TEMPLATE,
+    ATTRIBUTE_XHTML_TEMPLATE,
 )
 
 
