@@ -172,7 +172,8 @@ class SpecificationTypeParser:
         if spec_type.description is not None:
             output += f' DESC="{spec_type.description}"'
         output += f' IDENTIFIER="{spec_type.identifier}"'
-        output += f' LAST-CHANGE="{spec_type.last_change}"'
+        if spec_type.last_change is not None:
+            output += f' LAST-CHANGE="{spec_type.last_change}"'
         if spec_type.long_name is not None:
             output += f' LONG-NAME="{spec_type.long_name}"'
 
