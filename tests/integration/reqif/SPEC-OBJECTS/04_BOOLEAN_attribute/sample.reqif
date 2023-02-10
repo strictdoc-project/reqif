@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<REQ-IF xmlns="http://www.omg.org/spec/ReqIF/20110401/reqif.xsd" xmlns:doors="http://www.ibm.com/rdm/doors/REQIF/xmlns/1.0" xmlns:reqif="http://www.omg.org/spec/ReqIF/20110401/reqif.xsd" xmlns:reqif-common="http://www.prostep.org/reqif" xmlns:reqif-xhtml="http://www.w3.org/1999/xhtml" xmlns:rm="http://www.ibm.com/rm" xmlns:rm-reqif="http://www.ibm.com/rm/reqif" xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <CORE-CONTENT>
+    <REQ-IF-CONTENT>
+      <SPEC-OBJECTS>
+        <SPEC-OBJECT IDENTIFIER="_1_173759ff-cc02-4b85-8c95-457b785181b9" LAST-CHANGE="2018-10-12T16:43:58">
+          <TYPE>
+            <SPEC-OBJECT-TYPE-REF>_d1cbf7fe-5d6f-4d0a-b14a-c83e3b64477e</SPEC-OBJECT-TYPE-REF>
+          </TYPE>
+          <VALUES>
+            <ATTRIBUTE-VALUE-BOOLEAN THE-VALUE="true">
+              <DEFINITION>
+                <ATTRIBUTE-DEFINITION-BOOLEAN-REF>_295e207f-e060-4b94-9845-26a5e6cf9d50</ATTRIBUTE-DEFINITION-BOOLEAN-REF>
+              </DEFINITION>
+            </ATTRIBUTE-VALUE-BOOLEAN>
+          </VALUES>
+        </SPEC-OBJECT>
+      </SPEC-OBJECTS>
+    </REQ-IF-CONTENT>
+  </CORE-CONTENT>
+</REQ-IF>
