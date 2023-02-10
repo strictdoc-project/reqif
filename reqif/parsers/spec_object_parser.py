@@ -74,6 +74,14 @@ ATTRIBUTE_XHTML_TEMPLATE = """\
             </ATTRIBUTE-VALUE-XHTML>
 """
 
+ATTRIBUTE_BOOLEAN_TEMPLATE = """\
+            <ATTRIBUTE-VALUE-BOOLEAN THE-VALUE="{value}">
+              <DEFINITION>
+                <ATTRIBUTE-DEFINITION-BOOLEAN-REF>{definition_ref}</ATTRIBUTE-DEFINITION-BOOLEAN-REF>
+              </DEFINITION>
+            </ATTRIBUTE-VALUE-BOOLEAN>
+"""
+
 
 class SpecObjectParser:
     @staticmethod
@@ -316,6 +324,11 @@ class SpecObjectParser:
                 )
             elif attribute.attribute_type == SpecObjectAttributeType.XHTML:
                 output += ATTRIBUTE_XHTML_TEMPLATE.format(
+                    definition_ref=attribute.definition_ref,
+                    value=attribute.value,
+                )
+            elif attribute.attribute_type == SpecObjectAttributeType.BOOLEAN:
+                output += ATTRIBUTE_BOOLEAN_TEMPLATE.format(
                     definition_ref=attribute.definition_ref,
                     value=attribute.value,
                 )
