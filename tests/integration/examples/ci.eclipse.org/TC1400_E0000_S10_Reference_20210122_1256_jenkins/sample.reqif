@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<REQ-IF xmlns="http://www.omg.org/spec/ReqIF/20110401/reqif.xsd">
+  <THE-HEADER>
+    <REQ-IF-HEADER IDENTIFIER="ID_TC1400_ReqIfHeader">
+      <CREATION-TIME>2021-01-22T12:56:38.424Z</CREATION-TIME>
+      <REQ-IF-TOOL-ID>RMF - Requirements Modeling Framework (http://www.eclipse.org/rmf)</REQ-IF-TOOL-ID>
+      <REQ-IF-VERSION>1.0</REQ-IF-VERSION>
+      <SOURCE-TOOL-ID>RMF - Requirements Modeling Framework (http://www.eclipse.org/rmf)</SOURCE-TOOL-ID>
+      <TITLE>TC 1400 'Internal Table'</TITLE>
+    </REQ-IF-HEADER>
+  </THE-HEADER>
+  <CORE-CONTENT>
+    <REQ-IF-CONTENT>
+      <DATATYPES>
+        <DATATYPE-DEFINITION-STRING IDENTIFIER="ID_TC1400_DatatypeDefinitionString" LAST-CHANGE="2012-04-07T01:51:37.112+02:00" LONG-NAME="TC1400 DatatypeDefinitionString" MAX-LENGTH="255"/>
+        <DATATYPE-DEFINITION-INTEGER IDENTIFIER="ID_TC1400_DatatypeDefinitionInteger" LAST-CHANGE="2012-04-07T01:51:37.112+02:00" LONG-NAME="TC1400 DatatypeDefinitionInteger" MAX="1000000" MIN="0"/>
+      </DATATYPES>
+      <SPEC-TYPES>
+        <SPEC-OBJECT-TYPE IDENTIFIER="ID_TC1400_SpecObjectTypeRegular" LAST-CHANGE="2012-04-07T01:51:37.112+02:00" LONG-NAME="TC1400 SpecObjectType Regular">
+          <SPEC-ATTRIBUTES>
+            <ATTRIBUTE-DEFINITION-STRING IDENTIFIER="ID_TC1400_SpecObjectTypeRegularAttributeDefinitionString_ReqIF.Name" LAST-CHANGE="2012-04-07T01:51:37.112+02:00" LONG-NAME="ReqIF.Name">
+              <TYPE>
+                <DATATYPE-DEFINITION-STRING-REF>ID_TC1400_DatatypeDefinitionString</DATATYPE-DEFINITION-STRING-REF>
+              </TYPE>
+            </ATTRIBUTE-DEFINITION-STRING>
+          </SPEC-ATTRIBUTES>
+        </SPEC-OBJECT-TYPE>
+        <SPEC-OBJECT-TYPE IDENTIFIER="ID_TC1400_SpecObjectTypeInternalTable" LAST-CHANGE="2012-04-07T01:51:37.112+02:00" LONG-NAME="TC1400 SpecObjectType Internal Table">
+          <SPEC-ATTRIBUTES>
+            <ATTRIBUTE-DEFINITION-STRING IDENTIFIER="ID_TC1400_SpecObjectTypeInternalTableAttributeDefinitionString_ReqIF.Name" LAST-CHANGE="2012-04-07T01:51:37.112+02:00" LONG-NAME="ReqIF.Name">
+              <TYPE>
+                <DATATYPE-DEFINITION-STRING-REF>ID_TC1400_DatatypeDefinitionString</DATATYPE-DEFINITION-STRING-REF>
+              </TYPE>
+            </ATTRIBUTE-DEFINITION-STRING>
+            <ATTRIBUTE-DEFINITION-STRING IDENTIFIER="ID_TC1400_SpecObjectTypeInternalTableAttributeDefinitionString_ReqIF.ChangeDescription" LAST-CHANGE="2012-04-07T01:51:37.112+02:00" LONG-NAME="ReqIF.ChangeDescription">
+              <TYPE>
+                <DATATYPE-DEFINITION-STRING-REF>ID_TC1400_DatatypeDefinitionString</DATATYPE-DEFINITION-STRING-REF>
+              </TYPE>
+            </ATTRIBUTE-DEFINITION-STRING>
+            <ATTRIBUTE-DEFINITION-INTEGER IDENTIFIER="ID_TC1400_SpecObjectTypeInternalTableAttributeDefinitionInteger_ReqIF.Revision" LAST-CHANGE="2012-04-07T01:51:37.112+02:00" LONG-NAME="ReqIF.Revision">
+              <TYPE>
+                <DATATYPE-DEFINITION-INTEGER-REF>ID_TC1400_DatatypeDefinitionInteger</DATATYPE-DEFINITION-INTEGER-REF>
+              </TYPE>
+            </ATTRIBUTE-DEFINITION-INTEGER>
+          </SPEC-ATTRIBUTES>
+        </SPEC-OBJECT-TYPE>
+        <SPECIFICATION-TYPE IDENTIFIER="ID_TC1400_SpecificationType" LAST-CHANGE="2012-04-07T01:51:37.112+02:00" LONG-NAME="TC1400 SpecificationType"/>
+      </SPEC-TYPES>
+      <SPEC-OBJECTS>
+        <SPEC-OBJECT IDENTIFIER="ID_TC1400_SpecObject1" LAST-CHANGE="2012-04-07T01:51:37.112+02:00">
+          <VALUES>
+            <ATTRIBUTE-VALUE-STRING THE-VALUE="Obj1">
+              <DEFINITION>
+                <ATTRIBUTE-DEFINITION-STRING-REF>ID_TC1400_SpecObjectTypeRegularAttributeDefinitionString_ReqIF.Name</ATTRIBUTE-DEFINITION-STRING-REF>
+              </DEFINITION>
+            </ATTRIBUTE-VALUE-STRING>
+          </VALUES>
+          <TYPE>
+            <SPEC-OBJECT-TYPE-REF>ID_TC1400_SpecObjectTypeRegular</SPEC-OBJECT-TYPE-REF>
+          </TYPE>
+        </SPEC-OBJECT>
+        <SPEC-OBJECT IDENTIFIER="ID_TC1400_SpecObject11" LAST-CHANGE="2012-04-07T01:51:37.112+02:00">
+          <VALUES>
+            <ATTRIBUTE-VALUE-STRING THE-VALUE="Obj1.1">
+              <DEFINITION>
+                <ATTRIBUTE-DEFINITION-STRING-REF>ID_TC1400_SpecObjectTypeRegularAttributeDefinitionString_ReqIF.Name</ATTRIBUTE-DEFINITION-STRING-REF>
+              </DEFINITION>
+            </ATTRIBUTE-VALUE-STRING>
+          </VALUES>
+          <TYPE>
+            <SPEC-OBJECT-TYPE-REF>ID_TC1400_SpecObjectTypeRegular</SPEC-OBJECT-TYPE-REF>
+          </TYPE>
+        </SPEC-OBJECT>
+        <SPEC-OBJECT IDENTIFIER="ID_TC1400_SpecObject111" LAST-CHANGE="2012-04-07T01:51:37.112+02:00">
+          <VALUES>
+            <ATTRIBUTE-VALUE-STRING THE-VALUE="TableObj1.1.1">
+              <DEFINITION>
+                <ATTRIBUTE-DEFINITION-STRING-REF>ID_TC1400_SpecObjectTypeInternalTableAttributeDefinitionString_ReqIF.Name</ATTRIBUTE-DEFINITION-STRING-REF>
+              </DEFINITION>
+            </ATTRIBUTE-VALUE-STRING>
+            <ATTRIBUTE-VALUE-STRING THE-VALUE="Changed name">
+              <DEFINITION>
+                <ATTRIBUTE-DEFINITION-STRING-REF>ID_TC1400_SpecObjectTypeInternalTableAttributeDefinitionString_ReqIF.ChangeDescription</ATTRIBUTE-DEFINITION-STRING-REF>
+              </DEFINITION>
+            </ATTRIBUTE-VALUE-STRING>
+            <ATTRIBUTE-VALUE-INTEGER THE-VALUE="3">
+              <DEFINITION>
+                <ATTRIBUTE-DEFINITION-INTEGER-REF>ID_TC1400_SpecObjectTypeInternalTableAttributeDefinitionInteger_ReqIF.Revision</ATTRIBUTE-DEFINITION-INTEGER-REF>
+              </DEFINITION>
+            </ATTRIBUTE-VALUE-INTEGER>
+          </VALUES>
+          <TYPE>
+            <SPEC-OBJECT-TYPE-REF>ID_TC1400_SpecObjectTypeInternalTable</SPEC-OBJECT-TYPE-REF>
+          </TYPE>
+        </SPEC-OBJECT>
+        <SPEC-OBJECT IDENTIFIER="ID_TC1400_SpecObject112" LAST-CHANGE="2012-04-07T01:51:37.112+02:00">
+          <VALUES>
+            <ATTRIBUTE-VALUE-STRING THE-VALUE="TableObj1.1.2">
+              <DEFINITION>
+                <ATTRIBUTE-DEFINITION-STRING-REF>ID_TC1400_SpecObjectTypeInternalTableAttributeDefinitionString_ReqIF.Name</ATTRIBUTE-DEFINITION-STRING-REF>
+              </DEFINITION>
+            </ATTRIBUTE-VALUE-STRING>
+            <ATTRIBUTE-VALUE-STRING THE-VALUE="Changed name in order to comply to company naming conventions">
+              <DEFINITION>
+                <ATTRIBUTE-DEFINITION-STRING-REF>ID_TC1400_SpecObjectTypeInternalTableAttributeDefinitionString_ReqIF.ChangeDescription</ATTRIBUTE-DEFINITION-STRING-REF>
+              </DEFINITION>
+            </ATTRIBUTE-VALUE-STRING>
+            <ATTRIBUTE-VALUE-INTEGER THE-VALUE="20">
+              <DEFINITION>
+                <ATTRIBUTE-DEFINITION-INTEGER-REF>ID_TC1400_SpecObjectTypeInternalTableAttributeDefinitionInteger_ReqIF.Revision</ATTRIBUTE-DEFINITION-INTEGER-REF>
+              </DEFINITION>
+            </ATTRIBUTE-VALUE-INTEGER>
+          </VALUES>
+          <TYPE>
+            <SPEC-OBJECT-TYPE-REF>ID_TC1400_SpecObjectTypeInternalTable</SPEC-OBJECT-TYPE-REF>
+          </TYPE>
+        </SPEC-OBJECT>
+        <SPEC-OBJECT IDENTIFIER="ID_TC1400_SpecObject113" LAST-CHANGE="2012-04-07T01:51:37.112+02:00">
+          <VALUES>
+            <ATTRIBUTE-VALUE-STRING THE-VALUE="TableObj1.1.3">
+              <DEFINITION>
+                <ATTRIBUTE-DEFINITION-STRING-REF>ID_TC1400_SpecObjectTypeInternalTableAttributeDefinitionString_ReqIF.Name</ATTRIBUTE-DEFINITION-STRING-REF>
+              </DEFINITION>
+            </ATTRIBUTE-VALUE-STRING>
+            <ATTRIBUTE-VALUE-STRING THE-VALUE="initial revision">
+              <DEFINITION>
+                <ATTRIBUTE-DEFINITION-STRING-REF>ID_TC1400_SpecObjectTypeInternalTableAttributeDefinitionString_ReqIF.ChangeDescription</ATTRIBUTE-DEFINITION-STRING-REF>
+              </DEFINITION>
+            </ATTRIBUTE-VALUE-STRING>
+            <ATTRIBUTE-VALUE-INTEGER THE-VALUE="1">
+              <DEFINITION>
+                <ATTRIBUTE-DEFINITION-INTEGER-REF>ID_TC1400_SpecObjectTypeInternalTableAttributeDefinitionInteger_ReqIF.Revision</ATTRIBUTE-DEFINITION-INTEGER-REF>
+              </DEFINITION>
+            </ATTRIBUTE-VALUE-INTEGER>
+          </VALUES>
+          <TYPE>
+            <SPEC-OBJECT-TYPE-REF>ID_TC1400_SpecObjectTypeInternalTable</SPEC-OBJECT-TYPE-REF>
+          </TYPE>
+        </SPEC-OBJECT>
+      </SPEC-OBJECTS>
+      <SPECIFICATIONS>
+        <SPECIFICATION IDENTIFIER="ID_TC1400_Specification" LAST-CHANGE="2012-04-07T01:51:37.112+02:00">
+          <TYPE>
+            <SPECIFICATION-TYPE-REF>ID_TC1400_SpecificationType</SPECIFICATION-TYPE-REF>
+          </TYPE>
+          <CHILDREN>
+            <SPEC-HIERARCHY IDENTIFIER="ID_TC1400_SpecHierarchy1" LAST-CHANGE="2012-04-07T01:51:37.112+02:00" LONG-NAME="TC1400 SpecHierarchy 1">
+              <OBJECT>
+                <SPEC-OBJECT-REF>ID_TC1400_SpecObject1</SPEC-OBJECT-REF>
+              </OBJECT>
+              <CHILDREN>
+                <SPEC-HIERARCHY IDENTIFIER="ID_TC1400_SpecHierarchy11" LAST-CHANGE="2012-04-07T01:51:37.112+02:00" LONG-NAME="TC1400 SpecHierarchy 11" IS-TABLE-INTERNAL="true">
+                  <OBJECT>
+                    <SPEC-OBJECT-REF>ID_TC1400_SpecObject11</SPEC-OBJECT-REF>
+                  </OBJECT>
+                  <CHILDREN>
+                    <SPEC-HIERARCHY IDENTIFIER="ID_TC1400_SpecHierarchy111" LAST-CHANGE="2012-04-07T01:51:37.112+02:00" LONG-NAME="TC1400 SpecHierarchy Internal Table 111" IS-TABLE-INTERNAL="true">
+                      <OBJECT>
+                        <SPEC-OBJECT-REF>ID_TC1400_SpecObject111</SPEC-OBJECT-REF>
+                      </OBJECT>
+                    </SPEC-HIERARCHY>
+                    <SPEC-HIERARCHY IDENTIFIER="ID_TC1400_SpecHierarchy112" LAST-CHANGE="2012-04-07T01:51:37.112+02:00" LONG-NAME="TC1400 SpecHierarchy Internal Table 112" IS-TABLE-INTERNAL="true">
+                      <OBJECT>
+                        <SPEC-OBJECT-REF>ID_TC1400_SpecObject112</SPEC-OBJECT-REF>
+                      </OBJECT>
+                    </SPEC-HIERARCHY>
+                    <SPEC-HIERARCHY IDENTIFIER="ID_TC1400_SpecHierarchy113" LAST-CHANGE="2012-04-07T01:51:37.112+02:00" LONG-NAME="TC1400 SpecHierarchy Internal Table 113" IS-TABLE-INTERNAL="true">
+                      <OBJECT>
+                        <SPEC-OBJECT-REF>ID_TC1400_SpecObject113</SPEC-OBJECT-REF>
+                      </OBJECT>
+                    </SPEC-HIERARCHY>
+                  </CHILDREN>
+                </SPEC-HIERARCHY>
+              </CHILDREN>
+            </SPEC-HIERARCHY>
+          </CHILDREN>
+        </SPECIFICATION>
+      </SPECIFICATIONS>
+    </REQ-IF-CONTENT>
+  </CORE-CONTENT>
+</REQ-IF>

@@ -27,6 +27,13 @@ def my_escape(string: str) -> str:
     return string
 
 
+def my_escape_title(string: str) -> str:
+    # The only known reason for this method is the presence of &amp; in the
+    # HEADER title of ReqIF files found at the ci.eclipse.org.
+    string = string.replace("&", "&amp;")
+    return string
+
+
 # Using this rather hacky version because I could not make lxml to print
 # the namespaced tags such as:
 # <reqif-xhtml:div>--/reqif-xhtml:div>
@@ -42,7 +49,7 @@ def stringify_namespaced_children(node) -> str:
         node_no_ns_tag = etree.QName(node).localname
         output += f"<{nskey}:{node_no_ns_tag}"
         for attribute, attribute_value in node.attrib.items():
-            output += f' {attribute}="{attribute_value}"'
+            output += f' {attribute}="{my_escape(attribute_value)}"'
         if node.text is not None or len(node.getchildren()) > 0:
             output += ">"
             if node.text is not None:

@@ -1,0 +1,2177 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<REQ-IF xmlns="http://www.omg.org/spec/ReqIF/20110401/reqif.xsd" xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  <THE-HEADER>
+    <REQ-IF-HEADER IDENTIFIER="ID_TC1200_ReqIfHeader">
+      <CREATION-TIME>2021-01-22T12:56:32.580Z</CREATION-TIME>
+      <REQ-IF-TOOL-ID>RMF - Requirements Modeling Framework (http://www.eclipse.org/rmf)</REQ-IF-TOOL-ID>
+      <REQ-IF-VERSION>1.0</REQ-IF-VERSION>
+      <SOURCE-TOOL-ID>RMF - Requirements Modeling Framework (http://www.eclipse.org/rmf)</SOURCE-TOOL-ID>
+      <TITLE>TC 1200 'Formated Content'</TITLE>
+    </REQ-IF-HEADER>
+  </THE-HEADER>
+  <CORE-CONTENT>
+    <REQ-IF-CONTENT>
+      <DATATYPES>
+        <DATATYPE-DEFINITION-XHTML IDENTIFIER="ID_TC1200_DatatypeDefinitionXHTML" LAST-CHANGE="2012-04-07T01:51:37.112+02:00" LONG-NAME="TC1200 XHTML"/>
+        <DATATYPE-DEFINITION-STRING IDENTIFIER="ID_TC1200_DatatypeDefinitionString" LAST-CHANGE="2012-04-07T01:51:37.112+02:00" LONG-NAME="TC1200 String" MAX-LENGTH="255"/>
+      </DATATYPES>
+      <SPEC-TYPES>
+        <SPEC-OBJECT-TYPE IDENTIFIER="ID_TC1200_SpecObjectType" LAST-CHANGE="2012-04-07T01:51:37.112+02:00" LONG-NAME="TC1200 SpecObjectType">
+          <SPEC-ATTRIBUTES>
+            <ATTRIBUTE-DEFINITION-XHTML IDENTIFIER="ID_TC1200_AttributeDefinitionXHTML" LAST-CHANGE="2012-04-07T01:51:37.112+02:00" LONG-NAME="TC1200 AttributeDefinitionXHTML">
+              <TYPE>
+                <DATATYPE-DEFINITION-XHTML-REF>ID_TC1200_DatatypeDefinitionXHTML</DATATYPE-DEFINITION-XHTML-REF>
+              </TYPE>
+            </ATTRIBUTE-DEFINITION-XHTML>
+            <ATTRIBUTE-DEFINITION-STRING IDENTIFIER="ID_TC1200_AttributeDefinitionString" LAST-CHANGE="2012-04-07T01:51:37.112+02:00" LONG-NAME="TC1200 AttributeDefinitionString">
+              <TYPE>
+                <DATATYPE-DEFINITION-STRING-REF>ID_TC1200_DatatypeDefinitionString</DATATYPE-DEFINITION-STRING-REF>
+              </TYPE>
+            </ATTRIBUTE-DEFINITION-STRING>
+          </SPEC-ATTRIBUTES>
+        </SPEC-OBJECT-TYPE>
+        <SPECIFICATION-TYPE IDENTIFIER="ID_TC1200_SpecificationType" LAST-CHANGE="2012-04-07T01:51:37.112+02:00" LONG-NAME="TC1200 SpecificationType"/>
+      </SPEC-TYPES>
+      <SPEC-OBJECTS>
+        <SPEC-OBJECT IDENTIFIER="ID_TC1200_SpecObject_xhtml.p.type" LAST-CHANGE="2012-04-07T01:51:37.112+02:00">
+          <VALUES>
+            <ATTRIBUTE-VALUE-STRING THE-VALUE="xhtml.p.type">
+              <DEFINITION>
+                <ATTRIBUTE-DEFINITION-STRING-REF>ID_TC1200_AttributeDefinitionString</ATTRIBUTE-DEFINITION-STRING-REF>
+              </DEFINITION>
+            </ATTRIBUTE-VALUE-STRING>
+            <ATTRIBUTE-VALUE-XHTML>
+              <DEFINITION>
+                <ATTRIBUTE-DEFINITION-XHTML-REF>ID_TC1200_AttributeDefinitionXHTML</ATTRIBUTE-DEFINITION-XHTML-REF>
+              </DEFINITION>
+              <THE-VALUE>
+                <xhtml:p style="text-decoration:underline" title="text">
+                    text before br<xhtml:br/>text after br
+                    text before span<xhtml:span>XhtmlSpanType</xhtml:span>text after span
+                    text before em<xhtml:em>XhtmlEmType</xhtml:em>text after em
+                    text before strong<xhtml:strong>XhtmlStrongType</xhtml:strong>text after strong
+                    text before dfn<xhtml:dfn>XhtmlDfnType</xhtml:dfn>text after dfn
+                    text before code<xhtml:code>XhtmlCodeType</xhtml:code>text after code
+                    text before samp<xhtml:samp>XhtmlSampType</xhtml:samp>text after samp
+                    text before kbd<xhtml:kbd>XhtmlKbdType</xhtml:kbd>text after kbd
+                    text before var<xhtml:var>XhtmlVarType</xhtml:var>text after var
+                    text before cite<xhtml:cite>XhtmlCiteType</xhtml:cite>text after cite
+                    text before abbr<xhtml:abbr>XhtmlAbbrType</xhtml:abbr>text after abbr
+                    text before acronym<xhtml:acronym>XhtmlAcronymType</xhtml:acronym>text after acronym
+                    text before q<xhtml:q>XhtmlQType</xhtml:q>text after q
+                    text before tt<xhtml:tt>XhtmlInlPresType</xhtml:tt>text after tt
+                    text before i<xhtml:i>XhtmlInlPresType</xhtml:i>text after i
+                    text before b<xhtml:b>XhtmlInlPresType</xhtml:b>text after b
+                    text before big<xhtml:big>XhtmlInlPresType</xhtml:big>text after big
+                    text before small<xhtml:small>XhtmlInlPresType</xhtml:small>text after small
+                    text before sub<xhtml:sub>XhtmlInlPresType</xhtml:sub>text after sub
+                    text before sup<xhtml:sup>XhtmlInlPresType</xhtml:sup>text after sup
+                    text before a<xhtml:a>XhtmlAType</xhtml:a>text after a
+                    text before ins<xhtml:ins>XhtmlEditType</xhtml:ins>text after ins
+                    text before del<xhtml:del>XhtmlEditType</xhtml:del>text after del</xhtml:p>
+              </THE-VALUE>
+            </ATTRIBUTE-VALUE-XHTML>
+          </VALUES>
+          <TYPE>
+            <SPEC-OBJECT-TYPE-REF>ID_TC1200_SpecObjectType</SPEC-OBJECT-TYPE-REF>
+          </TYPE>
+        </SPEC-OBJECT>
+        <SPEC-OBJECT IDENTIFIER="ID_TC1200_SpecObject_xhtml.div.type" LAST-CHANGE="2012-04-07T01:51:37.112+02:00">
+          <VALUES>
+            <ATTRIBUTE-VALUE-STRING THE-VALUE="xhtml.div.type">
+              <DEFINITION>
+                <ATTRIBUTE-DEFINITION-STRING-REF>ID_TC1200_AttributeDefinitionString</ATTRIBUTE-DEFINITION-STRING-REF>
+              </DEFINITION>
+            </ATTRIBUTE-VALUE-STRING>
+            <ATTRIBUTE-VALUE-XHTML>
+              <DEFINITION>
+                <ATTRIBUTE-DEFINITION-XHTML-REF>ID_TC1200_AttributeDefinitionXHTML</ATTRIBUTE-DEFINITION-XHTML-REF>
+              </DEFINITION>
+              <THE-VALUE>
+                <xhtml:div style="text-decoration:underline" title="text">
+                    text before h1<xhtml:h1>XhtmlH1Type</xhtml:h1>text after h1
+                    text before h2<xhtml:h2>XhtmlH2Type</xhtml:h2>text after h2
+                    text before h3<xhtml:h3>XhtmlH3Type</xhtml:h3>text after h3
+                    text before h4<xhtml:h4>XhtmlH4Type</xhtml:h4>text after h4
+                    text before h5<xhtml:h5>XhtmlH5Type</xhtml:h5>text after h5
+                    text before h6<xhtml:h6>XhtmlH6Type</xhtml:h6>text after h6
+                    text before ul<xhtml:ul>
+                    <xhtml:li>XhtmlLiType</xhtml:li>
+                  </xhtml:ul>text after ul
+                    text before ol<xhtml:ol>
+                    <xhtml:li>XhtmlLiType</xhtml:li>
+                  </xhtml:ol>text after ol
+                    text before dl<xhtml:dl>
+                    <xhtml:dt>XhtmlDtType</xhtml:dt>
+                    <xhtml:dd>XhtmlDdType</xhtml:dd>
+                  </xhtml:dl>text after dl
+                    text before p<xhtml:p>XhtmlPType</xhtml:p>text after p
+                    text before div<xhtml:div>XhtmlDivType</xhtml:div>text after div
+                    text before pre<xhtml:pre>XhtmlPreType</xhtml:pre>text after pre
+                    text before blockquote<xhtml:blockquote/>text after blockquote
+                    text before address<xhtml:address>XhtmlAddressType</xhtml:address>text after address
+                    text before hr<xhtml:hr/>text after hr
+                    text before table<xhtml:table>
+                    <xhtml:tr>
+                      <xhtml:td/>
+                    </xhtml:tr>
+                  </xhtml:table>text after table
+                    text before br<xhtml:br/>text after br
+                    text before span<xhtml:span>XhtmlSpanType</xhtml:span>text after span
+                    text before em<xhtml:em>XhtmlEmType</xhtml:em>text after em
+                    text before strong<xhtml:strong>XhtmlStrongType</xhtml:strong>text after strong
+                    text before dfn<xhtml:dfn>XhtmlDfnType</xhtml:dfn>text after dfn
+                    text before code<xhtml:code>XhtmlCodeType</xhtml:code>text after code
+                    text before samp<xhtml:samp>XhtmlSampType</xhtml:samp>text after samp
+                    text before kbd<xhtml:kbd>XhtmlKbdType</xhtml:kbd>text after kbd
+                    text before var<xhtml:var>XhtmlVarType</xhtml:var>text after var
+                    text before cite<xhtml:cite>XhtmlCiteType</xhtml:cite>text after cite
+                    text before abbr<xhtml:abbr>XhtmlAbbrType</xhtml:abbr>text after abbr
+                    text before acronym<xhtml:acronym>XhtmlAcronymType</xhtml:acronym>text after acronym
+                    text before q<xhtml:q>XhtmlQType</xhtml:q>text after q
+                    text before tt<xhtml:tt>XhtmlInlPresType</xhtml:tt>text after tt
+                    text before i<xhtml:i>XhtmlInlPresType</xhtml:i>text after i
+                    text before b<xhtml:b>XhtmlInlPresType</xhtml:b>text after b
+                    text before big<xhtml:big>XhtmlInlPresType</xhtml:big>text after big
+                    text before small<xhtml:small>XhtmlInlPresType</xhtml:small>text after small
+                    text before sub<xhtml:sub>XhtmlInlPresType</xhtml:sub>text after sub
+                    text before sup<xhtml:sup>XhtmlInlPresType</xhtml:sup>text after sup
+                    text before a<xhtml:a>XhtmlAType</xhtml:a>text after a
+                    text before ins<xhtml:ins>XhtmlEditType</xhtml:ins>text after ins
+                    text before del<xhtml:del>XhtmlEditType</xhtml:del>text after del</xhtml:div>
+              </THE-VALUE>
+            </ATTRIBUTE-VALUE-XHTML>
+          </VALUES>
+          <TYPE>
+            <SPEC-OBJECT-TYPE-REF>ID_TC1200_SpecObjectType</SPEC-OBJECT-TYPE-REF>
+          </TYPE>
+        </SPEC-OBJECT>
+        <SPEC-OBJECT IDENTIFIER="ID_TC1200_SpecObject_xhtml.br.type" LAST-CHANGE="2012-04-07T01:51:37.112+02:00">
+          <VALUES>
+            <ATTRIBUTE-VALUE-STRING THE-VALUE="xhtml.br.type">
+              <DEFINITION>
+                <ATTRIBUTE-DEFINITION-STRING-REF>ID_TC1200_AttributeDefinitionString</ATTRIBUTE-DEFINITION-STRING-REF>
+              </DEFINITION>
+            </ATTRIBUTE-VALUE-STRING>
+            <ATTRIBUTE-VALUE-XHTML>
+              <DEFINITION>
+                <ATTRIBUTE-DEFINITION-XHTML-REF>ID_TC1200_AttributeDefinitionXHTML</ATTRIBUTE-DEFINITION-XHTML-REF>
+              </DEFINITION>
+              <THE-VALUE>
+                <xhtml:p>XhtmlPType<xhtml:br title="text"/></xhtml:p>
+              </THE-VALUE>
+            </ATTRIBUTE-VALUE-XHTML>
+          </VALUES>
+          <TYPE>
+            <SPEC-OBJECT-TYPE-REF>ID_TC1200_SpecObjectType</SPEC-OBJECT-TYPE-REF>
+          </TYPE>
+        </SPEC-OBJECT>
+        <SPEC-OBJECT IDENTIFIER="ID_TC1200_SpecObject_xhtml.span.type" LAST-CHANGE="2012-04-07T01:51:37.112+02:00">
+          <VALUES>
+            <ATTRIBUTE-VALUE-STRING THE-VALUE="xhtml.span.type">
+              <DEFINITION>
+                <ATTRIBUTE-DEFINITION-STRING-REF>ID_TC1200_AttributeDefinitionString</ATTRIBUTE-DEFINITION-STRING-REF>
+              </DEFINITION>
+            </ATTRIBUTE-VALUE-STRING>
+            <ATTRIBUTE-VALUE-XHTML>
+              <DEFINITION>
+                <ATTRIBUTE-DEFINITION-XHTML-REF>ID_TC1200_AttributeDefinitionXHTML</ATTRIBUTE-DEFINITION-XHTML-REF>
+              </DEFINITION>
+              <THE-VALUE>
+                <xhtml:p>XhtmlPType<xhtml:span style="text-decoration:underline" title="text">
+                    text before br<xhtml:br/>text after br
+                    text before span<xhtml:span>XhtmlSpanType</xhtml:span>text after span
+                    text before em<xhtml:em>XhtmlEmType</xhtml:em>text after em
+                    text before strong<xhtml:strong>XhtmlStrongType</xhtml:strong>text after strong
+                    text before dfn<xhtml:dfn>XhtmlDfnType</xhtml:dfn>text after dfn
+                    text before code<xhtml:code>XhtmlCodeType</xhtml:code>text after code
+                    text before samp<xhtml:samp>XhtmlSampType</xhtml:samp>text after samp
+                    text before kbd<xhtml:kbd>XhtmlKbdType</xhtml:kbd>text after kbd
+                    text before var<xhtml:var>XhtmlVarType</xhtml:var>text after var
+                    text before cite<xhtml:cite>XhtmlCiteType</xhtml:cite>text after cite
+                    text before abbr<xhtml:abbr>XhtmlAbbrType</xhtml:abbr>text after abbr
+                    text before acronym<xhtml:acronym>XhtmlAcronymType</xhtml:acronym>text after acronym
+                    text before q<xhtml:q>XhtmlQType</xhtml:q>text after q
+                    text before tt<xhtml:tt>XhtmlInlPresType</xhtml:tt>text after tt
+                    text before i<xhtml:i>XhtmlInlPresType</xhtml:i>text after i
+                    text before b<xhtml:b>XhtmlInlPresType</xhtml:b>text after b
+                    text before big<xhtml:big>XhtmlInlPresType</xhtml:big>text after big
+                    text before small<xhtml:small>XhtmlInlPresType</xhtml:small>text after small
+                    text before sub<xhtml:sub>XhtmlInlPresType</xhtml:sub>text after sub
+                    text before sup<xhtml:sup>XhtmlInlPresType</xhtml:sup>text after sup
+                    text before a<xhtml:a>XhtmlAType</xhtml:a>text after a
+                    text before ins<xhtml:ins>XhtmlEditType</xhtml:ins>text after ins
+                    text before del<xhtml:del>XhtmlEditType</xhtml:del>text after del</xhtml:span></xhtml:p>
+              </THE-VALUE>
+            </ATTRIBUTE-VALUE-XHTML>
+          </VALUES>
+          <TYPE>
+            <SPEC-OBJECT-TYPE-REF>ID_TC1200_SpecObjectType</SPEC-OBJECT-TYPE-REF>
+          </TYPE>
+        </SPEC-OBJECT>
+        <SPEC-OBJECT IDENTIFIER="ID_TC1200_SpecObject_xhtml.em.type" LAST-CHANGE="2012-04-07T01:51:37.112+02:00">
+          <VALUES>
+            <ATTRIBUTE-VALUE-STRING THE-VALUE="xhtml.em.type">
+              <DEFINITION>
+                <ATTRIBUTE-DEFINITION-STRING-REF>ID_TC1200_AttributeDefinitionString</ATTRIBUTE-DEFINITION-STRING-REF>
+              </DEFINITION>
+            </ATTRIBUTE-VALUE-STRING>
+            <ATTRIBUTE-VALUE-XHTML>
+              <DEFINITION>
+                <ATTRIBUTE-DEFINITION-XHTML-REF>ID_TC1200_AttributeDefinitionXHTML</ATTRIBUTE-DEFINITION-XHTML-REF>
+              </DEFINITION>
+              <THE-VALUE>
+                <xhtml:p>XhtmlPType<xhtml:em style="text-decoration:underline" title="text">
+                    text before br<xhtml:br/>text after br
+                    text before span<xhtml:span>XhtmlSpanType</xhtml:span>text after span
+                    text before em<xhtml:em>XhtmlEmType</xhtml:em>text after em
+                    text before strong<xhtml:strong>XhtmlStrongType</xhtml:strong>text after strong
+                    text before dfn<xhtml:dfn>XhtmlDfnType</xhtml:dfn>text after dfn
+                    text before code<xhtml:code>XhtmlCodeType</xhtml:code>text after code
+                    text before samp<xhtml:samp>XhtmlSampType</xhtml:samp>text after samp
+                    text before kbd<xhtml:kbd>XhtmlKbdType</xhtml:kbd>text after kbd
+                    text before var<xhtml:var>XhtmlVarType</xhtml:var>text after var
+                    text before cite<xhtml:cite>XhtmlCiteType</xhtml:cite>text after cite
+                    text before abbr<xhtml:abbr>XhtmlAbbrType</xhtml:abbr>text after abbr
+                    text before acronym<xhtml:acronym>XhtmlAcronymType</xhtml:acronym>text after acronym
+                    text before q<xhtml:q>XhtmlQType</xhtml:q>text after q
+                    text before tt<xhtml:tt>XhtmlInlPresType</xhtml:tt>text after tt
+                    text before i<xhtml:i>XhtmlInlPresType</xhtml:i>text after i
+                    text before b<xhtml:b>XhtmlInlPresType</xhtml:b>text after b
+                    text before big<xhtml:big>XhtmlInlPresType</xhtml:big>text after big
+                    text before small<xhtml:small>XhtmlInlPresType</xhtml:small>text after small
+                    text before sub<xhtml:sub>XhtmlInlPresType</xhtml:sub>text after sub
+                    text before sup<xhtml:sup>XhtmlInlPresType</xhtml:sup>text after sup
+                    text before a<xhtml:a>XhtmlAType</xhtml:a>text after a
+                    text before ins<xhtml:ins>XhtmlEditType</xhtml:ins>text after ins
+                    text before del<xhtml:del>XhtmlEditType</xhtml:del>text after del</xhtml:em></xhtml:p>
+              </THE-VALUE>
+            </ATTRIBUTE-VALUE-XHTML>
+          </VALUES>
+          <TYPE>
+            <SPEC-OBJECT-TYPE-REF>ID_TC1200_SpecObjectType</SPEC-OBJECT-TYPE-REF>
+          </TYPE>
+        </SPEC-OBJECT>
+        <SPEC-OBJECT IDENTIFIER="ID_TC1200_SpecObject_xhtml.strong.type" LAST-CHANGE="2012-04-07T01:51:37.112+02:00">
+          <VALUES>
+            <ATTRIBUTE-VALUE-STRING THE-VALUE="xhtml.strong.type">
+              <DEFINITION>
+                <ATTRIBUTE-DEFINITION-STRING-REF>ID_TC1200_AttributeDefinitionString</ATTRIBUTE-DEFINITION-STRING-REF>
+              </DEFINITION>
+            </ATTRIBUTE-VALUE-STRING>
+            <ATTRIBUTE-VALUE-XHTML>
+              <DEFINITION>
+                <ATTRIBUTE-DEFINITION-XHTML-REF>ID_TC1200_AttributeDefinitionXHTML</ATTRIBUTE-DEFINITION-XHTML-REF>
+              </DEFINITION>
+              <THE-VALUE>
+                <xhtml:p>XhtmlPType<xhtml:strong style="text-decoration:underline" title="text">
+                    text before br<xhtml:br/>text after br
+                    text before span<xhtml:span>XhtmlSpanType</xhtml:span>text after span
+                    text before em<xhtml:em>XhtmlEmType</xhtml:em>text after em
+                    text before strong<xhtml:strong>XhtmlStrongType</xhtml:strong>text after strong
+                    text before dfn<xhtml:dfn>XhtmlDfnType</xhtml:dfn>text after dfn
+                    text before code<xhtml:code>XhtmlCodeType</xhtml:code>text after code
+                    text before samp<xhtml:samp>XhtmlSampType</xhtml:samp>text after samp
+                    text before kbd<xhtml:kbd>XhtmlKbdType</xhtml:kbd>text after kbd
+                    text before var<xhtml:var>XhtmlVarType</xhtml:var>text after var
+                    text before cite<xhtml:cite>XhtmlCiteType</xhtml:cite>text after cite
+                    text before abbr<xhtml:abbr>XhtmlAbbrType</xhtml:abbr>text after abbr
+                    text before acronym<xhtml:acronym>XhtmlAcronymType</xhtml:acronym>text after acronym
+                    text before q<xhtml:q>XhtmlQType</xhtml:q>text after q
+                    text before tt<xhtml:tt>XhtmlInlPresType</xhtml:tt>text after tt
+                    text before i<xhtml:i>XhtmlInlPresType</xhtml:i>text after i
+                    text before b<xhtml:b>XhtmlInlPresType</xhtml:b>text after b
+                    text before big<xhtml:big>XhtmlInlPresType</xhtml:big>text after big
+                    text before small<xhtml:small>XhtmlInlPresType</xhtml:small>text after small
+                    text before sub<xhtml:sub>XhtmlInlPresType</xhtml:sub>text after sub
+                    text before sup<xhtml:sup>XhtmlInlPresType</xhtml:sup>text after sup
+                    text before a<xhtml:a>XhtmlAType</xhtml:a>text after a
+                    text before ins<xhtml:ins>XhtmlEditType</xhtml:ins>text after ins
+                    text before del<xhtml:del>XhtmlEditType</xhtml:del>text after del</xhtml:strong></xhtml:p>
+              </THE-VALUE>
+            </ATTRIBUTE-VALUE-XHTML>
+          </VALUES>
+          <TYPE>
+            <SPEC-OBJECT-TYPE-REF>ID_TC1200_SpecObjectType</SPEC-OBJECT-TYPE-REF>
+          </TYPE>
+        </SPEC-OBJECT>
+        <SPEC-OBJECT IDENTIFIER="ID_TC1200_SpecObject_xhtml.dfn.type" LAST-CHANGE="2012-04-07T01:51:37.112+02:00">
+          <VALUES>
+            <ATTRIBUTE-VALUE-STRING THE-VALUE="xhtml.dfn.type">
+              <DEFINITION>
+                <ATTRIBUTE-DEFINITION-STRING-REF>ID_TC1200_AttributeDefinitionString</ATTRIBUTE-DEFINITION-STRING-REF>
+              </DEFINITION>
+            </ATTRIBUTE-VALUE-STRING>
+            <ATTRIBUTE-VALUE-XHTML>
+              <DEFINITION>
+                <ATTRIBUTE-DEFINITION-XHTML-REF>ID_TC1200_AttributeDefinitionXHTML</ATTRIBUTE-DEFINITION-XHTML-REF>
+              </DEFINITION>
+              <THE-VALUE>
+                <xhtml:p>XhtmlPType<xhtml:dfn style="text-decoration:underline" title="text">
+                    text before br<xhtml:br/>text after br
+                    text before span<xhtml:span>XhtmlSpanType</xhtml:span>text after span
+                    text before em<xhtml:em>XhtmlEmType</xhtml:em>text after em
+                    text before strong<xhtml:strong>XhtmlStrongType</xhtml:strong>text after strong
+                    text before dfn<xhtml:dfn>XhtmlDfnType</xhtml:dfn>text after dfn
+                    text before code<xhtml:code>XhtmlCodeType</xhtml:code>text after code
+                    text before samp<xhtml:samp>XhtmlSampType</xhtml:samp>text after samp
+                    text before kbd<xhtml:kbd>XhtmlKbdType</xhtml:kbd>text after kbd
+                    text before var<xhtml:var>XhtmlVarType</xhtml:var>text after var
+                    text before cite<xhtml:cite>XhtmlCiteType</xhtml:cite>text after cite
+                    text before abbr<xhtml:abbr>XhtmlAbbrType</xhtml:abbr>text after abbr
+                    text before acronym<xhtml:acronym>XhtmlAcronymType</xhtml:acronym>text after acronym
+                    text before q<xhtml:q>XhtmlQType</xhtml:q>text after q
+                    text before tt<xhtml:tt>XhtmlInlPresType</xhtml:tt>text after tt
+                    text before i<xhtml:i>XhtmlInlPresType</xhtml:i>text after i
+                    text before b<xhtml:b>XhtmlInlPresType</xhtml:b>text after b
+                    text before big<xhtml:big>XhtmlInlPresType</xhtml:big>text after big
+                    text before small<xhtml:small>XhtmlInlPresType</xhtml:small>text after small
+                    text before sub<xhtml:sub>XhtmlInlPresType</xhtml:sub>text after sub
+                    text before sup<xhtml:sup>XhtmlInlPresType</xhtml:sup>text after sup
+                    text before a<xhtml:a>XhtmlAType</xhtml:a>text after a
+                    text before ins<xhtml:ins>XhtmlEditType</xhtml:ins>text after ins
+                    text before del<xhtml:del>XhtmlEditType</xhtml:del>text after del</xhtml:dfn></xhtml:p>
+              </THE-VALUE>
+            </ATTRIBUTE-VALUE-XHTML>
+          </VALUES>
+          <TYPE>
+            <SPEC-OBJECT-TYPE-REF>ID_TC1200_SpecObjectType</SPEC-OBJECT-TYPE-REF>
+          </TYPE>
+        </SPEC-OBJECT>
+        <SPEC-OBJECT IDENTIFIER="ID_TC1200_SpecObject_xhtml.code.type" LAST-CHANGE="2012-04-07T01:51:37.112+02:00">
+          <VALUES>
+            <ATTRIBUTE-VALUE-STRING THE-VALUE="xhtml.code.type">
+              <DEFINITION>
+                <ATTRIBUTE-DEFINITION-STRING-REF>ID_TC1200_AttributeDefinitionString</ATTRIBUTE-DEFINITION-STRING-REF>
+              </DEFINITION>
+            </ATTRIBUTE-VALUE-STRING>
+            <ATTRIBUTE-VALUE-XHTML>
+              <DEFINITION>
+                <ATTRIBUTE-DEFINITION-XHTML-REF>ID_TC1200_AttributeDefinitionXHTML</ATTRIBUTE-DEFINITION-XHTML-REF>
+              </DEFINITION>
+              <THE-VALUE>
+                <xhtml:p>XhtmlPType<xhtml:code style="text-decoration:underline" title="text">
+                    text before br<xhtml:br/>text after br
+                    text before span<xhtml:span>XhtmlSpanType</xhtml:span>text after span
+                    text before em<xhtml:em>XhtmlEmType</xhtml:em>text after em
+                    text before strong<xhtml:strong>XhtmlStrongType</xhtml:strong>text after strong
+                    text before dfn<xhtml:dfn>XhtmlDfnType</xhtml:dfn>text after dfn
+                    text before code<xhtml:code>XhtmlCodeType</xhtml:code>text after code
+                    text before samp<xhtml:samp>XhtmlSampType</xhtml:samp>text after samp
+                    text before kbd<xhtml:kbd>XhtmlKbdType</xhtml:kbd>text after kbd
+                    text before var<xhtml:var>XhtmlVarType</xhtml:var>text after var
+                    text before cite<xhtml:cite>XhtmlCiteType</xhtml:cite>text after cite
+                    text before abbr<xhtml:abbr>XhtmlAbbrType</xhtml:abbr>text after abbr
+                    text before acronym<xhtml:acronym>XhtmlAcronymType</xhtml:acronym>text after acronym
+                    text before q<xhtml:q>XhtmlQType</xhtml:q>text after q
+                    text before tt<xhtml:tt>XhtmlInlPresType</xhtml:tt>text after tt
+                    text before i<xhtml:i>XhtmlInlPresType</xhtml:i>text after i
+                    text before b<xhtml:b>XhtmlInlPresType</xhtml:b>text after b
+                    text before big<xhtml:big>XhtmlInlPresType</xhtml:big>text after big
+                    text before small<xhtml:small>XhtmlInlPresType</xhtml:small>text after small
+                    text before sub<xhtml:sub>XhtmlInlPresType</xhtml:sub>text after sub
+                    text before sup<xhtml:sup>XhtmlInlPresType</xhtml:sup>text after sup
+                    text before a<xhtml:a>XhtmlAType</xhtml:a>text after a
+                    text before ins<xhtml:ins>XhtmlEditType</xhtml:ins>text after ins
+                    text before del<xhtml:del>XhtmlEditType</xhtml:del>text after del</xhtml:code></xhtml:p>
+              </THE-VALUE>
+            </ATTRIBUTE-VALUE-XHTML>
+          </VALUES>
+          <TYPE>
+            <SPEC-OBJECT-TYPE-REF>ID_TC1200_SpecObjectType</SPEC-OBJECT-TYPE-REF>
+          </TYPE>
+        </SPEC-OBJECT>
+        <SPEC-OBJECT IDENTIFIER="ID_TC1200_SpecObject_xhtml.samp.type" LAST-CHANGE="2012-04-07T01:51:37.112+02:00">
+          <VALUES>
+            <ATTRIBUTE-VALUE-STRING THE-VALUE="xhtml.samp.type">
+              <DEFINITION>
+                <ATTRIBUTE-DEFINITION-STRING-REF>ID_TC1200_AttributeDefinitionString</ATTRIBUTE-DEFINITION-STRING-REF>
+              </DEFINITION>
+            </ATTRIBUTE-VALUE-STRING>
+            <ATTRIBUTE-VALUE-XHTML>
+              <DEFINITION>
+                <ATTRIBUTE-DEFINITION-XHTML-REF>ID_TC1200_AttributeDefinitionXHTML</ATTRIBUTE-DEFINITION-XHTML-REF>
+              </DEFINITION>
+              <THE-VALUE>
+                <xhtml:p>XhtmlPType<xhtml:samp style="text-decoration:underline" title="text">
+                    text before br<xhtml:br/>text after br
+                    text before span<xhtml:span>XhtmlSpanType</xhtml:span>text after span
+                    text before em<xhtml:em>XhtmlEmType</xhtml:em>text after em
+                    text before strong<xhtml:strong>XhtmlStrongType</xhtml:strong>text after strong
+                    text before dfn<xhtml:dfn>XhtmlDfnType</xhtml:dfn>text after dfn
+                    text before code<xhtml:code>XhtmlCodeType</xhtml:code>text after code
+                    text before samp<xhtml:samp>XhtmlSampType</xhtml:samp>text after samp
+                    text before kbd<xhtml:kbd>XhtmlKbdType</xhtml:kbd>text after kbd
+                    text before var<xhtml:var>XhtmlVarType</xhtml:var>text after var
+                    text before cite<xhtml:cite>XhtmlCiteType</xhtml:cite>text after cite
+                    text before abbr<xhtml:abbr>XhtmlAbbrType</xhtml:abbr>text after abbr
+                    text before acronym<xhtml:acronym>XhtmlAcronymType</xhtml:acronym>text after acronym
+                    text before q<xhtml:q>XhtmlQType</xhtml:q>text after q
+                    text before tt<xhtml:tt>XhtmlInlPresType</xhtml:tt>text after tt
+                    text before i<xhtml:i>XhtmlInlPresType</xhtml:i>text after i
+                    text before b<xhtml:b>XhtmlInlPresType</xhtml:b>text after b
+                    text before big<xhtml:big>XhtmlInlPresType</xhtml:big>text after big
+                    text before small<xhtml:small>XhtmlInlPresType</xhtml:small>text after small
+                    text before sub<xhtml:sub>XhtmlInlPresType</xhtml:sub>text after sub
+                    text before sup<xhtml:sup>XhtmlInlPresType</xhtml:sup>text after sup
+                    text before a<xhtml:a>XhtmlAType</xhtml:a>text after a
+                    text before ins<xhtml:ins>XhtmlEditType</xhtml:ins>text after ins
+                    text before del<xhtml:del>XhtmlEditType</xhtml:del>text after del</xhtml:samp></xhtml:p>
+              </THE-VALUE>
+            </ATTRIBUTE-VALUE-XHTML>
+          </VALUES>
+          <TYPE>
+            <SPEC-OBJECT-TYPE-REF>ID_TC1200_SpecObjectType</SPEC-OBJECT-TYPE-REF>
+          </TYPE>
+        </SPEC-OBJECT>
+        <SPEC-OBJECT IDENTIFIER="ID_TC1200_SpecObject_xhtml.kbd.type" LAST-CHANGE="2012-04-07T01:51:37.112+02:00">
+          <VALUES>
+            <ATTRIBUTE-VALUE-STRING THE-VALUE="xhtml.kbd.type">
+              <DEFINITION>
+                <ATTRIBUTE-DEFINITION-STRING-REF>ID_TC1200_AttributeDefinitionString</ATTRIBUTE-DEFINITION-STRING-REF>
+              </DEFINITION>
+            </ATTRIBUTE-VALUE-STRING>
+            <ATTRIBUTE-VALUE-XHTML>
+              <DEFINITION>
+                <ATTRIBUTE-DEFINITION-XHTML-REF>ID_TC1200_AttributeDefinitionXHTML</ATTRIBUTE-DEFINITION-XHTML-REF>
+              </DEFINITION>
+              <THE-VALUE>
+                <xhtml:p>XhtmlPType<xhtml:kbd style="text-decoration:underline" title="text">
+                    text before br<xhtml:br/>text after br
+                    text before span<xhtml:span>XhtmlSpanType</xhtml:span>text after span
+                    text before em<xhtml:em>XhtmlEmType</xhtml:em>text after em
+                    text before strong<xhtml:strong>XhtmlStrongType</xhtml:strong>text after strong
+                    text before dfn<xhtml:dfn>XhtmlDfnType</xhtml:dfn>text after dfn
+                    text before code<xhtml:code>XhtmlCodeType</xhtml:code>text after code
+                    text before samp<xhtml:samp>XhtmlSampType</xhtml:samp>text after samp
+                    text before kbd<xhtml:kbd>XhtmlKbdType</xhtml:kbd>text after kbd
+                    text before var<xhtml:var>XhtmlVarType</xhtml:var>text after var
+                    text before cite<xhtml:cite>XhtmlCiteType</xhtml:cite>text after cite
+                    text before abbr<xhtml:abbr>XhtmlAbbrType</xhtml:abbr>text after abbr
+                    text before acronym<xhtml:acronym>XhtmlAcronymType</xhtml:acronym>text after acronym
+                    text before q<xhtml:q>XhtmlQType</xhtml:q>text after q
+                    text before tt<xhtml:tt>XhtmlInlPresType</xhtml:tt>text after tt
+                    text before i<xhtml:i>XhtmlInlPresType</xhtml:i>text after i
+                    text before b<xhtml:b>XhtmlInlPresType</xhtml:b>text after b
+                    text before big<xhtml:big>XhtmlInlPresType</xhtml:big>text after big
+                    text before small<xhtml:small>XhtmlInlPresType</xhtml:small>text after small
+                    text before sub<xhtml:sub>XhtmlInlPresType</xhtml:sub>text after sub
+                    text before sup<xhtml:sup>XhtmlInlPresType</xhtml:sup>text after sup
+                    text before a<xhtml:a>XhtmlAType</xhtml:a>text after a
+                    text before ins<xhtml:ins>XhtmlEditType</xhtml:ins>text after ins
+                    text before del<xhtml:del>XhtmlEditType</xhtml:del>text after del</xhtml:kbd></xhtml:p>
+              </THE-VALUE>
+            </ATTRIBUTE-VALUE-XHTML>
+          </VALUES>
+          <TYPE>
+            <SPEC-OBJECT-TYPE-REF>ID_TC1200_SpecObjectType</SPEC-OBJECT-TYPE-REF>
+          </TYPE>
+        </SPEC-OBJECT>
+        <SPEC-OBJECT IDENTIFIER="ID_TC1200_SpecObject_xhtml.var.type" LAST-CHANGE="2012-04-07T01:51:37.112+02:00">
+          <VALUES>
+            <ATTRIBUTE-VALUE-STRING THE-VALUE="xhtml.var.type">
+              <DEFINITION>
+                <ATTRIBUTE-DEFINITION-STRING-REF>ID_TC1200_AttributeDefinitionString</ATTRIBUTE-DEFINITION-STRING-REF>
+              </DEFINITION>
+            </ATTRIBUTE-VALUE-STRING>
+            <ATTRIBUTE-VALUE-XHTML>
+              <DEFINITION>
+                <ATTRIBUTE-DEFINITION-XHTML-REF>ID_TC1200_AttributeDefinitionXHTML</ATTRIBUTE-DEFINITION-XHTML-REF>
+              </DEFINITION>
+              <THE-VALUE>
+                <xhtml:p>XhtmlPType<xhtml:var style="text-decoration:underline" title="text">
+                    text before br<xhtml:br/>text after br
+                    text before span<xhtml:span>XhtmlSpanType</xhtml:span>text after span
+                    text before em<xhtml:em>XhtmlEmType</xhtml:em>text after em
+                    text before strong<xhtml:strong>XhtmlStrongType</xhtml:strong>text after strong
+                    text before dfn<xhtml:dfn>XhtmlDfnType</xhtml:dfn>text after dfn
+                    text before code<xhtml:code>XhtmlCodeType</xhtml:code>text after code
+                    text before samp<xhtml:samp>XhtmlSampType</xhtml:samp>text after samp
+                    text before kbd<xhtml:kbd>XhtmlKbdType</xhtml:kbd>text after kbd
+                    text before var<xhtml:var>XhtmlVarType</xhtml:var>text after var
+                    text before cite<xhtml:cite>XhtmlCiteType</xhtml:cite>text after cite
+                    text before abbr<xhtml:abbr>XhtmlAbbrType</xhtml:abbr>text after abbr
+                    text before acronym<xhtml:acronym>XhtmlAcronymType</xhtml:acronym>text after acronym
+                    text before q<xhtml:q>XhtmlQType</xhtml:q>text after q
+                    text before tt<xhtml:tt>XhtmlInlPresType</xhtml:tt>text after tt
+                    text before i<xhtml:i>XhtmlInlPresType</xhtml:i>text after i
+                    text before b<xhtml:b>XhtmlInlPresType</xhtml:b>text after b
+                    text before big<xhtml:big>XhtmlInlPresType</xhtml:big>text after big
+                    text before small<xhtml:small>XhtmlInlPresType</xhtml:small>text after small
+                    text before sub<xhtml:sub>XhtmlInlPresType</xhtml:sub>text after sub
+                    text before sup<xhtml:sup>XhtmlInlPresType</xhtml:sup>text after sup
+                    text before a<xhtml:a>XhtmlAType</xhtml:a>text after a
+                    text before ins<xhtml:ins>XhtmlEditType</xhtml:ins>text after ins
+                    text before del<xhtml:del>XhtmlEditType</xhtml:del>text after del</xhtml:var></xhtml:p>
+              </THE-VALUE>
+            </ATTRIBUTE-VALUE-XHTML>
+          </VALUES>
+          <TYPE>
+            <SPEC-OBJECT-TYPE-REF>ID_TC1200_SpecObjectType</SPEC-OBJECT-TYPE-REF>
+          </TYPE>
+        </SPEC-OBJECT>
+        <SPEC-OBJECT IDENTIFIER="ID_TC1200_SpecObject_xhtml.cite.type" LAST-CHANGE="2012-04-07T01:51:37.112+02:00">
+          <VALUES>
+            <ATTRIBUTE-VALUE-STRING THE-VALUE="xhtml.cite.type">
+              <DEFINITION>
+                <ATTRIBUTE-DEFINITION-STRING-REF>ID_TC1200_AttributeDefinitionString</ATTRIBUTE-DEFINITION-STRING-REF>
+              </DEFINITION>
+            </ATTRIBUTE-VALUE-STRING>
+            <ATTRIBUTE-VALUE-XHTML>
+              <DEFINITION>
+                <ATTRIBUTE-DEFINITION-XHTML-REF>ID_TC1200_AttributeDefinitionXHTML</ATTRIBUTE-DEFINITION-XHTML-REF>
+              </DEFINITION>
+              <THE-VALUE>
+                <xhtml:p>XhtmlPType<xhtml:cite style="text-decoration:underline" title="text">
+                    text before br<xhtml:br/>text after br
+                    text before span<xhtml:span>XhtmlSpanType</xhtml:span>text after span
+                    text before em<xhtml:em>XhtmlEmType</xhtml:em>text after em
+                    text before strong<xhtml:strong>XhtmlStrongType</xhtml:strong>text after strong
+                    text before dfn<xhtml:dfn>XhtmlDfnType</xhtml:dfn>text after dfn
+                    text before code<xhtml:code>XhtmlCodeType</xhtml:code>text after code
+                    text before samp<xhtml:samp>XhtmlSampType</xhtml:samp>text after samp
+                    text before kbd<xhtml:kbd>XhtmlKbdType</xhtml:kbd>text after kbd
+                    text before var<xhtml:var>XhtmlVarType</xhtml:var>text after var
+                    text before cite<xhtml:cite>XhtmlCiteType</xhtml:cite>text after cite
+                    text before abbr<xhtml:abbr>XhtmlAbbrType</xhtml:abbr>text after abbr
+                    text before acronym<xhtml:acronym>XhtmlAcronymType</xhtml:acronym>text after acronym
+                    text before q<xhtml:q>XhtmlQType</xhtml:q>text after q
+                    text before tt<xhtml:tt>XhtmlInlPresType</xhtml:tt>text after tt
+                    text before i<xhtml:i>XhtmlInlPresType</xhtml:i>text after i
+                    text before b<xhtml:b>XhtmlInlPresType</xhtml:b>text after b
+                    text before big<xhtml:big>XhtmlInlPresType</xhtml:big>text after big
+                    text before small<xhtml:small>XhtmlInlPresType</xhtml:small>text after small
+                    text before sub<xhtml:sub>XhtmlInlPresType</xhtml:sub>text after sub
+                    text before sup<xhtml:sup>XhtmlInlPresType</xhtml:sup>text after sup
+                    text before a<xhtml:a>XhtmlAType</xhtml:a>text after a
+                    text before ins<xhtml:ins>XhtmlEditType</xhtml:ins>text after ins
+                    text before del<xhtml:del>XhtmlEditType</xhtml:del>text after del</xhtml:cite></xhtml:p>
+              </THE-VALUE>
+            </ATTRIBUTE-VALUE-XHTML>
+          </VALUES>
+          <TYPE>
+            <SPEC-OBJECT-TYPE-REF>ID_TC1200_SpecObjectType</SPEC-OBJECT-TYPE-REF>
+          </TYPE>
+        </SPEC-OBJECT>
+        <SPEC-OBJECT IDENTIFIER="ID_TC1200_SpecObject_xhtml.abbr.type" LAST-CHANGE="2012-04-07T01:51:37.112+02:00">
+          <VALUES>
+            <ATTRIBUTE-VALUE-STRING THE-VALUE="xhtml.abbr.type">
+              <DEFINITION>
+                <ATTRIBUTE-DEFINITION-STRING-REF>ID_TC1200_AttributeDefinitionString</ATTRIBUTE-DEFINITION-STRING-REF>
+              </DEFINITION>
+            </ATTRIBUTE-VALUE-STRING>
+            <ATTRIBUTE-VALUE-XHTML>
+              <DEFINITION>
+                <ATTRIBUTE-DEFINITION-XHTML-REF>ID_TC1200_AttributeDefinitionXHTML</ATTRIBUTE-DEFINITION-XHTML-REF>
+              </DEFINITION>
+              <THE-VALUE>
+                <xhtml:p>XhtmlPType<xhtml:abbr style="text-decoration:underline" title="text">
+                    text before br<xhtml:br/>text after br
+                    text before span<xhtml:span>XhtmlSpanType</xhtml:span>text after span
+                    text before em<xhtml:em>XhtmlEmType</xhtml:em>text after em
+                    text before strong<xhtml:strong>XhtmlStrongType</xhtml:strong>text after strong
+                    text before dfn<xhtml:dfn>XhtmlDfnType</xhtml:dfn>text after dfn
+                    text before code<xhtml:code>XhtmlCodeType</xhtml:code>text after code
+                    text before samp<xhtml:samp>XhtmlSampType</xhtml:samp>text after samp
+                    text before kbd<xhtml:kbd>XhtmlKbdType</xhtml:kbd>text after kbd
+                    text before var<xhtml:var>XhtmlVarType</xhtml:var>text after var
+                    text before cite<xhtml:cite>XhtmlCiteType</xhtml:cite>text after cite
+                    text before abbr<xhtml:abbr>XhtmlAbbrType</xhtml:abbr>text after abbr
+                    text before acronym<xhtml:acronym>XhtmlAcronymType</xhtml:acronym>text after acronym
+                    text before q<xhtml:q>XhtmlQType</xhtml:q>text after q
+                    text before tt<xhtml:tt>XhtmlInlPresType</xhtml:tt>text after tt
+                    text before i<xhtml:i>XhtmlInlPresType</xhtml:i>text after i
+                    text before b<xhtml:b>XhtmlInlPresType</xhtml:b>text after b
+                    text before big<xhtml:big>XhtmlInlPresType</xhtml:big>text after big
+                    text before small<xhtml:small>XhtmlInlPresType</xhtml:small>text after small
+                    text before sub<xhtml:sub>XhtmlInlPresType</xhtml:sub>text after sub
+                    text before sup<xhtml:sup>XhtmlInlPresType</xhtml:sup>text after sup
+                    text before a<xhtml:a>XhtmlAType</xhtml:a>text after a
+                    text before ins<xhtml:ins>XhtmlEditType</xhtml:ins>text after ins
+                    text before del<xhtml:del>XhtmlEditType</xhtml:del>text after del</xhtml:abbr></xhtml:p>
+              </THE-VALUE>
+            </ATTRIBUTE-VALUE-XHTML>
+          </VALUES>
+          <TYPE>
+            <SPEC-OBJECT-TYPE-REF>ID_TC1200_SpecObjectType</SPEC-OBJECT-TYPE-REF>
+          </TYPE>
+        </SPEC-OBJECT>
+        <SPEC-OBJECT IDENTIFIER="ID_TC1200_SpecObject_xhtml.acronym.type" LAST-CHANGE="2012-04-07T01:51:37.112+02:00">
+          <VALUES>
+            <ATTRIBUTE-VALUE-STRING THE-VALUE="xhtml.acronym.type">
+              <DEFINITION>
+                <ATTRIBUTE-DEFINITION-STRING-REF>ID_TC1200_AttributeDefinitionString</ATTRIBUTE-DEFINITION-STRING-REF>
+              </DEFINITION>
+            </ATTRIBUTE-VALUE-STRING>
+            <ATTRIBUTE-VALUE-XHTML>
+              <DEFINITION>
+                <ATTRIBUTE-DEFINITION-XHTML-REF>ID_TC1200_AttributeDefinitionXHTML</ATTRIBUTE-DEFINITION-XHTML-REF>
+              </DEFINITION>
+              <THE-VALUE>
+                <xhtml:p>XhtmlPType<xhtml:acronym style="text-decoration:underline" title="text">
+                    text before br<xhtml:br/>text after br
+                    text before span<xhtml:span>XhtmlSpanType</xhtml:span>text after span
+                    text before em<xhtml:em>XhtmlEmType</xhtml:em>text after em
+                    text before strong<xhtml:strong>XhtmlStrongType</xhtml:strong>text after strong
+                    text before dfn<xhtml:dfn>XhtmlDfnType</xhtml:dfn>text after dfn
+                    text before code<xhtml:code>XhtmlCodeType</xhtml:code>text after code
+                    text before samp<xhtml:samp>XhtmlSampType</xhtml:samp>text after samp
+                    text before kbd<xhtml:kbd>XhtmlKbdType</xhtml:kbd>text after kbd
+                    text before var<xhtml:var>XhtmlVarType</xhtml:var>text after var
+                    text before cite<xhtml:cite>XhtmlCiteType</xhtml:cite>text after cite
+                    text before abbr<xhtml:abbr>XhtmlAbbrType</xhtml:abbr>text after abbr
+                    text before acronym<xhtml:acronym>XhtmlAcronymType</xhtml:acronym>text after acronym
+                    text before q<xhtml:q>XhtmlQType</xhtml:q>text after q
+                    text before tt<xhtml:tt>XhtmlInlPresType</xhtml:tt>text after tt
+                    text before i<xhtml:i>XhtmlInlPresType</xhtml:i>text after i
+                    text before b<xhtml:b>XhtmlInlPresType</xhtml:b>text after b
+                    text before big<xhtml:big>XhtmlInlPresType</xhtml:big>text after big
+                    text before small<xhtml:small>XhtmlInlPresType</xhtml:small>text after small
+                    text before sub<xhtml:sub>XhtmlInlPresType</xhtml:sub>text after sub
+                    text before sup<xhtml:sup>XhtmlInlPresType</xhtml:sup>text after sup
+                    text before a<xhtml:a>XhtmlAType</xhtml:a>text after a
+                    text before ins<xhtml:ins>XhtmlEditType</xhtml:ins>text after ins
+                    text before del<xhtml:del>XhtmlEditType</xhtml:del>text after del</xhtml:acronym></xhtml:p>
+              </THE-VALUE>
+            </ATTRIBUTE-VALUE-XHTML>
+          </VALUES>
+          <TYPE>
+            <SPEC-OBJECT-TYPE-REF>ID_TC1200_SpecObjectType</SPEC-OBJECT-TYPE-REF>
+          </TYPE>
+        </SPEC-OBJECT>
+        <SPEC-OBJECT IDENTIFIER="ID_TC1200_SpecObject_xhtml.q.type" LAST-CHANGE="2012-04-07T01:51:37.112+02:00">
+          <VALUES>
+            <ATTRIBUTE-VALUE-STRING THE-VALUE="xhtml.q.type">
+              <DEFINITION>
+                <ATTRIBUTE-DEFINITION-STRING-REF>ID_TC1200_AttributeDefinitionString</ATTRIBUTE-DEFINITION-STRING-REF>
+              </DEFINITION>
+            </ATTRIBUTE-VALUE-STRING>
+            <ATTRIBUTE-VALUE-XHTML>
+              <DEFINITION>
+                <ATTRIBUTE-DEFINITION-XHTML-REF>ID_TC1200_AttributeDefinitionXHTML</ATTRIBUTE-DEFINITION-XHTML-REF>
+              </DEFINITION>
+              <THE-VALUE>
+                <xhtml:p>XhtmlPType<xhtml:q cite="http://eclipse.org/rmf" style="text-decoration:underline" title="text">
+                    text before br<xhtml:br/>text after br
+                    text before span<xhtml:span>XhtmlSpanType</xhtml:span>text after span
+                    text before em<xhtml:em>XhtmlEmType</xhtml:em>text after em
+                    text before strong<xhtml:strong>XhtmlStrongType</xhtml:strong>text after strong
+                    text before dfn<xhtml:dfn>XhtmlDfnType</xhtml:dfn>text after dfn
+                    text before code<xhtml:code>XhtmlCodeType</xhtml:code>text after code
+                    text before samp<xhtml:samp>XhtmlSampType</xhtml:samp>text after samp
+                    text before kbd<xhtml:kbd>XhtmlKbdType</xhtml:kbd>text after kbd
+                    text before var<xhtml:var>XhtmlVarType</xhtml:var>text after var
+                    text before cite<xhtml:cite>XhtmlCiteType</xhtml:cite>text after cite
+                    text before abbr<xhtml:abbr>XhtmlAbbrType</xhtml:abbr>text after abbr
+                    text before acronym<xhtml:acronym>XhtmlAcronymType</xhtml:acronym>text after acronym
+                    text before q<xhtml:q>XhtmlQType</xhtml:q>text after q
+                    text before tt<xhtml:tt>XhtmlInlPresType</xhtml:tt>text after tt
+                    text before i<xhtml:i>XhtmlInlPresType</xhtml:i>text after i
+                    text before b<xhtml:b>XhtmlInlPresType</xhtml:b>text after b
+                    text before big<xhtml:big>XhtmlInlPresType</xhtml:big>text after big
+                    text before small<xhtml:small>XhtmlInlPresType</xhtml:small>text after small
+                    text before sub<xhtml:sub>XhtmlInlPresType</xhtml:sub>text after sub
+                    text before sup<xhtml:sup>XhtmlInlPresType</xhtml:sup>text after sup
+                    text before a<xhtml:a>XhtmlAType</xhtml:a>text after a
+                    text before ins<xhtml:ins>XhtmlEditType</xhtml:ins>text after ins
+                    text before del<xhtml:del>XhtmlEditType</xhtml:del>text after del</xhtml:q></xhtml:p>
+              </THE-VALUE>
+            </ATTRIBUTE-VALUE-XHTML>
+          </VALUES>
+          <TYPE>
+            <SPEC-OBJECT-TYPE-REF>ID_TC1200_SpecObjectType</SPEC-OBJECT-TYPE-REF>
+          </TYPE>
+        </SPEC-OBJECT>
+        <SPEC-OBJECT IDENTIFIER="ID_TC1200_SpecObject_xhtml.inl.pres.type" LAST-CHANGE="2012-04-07T01:51:37.112+02:00">
+          <VALUES>
+            <ATTRIBUTE-VALUE-STRING THE-VALUE="xhtml.inl.pres.type">
+              <DEFINITION>
+                <ATTRIBUTE-DEFINITION-STRING-REF>ID_TC1200_AttributeDefinitionString</ATTRIBUTE-DEFINITION-STRING-REF>
+              </DEFINITION>
+            </ATTRIBUTE-VALUE-STRING>
+            <ATTRIBUTE-VALUE-XHTML>
+              <DEFINITION>
+                <ATTRIBUTE-DEFINITION-XHTML-REF>ID_TC1200_AttributeDefinitionXHTML</ATTRIBUTE-DEFINITION-XHTML-REF>
+              </DEFINITION>
+              <THE-VALUE>
+                <xhtml:p>XhtmlPType<xhtml:tt style="text-decoration:underline" title="text">
+                    text before br<xhtml:br/>text after br
+                    text before span<xhtml:span>XhtmlSpanType</xhtml:span>text after span
+                    text before em<xhtml:em>XhtmlEmType</xhtml:em>text after em
+                    text before strong<xhtml:strong>XhtmlStrongType</xhtml:strong>text after strong
+                    text before dfn<xhtml:dfn>XhtmlDfnType</xhtml:dfn>text after dfn
+                    text before code<xhtml:code>XhtmlCodeType</xhtml:code>text after code
+                    text before samp<xhtml:samp>XhtmlSampType</xhtml:samp>text after samp
+                    text before kbd<xhtml:kbd>XhtmlKbdType</xhtml:kbd>text after kbd
+                    text before var<xhtml:var>XhtmlVarType</xhtml:var>text after var
+                    text before cite<xhtml:cite>XhtmlCiteType</xhtml:cite>text after cite
+                    text before abbr<xhtml:abbr>XhtmlAbbrType</xhtml:abbr>text after abbr
+                    text before acronym<xhtml:acronym>XhtmlAcronymType</xhtml:acronym>text after acronym
+                    text before q<xhtml:q>XhtmlQType</xhtml:q>text after q
+                    text before tt<xhtml:tt>XhtmlInlPresType</xhtml:tt>text after tt
+                    text before i<xhtml:i>XhtmlInlPresType</xhtml:i>text after i
+                    text before b<xhtml:b>XhtmlInlPresType</xhtml:b>text after b
+                    text before big<xhtml:big>XhtmlInlPresType</xhtml:big>text after big
+                    text before small<xhtml:small>XhtmlInlPresType</xhtml:small>text after small
+                    text before sub<xhtml:sub>XhtmlInlPresType</xhtml:sub>text after sub
+                    text before sup<xhtml:sup>XhtmlInlPresType</xhtml:sup>text after sup
+                    text before a<xhtml:a>XhtmlAType</xhtml:a>text after a
+                    text before ins<xhtml:ins>XhtmlEditType</xhtml:ins>text after ins
+                    text before del<xhtml:del>XhtmlEditType</xhtml:del>text after del</xhtml:tt></xhtml:p>
+              </THE-VALUE>
+            </ATTRIBUTE-VALUE-XHTML>
+          </VALUES>
+          <TYPE>
+            <SPEC-OBJECT-TYPE-REF>ID_TC1200_SpecObjectType</SPEC-OBJECT-TYPE-REF>
+          </TYPE>
+        </SPEC-OBJECT>
+        <SPEC-OBJECT IDENTIFIER="ID_TC1200_SpecObject_xhtml.a.type" LAST-CHANGE="2012-04-07T01:51:37.112+02:00">
+          <VALUES>
+            <ATTRIBUTE-VALUE-STRING THE-VALUE="xhtml.a.type">
+              <DEFINITION>
+                <ATTRIBUTE-DEFINITION-STRING-REF>ID_TC1200_AttributeDefinitionString</ATTRIBUTE-DEFINITION-STRING-REF>
+              </DEFINITION>
+            </ATTRIBUTE-VALUE-STRING>
+            <ATTRIBUTE-VALUE-XHTML>
+              <DEFINITION>
+                <ATTRIBUTE-DEFINITION-XHTML-REF>ID_TC1200_AttributeDefinitionXHTML</ATTRIBUTE-DEFINITION-XHTML-REF>
+              </DEFINITION>
+              <THE-VALUE>
+                <xhtml:p>XhtmlPType<xhtml:a accesskey="a" charset="UTF-8" href="http://eclipse.org/rmf" hreflang="en" rel="LinkTypes" rev="LinkTypes" style="text-decoration:underline" tabindex="1" title="text" type="text/html">
+                    text before br<xhtml:br/>text after br
+                    text before span<xhtml:span>XhtmlSpanType</xhtml:span>text after span
+                    text before em<xhtml:em>XhtmlEmType</xhtml:em>text after em
+                    text before strong<xhtml:strong>XhtmlStrongType</xhtml:strong>text after strong
+                    text before dfn<xhtml:dfn>XhtmlDfnType</xhtml:dfn>text after dfn
+                    text before code<xhtml:code>XhtmlCodeType</xhtml:code>text after code
+                    text before samp<xhtml:samp>XhtmlSampType</xhtml:samp>text after samp
+                    text before kbd<xhtml:kbd>XhtmlKbdType</xhtml:kbd>text after kbd
+                    text before var<xhtml:var>XhtmlVarType</xhtml:var>text after var
+                    text before cite<xhtml:cite>XhtmlCiteType</xhtml:cite>text after cite
+                    text before abbr<xhtml:abbr>XhtmlAbbrType</xhtml:abbr>text after abbr
+                    text before acronym<xhtml:acronym>XhtmlAcronymType</xhtml:acronym>text after acronym
+                    text before q<xhtml:q>XhtmlQType</xhtml:q>text after q
+                    text before tt<xhtml:tt>XhtmlInlPresType</xhtml:tt>text after tt
+                    text before i<xhtml:i>XhtmlInlPresType</xhtml:i>text after i
+                    text before b<xhtml:b>XhtmlInlPresType</xhtml:b>text after b
+                    text before big<xhtml:big>XhtmlInlPresType</xhtml:big>text after big
+                    text before small<xhtml:small>XhtmlInlPresType</xhtml:small>text after small
+                    text before sub<xhtml:sub>XhtmlInlPresType</xhtml:sub>text after sub
+                    text before sup<xhtml:sup>XhtmlInlPresType</xhtml:sup>text after sup
+                    text before ins<xhtml:ins>XhtmlEditType</xhtml:ins>text after ins
+                    text before del<xhtml:del>XhtmlEditType</xhtml:del>text after del</xhtml:a></xhtml:p>
+              </THE-VALUE>
+            </ATTRIBUTE-VALUE-XHTML>
+          </VALUES>
+          <TYPE>
+            <SPEC-OBJECT-TYPE-REF>ID_TC1200_SpecObjectType</SPEC-OBJECT-TYPE-REF>
+          </TYPE>
+        </SPEC-OBJECT>
+        <SPEC-OBJECT IDENTIFIER="ID_TC1200_SpecObject_xhtml.edit.type" LAST-CHANGE="2012-04-07T01:51:37.112+02:00">
+          <VALUES>
+            <ATTRIBUTE-VALUE-STRING THE-VALUE="xhtml.edit.type">
+              <DEFINITION>
+                <ATTRIBUTE-DEFINITION-STRING-REF>ID_TC1200_AttributeDefinitionString</ATTRIBUTE-DEFINITION-STRING-REF>
+              </DEFINITION>
+            </ATTRIBUTE-VALUE-STRING>
+            <ATTRIBUTE-VALUE-XHTML>
+              <DEFINITION>
+                <ATTRIBUTE-DEFINITION-XHTML-REF>ID_TC1200_AttributeDefinitionXHTML</ATTRIBUTE-DEFINITION-XHTML-REF>
+              </DEFINITION>
+              <THE-VALUE>
+                <xhtml:p>XhtmlPType<xhtml:ins cite="http://eclipse.org/rmf" datetime="2012-04-05T02:39:33.005+02:00" style="text-decoration:underline" title="text">
+                    text before h1<xhtml:h1>XhtmlH1Type</xhtml:h1>text after h1
+                    text before h2<xhtml:h2>XhtmlH2Type</xhtml:h2>text after h2
+                    text before h3<xhtml:h3>XhtmlH3Type</xhtml:h3>text after h3
+                    text before h4<xhtml:h4>XhtmlH4Type</xhtml:h4>text after h4
+                    text before h5<xhtml:h5>XhtmlH5Type</xhtml:h5>text after h5
+                    text before h6<xhtml:h6>XhtmlH6Type</xhtml:h6>text after h6
+                    text before ul<xhtml:ul>
+                      <xhtml:li>XhtmlLiType</xhtml:li>
+                    </xhtml:ul>text after ul
+                    text before ol<xhtml:ol>
+                      <xhtml:li>XhtmlLiType</xhtml:li>
+                    </xhtml:ol>text after ol
+                    text before dl<xhtml:dl>
+                      <xhtml:dt>XhtmlDtType</xhtml:dt>
+                      <xhtml:dd>XhtmlDdType</xhtml:dd>
+                    </xhtml:dl>text after dl
+                    text before p<xhtml:p>XhtmlPType</xhtml:p>text after p
+                    text before div<xhtml:div>XhtmlDivType</xhtml:div>text after div
+                    text before pre<xhtml:pre>XhtmlPreType</xhtml:pre>text after pre
+                    text before blockquote<xhtml:blockquote/>text after blockquote
+                    text before address<xhtml:address>XhtmlAddressType</xhtml:address>text after address
+                    text before hr<xhtml:hr/>text after hr
+                    text before table<xhtml:table>
+                      <xhtml:tr>
+                        <xhtml:td/>
+                      </xhtml:tr>
+                    </xhtml:table>text after table
+                    text before br<xhtml:br/>text after br
+                    text before span<xhtml:span>XhtmlSpanType</xhtml:span>text after span
+                    text before em<xhtml:em>XhtmlEmType</xhtml:em>text after em
+                    text before strong<xhtml:strong>XhtmlStrongType</xhtml:strong>text after strong
+                    text before dfn<xhtml:dfn>XhtmlDfnType</xhtml:dfn>text after dfn
+                    text before code<xhtml:code>XhtmlCodeType</xhtml:code>text after code
+                    text before samp<xhtml:samp>XhtmlSampType</xhtml:samp>text after samp
+                    text before kbd<xhtml:kbd>XhtmlKbdType</xhtml:kbd>text after kbd
+                    text before var<xhtml:var>XhtmlVarType</xhtml:var>text after var
+                    text before cite<xhtml:cite>XhtmlCiteType</xhtml:cite>text after cite
+                    text before abbr<xhtml:abbr>XhtmlAbbrType</xhtml:abbr>text after abbr
+                    text before acronym<xhtml:acronym>XhtmlAcronymType</xhtml:acronym>text after acronym
+                    text before q<xhtml:q>XhtmlQType</xhtml:q>text after q
+                    text before tt<xhtml:tt>XhtmlInlPresType</xhtml:tt>text after tt
+                    text before i<xhtml:i>XhtmlInlPresType</xhtml:i>text after i
+                    text before b<xhtml:b>XhtmlInlPresType</xhtml:b>text after b
+                    text before big<xhtml:big>XhtmlInlPresType</xhtml:big>text after big
+                    text before small<xhtml:small>XhtmlInlPresType</xhtml:small>text after small
+                    text before sub<xhtml:sub>XhtmlInlPresType</xhtml:sub>text after sub
+                    text before sup<xhtml:sup>XhtmlInlPresType</xhtml:sup>text after sup
+                    text before a<xhtml:a>XhtmlAType</xhtml:a>text after a
+                    text before ins<xhtml:ins>XhtmlEditType</xhtml:ins>text after ins
+                    text before del<xhtml:del>XhtmlEditType</xhtml:del>text after del</xhtml:ins></xhtml:p>
+              </THE-VALUE>
+            </ATTRIBUTE-VALUE-XHTML>
+          </VALUES>
+          <TYPE>
+            <SPEC-OBJECT-TYPE-REF>ID_TC1200_SpecObjectType</SPEC-OBJECT-TYPE-REF>
+          </TYPE>
+        </SPEC-OBJECT>
+        <SPEC-OBJECT IDENTIFIER="ID_TC1200_SpecObject_xhtml.h1.type" LAST-CHANGE="2012-04-07T01:51:37.112+02:00">
+          <VALUES>
+            <ATTRIBUTE-VALUE-STRING THE-VALUE="xhtml.h1.type">
+              <DEFINITION>
+                <ATTRIBUTE-DEFINITION-STRING-REF>ID_TC1200_AttributeDefinitionString</ATTRIBUTE-DEFINITION-STRING-REF>
+              </DEFINITION>
+            </ATTRIBUTE-VALUE-STRING>
+            <ATTRIBUTE-VALUE-XHTML>
+              <DEFINITION>
+                <ATTRIBUTE-DEFINITION-XHTML-REF>ID_TC1200_AttributeDefinitionXHTML</ATTRIBUTE-DEFINITION-XHTML-REF>
+              </DEFINITION>
+              <THE-VALUE>
+                <xhtml:div>XhtmlDivType<xhtml:h1 style="text-decoration:underline" title="text">
+                    text before br<xhtml:br/>text after br
+                    text before span<xhtml:span>XhtmlSpanType</xhtml:span>text after span
+                    text before em<xhtml:em>XhtmlEmType</xhtml:em>text after em
+                    text before strong<xhtml:strong>XhtmlStrongType</xhtml:strong>text after strong
+                    text before dfn<xhtml:dfn>XhtmlDfnType</xhtml:dfn>text after dfn
+                    text before code<xhtml:code>XhtmlCodeType</xhtml:code>text after code
+                    text before samp<xhtml:samp>XhtmlSampType</xhtml:samp>text after samp
+                    text before kbd<xhtml:kbd>XhtmlKbdType</xhtml:kbd>text after kbd
+                    text before var<xhtml:var>XhtmlVarType</xhtml:var>text after var
+                    text before cite<xhtml:cite>XhtmlCiteType</xhtml:cite>text after cite
+                    text before abbr<xhtml:abbr>XhtmlAbbrType</xhtml:abbr>text after abbr
+                    text before acronym<xhtml:acronym>XhtmlAcronymType</xhtml:acronym>text after acronym
+                    text before q<xhtml:q>XhtmlQType</xhtml:q>text after q
+                    text before tt<xhtml:tt>XhtmlInlPresType</xhtml:tt>text after tt
+                    text before i<xhtml:i>XhtmlInlPresType</xhtml:i>text after i
+                    text before b<xhtml:b>XhtmlInlPresType</xhtml:b>text after b
+                    text before big<xhtml:big>XhtmlInlPresType</xhtml:big>text after big
+                    text before small<xhtml:small>XhtmlInlPresType</xhtml:small>text after small
+                    text before sub<xhtml:sub>XhtmlInlPresType</xhtml:sub>text after sub
+                    text before sup<xhtml:sup>XhtmlInlPresType</xhtml:sup>text after sup
+                    text before a<xhtml:a>XhtmlAType</xhtml:a>text after a
+                    text before ins<xhtml:ins>XhtmlEditType</xhtml:ins>text after ins
+                    text before del<xhtml:del>XhtmlEditType</xhtml:del>text after del</xhtml:h1></xhtml:div>
+              </THE-VALUE>
+            </ATTRIBUTE-VALUE-XHTML>
+          </VALUES>
+          <TYPE>
+            <SPEC-OBJECT-TYPE-REF>ID_TC1200_SpecObjectType</SPEC-OBJECT-TYPE-REF>
+          </TYPE>
+        </SPEC-OBJECT>
+        <SPEC-OBJECT IDENTIFIER="ID_TC1200_SpecObject_xhtml.h2.type" LAST-CHANGE="2012-04-07T01:51:37.112+02:00">
+          <VALUES>
+            <ATTRIBUTE-VALUE-STRING THE-VALUE="xhtml.h2.type">
+              <DEFINITION>
+                <ATTRIBUTE-DEFINITION-STRING-REF>ID_TC1200_AttributeDefinitionString</ATTRIBUTE-DEFINITION-STRING-REF>
+              </DEFINITION>
+            </ATTRIBUTE-VALUE-STRING>
+            <ATTRIBUTE-VALUE-XHTML>
+              <DEFINITION>
+                <ATTRIBUTE-DEFINITION-XHTML-REF>ID_TC1200_AttributeDefinitionXHTML</ATTRIBUTE-DEFINITION-XHTML-REF>
+              </DEFINITION>
+              <THE-VALUE>
+                <xhtml:div>XhtmlDivType<xhtml:h2 style="text-decoration:underline" title="text">
+                    text before br<xhtml:br/>text after br
+                    text before span<xhtml:span>XhtmlSpanType</xhtml:span>text after span
+                    text before em<xhtml:em>XhtmlEmType</xhtml:em>text after em
+                    text before strong<xhtml:strong>XhtmlStrongType</xhtml:strong>text after strong
+                    text before dfn<xhtml:dfn>XhtmlDfnType</xhtml:dfn>text after dfn
+                    text before code<xhtml:code>XhtmlCodeType</xhtml:code>text after code
+                    text before samp<xhtml:samp>XhtmlSampType</xhtml:samp>text after samp
+                    text before kbd<xhtml:kbd>XhtmlKbdType</xhtml:kbd>text after kbd
+                    text before var<xhtml:var>XhtmlVarType</xhtml:var>text after var
+                    text before cite<xhtml:cite>XhtmlCiteType</xhtml:cite>text after cite
+                    text before abbr<xhtml:abbr>XhtmlAbbrType</xhtml:abbr>text after abbr
+                    text before acronym<xhtml:acronym>XhtmlAcronymType</xhtml:acronym>text after acronym
+                    text before q<xhtml:q>XhtmlQType</xhtml:q>text after q
+                    text before tt<xhtml:tt>XhtmlInlPresType</xhtml:tt>text after tt
+                    text before i<xhtml:i>XhtmlInlPresType</xhtml:i>text after i
+                    text before b<xhtml:b>XhtmlInlPresType</xhtml:b>text after b
+                    text before big<xhtml:big>XhtmlInlPresType</xhtml:big>text after big
+                    text before small<xhtml:small>XhtmlInlPresType</xhtml:small>text after small
+                    text before sub<xhtml:sub>XhtmlInlPresType</xhtml:sub>text after sub
+                    text before sup<xhtml:sup>XhtmlInlPresType</xhtml:sup>text after sup
+                    text before a<xhtml:a>XhtmlAType</xhtml:a>text after a
+                    text before ins<xhtml:ins>XhtmlEditType</xhtml:ins>text after ins
+                    text before del<xhtml:del>XhtmlEditType</xhtml:del>text after del</xhtml:h2></xhtml:div>
+              </THE-VALUE>
+            </ATTRIBUTE-VALUE-XHTML>
+          </VALUES>
+          <TYPE>
+            <SPEC-OBJECT-TYPE-REF>ID_TC1200_SpecObjectType</SPEC-OBJECT-TYPE-REF>
+          </TYPE>
+        </SPEC-OBJECT>
+        <SPEC-OBJECT IDENTIFIER="ID_TC1200_SpecObject_xhtml.h3.type" LAST-CHANGE="2012-04-07T01:51:37.112+02:00">
+          <VALUES>
+            <ATTRIBUTE-VALUE-STRING THE-VALUE="xhtml.h3.type">
+              <DEFINITION>
+                <ATTRIBUTE-DEFINITION-STRING-REF>ID_TC1200_AttributeDefinitionString</ATTRIBUTE-DEFINITION-STRING-REF>
+              </DEFINITION>
+            </ATTRIBUTE-VALUE-STRING>
+            <ATTRIBUTE-VALUE-XHTML>
+              <DEFINITION>
+                <ATTRIBUTE-DEFINITION-XHTML-REF>ID_TC1200_AttributeDefinitionXHTML</ATTRIBUTE-DEFINITION-XHTML-REF>
+              </DEFINITION>
+              <THE-VALUE>
+                <xhtml:div>XhtmlDivType<xhtml:h3 style="text-decoration:underline" title="text">
+                    text before br<xhtml:br/>text after br
+                    text before span<xhtml:span>XhtmlSpanType</xhtml:span>text after span
+                    text before em<xhtml:em>XhtmlEmType</xhtml:em>text after em
+                    text before strong<xhtml:strong>XhtmlStrongType</xhtml:strong>text after strong
+                    text before dfn<xhtml:dfn>XhtmlDfnType</xhtml:dfn>text after dfn
+                    text before code<xhtml:code>XhtmlCodeType</xhtml:code>text after code
+                    text before samp<xhtml:samp>XhtmlSampType</xhtml:samp>text after samp
+                    text before kbd<xhtml:kbd>XhtmlKbdType</xhtml:kbd>text after kbd
+                    text before var<xhtml:var>XhtmlVarType</xhtml:var>text after var
+                    text before cite<xhtml:cite>XhtmlCiteType</xhtml:cite>text after cite
+                    text before abbr<xhtml:abbr>XhtmlAbbrType</xhtml:abbr>text after abbr
+                    text before acronym<xhtml:acronym>XhtmlAcronymType</xhtml:acronym>text after acronym
+                    text before q<xhtml:q>XhtmlQType</xhtml:q>text after q
+                    text before tt<xhtml:tt>XhtmlInlPresType</xhtml:tt>text after tt
+                    text before i<xhtml:i>XhtmlInlPresType</xhtml:i>text after i
+                    text before b<xhtml:b>XhtmlInlPresType</xhtml:b>text after b
+                    text before big<xhtml:big>XhtmlInlPresType</xhtml:big>text after big
+                    text before small<xhtml:small>XhtmlInlPresType</xhtml:small>text after small
+                    text before sub<xhtml:sub>XhtmlInlPresType</xhtml:sub>text after sub
+                    text before sup<xhtml:sup>XhtmlInlPresType</xhtml:sup>text after sup
+                    text before a<xhtml:a>XhtmlAType</xhtml:a>text after a
+                    text before ins<xhtml:ins>XhtmlEditType</xhtml:ins>text after ins
+                    text before del<xhtml:del>XhtmlEditType</xhtml:del>text after del</xhtml:h3></xhtml:div>
+              </THE-VALUE>
+            </ATTRIBUTE-VALUE-XHTML>
+          </VALUES>
+          <TYPE>
+            <SPEC-OBJECT-TYPE-REF>ID_TC1200_SpecObjectType</SPEC-OBJECT-TYPE-REF>
+          </TYPE>
+        </SPEC-OBJECT>
+        <SPEC-OBJECT IDENTIFIER="ID_TC1200_SpecObject_xhtml.h4.type" LAST-CHANGE="2012-04-07T01:51:37.112+02:00">
+          <VALUES>
+            <ATTRIBUTE-VALUE-STRING THE-VALUE="xhtml.h4.type">
+              <DEFINITION>
+                <ATTRIBUTE-DEFINITION-STRING-REF>ID_TC1200_AttributeDefinitionString</ATTRIBUTE-DEFINITION-STRING-REF>
+              </DEFINITION>
+            </ATTRIBUTE-VALUE-STRING>
+            <ATTRIBUTE-VALUE-XHTML>
+              <DEFINITION>
+                <ATTRIBUTE-DEFINITION-XHTML-REF>ID_TC1200_AttributeDefinitionXHTML</ATTRIBUTE-DEFINITION-XHTML-REF>
+              </DEFINITION>
+              <THE-VALUE>
+                <xhtml:div>XhtmlDivType<xhtml:h4 style="text-decoration:underline" title="text">
+                    text before br<xhtml:br/>text after br
+                    text before span<xhtml:span>XhtmlSpanType</xhtml:span>text after span
+                    text before em<xhtml:em>XhtmlEmType</xhtml:em>text after em
+                    text before strong<xhtml:strong>XhtmlStrongType</xhtml:strong>text after strong
+                    text before dfn<xhtml:dfn>XhtmlDfnType</xhtml:dfn>text after dfn
+                    text before code<xhtml:code>XhtmlCodeType</xhtml:code>text after code
+                    text before samp<xhtml:samp>XhtmlSampType</xhtml:samp>text after samp
+                    text before kbd<xhtml:kbd>XhtmlKbdType</xhtml:kbd>text after kbd
+                    text before var<xhtml:var>XhtmlVarType</xhtml:var>text after var
+                    text before cite<xhtml:cite>XhtmlCiteType</xhtml:cite>text after cite
+                    text before abbr<xhtml:abbr>XhtmlAbbrType</xhtml:abbr>text after abbr
+                    text before acronym<xhtml:acronym>XhtmlAcronymType</xhtml:acronym>text after acronym
+                    text before q<xhtml:q>XhtmlQType</xhtml:q>text after q
+                    text before tt<xhtml:tt>XhtmlInlPresType</xhtml:tt>text after tt
+                    text before i<xhtml:i>XhtmlInlPresType</xhtml:i>text after i
+                    text before b<xhtml:b>XhtmlInlPresType</xhtml:b>text after b
+                    text before big<xhtml:big>XhtmlInlPresType</xhtml:big>text after big
+                    text before small<xhtml:small>XhtmlInlPresType</xhtml:small>text after small
+                    text before sub<xhtml:sub>XhtmlInlPresType</xhtml:sub>text after sub
+                    text before sup<xhtml:sup>XhtmlInlPresType</xhtml:sup>text after sup
+                    text before a<xhtml:a>XhtmlAType</xhtml:a>text after a
+                    text before ins<xhtml:ins>XhtmlEditType</xhtml:ins>text after ins
+                    text before del<xhtml:del>XhtmlEditType</xhtml:del>text after del</xhtml:h4></xhtml:div>
+              </THE-VALUE>
+            </ATTRIBUTE-VALUE-XHTML>
+          </VALUES>
+          <TYPE>
+            <SPEC-OBJECT-TYPE-REF>ID_TC1200_SpecObjectType</SPEC-OBJECT-TYPE-REF>
+          </TYPE>
+        </SPEC-OBJECT>
+        <SPEC-OBJECT IDENTIFIER="ID_TC1200_SpecObject_xhtml.h5.type" LAST-CHANGE="2012-04-07T01:51:37.112+02:00">
+          <VALUES>
+            <ATTRIBUTE-VALUE-STRING THE-VALUE="xhtml.h5.type">
+              <DEFINITION>
+                <ATTRIBUTE-DEFINITION-STRING-REF>ID_TC1200_AttributeDefinitionString</ATTRIBUTE-DEFINITION-STRING-REF>
+              </DEFINITION>
+            </ATTRIBUTE-VALUE-STRING>
+            <ATTRIBUTE-VALUE-XHTML>
+              <DEFINITION>
+                <ATTRIBUTE-DEFINITION-XHTML-REF>ID_TC1200_AttributeDefinitionXHTML</ATTRIBUTE-DEFINITION-XHTML-REF>
+              </DEFINITION>
+              <THE-VALUE>
+                <xhtml:div>XhtmlDivType<xhtml:h5 style="text-decoration:underline" title="text">
+                    text before br<xhtml:br/>text after br
+                    text before span<xhtml:span>XhtmlSpanType</xhtml:span>text after span
+                    text before em<xhtml:em>XhtmlEmType</xhtml:em>text after em
+                    text before strong<xhtml:strong>XhtmlStrongType</xhtml:strong>text after strong
+                    text before dfn<xhtml:dfn>XhtmlDfnType</xhtml:dfn>text after dfn
+                    text before code<xhtml:code>XhtmlCodeType</xhtml:code>text after code
+                    text before samp<xhtml:samp>XhtmlSampType</xhtml:samp>text after samp
+                    text before kbd<xhtml:kbd>XhtmlKbdType</xhtml:kbd>text after kbd
+                    text before var<xhtml:var>XhtmlVarType</xhtml:var>text after var
+                    text before cite<xhtml:cite>XhtmlCiteType</xhtml:cite>text after cite
+                    text before abbr<xhtml:abbr>XhtmlAbbrType</xhtml:abbr>text after abbr
+                    text before acronym<xhtml:acronym>XhtmlAcronymType</xhtml:acronym>text after acronym
+                    text before q<xhtml:q>XhtmlQType</xhtml:q>text after q
+                    text before tt<xhtml:tt>XhtmlInlPresType</xhtml:tt>text after tt
+                    text before i<xhtml:i>XhtmlInlPresType</xhtml:i>text after i
+                    text before b<xhtml:b>XhtmlInlPresType</xhtml:b>text after b
+                    text before big<xhtml:big>XhtmlInlPresType</xhtml:big>text after big
+                    text before small<xhtml:small>XhtmlInlPresType</xhtml:small>text after small
+                    text before sub<xhtml:sub>XhtmlInlPresType</xhtml:sub>text after sub
+                    text before sup<xhtml:sup>XhtmlInlPresType</xhtml:sup>text after sup
+                    text before a<xhtml:a>XhtmlAType</xhtml:a>text after a
+                    text before ins<xhtml:ins>XhtmlEditType</xhtml:ins>text after ins
+                    text before del<xhtml:del>XhtmlEditType</xhtml:del>text after del</xhtml:h5></xhtml:div>
+              </THE-VALUE>
+            </ATTRIBUTE-VALUE-XHTML>
+          </VALUES>
+          <TYPE>
+            <SPEC-OBJECT-TYPE-REF>ID_TC1200_SpecObjectType</SPEC-OBJECT-TYPE-REF>
+          </TYPE>
+        </SPEC-OBJECT>
+        <SPEC-OBJECT IDENTIFIER="ID_TC1200_SpecObject_xhtml.h6.type" LAST-CHANGE="2012-04-07T01:51:37.112+02:00">
+          <VALUES>
+            <ATTRIBUTE-VALUE-STRING THE-VALUE="xhtml.h6.type">
+              <DEFINITION>
+                <ATTRIBUTE-DEFINITION-STRING-REF>ID_TC1200_AttributeDefinitionString</ATTRIBUTE-DEFINITION-STRING-REF>
+              </DEFINITION>
+            </ATTRIBUTE-VALUE-STRING>
+            <ATTRIBUTE-VALUE-XHTML>
+              <DEFINITION>
+                <ATTRIBUTE-DEFINITION-XHTML-REF>ID_TC1200_AttributeDefinitionXHTML</ATTRIBUTE-DEFINITION-XHTML-REF>
+              </DEFINITION>
+              <THE-VALUE>
+                <xhtml:div>XhtmlDivType<xhtml:h6 style="text-decoration:underline" title="text">
+                    text before br<xhtml:br/>text after br
+                    text before span<xhtml:span>XhtmlSpanType</xhtml:span>text after span
+                    text before em<xhtml:em>XhtmlEmType</xhtml:em>text after em
+                    text before strong<xhtml:strong>XhtmlStrongType</xhtml:strong>text after strong
+                    text before dfn<xhtml:dfn>XhtmlDfnType</xhtml:dfn>text after dfn
+                    text before code<xhtml:code>XhtmlCodeType</xhtml:code>text after code
+                    text before samp<xhtml:samp>XhtmlSampType</xhtml:samp>text after samp
+                    text before kbd<xhtml:kbd>XhtmlKbdType</xhtml:kbd>text after kbd
+                    text before var<xhtml:var>XhtmlVarType</xhtml:var>text after var
+                    text before cite<xhtml:cite>XhtmlCiteType</xhtml:cite>text after cite
+                    text before abbr<xhtml:abbr>XhtmlAbbrType</xhtml:abbr>text after abbr
+                    text before acronym<xhtml:acronym>XhtmlAcronymType</xhtml:acronym>text after acronym
+                    text before q<xhtml:q>XhtmlQType</xhtml:q>text after q
+                    text before tt<xhtml:tt>XhtmlInlPresType</xhtml:tt>text after tt
+                    text before i<xhtml:i>XhtmlInlPresType</xhtml:i>text after i
+                    text before b<xhtml:b>XhtmlInlPresType</xhtml:b>text after b
+                    text before big<xhtml:big>XhtmlInlPresType</xhtml:big>text after big
+                    text before small<xhtml:small>XhtmlInlPresType</xhtml:small>text after small
+                    text before sub<xhtml:sub>XhtmlInlPresType</xhtml:sub>text after sub
+                    text before sup<xhtml:sup>XhtmlInlPresType</xhtml:sup>text after sup
+                    text before a<xhtml:a>XhtmlAType</xhtml:a>text after a
+                    text before ins<xhtml:ins>XhtmlEditType</xhtml:ins>text after ins
+                    text before del<xhtml:del>XhtmlEditType</xhtml:del>text after del</xhtml:h6></xhtml:div>
+              </THE-VALUE>
+            </ATTRIBUTE-VALUE-XHTML>
+          </VALUES>
+          <TYPE>
+            <SPEC-OBJECT-TYPE-REF>ID_TC1200_SpecObjectType</SPEC-OBJECT-TYPE-REF>
+          </TYPE>
+        </SPEC-OBJECT>
+        <SPEC-OBJECT IDENTIFIER="ID_TC1200_SpecObject_xhtml.ul.type" LAST-CHANGE="2012-04-07T01:51:37.112+02:00">
+          <VALUES>
+            <ATTRIBUTE-VALUE-STRING THE-VALUE="xhtml.ul.type">
+              <DEFINITION>
+                <ATTRIBUTE-DEFINITION-STRING-REF>ID_TC1200_AttributeDefinitionString</ATTRIBUTE-DEFINITION-STRING-REF>
+              </DEFINITION>
+            </ATTRIBUTE-VALUE-STRING>
+            <ATTRIBUTE-VALUE-XHTML>
+              <DEFINITION>
+                <ATTRIBUTE-DEFINITION-XHTML-REF>ID_TC1200_AttributeDefinitionXHTML</ATTRIBUTE-DEFINITION-XHTML-REF>
+              </DEFINITION>
+              <THE-VALUE>
+                <xhtml:div>XhtmlDivType<xhtml:ul style="text-decoration:underline" title="text">
+                    <xhtml:li>XhtmlLiType</xhtml:li>
+                  </xhtml:ul></xhtml:div>
+              </THE-VALUE>
+            </ATTRIBUTE-VALUE-XHTML>
+          </VALUES>
+          <TYPE>
+            <SPEC-OBJECT-TYPE-REF>ID_TC1200_SpecObjectType</SPEC-OBJECT-TYPE-REF>
+          </TYPE>
+        </SPEC-OBJECT>
+        <SPEC-OBJECT IDENTIFIER="ID_TC1200_SpecObject_xhtml.ol.type" LAST-CHANGE="2012-04-07T01:51:37.112+02:00">
+          <VALUES>
+            <ATTRIBUTE-VALUE-STRING THE-VALUE="xhtml.ol.type">
+              <DEFINITION>
+                <ATTRIBUTE-DEFINITION-STRING-REF>ID_TC1200_AttributeDefinitionString</ATTRIBUTE-DEFINITION-STRING-REF>
+              </DEFINITION>
+            </ATTRIBUTE-VALUE-STRING>
+            <ATTRIBUTE-VALUE-XHTML>
+              <DEFINITION>
+                <ATTRIBUTE-DEFINITION-XHTML-REF>ID_TC1200_AttributeDefinitionXHTML</ATTRIBUTE-DEFINITION-XHTML-REF>
+              </DEFINITION>
+              <THE-VALUE>
+                <xhtml:div>XhtmlDivType<xhtml:ol style="text-decoration:underline" title="text">
+                    <xhtml:li>XhtmlLiType</xhtml:li>
+                  </xhtml:ol></xhtml:div>
+              </THE-VALUE>
+            </ATTRIBUTE-VALUE-XHTML>
+          </VALUES>
+          <TYPE>
+            <SPEC-OBJECT-TYPE-REF>ID_TC1200_SpecObjectType</SPEC-OBJECT-TYPE-REF>
+          </TYPE>
+        </SPEC-OBJECT>
+        <SPEC-OBJECT IDENTIFIER="ID_TC1200_SpecObject_xhtml.dl.type" LAST-CHANGE="2012-04-07T01:51:37.112+02:00">
+          <VALUES>
+            <ATTRIBUTE-VALUE-STRING THE-VALUE="xhtml.dl.type">
+              <DEFINITION>
+                <ATTRIBUTE-DEFINITION-STRING-REF>ID_TC1200_AttributeDefinitionString</ATTRIBUTE-DEFINITION-STRING-REF>
+              </DEFINITION>
+            </ATTRIBUTE-VALUE-STRING>
+            <ATTRIBUTE-VALUE-XHTML>
+              <DEFINITION>
+                <ATTRIBUTE-DEFINITION-XHTML-REF>ID_TC1200_AttributeDefinitionXHTML</ATTRIBUTE-DEFINITION-XHTML-REF>
+              </DEFINITION>
+              <THE-VALUE>
+                <xhtml:div>XhtmlDivType<xhtml:dl style="text-decoration:underline" title="text">
+                    <xhtml:dt>XhtmlDtType</xhtml:dt>
+                    <xhtml:dd>XhtmlDdType</xhtml:dd>
+                  </xhtml:dl></xhtml:div>
+              </THE-VALUE>
+            </ATTRIBUTE-VALUE-XHTML>
+          </VALUES>
+          <TYPE>
+            <SPEC-OBJECT-TYPE-REF>ID_TC1200_SpecObjectType</SPEC-OBJECT-TYPE-REF>
+          </TYPE>
+        </SPEC-OBJECT>
+        <SPEC-OBJECT IDENTIFIER="ID_TC1200_SpecObject_xhtml.pre.type" LAST-CHANGE="2012-04-07T01:51:37.112+02:00">
+          <VALUES>
+            <ATTRIBUTE-VALUE-STRING THE-VALUE="xhtml.pre.type">
+              <DEFINITION>
+                <ATTRIBUTE-DEFINITION-STRING-REF>ID_TC1200_AttributeDefinitionString</ATTRIBUTE-DEFINITION-STRING-REF>
+              </DEFINITION>
+            </ATTRIBUTE-VALUE-STRING>
+            <ATTRIBUTE-VALUE-XHTML>
+              <DEFINITION>
+                <ATTRIBUTE-DEFINITION-XHTML-REF>ID_TC1200_AttributeDefinitionXHTML</ATTRIBUTE-DEFINITION-XHTML-REF>
+              </DEFINITION>
+              <THE-VALUE>
+                <xhtml:div>XhtmlDivType<xhtml:pre style="text-decoration:underline" title="text">
+                    text before br<xhtml:br/>text after br
+                    text before span<xhtml:span>XhtmlSpanType</xhtml:span>text after span
+                    text before em<xhtml:em>XhtmlEmType</xhtml:em>text after em
+                    text before strong<xhtml:strong>XhtmlStrongType</xhtml:strong>text after strong
+                    text before dfn<xhtml:dfn>XhtmlDfnType</xhtml:dfn>text after dfn
+                    text before code<xhtml:code>XhtmlCodeType</xhtml:code>text after code
+                    text before samp<xhtml:samp>XhtmlSampType</xhtml:samp>text after samp
+                    text before kbd<xhtml:kbd>XhtmlKbdType</xhtml:kbd>text after kbd
+                    text before var<xhtml:var>XhtmlVarType</xhtml:var>text after var
+                    text before cite<xhtml:cite>XhtmlCiteType</xhtml:cite>text after cite
+                    text before abbr<xhtml:abbr>XhtmlAbbrType</xhtml:abbr>text after abbr
+                    text before acronym<xhtml:acronym>XhtmlAcronymType</xhtml:acronym>text after acronym
+                    text before q<xhtml:q>XhtmlQType</xhtml:q>text after q
+                    text before tt<xhtml:tt>XhtmlInlPresType</xhtml:tt>text after tt
+                    text before i<xhtml:i>XhtmlInlPresType</xhtml:i>text after i
+                    text before b<xhtml:b>XhtmlInlPresType</xhtml:b>text after b
+                    text before a<xhtml:a>XhtmlAType</xhtml:a>text after a
+                    text before ins<xhtml:ins>XhtmlEditType</xhtml:ins>text after ins
+                    text before del<xhtml:del>XhtmlEditType</xhtml:del>text after del</xhtml:pre></xhtml:div>
+              </THE-VALUE>
+            </ATTRIBUTE-VALUE-XHTML>
+          </VALUES>
+          <TYPE>
+            <SPEC-OBJECT-TYPE-REF>ID_TC1200_SpecObjectType</SPEC-OBJECT-TYPE-REF>
+          </TYPE>
+        </SPEC-OBJECT>
+        <SPEC-OBJECT IDENTIFIER="ID_TC1200_SpecObject_xhtml.blockquote.type" LAST-CHANGE="2012-04-07T01:51:37.112+02:00">
+          <VALUES>
+            <ATTRIBUTE-VALUE-STRING THE-VALUE="xhtml.blockquote.type">
+              <DEFINITION>
+                <ATTRIBUTE-DEFINITION-STRING-REF>ID_TC1200_AttributeDefinitionString</ATTRIBUTE-DEFINITION-STRING-REF>
+              </DEFINITION>
+            </ATTRIBUTE-VALUE-STRING>
+            <ATTRIBUTE-VALUE-XHTML>
+              <DEFINITION>
+                <ATTRIBUTE-DEFINITION-XHTML-REF>ID_TC1200_AttributeDefinitionXHTML</ATTRIBUTE-DEFINITION-XHTML-REF>
+              </DEFINITION>
+              <THE-VALUE>
+                <xhtml:div>XhtmlDivType<xhtml:blockquote cite="http://eclipse.org/rmf" style="text-decoration:underline" title="text">
+                    <xhtml:h1>XhtmlH1Type</xhtml:h1>
+                    <xhtml:h2>XhtmlH2Type</xhtml:h2>
+                    <xhtml:h3>XhtmlH3Type</xhtml:h3>
+                    <xhtml:h4>XhtmlH4Type</xhtml:h4>
+                    <xhtml:h5>XhtmlH5Type</xhtml:h5>
+                    <xhtml:h6>XhtmlH6Type</xhtml:h6>
+                    <xhtml:ul>
+                      <xhtml:li>XhtmlLiType</xhtml:li>
+                    </xhtml:ul>
+                    <xhtml:ol>
+                      <xhtml:li>XhtmlLiType</xhtml:li>
+                    </xhtml:ol>
+                    <xhtml:dl>
+                      <xhtml:dt>XhtmlDtType</xhtml:dt>
+                      <xhtml:dd>XhtmlDdType</xhtml:dd>
+                    </xhtml:dl>
+                    <xhtml:p>XhtmlPType</xhtml:p>
+                    <xhtml:div>XhtmlDivType</xhtml:div>
+                    <xhtml:pre>XhtmlPreType</xhtml:pre>
+                    <xhtml:blockquote/>
+                    <xhtml:address>XhtmlAddressType</xhtml:address>
+                    <xhtml:hr/>
+                    <xhtml:table>
+                      <xhtml:tr>
+                        <xhtml:td/>
+                      </xhtml:tr>
+                    </xhtml:table>
+                    <xhtml:ins>XhtmlEditType</xhtml:ins>
+                    <xhtml:del>XhtmlEditType</xhtml:del>
+                  </xhtml:blockquote></xhtml:div>
+              </THE-VALUE>
+            </ATTRIBUTE-VALUE-XHTML>
+          </VALUES>
+          <TYPE>
+            <SPEC-OBJECT-TYPE-REF>ID_TC1200_SpecObjectType</SPEC-OBJECT-TYPE-REF>
+          </TYPE>
+        </SPEC-OBJECT>
+        <SPEC-OBJECT IDENTIFIER="ID_TC1200_SpecObject_xhtml.address.type" LAST-CHANGE="2012-04-07T01:51:37.112+02:00">
+          <VALUES>
+            <ATTRIBUTE-VALUE-STRING THE-VALUE="xhtml.address.type">
+              <DEFINITION>
+                <ATTRIBUTE-DEFINITION-STRING-REF>ID_TC1200_AttributeDefinitionString</ATTRIBUTE-DEFINITION-STRING-REF>
+              </DEFINITION>
+            </ATTRIBUTE-VALUE-STRING>
+            <ATTRIBUTE-VALUE-XHTML>
+              <DEFINITION>
+                <ATTRIBUTE-DEFINITION-XHTML-REF>ID_TC1200_AttributeDefinitionXHTML</ATTRIBUTE-DEFINITION-XHTML-REF>
+              </DEFINITION>
+              <THE-VALUE>
+                <xhtml:div>XhtmlDivType<xhtml:address style="text-decoration:underline" title="text">
+                    text before br<xhtml:br/>text after br
+                    text before span<xhtml:span>XhtmlSpanType</xhtml:span>text after span
+                    text before em<xhtml:em>XhtmlEmType</xhtml:em>text after em
+                    text before strong<xhtml:strong>XhtmlStrongType</xhtml:strong>text after strong
+                    text before dfn<xhtml:dfn>XhtmlDfnType</xhtml:dfn>text after dfn
+                    text before code<xhtml:code>XhtmlCodeType</xhtml:code>text after code
+                    text before samp<xhtml:samp>XhtmlSampType</xhtml:samp>text after samp
+                    text before kbd<xhtml:kbd>XhtmlKbdType</xhtml:kbd>text after kbd
+                    text before var<xhtml:var>XhtmlVarType</xhtml:var>text after var
+                    text before cite<xhtml:cite>XhtmlCiteType</xhtml:cite>text after cite
+                    text before abbr<xhtml:abbr>XhtmlAbbrType</xhtml:abbr>text after abbr
+                    text before acronym<xhtml:acronym>XhtmlAcronymType</xhtml:acronym>text after acronym
+                    text before q<xhtml:q>XhtmlQType</xhtml:q>text after q
+                    text before tt<xhtml:tt>XhtmlInlPresType</xhtml:tt>text after tt
+                    text before i<xhtml:i>XhtmlInlPresType</xhtml:i>text after i
+                    text before b<xhtml:b>XhtmlInlPresType</xhtml:b>text after b
+                    text before big<xhtml:big>XhtmlInlPresType</xhtml:big>text after big
+                    text before small<xhtml:small>XhtmlInlPresType</xhtml:small>text after small
+                    text before sub<xhtml:sub>XhtmlInlPresType</xhtml:sub>text after sub
+                    text before sup<xhtml:sup>XhtmlInlPresType</xhtml:sup>text after sup
+                    text before a<xhtml:a>XhtmlAType</xhtml:a>text after a
+                    text before ins<xhtml:ins>XhtmlEditType</xhtml:ins>text after ins
+                    text before del<xhtml:del>XhtmlEditType</xhtml:del>text after del</xhtml:address></xhtml:div>
+              </THE-VALUE>
+            </ATTRIBUTE-VALUE-XHTML>
+          </VALUES>
+          <TYPE>
+            <SPEC-OBJECT-TYPE-REF>ID_TC1200_SpecObjectType</SPEC-OBJECT-TYPE-REF>
+          </TYPE>
+        </SPEC-OBJECT>
+        <SPEC-OBJECT IDENTIFIER="ID_TC1200_SpecObject_xhtml.hr.type" LAST-CHANGE="2012-04-07T01:51:37.112+02:00">
+          <VALUES>
+            <ATTRIBUTE-VALUE-STRING THE-VALUE="xhtml.hr.type">
+              <DEFINITION>
+                <ATTRIBUTE-DEFINITION-STRING-REF>ID_TC1200_AttributeDefinitionString</ATTRIBUTE-DEFINITION-STRING-REF>
+              </DEFINITION>
+            </ATTRIBUTE-VALUE-STRING>
+            <ATTRIBUTE-VALUE-XHTML>
+              <DEFINITION>
+                <ATTRIBUTE-DEFINITION-XHTML-REF>ID_TC1200_AttributeDefinitionXHTML</ATTRIBUTE-DEFINITION-XHTML-REF>
+              </DEFINITION>
+              <THE-VALUE>
+                <xhtml:div>XhtmlDivType<xhtml:hr style="text-decoration:underline" title="text"/></xhtml:div>
+              </THE-VALUE>
+            </ATTRIBUTE-VALUE-XHTML>
+          </VALUES>
+          <TYPE>
+            <SPEC-OBJECT-TYPE-REF>ID_TC1200_SpecObjectType</SPEC-OBJECT-TYPE-REF>
+          </TYPE>
+        </SPEC-OBJECT>
+        <SPEC-OBJECT IDENTIFIER="ID_TC1200_SpecObject_xhtml.table.type" LAST-CHANGE="2012-04-07T01:51:37.112+02:00">
+          <VALUES>
+            <ATTRIBUTE-VALUE-STRING THE-VALUE="xhtml.table.type">
+              <DEFINITION>
+                <ATTRIBUTE-DEFINITION-STRING-REF>ID_TC1200_AttributeDefinitionString</ATTRIBUTE-DEFINITION-STRING-REF>
+              </DEFINITION>
+            </ATTRIBUTE-VALUE-STRING>
+            <ATTRIBUTE-VALUE-XHTML>
+              <DEFINITION>
+                <ATTRIBUTE-DEFINITION-XHTML-REF>ID_TC1200_AttributeDefinitionXHTML</ATTRIBUTE-DEFINITION-XHTML-REF>
+              </DEFINITION>
+              <THE-VALUE>
+                <xhtml:div>XhtmlDivType<xhtml:table border="100" cellpadding="100" cellspacing="100" frame="above" rules="rows" style="text-decoration:underline" summary="text" title="text" width="100">
+                    <xhtml:caption>XhtmlCaptionType</xhtml:caption>
+                    <xhtml:colgroup>
+                      <xhtml:col/>
+                    </xhtml:colgroup>
+                    <xhtml:thead>
+                      <xhtml:tr>
+                        <xhtml:td/>
+                      </xhtml:tr>
+                    </xhtml:thead>
+                    <xhtml:tfoot>
+                      <xhtml:tr>
+                        <xhtml:td/>
+                      </xhtml:tr>
+                    </xhtml:tfoot>
+                    <xhtml:tbody>
+                      <xhtml:tr>
+                        <xhtml:td/>
+                      </xhtml:tr>
+                    </xhtml:tbody>
+                  </xhtml:table></xhtml:div>
+              </THE-VALUE>
+            </ATTRIBUTE-VALUE-XHTML>
+          </VALUES>
+          <TYPE>
+            <SPEC-OBJECT-TYPE-REF>ID_TC1200_SpecObjectType</SPEC-OBJECT-TYPE-REF>
+          </TYPE>
+        </SPEC-OBJECT>
+        <SPEC-OBJECT IDENTIFIER="ID_TC1200_SpecObject_xhtml.li.type" LAST-CHANGE="2012-04-07T01:51:37.112+02:00">
+          <VALUES>
+            <ATTRIBUTE-VALUE-STRING THE-VALUE="xhtml.li.type">
+              <DEFINITION>
+                <ATTRIBUTE-DEFINITION-STRING-REF>ID_TC1200_AttributeDefinitionString</ATTRIBUTE-DEFINITION-STRING-REF>
+              </DEFINITION>
+            </ATTRIBUTE-VALUE-STRING>
+            <ATTRIBUTE-VALUE-XHTML>
+              <DEFINITION>
+                <ATTRIBUTE-DEFINITION-XHTML-REF>ID_TC1200_AttributeDefinitionXHTML</ATTRIBUTE-DEFINITION-XHTML-REF>
+              </DEFINITION>
+              <THE-VALUE>
+                <xhtml:div>XhtmlDivType<xhtml:ul>
+                    <xhtml:li>XhtmlLiType</xhtml:li>
+                    <xhtml:li style="text-decoration:underline" title="text">
+                    text before h1<xhtml:h1>XhtmlH1Type</xhtml:h1>text after h1
+                    text before h2<xhtml:h2>XhtmlH2Type</xhtml:h2>text after h2
+                    text before h3<xhtml:h3>XhtmlH3Type</xhtml:h3>text after h3
+                    text before h4<xhtml:h4>XhtmlH4Type</xhtml:h4>text after h4
+                    text before h5<xhtml:h5>XhtmlH5Type</xhtml:h5>text after h5
+                    text before h6<xhtml:h6>XhtmlH6Type</xhtml:h6>text after h6
+                    text before ul<xhtml:ul>
+                        <xhtml:li>XhtmlLiType</xhtml:li>
+                      </xhtml:ul>text after ul
+                    text before ol<xhtml:ol>
+                        <xhtml:li>XhtmlLiType</xhtml:li>
+                      </xhtml:ol>text after ol
+                    text before dl<xhtml:dl>
+                        <xhtml:dt>XhtmlDtType</xhtml:dt>
+                        <xhtml:dd>XhtmlDdType</xhtml:dd>
+                      </xhtml:dl>text after dl
+                    text before p<xhtml:p>XhtmlPType</xhtml:p>text after p
+                    text before div<xhtml:div>XhtmlDivType</xhtml:div>text after div
+                    text before pre<xhtml:pre>XhtmlPreType</xhtml:pre>text after pre
+                    text before blockquote<xhtml:blockquote/>text after blockquote
+                    text before address<xhtml:address>XhtmlAddressType</xhtml:address>text after address
+                    text before hr<xhtml:hr/>text after hr
+                    text before table<xhtml:table>
+                        <xhtml:tr>
+                          <xhtml:td/>
+                        </xhtml:tr>
+                      </xhtml:table>text after table
+                    text before br<xhtml:br/>text after br
+                    text before span<xhtml:span>XhtmlSpanType</xhtml:span>text after span
+                    text before em<xhtml:em>XhtmlEmType</xhtml:em>text after em
+                    text before strong<xhtml:strong>XhtmlStrongType</xhtml:strong>text after strong
+                    text before dfn<xhtml:dfn>XhtmlDfnType</xhtml:dfn>text after dfn
+                    text before code<xhtml:code>XhtmlCodeType</xhtml:code>text after code
+                    text before samp<xhtml:samp>XhtmlSampType</xhtml:samp>text after samp
+                    text before kbd<xhtml:kbd>XhtmlKbdType</xhtml:kbd>text after kbd
+                    text before var<xhtml:var>XhtmlVarType</xhtml:var>text after var
+                    text before cite<xhtml:cite>XhtmlCiteType</xhtml:cite>text after cite
+                    text before abbr<xhtml:abbr>XhtmlAbbrType</xhtml:abbr>text after abbr
+                    text before acronym<xhtml:acronym>XhtmlAcronymType</xhtml:acronym>text after acronym
+                    text before q<xhtml:q>XhtmlQType</xhtml:q>text after q
+                    text before tt<xhtml:tt>XhtmlInlPresType</xhtml:tt>text after tt
+                    text before i<xhtml:i>XhtmlInlPresType</xhtml:i>text after i
+                    text before b<xhtml:b>XhtmlInlPresType</xhtml:b>text after b
+                    text before big<xhtml:big>XhtmlInlPresType</xhtml:big>text after big
+                    text before small<xhtml:small>XhtmlInlPresType</xhtml:small>text after small
+                    text before sub<xhtml:sub>XhtmlInlPresType</xhtml:sub>text after sub
+                    text before sup<xhtml:sup>XhtmlInlPresType</xhtml:sup>text after sup
+                    text before a<xhtml:a>XhtmlAType</xhtml:a>text after a
+                    text before ins<xhtml:ins>XhtmlEditType</xhtml:ins>text after ins
+                    text before del<xhtml:del>XhtmlEditType</xhtml:del>text after del</xhtml:li>
+                  </xhtml:ul></xhtml:div>
+              </THE-VALUE>
+            </ATTRIBUTE-VALUE-XHTML>
+          </VALUES>
+          <TYPE>
+            <SPEC-OBJECT-TYPE-REF>ID_TC1200_SpecObjectType</SPEC-OBJECT-TYPE-REF>
+          </TYPE>
+        </SPEC-OBJECT>
+        <SPEC-OBJECT IDENTIFIER="ID_TC1200_SpecObject_xhtml.dt.type" LAST-CHANGE="2012-04-07T01:51:37.112+02:00">
+          <VALUES>
+            <ATTRIBUTE-VALUE-STRING THE-VALUE="xhtml.dt.type">
+              <DEFINITION>
+                <ATTRIBUTE-DEFINITION-STRING-REF>ID_TC1200_AttributeDefinitionString</ATTRIBUTE-DEFINITION-STRING-REF>
+              </DEFINITION>
+            </ATTRIBUTE-VALUE-STRING>
+            <ATTRIBUTE-VALUE-XHTML>
+              <DEFINITION>
+                <ATTRIBUTE-DEFINITION-XHTML-REF>ID_TC1200_AttributeDefinitionXHTML</ATTRIBUTE-DEFINITION-XHTML-REF>
+              </DEFINITION>
+              <THE-VALUE>
+                <xhtml:div>XhtmlDivType<xhtml:dl>
+                    <xhtml:dt>XhtmlDtType</xhtml:dt>
+                    <xhtml:dd>XhtmlDdType</xhtml:dd>
+                    <xhtml:dt style="text-decoration:underline" title="text">
+                    text before br<xhtml:br/>text after br
+                    text before span<xhtml:span>XhtmlSpanType</xhtml:span>text after span
+                    text before em<xhtml:em>XhtmlEmType</xhtml:em>text after em
+                    text before strong<xhtml:strong>XhtmlStrongType</xhtml:strong>text after strong
+                    text before dfn<xhtml:dfn>XhtmlDfnType</xhtml:dfn>text after dfn
+                    text before code<xhtml:code>XhtmlCodeType</xhtml:code>text after code
+                    text before samp<xhtml:samp>XhtmlSampType</xhtml:samp>text after samp
+                    text before kbd<xhtml:kbd>XhtmlKbdType</xhtml:kbd>text after kbd
+                    text before var<xhtml:var>XhtmlVarType</xhtml:var>text after var
+                    text before cite<xhtml:cite>XhtmlCiteType</xhtml:cite>text after cite
+                    text before abbr<xhtml:abbr>XhtmlAbbrType</xhtml:abbr>text after abbr
+                    text before acronym<xhtml:acronym>XhtmlAcronymType</xhtml:acronym>text after acronym
+                    text before q<xhtml:q>XhtmlQType</xhtml:q>text after q
+                    text before tt<xhtml:tt>XhtmlInlPresType</xhtml:tt>text after tt
+                    text before i<xhtml:i>XhtmlInlPresType</xhtml:i>text after i
+                    text before b<xhtml:b>XhtmlInlPresType</xhtml:b>text after b
+                    text before big<xhtml:big>XhtmlInlPresType</xhtml:big>text after big
+                    text before small<xhtml:small>XhtmlInlPresType</xhtml:small>text after small
+                    text before sub<xhtml:sub>XhtmlInlPresType</xhtml:sub>text after sub
+                    text before sup<xhtml:sup>XhtmlInlPresType</xhtml:sup>text after sup
+                    text before a<xhtml:a>XhtmlAType</xhtml:a>text after a
+                    text before ins<xhtml:ins>XhtmlEditType</xhtml:ins>text after ins
+                    text before del<xhtml:del>XhtmlEditType</xhtml:del>text after del</xhtml:dt>
+                    <xhtml:dd>XhtmlDdType</xhtml:dd>
+                  </xhtml:dl></xhtml:div>
+              </THE-VALUE>
+            </ATTRIBUTE-VALUE-XHTML>
+          </VALUES>
+          <TYPE>
+            <SPEC-OBJECT-TYPE-REF>ID_TC1200_SpecObjectType</SPEC-OBJECT-TYPE-REF>
+          </TYPE>
+        </SPEC-OBJECT>
+        <SPEC-OBJECT IDENTIFIER="ID_TC1200_SpecObject_xhtml.dd.type" LAST-CHANGE="2012-04-07T01:51:37.112+02:00">
+          <VALUES>
+            <ATTRIBUTE-VALUE-STRING THE-VALUE="xhtml.dd.type">
+              <DEFINITION>
+                <ATTRIBUTE-DEFINITION-STRING-REF>ID_TC1200_AttributeDefinitionString</ATTRIBUTE-DEFINITION-STRING-REF>
+              </DEFINITION>
+            </ATTRIBUTE-VALUE-STRING>
+            <ATTRIBUTE-VALUE-XHTML>
+              <DEFINITION>
+                <ATTRIBUTE-DEFINITION-XHTML-REF>ID_TC1200_AttributeDefinitionXHTML</ATTRIBUTE-DEFINITION-XHTML-REF>
+              </DEFINITION>
+              <THE-VALUE>
+                <xhtml:div>XhtmlDivType<xhtml:dl>
+                    <xhtml:dt>XhtmlDtType</xhtml:dt>
+                    <xhtml:dd>XhtmlDdType</xhtml:dd>
+                    <xhtml:dt>XhtmlDtType</xhtml:dt>
+                    <xhtml:dd style="text-decoration:underline" title="text">
+                    text before h1<xhtml:h1>XhtmlH1Type</xhtml:h1>text after h1
+                    text before h2<xhtml:h2>XhtmlH2Type</xhtml:h2>text after h2
+                    text before h3<xhtml:h3>XhtmlH3Type</xhtml:h3>text after h3
+                    text before h4<xhtml:h4>XhtmlH4Type</xhtml:h4>text after h4
+                    text before h5<xhtml:h5>XhtmlH5Type</xhtml:h5>text after h5
+                    text before h6<xhtml:h6>XhtmlH6Type</xhtml:h6>text after h6
+                    text before ul<xhtml:ul>
+                        <xhtml:li>XhtmlLiType</xhtml:li>
+                      </xhtml:ul>text after ul
+                    text before ol<xhtml:ol>
+                        <xhtml:li>XhtmlLiType</xhtml:li>
+                      </xhtml:ol>text after ol
+                    text before dl<xhtml:dl>
+                        <xhtml:dt>XhtmlDtType</xhtml:dt>
+                        <xhtml:dd>XhtmlDdType</xhtml:dd>
+                      </xhtml:dl>text after dl
+                    text before p<xhtml:p>XhtmlPType</xhtml:p>text after p
+                    text before div<xhtml:div>XhtmlDivType</xhtml:div>text after div
+                    text before pre<xhtml:pre>XhtmlPreType</xhtml:pre>text after pre
+                    text before blockquote<xhtml:blockquote/>text after blockquote
+                    text before address<xhtml:address>XhtmlAddressType</xhtml:address>text after address
+                    text before hr<xhtml:hr/>text after hr
+                    text before table<xhtml:table>
+                        <xhtml:tr>
+                          <xhtml:td/>
+                        </xhtml:tr>
+                      </xhtml:table>text after table
+                    text before br<xhtml:br/>text after br
+                    text before span<xhtml:span>XhtmlSpanType</xhtml:span>text after span
+                    text before em<xhtml:em>XhtmlEmType</xhtml:em>text after em
+                    text before strong<xhtml:strong>XhtmlStrongType</xhtml:strong>text after strong
+                    text before dfn<xhtml:dfn>XhtmlDfnType</xhtml:dfn>text after dfn
+                    text before code<xhtml:code>XhtmlCodeType</xhtml:code>text after code
+                    text before samp<xhtml:samp>XhtmlSampType</xhtml:samp>text after samp
+                    text before kbd<xhtml:kbd>XhtmlKbdType</xhtml:kbd>text after kbd
+                    text before var<xhtml:var>XhtmlVarType</xhtml:var>text after var
+                    text before cite<xhtml:cite>XhtmlCiteType</xhtml:cite>text after cite
+                    text before abbr<xhtml:abbr>XhtmlAbbrType</xhtml:abbr>text after abbr
+                    text before acronym<xhtml:acronym>XhtmlAcronymType</xhtml:acronym>text after acronym
+                    text before q<xhtml:q>XhtmlQType</xhtml:q>text after q
+                    text before tt<xhtml:tt>XhtmlInlPresType</xhtml:tt>text after tt
+                    text before i<xhtml:i>XhtmlInlPresType</xhtml:i>text after i
+                    text before b<xhtml:b>XhtmlInlPresType</xhtml:b>text after b
+                    text before big<xhtml:big>XhtmlInlPresType</xhtml:big>text after big
+                    text before small<xhtml:small>XhtmlInlPresType</xhtml:small>text after small
+                    text before sub<xhtml:sub>XhtmlInlPresType</xhtml:sub>text after sub
+                    text before sup<xhtml:sup>XhtmlInlPresType</xhtml:sup>text after sup
+                    text before a<xhtml:a>XhtmlAType</xhtml:a>text after a
+                    text before ins<xhtml:ins>XhtmlEditType</xhtml:ins>text after ins
+                    text before del<xhtml:del>XhtmlEditType</xhtml:del>text after del</xhtml:dd>
+                  </xhtml:dl></xhtml:div>
+              </THE-VALUE>
+            </ATTRIBUTE-VALUE-XHTML>
+          </VALUES>
+          <TYPE>
+            <SPEC-OBJECT-TYPE-REF>ID_TC1200_SpecObjectType</SPEC-OBJECT-TYPE-REF>
+          </TYPE>
+        </SPEC-OBJECT>
+        <SPEC-OBJECT IDENTIFIER="ID_TC1200_SpecObject_xhtml.caption.type" LAST-CHANGE="2012-04-07T01:51:37.112+02:00">
+          <VALUES>
+            <ATTRIBUTE-VALUE-STRING THE-VALUE="xhtml.caption.type">
+              <DEFINITION>
+                <ATTRIBUTE-DEFINITION-STRING-REF>ID_TC1200_AttributeDefinitionString</ATTRIBUTE-DEFINITION-STRING-REF>
+              </DEFINITION>
+            </ATTRIBUTE-VALUE-STRING>
+            <ATTRIBUTE-VALUE-XHTML>
+              <DEFINITION>
+                <ATTRIBUTE-DEFINITION-XHTML-REF>ID_TC1200_AttributeDefinitionXHTML</ATTRIBUTE-DEFINITION-XHTML-REF>
+              </DEFINITION>
+              <THE-VALUE>
+                <xhtml:div>XhtmlDivType<xhtml:table>
+                    <xhtml:caption style="text-decoration:underline" title="text">
+                    text before br<xhtml:br/>text after br
+                    text before span<xhtml:span>XhtmlSpanType</xhtml:span>text after span
+                    text before em<xhtml:em>XhtmlEmType</xhtml:em>text after em
+                    text before strong<xhtml:strong>XhtmlStrongType</xhtml:strong>text after strong
+                    text before dfn<xhtml:dfn>XhtmlDfnType</xhtml:dfn>text after dfn
+                    text before code<xhtml:code>XhtmlCodeType</xhtml:code>text after code
+                    text before samp<xhtml:samp>XhtmlSampType</xhtml:samp>text after samp
+                    text before kbd<xhtml:kbd>XhtmlKbdType</xhtml:kbd>text after kbd
+                    text before var<xhtml:var>XhtmlVarType</xhtml:var>text after var
+                    text before cite<xhtml:cite>XhtmlCiteType</xhtml:cite>text after cite
+                    text before abbr<xhtml:abbr>XhtmlAbbrType</xhtml:abbr>text after abbr
+                    text before acronym<xhtml:acronym>XhtmlAcronymType</xhtml:acronym>text after acronym
+                    text before q<xhtml:q>XhtmlQType</xhtml:q>text after q
+                    text before tt<xhtml:tt>XhtmlInlPresType</xhtml:tt>text after tt
+                    text before i<xhtml:i>XhtmlInlPresType</xhtml:i>text after i
+                    text before b<xhtml:b>XhtmlInlPresType</xhtml:b>text after b
+                    text before big<xhtml:big>XhtmlInlPresType</xhtml:big>text after big
+                    text before small<xhtml:small>XhtmlInlPresType</xhtml:small>text after small
+                    text before sub<xhtml:sub>XhtmlInlPresType</xhtml:sub>text after sub
+                    text before sup<xhtml:sup>XhtmlInlPresType</xhtml:sup>text after sup
+                    text before a<xhtml:a>XhtmlAType</xhtml:a>text after a
+                    text before ins<xhtml:ins>XhtmlEditType</xhtml:ins>text after ins
+                    text before del<xhtml:del>XhtmlEditType</xhtml:del>text after del</xhtml:caption>
+                    <xhtml:tr>
+                      <xhtml:td/>
+                    </xhtml:tr>
+                  </xhtml:table></xhtml:div>
+              </THE-VALUE>
+            </ATTRIBUTE-VALUE-XHTML>
+          </VALUES>
+          <TYPE>
+            <SPEC-OBJECT-TYPE-REF>ID_TC1200_SpecObjectType</SPEC-OBJECT-TYPE-REF>
+          </TYPE>
+        </SPEC-OBJECT>
+        <SPEC-OBJECT IDENTIFIER="ID_TC1200_SpecObject_xhtml.thead.type" LAST-CHANGE="2012-04-07T01:51:37.112+02:00">
+          <VALUES>
+            <ATTRIBUTE-VALUE-STRING THE-VALUE="xhtml.thead.type">
+              <DEFINITION>
+                <ATTRIBUTE-DEFINITION-STRING-REF>ID_TC1200_AttributeDefinitionString</ATTRIBUTE-DEFINITION-STRING-REF>
+              </DEFINITION>
+            </ATTRIBUTE-VALUE-STRING>
+            <ATTRIBUTE-VALUE-XHTML>
+              <DEFINITION>
+                <ATTRIBUTE-DEFINITION-XHTML-REF>ID_TC1200_AttributeDefinitionXHTML</ATTRIBUTE-DEFINITION-XHTML-REF>
+              </DEFINITION>
+              <THE-VALUE>
+                <xhtml:div>XhtmlDivType<xhtml:table>
+                    <xhtml:thead align="left" char="a" charoff="100" style="text-decoration:underline" title="text" valign="top">
+                      <xhtml:tr>
+                        <xhtml:td/>
+                      </xhtml:tr>
+                    </xhtml:thead>
+                    <xhtml:tfoot>
+                      <xhtml:tr>
+                        <xhtml:td/>
+                      </xhtml:tr>
+                    </xhtml:tfoot>
+                    <xhtml:tbody>
+                      <xhtml:tr>
+                        <xhtml:td/>
+                      </xhtml:tr>
+                    </xhtml:tbody>
+                  </xhtml:table></xhtml:div>
+              </THE-VALUE>
+            </ATTRIBUTE-VALUE-XHTML>
+          </VALUES>
+          <TYPE>
+            <SPEC-OBJECT-TYPE-REF>ID_TC1200_SpecObjectType</SPEC-OBJECT-TYPE-REF>
+          </TYPE>
+        </SPEC-OBJECT>
+        <SPEC-OBJECT IDENTIFIER="ID_TC1200_SpecObject_xhtml.col.type" LAST-CHANGE="2012-04-07T01:51:37.112+02:00">
+          <VALUES>
+            <ATTRIBUTE-VALUE-STRING THE-VALUE="xhtml.col.type">
+              <DEFINITION>
+                <ATTRIBUTE-DEFINITION-STRING-REF>ID_TC1200_AttributeDefinitionString</ATTRIBUTE-DEFINITION-STRING-REF>
+              </DEFINITION>
+            </ATTRIBUTE-VALUE-STRING>
+            <ATTRIBUTE-VALUE-XHTML>
+              <DEFINITION>
+                <ATTRIBUTE-DEFINITION-XHTML-REF>ID_TC1200_AttributeDefinitionXHTML</ATTRIBUTE-DEFINITION-XHTML-REF>
+              </DEFINITION>
+              <THE-VALUE>
+                <xhtml:div>XhtmlDivType<xhtml:table>
+                    <xhtml:col align="left" char="a" charoff="100" span="1" style="text-decoration:underline" title="text" valign="top" width="100"/>
+                    <xhtml:tr>
+                      <xhtml:td/>
+                    </xhtml:tr>
+                  </xhtml:table></xhtml:div>
+              </THE-VALUE>
+            </ATTRIBUTE-VALUE-XHTML>
+          </VALUES>
+          <TYPE>
+            <SPEC-OBJECT-TYPE-REF>ID_TC1200_SpecObjectType</SPEC-OBJECT-TYPE-REF>
+          </TYPE>
+        </SPEC-OBJECT>
+        <SPEC-OBJECT IDENTIFIER="ID_TC1200_SpecObject_xhtml.colgroup.type" LAST-CHANGE="2012-04-07T01:51:37.112+02:00">
+          <VALUES>
+            <ATTRIBUTE-VALUE-STRING THE-VALUE="xhtml.colgroup.type">
+              <DEFINITION>
+                <ATTRIBUTE-DEFINITION-STRING-REF>ID_TC1200_AttributeDefinitionString</ATTRIBUTE-DEFINITION-STRING-REF>
+              </DEFINITION>
+            </ATTRIBUTE-VALUE-STRING>
+            <ATTRIBUTE-VALUE-XHTML>
+              <DEFINITION>
+                <ATTRIBUTE-DEFINITION-XHTML-REF>ID_TC1200_AttributeDefinitionXHTML</ATTRIBUTE-DEFINITION-XHTML-REF>
+              </DEFINITION>
+              <THE-VALUE>
+                <xhtml:div>XhtmlDivType<xhtml:table>
+                    <xhtml:colgroup align="left" char="a" charoff="100" span="1" style="text-decoration:underline" title="text" valign="top" width="100">
+                      <xhtml:col/>
+                    </xhtml:colgroup>
+                    <xhtml:tr>
+                      <xhtml:td/>
+                    </xhtml:tr>
+                  </xhtml:table></xhtml:div>
+              </THE-VALUE>
+            </ATTRIBUTE-VALUE-XHTML>
+          </VALUES>
+          <TYPE>
+            <SPEC-OBJECT-TYPE-REF>ID_TC1200_SpecObjectType</SPEC-OBJECT-TYPE-REF>
+          </TYPE>
+        </SPEC-OBJECT>
+        <SPEC-OBJECT IDENTIFIER="ID_TC1200_SpecObject_xhtml.tfoot.type" LAST-CHANGE="2012-04-07T01:51:37.112+02:00">
+          <VALUES>
+            <ATTRIBUTE-VALUE-STRING THE-VALUE="xhtml.tfoot.type">
+              <DEFINITION>
+                <ATTRIBUTE-DEFINITION-STRING-REF>ID_TC1200_AttributeDefinitionString</ATTRIBUTE-DEFINITION-STRING-REF>
+              </DEFINITION>
+            </ATTRIBUTE-VALUE-STRING>
+            <ATTRIBUTE-VALUE-XHTML>
+              <DEFINITION>
+                <ATTRIBUTE-DEFINITION-XHTML-REF>ID_TC1200_AttributeDefinitionXHTML</ATTRIBUTE-DEFINITION-XHTML-REF>
+              </DEFINITION>
+              <THE-VALUE>
+                <xhtml:div>XhtmlDivType<xhtml:table>
+                    <xhtml:thead>
+                      <xhtml:tr>
+                        <xhtml:td/>
+                      </xhtml:tr>
+                    </xhtml:thead>
+                    <xhtml:tfoot align="left" char="a" charoff="100" style="text-decoration:underline" title="text" valign="top">
+                      <xhtml:tr>
+                        <xhtml:td/>
+                      </xhtml:tr>
+                    </xhtml:tfoot>
+                    <xhtml:tbody>
+                      <xhtml:tr>
+                        <xhtml:td/>
+                      </xhtml:tr>
+                    </xhtml:tbody>
+                  </xhtml:table></xhtml:div>
+              </THE-VALUE>
+            </ATTRIBUTE-VALUE-XHTML>
+          </VALUES>
+          <TYPE>
+            <SPEC-OBJECT-TYPE-REF>ID_TC1200_SpecObjectType</SPEC-OBJECT-TYPE-REF>
+          </TYPE>
+        </SPEC-OBJECT>
+        <SPEC-OBJECT IDENTIFIER="ID_TC1200_SpecObject_xhtml.tbody.type" LAST-CHANGE="2012-04-07T01:51:37.112+02:00">
+          <VALUES>
+            <ATTRIBUTE-VALUE-STRING THE-VALUE="xhtml.tbody.type">
+              <DEFINITION>
+                <ATTRIBUTE-DEFINITION-STRING-REF>ID_TC1200_AttributeDefinitionString</ATTRIBUTE-DEFINITION-STRING-REF>
+              </DEFINITION>
+            </ATTRIBUTE-VALUE-STRING>
+            <ATTRIBUTE-VALUE-XHTML>
+              <DEFINITION>
+                <ATTRIBUTE-DEFINITION-XHTML-REF>ID_TC1200_AttributeDefinitionXHTML</ATTRIBUTE-DEFINITION-XHTML-REF>
+              </DEFINITION>
+              <THE-VALUE>
+                <xhtml:div>XhtmlDivType<xhtml:table>
+                    <xhtml:thead>
+                      <xhtml:tr>
+                        <xhtml:td/>
+                      </xhtml:tr>
+                    </xhtml:thead>
+                    <xhtml:tfoot>
+                      <xhtml:tr>
+                        <xhtml:td/>
+                      </xhtml:tr>
+                    </xhtml:tfoot>
+                    <xhtml:tbody align="left" char="a" charoff="100" style="text-decoration:underline" title="text" valign="top">
+                      <xhtml:tr>
+                        <xhtml:td/>
+                      </xhtml:tr>
+                    </xhtml:tbody>
+                  </xhtml:table></xhtml:div>
+              </THE-VALUE>
+            </ATTRIBUTE-VALUE-XHTML>
+          </VALUES>
+          <TYPE>
+            <SPEC-OBJECT-TYPE-REF>ID_TC1200_SpecObjectType</SPEC-OBJECT-TYPE-REF>
+          </TYPE>
+        </SPEC-OBJECT>
+        <SPEC-OBJECT IDENTIFIER="ID_TC1200_SpecObject_xhtml.tr.type" LAST-CHANGE="2012-04-07T01:51:37.112+02:00">
+          <VALUES>
+            <ATTRIBUTE-VALUE-STRING THE-VALUE="xhtml.tr.type">
+              <DEFINITION>
+                <ATTRIBUTE-DEFINITION-STRING-REF>ID_TC1200_AttributeDefinitionString</ATTRIBUTE-DEFINITION-STRING-REF>
+              </DEFINITION>
+            </ATTRIBUTE-VALUE-STRING>
+            <ATTRIBUTE-VALUE-XHTML>
+              <DEFINITION>
+                <ATTRIBUTE-DEFINITION-XHTML-REF>ID_TC1200_AttributeDefinitionXHTML</ATTRIBUTE-DEFINITION-XHTML-REF>
+              </DEFINITION>
+              <THE-VALUE>
+                <xhtml:div>XhtmlDivType<xhtml:table>
+                    <xhtml:tr>
+                      <xhtml:td/>
+                    </xhtml:tr>
+                    <xhtml:tr align="left" char="a" charoff="100" style="text-decoration:underline" title="text" valign="top">
+                      <xhtml:th>XhtmlThType</xhtml:th>
+                      <xhtml:td>XhtmlTdType</xhtml:td>
+                    </xhtml:tr>
+                  </xhtml:table></xhtml:div>
+              </THE-VALUE>
+            </ATTRIBUTE-VALUE-XHTML>
+          </VALUES>
+          <TYPE>
+            <SPEC-OBJECT-TYPE-REF>ID_TC1200_SpecObjectType</SPEC-OBJECT-TYPE-REF>
+          </TYPE>
+        </SPEC-OBJECT>
+        <SPEC-OBJECT IDENTIFIER="ID_TC1200_SpecObject_xhtml.td.type" LAST-CHANGE="2012-04-07T01:51:37.112+02:00">
+          <VALUES>
+            <ATTRIBUTE-VALUE-STRING THE-VALUE="xhtml.td.type">
+              <DEFINITION>
+                <ATTRIBUTE-DEFINITION-STRING-REF>ID_TC1200_AttributeDefinitionString</ATTRIBUTE-DEFINITION-STRING-REF>
+              </DEFINITION>
+            </ATTRIBUTE-VALUE-STRING>
+            <ATTRIBUTE-VALUE-XHTML>
+              <DEFINITION>
+                <ATTRIBUTE-DEFINITION-XHTML-REF>ID_TC1200_AttributeDefinitionXHTML</ATTRIBUTE-DEFINITION-XHTML-REF>
+              </DEFINITION>
+              <THE-VALUE>
+                <xhtml:div>XhtmlDivType<xhtml:table>
+                    <xhtml:tr>
+                      <xhtml:td/>
+                    </xhtml:tr>
+                    <xhtml:tr>
+                      <xhtml:td/>
+                      <xhtml:td abbr="text" align="left" axis="CDATA&quot;CDATA" char="a" charoff="100" colspan="1" rowspan="1" scope="row" style="text-decoration:underline" title="text" valign="top">
+                    text before h1<xhtml:h1>XhtmlH1Type</xhtml:h1>text after h1
+                    text before h2<xhtml:h2>XhtmlH2Type</xhtml:h2>text after h2
+                    text before h3<xhtml:h3>XhtmlH3Type</xhtml:h3>text after h3
+                    text before h4<xhtml:h4>XhtmlH4Type</xhtml:h4>text after h4
+                    text before h5<xhtml:h5>XhtmlH5Type</xhtml:h5>text after h5
+                    text before h6<xhtml:h6>XhtmlH6Type</xhtml:h6>text after h6
+                    text before ul<xhtml:ul>
+                          <xhtml:li>XhtmlLiType</xhtml:li>
+                        </xhtml:ul>text after ul
+                    text before ol<xhtml:ol>
+                          <xhtml:li>XhtmlLiType</xhtml:li>
+                        </xhtml:ol>text after ol
+                    text before dl<xhtml:dl>
+                          <xhtml:dt>XhtmlDtType</xhtml:dt>
+                          <xhtml:dd>XhtmlDdType</xhtml:dd>
+                        </xhtml:dl>text after dl
+                    text before p<xhtml:p>XhtmlPType</xhtml:p>text after p
+                    text before div<xhtml:div>XhtmlDivType</xhtml:div>text after div
+                    text before pre<xhtml:pre>XhtmlPreType</xhtml:pre>text after pre
+                    text before blockquote<xhtml:blockquote/>text after blockquote
+                    text before address<xhtml:address>XhtmlAddressType</xhtml:address>text after address
+                    text before hr<xhtml:hr/>text after hr
+                    text before table<xhtml:table>
+                          <xhtml:tr>
+                            <xhtml:td/>
+                          </xhtml:tr>
+                        </xhtml:table>text after table
+                    text before br<xhtml:br/>text after br
+                    text before span<xhtml:span>XhtmlSpanType</xhtml:span>text after span
+                    text before em<xhtml:em>XhtmlEmType</xhtml:em>text after em
+                    text before strong<xhtml:strong>XhtmlStrongType</xhtml:strong>text after strong
+                    text before dfn<xhtml:dfn>XhtmlDfnType</xhtml:dfn>text after dfn
+                    text before code<xhtml:code>XhtmlCodeType</xhtml:code>text after code
+                    text before samp<xhtml:samp>XhtmlSampType</xhtml:samp>text after samp
+                    text before kbd<xhtml:kbd>XhtmlKbdType</xhtml:kbd>text after kbd
+                    text before var<xhtml:var>XhtmlVarType</xhtml:var>text after var
+                    text before cite<xhtml:cite>XhtmlCiteType</xhtml:cite>text after cite
+                    text before abbr<xhtml:abbr>XhtmlAbbrType</xhtml:abbr>text after abbr
+                    text before acronym<xhtml:acronym>XhtmlAcronymType</xhtml:acronym>text after acronym
+                    text before q<xhtml:q>XhtmlQType</xhtml:q>text after q
+                    text before tt<xhtml:tt>XhtmlInlPresType</xhtml:tt>text after tt
+                    text before i<xhtml:i>XhtmlInlPresType</xhtml:i>text after i
+                    text before b<xhtml:b>XhtmlInlPresType</xhtml:b>text after b
+                    text before big<xhtml:big>XhtmlInlPresType</xhtml:big>text after big
+                    text before small<xhtml:small>XhtmlInlPresType</xhtml:small>text after small
+                    text before sub<xhtml:sub>XhtmlInlPresType</xhtml:sub>text after sub
+                    text before sup<xhtml:sup>XhtmlInlPresType</xhtml:sup>text after sup
+                    text before a<xhtml:a>XhtmlAType</xhtml:a>text after a
+                    text before ins<xhtml:ins>XhtmlEditType</xhtml:ins>text after ins
+                    text before del<xhtml:del>XhtmlEditType</xhtml:del>text after del</xhtml:td>
+                    </xhtml:tr>
+                  </xhtml:table></xhtml:div>
+              </THE-VALUE>
+            </ATTRIBUTE-VALUE-XHTML>
+          </VALUES>
+          <TYPE>
+            <SPEC-OBJECT-TYPE-REF>ID_TC1200_SpecObjectType</SPEC-OBJECT-TYPE-REF>
+          </TYPE>
+        </SPEC-OBJECT>
+        <SPEC-OBJECT IDENTIFIER="ID_TC1200_SpecObject_xhtml.th.type" LAST-CHANGE="2012-04-07T01:51:37.112+02:00">
+          <VALUES>
+            <ATTRIBUTE-VALUE-STRING THE-VALUE="xhtml.th.type">
+              <DEFINITION>
+                <ATTRIBUTE-DEFINITION-STRING-REF>ID_TC1200_AttributeDefinitionString</ATTRIBUTE-DEFINITION-STRING-REF>
+              </DEFINITION>
+            </ATTRIBUTE-VALUE-STRING>
+            <ATTRIBUTE-VALUE-XHTML>
+              <DEFINITION>
+                <ATTRIBUTE-DEFINITION-XHTML-REF>ID_TC1200_AttributeDefinitionXHTML</ATTRIBUTE-DEFINITION-XHTML-REF>
+              </DEFINITION>
+              <THE-VALUE>
+                <xhtml:div>XhtmlDivType<xhtml:table>
+                    <xhtml:tr>
+                      <xhtml:td/>
+                    </xhtml:tr>
+                    <xhtml:tr>
+                      <xhtml:td/>
+                      <xhtml:th abbr="text" align="left" axis="CDATA&quot;CDATA" char="a" charoff="100" colspan="1" rowspan="1" scope="row" style="text-decoration:underline" title="text" valign="top">
+                    text before h1<xhtml:h1>XhtmlH1Type</xhtml:h1>text after h1
+                    text before h2<xhtml:h2>XhtmlH2Type</xhtml:h2>text after h2
+                    text before h3<xhtml:h3>XhtmlH3Type</xhtml:h3>text after h3
+                    text before h4<xhtml:h4>XhtmlH4Type</xhtml:h4>text after h4
+                    text before h5<xhtml:h5>XhtmlH5Type</xhtml:h5>text after h5
+                    text before h6<xhtml:h6>XhtmlH6Type</xhtml:h6>text after h6
+                    text before ul<xhtml:ul>
+                          <xhtml:li>XhtmlLiType</xhtml:li>
+                        </xhtml:ul>text after ul
+                    text before ol<xhtml:ol>
+                          <xhtml:li>XhtmlLiType</xhtml:li>
+                        </xhtml:ol>text after ol
+                    text before dl<xhtml:dl>
+                          <xhtml:dt>XhtmlDtType</xhtml:dt>
+                          <xhtml:dd>XhtmlDdType</xhtml:dd>
+                        </xhtml:dl>text after dl
+                    text before p<xhtml:p>XhtmlPType</xhtml:p>text after p
+                    text before div<xhtml:div>XhtmlDivType</xhtml:div>text after div
+                    text before pre<xhtml:pre>XhtmlPreType</xhtml:pre>text after pre
+                    text before blockquote<xhtml:blockquote/>text after blockquote
+                    text before address<xhtml:address>XhtmlAddressType</xhtml:address>text after address
+                    text before hr<xhtml:hr/>text after hr
+                    text before table<xhtml:table>
+                          <xhtml:tr>
+                            <xhtml:td/>
+                          </xhtml:tr>
+                        </xhtml:table>text after table
+                    text before br<xhtml:br/>text after br
+                    text before span<xhtml:span>XhtmlSpanType</xhtml:span>text after span
+                    text before em<xhtml:em>XhtmlEmType</xhtml:em>text after em
+                    text before strong<xhtml:strong>XhtmlStrongType</xhtml:strong>text after strong
+                    text before dfn<xhtml:dfn>XhtmlDfnType</xhtml:dfn>text after dfn
+                    text before code<xhtml:code>XhtmlCodeType</xhtml:code>text after code
+                    text before samp<xhtml:samp>XhtmlSampType</xhtml:samp>text after samp
+                    text before kbd<xhtml:kbd>XhtmlKbdType</xhtml:kbd>text after kbd
+                    text before var<xhtml:var>XhtmlVarType</xhtml:var>text after var
+                    text before cite<xhtml:cite>XhtmlCiteType</xhtml:cite>text after cite
+                    text before abbr<xhtml:abbr>XhtmlAbbrType</xhtml:abbr>text after abbr
+                    text before acronym<xhtml:acronym>XhtmlAcronymType</xhtml:acronym>text after acronym
+                    text before q<xhtml:q>XhtmlQType</xhtml:q>text after q
+                    text before tt<xhtml:tt>XhtmlInlPresType</xhtml:tt>text after tt
+                    text before i<xhtml:i>XhtmlInlPresType</xhtml:i>text after i
+                    text before b<xhtml:b>XhtmlInlPresType</xhtml:b>text after b
+                    text before big<xhtml:big>XhtmlInlPresType</xhtml:big>text after big
+                    text before small<xhtml:small>XhtmlInlPresType</xhtml:small>text after small
+                    text before sub<xhtml:sub>XhtmlInlPresType</xhtml:sub>text after sub
+                    text before sup<xhtml:sup>XhtmlInlPresType</xhtml:sup>text after sup
+                    text before a<xhtml:a>XhtmlAType</xhtml:a>text after a
+                    text before ins<xhtml:ins>XhtmlEditType</xhtml:ins>text after ins
+                    text before del<xhtml:del>XhtmlEditType</xhtml:del>text after del</xhtml:th>
+                    </xhtml:tr>
+                  </xhtml:table></xhtml:div>
+              </THE-VALUE>
+            </ATTRIBUTE-VALUE-XHTML>
+          </VALUES>
+          <TYPE>
+            <SPEC-OBJECT-TYPE-REF>ID_TC1200_SpecObjectType</SPEC-OBJECT-TYPE-REF>
+          </TYPE>
+        </SPEC-OBJECT>
+      </SPEC-OBJECTS>
+      <SPECIFICATIONS>
+        <SPECIFICATION IDENTIFIER="ID_TC1200_Specification" LAST-CHANGE="2012-04-07T01:51:37.112+02:00">
+          <TYPE>
+            <SPECIFICATION-TYPE-REF>ID_TC1200_SpecificationType</SPECIFICATION-TYPE-REF>
+          </TYPE>
+          <CHILDREN>
+            <SPEC-HIERARCHY IDENTIFIER="ID_TC1200_SpecHierarchy_0" LAST-CHANGE="2012-04-07T01:51:37.112+02:00">
+              <OBJECT>
+                <SPEC-OBJECT-REF>ID_TC1200_SpecObject_xhtml.p.type</SPEC-OBJECT-REF>
+              </OBJECT>
+            </SPEC-HIERARCHY>
+            <SPEC-HIERARCHY IDENTIFIER="ID_TC1200_SpecHierarchy_1" LAST-CHANGE="2012-04-07T01:51:37.112+02:00">
+              <OBJECT>
+                <SPEC-OBJECT-REF>ID_TC1200_SpecObject_xhtml.div.type</SPEC-OBJECT-REF>
+              </OBJECT>
+            </SPEC-HIERARCHY>
+            <SPEC-HIERARCHY IDENTIFIER="ID_TC1200_SpecHierarchy_2" LAST-CHANGE="2012-04-07T01:51:37.112+02:00">
+              <OBJECT>
+                <SPEC-OBJECT-REF>ID_TC1200_SpecObject_xhtml.br.type</SPEC-OBJECT-REF>
+              </OBJECT>
+            </SPEC-HIERARCHY>
+            <SPEC-HIERARCHY IDENTIFIER="ID_TC1200_SpecHierarchy_3" LAST-CHANGE="2012-04-07T01:51:37.112+02:00">
+              <OBJECT>
+                <SPEC-OBJECT-REF>ID_TC1200_SpecObject_xhtml.span.type</SPEC-OBJECT-REF>
+              </OBJECT>
+            </SPEC-HIERARCHY>
+            <SPEC-HIERARCHY IDENTIFIER="ID_TC1200_SpecHierarchy_4" LAST-CHANGE="2012-04-07T01:51:37.112+02:00">
+              <OBJECT>
+                <SPEC-OBJECT-REF>ID_TC1200_SpecObject_xhtml.em.type</SPEC-OBJECT-REF>
+              </OBJECT>
+            </SPEC-HIERARCHY>
+            <SPEC-HIERARCHY IDENTIFIER="ID_TC1200_SpecHierarchy_5" LAST-CHANGE="2012-04-07T01:51:37.112+02:00">
+              <OBJECT>
+                <SPEC-OBJECT-REF>ID_TC1200_SpecObject_xhtml.strong.type</SPEC-OBJECT-REF>
+              </OBJECT>
+            </SPEC-HIERARCHY>
+            <SPEC-HIERARCHY IDENTIFIER="ID_TC1200_SpecHierarchy_6" LAST-CHANGE="2012-04-07T01:51:37.112+02:00">
+              <OBJECT>
+                <SPEC-OBJECT-REF>ID_TC1200_SpecObject_xhtml.dfn.type</SPEC-OBJECT-REF>
+              </OBJECT>
+            </SPEC-HIERARCHY>
+            <SPEC-HIERARCHY IDENTIFIER="ID_TC1200_SpecHierarchy_7" LAST-CHANGE="2012-04-07T01:51:37.112+02:00">
+              <OBJECT>
+                <SPEC-OBJECT-REF>ID_TC1200_SpecObject_xhtml.code.type</SPEC-OBJECT-REF>
+              </OBJECT>
+            </SPEC-HIERARCHY>
+            <SPEC-HIERARCHY IDENTIFIER="ID_TC1200_SpecHierarchy_8" LAST-CHANGE="2012-04-07T01:51:37.112+02:00">
+              <OBJECT>
+                <SPEC-OBJECT-REF>ID_TC1200_SpecObject_xhtml.samp.type</SPEC-OBJECT-REF>
+              </OBJECT>
+            </SPEC-HIERARCHY>
+            <SPEC-HIERARCHY IDENTIFIER="ID_TC1200_SpecHierarchy_9" LAST-CHANGE="2012-04-07T01:51:37.112+02:00">
+              <OBJECT>
+                <SPEC-OBJECT-REF>ID_TC1200_SpecObject_xhtml.kbd.type</SPEC-OBJECT-REF>
+              </OBJECT>
+            </SPEC-HIERARCHY>
+            <SPEC-HIERARCHY IDENTIFIER="ID_TC1200_SpecHierarchy_10" LAST-CHANGE="2012-04-07T01:51:37.112+02:00">
+              <OBJECT>
+                <SPEC-OBJECT-REF>ID_TC1200_SpecObject_xhtml.var.type</SPEC-OBJECT-REF>
+              </OBJECT>
+            </SPEC-HIERARCHY>
+            <SPEC-HIERARCHY IDENTIFIER="ID_TC1200_SpecHierarchy_11" LAST-CHANGE="2012-04-07T01:51:37.112+02:00">
+              <OBJECT>
+                <SPEC-OBJECT-REF>ID_TC1200_SpecObject_xhtml.cite.type</SPEC-OBJECT-REF>
+              </OBJECT>
+            </SPEC-HIERARCHY>
+            <SPEC-HIERARCHY IDENTIFIER="ID_TC1200_SpecHierarchy_12" LAST-CHANGE="2012-04-07T01:51:37.112+02:00">
+              <OBJECT>
+                <SPEC-OBJECT-REF>ID_TC1200_SpecObject_xhtml.abbr.type</SPEC-OBJECT-REF>
+              </OBJECT>
+            </SPEC-HIERARCHY>
+            <SPEC-HIERARCHY IDENTIFIER="ID_TC1200_SpecHierarchy_13" LAST-CHANGE="2012-04-07T01:51:37.112+02:00">
+              <OBJECT>
+                <SPEC-OBJECT-REF>ID_TC1200_SpecObject_xhtml.acronym.type</SPEC-OBJECT-REF>
+              </OBJECT>
+            </SPEC-HIERARCHY>
+            <SPEC-HIERARCHY IDENTIFIER="ID_TC1200_SpecHierarchy_14" LAST-CHANGE="2012-04-07T01:51:37.112+02:00">
+              <OBJECT>
+                <SPEC-OBJECT-REF>ID_TC1200_SpecObject_xhtml.q.type</SPEC-OBJECT-REF>
+              </OBJECT>
+            </SPEC-HIERARCHY>
+            <SPEC-HIERARCHY IDENTIFIER="ID_TC1200_SpecHierarchy_15" LAST-CHANGE="2012-04-07T01:51:37.112+02:00">
+              <OBJECT>
+                <SPEC-OBJECT-REF>ID_TC1200_SpecObject_xhtml.inl.pres.type</SPEC-OBJECT-REF>
+              </OBJECT>
+            </SPEC-HIERARCHY>
+            <SPEC-HIERARCHY IDENTIFIER="ID_TC1200_SpecHierarchy_16" LAST-CHANGE="2012-04-07T01:51:37.112+02:00">
+              <OBJECT>
+                <SPEC-OBJECT-REF>ID_TC1200_SpecObject_xhtml.a.type</SPEC-OBJECT-REF>
+              </OBJECT>
+            </SPEC-HIERARCHY>
+            <SPEC-HIERARCHY IDENTIFIER="ID_TC1200_SpecHierarchy_17" LAST-CHANGE="2012-04-07T01:51:37.112+02:00">
+              <OBJECT>
+                <SPEC-OBJECT-REF>ID_TC1200_SpecObject_xhtml.edit.type</SPEC-OBJECT-REF>
+              </OBJECT>
+            </SPEC-HIERARCHY>
+            <SPEC-HIERARCHY IDENTIFIER="ID_TC1200_SpecHierarchy_18" LAST-CHANGE="2012-04-07T01:51:37.112+02:00">
+              <OBJECT>
+                <SPEC-OBJECT-REF>ID_TC1200_SpecObject_xhtml.h1.type</SPEC-OBJECT-REF>
+              </OBJECT>
+            </SPEC-HIERARCHY>
+            <SPEC-HIERARCHY IDENTIFIER="ID_TC1200_SpecHierarchy_19" LAST-CHANGE="2012-04-07T01:51:37.112+02:00">
+              <OBJECT>
+                <SPEC-OBJECT-REF>ID_TC1200_SpecObject_xhtml.h2.type</SPEC-OBJECT-REF>
+              </OBJECT>
+            </SPEC-HIERARCHY>
+            <SPEC-HIERARCHY IDENTIFIER="ID_TC1200_SpecHierarchy_20" LAST-CHANGE="2012-04-07T01:51:37.112+02:00">
+              <OBJECT>
+                <SPEC-OBJECT-REF>ID_TC1200_SpecObject_xhtml.h3.type</SPEC-OBJECT-REF>
+              </OBJECT>
+            </SPEC-HIERARCHY>
+            <SPEC-HIERARCHY IDENTIFIER="ID_TC1200_SpecHierarchy_21" LAST-CHANGE="2012-04-07T01:51:37.112+02:00">
+              <OBJECT>
+                <SPEC-OBJECT-REF>ID_TC1200_SpecObject_xhtml.h4.type</SPEC-OBJECT-REF>
+              </OBJECT>
+            </SPEC-HIERARCHY>
+            <SPEC-HIERARCHY IDENTIFIER="ID_TC1200_SpecHierarchy_22" LAST-CHANGE="2012-04-07T01:51:37.112+02:00">
+              <OBJECT>
+                <SPEC-OBJECT-REF>ID_TC1200_SpecObject_xhtml.h5.type</SPEC-OBJECT-REF>
+              </OBJECT>
+            </SPEC-HIERARCHY>
+            <SPEC-HIERARCHY IDENTIFIER="ID_TC1200_SpecHierarchy_23" LAST-CHANGE="2012-04-07T01:51:37.112+02:00">
+              <OBJECT>
+                <SPEC-OBJECT-REF>ID_TC1200_SpecObject_xhtml.h6.type</SPEC-OBJECT-REF>
+              </OBJECT>
+            </SPEC-HIERARCHY>
+            <SPEC-HIERARCHY IDENTIFIER="ID_TC1200_SpecHierarchy_24" LAST-CHANGE="2012-04-07T01:51:37.112+02:00">
+              <OBJECT>
+                <SPEC-OBJECT-REF>ID_TC1200_SpecObject_xhtml.ul.type</SPEC-OBJECT-REF>
+              </OBJECT>
+            </SPEC-HIERARCHY>
+            <SPEC-HIERARCHY IDENTIFIER="ID_TC1200_SpecHierarchy_25" LAST-CHANGE="2012-04-07T01:51:37.112+02:00">
+              <OBJECT>
+                <SPEC-OBJECT-REF>ID_TC1200_SpecObject_xhtml.ol.type</SPEC-OBJECT-REF>
+              </OBJECT>
+            </SPEC-HIERARCHY>
+            <SPEC-HIERARCHY IDENTIFIER="ID_TC1200_SpecHierarchy_26" LAST-CHANGE="2012-04-07T01:51:37.112+02:00">
+              <OBJECT>
+                <SPEC-OBJECT-REF>ID_TC1200_SpecObject_xhtml.dl.type</SPEC-OBJECT-REF>
+              </OBJECT>
+            </SPEC-HIERARCHY>
+            <SPEC-HIERARCHY IDENTIFIER="ID_TC1200_SpecHierarchy_27" LAST-CHANGE="2012-04-07T01:51:37.112+02:00">
+              <OBJECT>
+                <SPEC-OBJECT-REF>ID_TC1200_SpecObject_xhtml.pre.type</SPEC-OBJECT-REF>
+              </OBJECT>
+            </SPEC-HIERARCHY>
+            <SPEC-HIERARCHY IDENTIFIER="ID_TC1200_SpecHierarchy_28" LAST-CHANGE="2012-04-07T01:51:37.112+02:00">
+              <OBJECT>
+                <SPEC-OBJECT-REF>ID_TC1200_SpecObject_xhtml.blockquote.type</SPEC-OBJECT-REF>
+              </OBJECT>
+            </SPEC-HIERARCHY>
+            <SPEC-HIERARCHY IDENTIFIER="ID_TC1200_SpecHierarchy_29" LAST-CHANGE="2012-04-07T01:51:37.112+02:00">
+              <OBJECT>
+                <SPEC-OBJECT-REF>ID_TC1200_SpecObject_xhtml.address.type</SPEC-OBJECT-REF>
+              </OBJECT>
+            </SPEC-HIERARCHY>
+            <SPEC-HIERARCHY IDENTIFIER="ID_TC1200_SpecHierarchy_30" LAST-CHANGE="2012-04-07T01:51:37.112+02:00">
+              <OBJECT>
+                <SPEC-OBJECT-REF>ID_TC1200_SpecObject_xhtml.hr.type</SPEC-OBJECT-REF>
+              </OBJECT>
+            </SPEC-HIERARCHY>
+            <SPEC-HIERARCHY IDENTIFIER="ID_TC1200_SpecHierarchy_31" LAST-CHANGE="2012-04-07T01:51:37.112+02:00">
+              <OBJECT>
+                <SPEC-OBJECT-REF>ID_TC1200_SpecObject_xhtml.table.type</SPEC-OBJECT-REF>
+              </OBJECT>
+            </SPEC-HIERARCHY>
+            <SPEC-HIERARCHY IDENTIFIER="ID_TC1200_SpecHierarchy_32" LAST-CHANGE="2012-04-07T01:51:37.112+02:00">
+              <OBJECT>
+                <SPEC-OBJECT-REF>ID_TC1200_SpecObject_xhtml.li.type</SPEC-OBJECT-REF>
+              </OBJECT>
+            </SPEC-HIERARCHY>
+            <SPEC-HIERARCHY IDENTIFIER="ID_TC1200_SpecHierarchy_33" LAST-CHANGE="2012-04-07T01:51:37.112+02:00">
+              <OBJECT>
+                <SPEC-OBJECT-REF>ID_TC1200_SpecObject_xhtml.dt.type</SPEC-OBJECT-REF>
+              </OBJECT>
+            </SPEC-HIERARCHY>
+            <SPEC-HIERARCHY IDENTIFIER="ID_TC1200_SpecHierarchy_34" LAST-CHANGE="2012-04-07T01:51:37.112+02:00">
+              <OBJECT>
+                <SPEC-OBJECT-REF>ID_TC1200_SpecObject_xhtml.dd.type</SPEC-OBJECT-REF>
+              </OBJECT>
+            </SPEC-HIERARCHY>
+            <SPEC-HIERARCHY IDENTIFIER="ID_TC1200_SpecHierarchy_35" LAST-CHANGE="2012-04-07T01:51:37.112+02:00">
+              <OBJECT>
+                <SPEC-OBJECT-REF>ID_TC1200_SpecObject_xhtml.caption.type</SPEC-OBJECT-REF>
+              </OBJECT>
+            </SPEC-HIERARCHY>
+            <SPEC-HIERARCHY IDENTIFIER="ID_TC1200_SpecHierarchy_36" LAST-CHANGE="2012-04-07T01:51:37.112+02:00">
+              <OBJECT>
+                <SPEC-OBJECT-REF>ID_TC1200_SpecObject_xhtml.thead.type</SPEC-OBJECT-REF>
+              </OBJECT>
+            </SPEC-HIERARCHY>
+            <SPEC-HIERARCHY IDENTIFIER="ID_TC1200_SpecHierarchy_37" LAST-CHANGE="2012-04-07T01:51:37.112+02:00">
+              <OBJECT>
+                <SPEC-OBJECT-REF>ID_TC1200_SpecObject_xhtml.col.type</SPEC-OBJECT-REF>
+              </OBJECT>
+            </SPEC-HIERARCHY>
+            <SPEC-HIERARCHY IDENTIFIER="ID_TC1200_SpecHierarchy_38" LAST-CHANGE="2012-04-07T01:51:37.112+02:00">
+              <OBJECT>
+                <SPEC-OBJECT-REF>ID_TC1200_SpecObject_xhtml.colgroup.type</SPEC-OBJECT-REF>
+              </OBJECT>
+            </SPEC-HIERARCHY>
+            <SPEC-HIERARCHY IDENTIFIER="ID_TC1200_SpecHierarchy_39" LAST-CHANGE="2012-04-07T01:51:37.112+02:00">
+              <OBJECT>
+                <SPEC-OBJECT-REF>ID_TC1200_SpecObject_xhtml.tfoot.type</SPEC-OBJECT-REF>
+              </OBJECT>
+            </SPEC-HIERARCHY>
+            <SPEC-HIERARCHY IDENTIFIER="ID_TC1200_SpecHierarchy_40" LAST-CHANGE="2012-04-07T01:51:37.112+02:00">
+              <OBJECT>
+                <SPEC-OBJECT-REF>ID_TC1200_SpecObject_xhtml.tbody.type</SPEC-OBJECT-REF>
+              </OBJECT>
+            </SPEC-HIERARCHY>
+            <SPEC-HIERARCHY IDENTIFIER="ID_TC1200_SpecHierarchy_41" LAST-CHANGE="2012-04-07T01:51:37.112+02:00">
+              <OBJECT>
+                <SPEC-OBJECT-REF>ID_TC1200_SpecObject_xhtml.tr.type</SPEC-OBJECT-REF>
+              </OBJECT>
+            </SPEC-HIERARCHY>
+            <SPEC-HIERARCHY IDENTIFIER="ID_TC1200_SpecHierarchy_42" LAST-CHANGE="2012-04-07T01:51:37.112+02:00">
+              <OBJECT>
+                <SPEC-OBJECT-REF>ID_TC1200_SpecObject_xhtml.td.type</SPEC-OBJECT-REF>
+              </OBJECT>
+            </SPEC-HIERARCHY>
+            <SPEC-HIERARCHY IDENTIFIER="ID_TC1200_SpecHierarchy_43" LAST-CHANGE="2012-04-07T01:51:37.112+02:00">
+              <OBJECT>
+                <SPEC-OBJECT-REF>ID_TC1200_SpecObject_xhtml.th.type</SPEC-OBJECT-REF>
+              </OBJECT>
+            </SPEC-HIERARCHY>
+          </CHILDREN>
+        </SPECIFICATION>
+      </SPECIFICATIONS>
+    </REQ-IF-CONTENT>
+  </CORE-CONTENT>
+</REQ-IF>
