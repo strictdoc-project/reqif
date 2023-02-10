@@ -136,7 +136,9 @@ that attempts to harmonize ReqIF tool developments. See also
   - One way: create separate `SPEC-TYPES`: one or more for requirements and
     one for sections.
   - Another way: have one spec type but have it provide a `TYPE` field that can
-  be used to distinguish between `REQUIREMENT` or `SECTION`.
+    be used to distinguish between `REQUIREMENT` or `SECTION`.
+  - Yet another way: Check if the "ReqIF.ChapterName" is present on the spec object.
+    When present, it is a section. When not, it is a requirement.
 
 ## Reference documents
 
