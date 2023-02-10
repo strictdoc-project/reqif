@@ -13,6 +13,7 @@ from reqif.models.reqif_spec_hierarchy import (
 from reqif.models.reqif_spec_object import (
     ReqIFSpecObject,
 )
+from reqif.models.reqif_spec_object_type import ReqIFSpecObjectType
 from reqif.object_lookup import ReqIFObjectLookup
 
 
@@ -75,6 +76,24 @@ class ReqIFBundle:  # pylint: disable=too-many-instance-attributes
 
     def get_spec_object_by_ref(self, ref) -> ReqIFSpecObject:
         return self.lookup.get_spec_object_by_ref(ref)
+
+    def get_spec_object_type_by_ref(
+        self,
+        ref: str,
+    ) -> Optional[ReqIFSpecObjectType]:
+        if self.core_content is None:
+            return None
+        if self.core_content.req_if_content is None:
+            return None
+        if self.core_content.req_if_content.spec_types is None:
+            return None
+        for spec_type in self.core_content.req_if_content.spec_types:
+            if (
+                isinstance(spec_type, ReqIFSpecObjectType)
+                and spec_type.identifier == ref
+            ):
+                return spec_type
+        return None
 
     def get_spec_object_parents(self, ref) -> List:
         return self.lookup.get_spec_object_parents(ref)
