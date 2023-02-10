@@ -13,7 +13,7 @@ from reqif.models.reqif_specification_type import ReqIFSpecificationType
 class ReqIFReqIFContent:
     def __init__(  # pylint: disable=too-many-arguments
         self,
-        data_types: Optional[List],
+        data_types: Optional[List] = None,
         spec_types: Optional[
             List[
                 Union[
@@ -22,11 +22,11 @@ class ReqIFReqIFContent:
                     ReqIFSpecificationType,
                 ]
             ]
-        ],
-        spec_objects: Optional[List[ReqIFSpecObject]],
-        spec_relations: Optional[List[ReqIFSpecRelation]],
-        specifications: Optional[List[ReqIFSpecification]],
-        spec_relation_groups: Optional[List],
+        ] = None,
+        spec_objects: Optional[List[ReqIFSpecObject]] = None,
+        spec_relations: Optional[List[ReqIFSpecRelation]] = None,
+        specifications: Optional[List[ReqIFSpecification]] = None,
+        spec_relation_groups: Optional[List] = None,
     ):
         self.data_types: Optional[List] = data_types
         self.spec_types: Optional[
