@@ -1,15 +1,27 @@
+import hashlib
+import io
 import os
 import sys
 from typing import List
 
+from lxml import etree
+from lxml.etree import tostring
+
 from reqif.cli.cli_arg_parser import AnonimizeCommandConfig
+from reqif.models.error_handling import ReqIFXMLParsingError
 from reqif.models.reqif_spec_object import ReqIFSpecObject, SpecObjectAttribute
 from reqif.models.reqif_specification import ReqIFSpecification
 from reqif.models.reqif_types import SpecObjectAttributeType
-from reqif.parser import ReqIFParser
-from reqif.unparser import ReqIFUnparser
 
-ANONYMIZED = "...Anonymized..."
+ANONYMIZED = "Anonymized"
+
+
+def anonymize_string(string: str) -> str:
+    # https://stackoverflow.com/a/42089311/598057
+    hash_number = (
+        int(hashlib.sha256(string.encode("utf8")).hexdigest(), 16) % 10**10
+    )
+    return "..." + ANONYMIZED + "-" + str(hash_number) + "..."
 
 
 class AnonymizeCommand:
@@ -34,28 +46,80 @@ class AnonymizeCommand:
             file.write(output)
 
     @staticmethod
-    def _anonymize(passthrough_config: AnonimizeCommandConfig):
-        reqif_bundle = ReqIFParser.parse(passthrough_config.input_file)
+    def _anonymize(config: AnonimizeCommandConfig):
+        with open(config.input_file, "r", encoding="UTF-8") as file:
+            content = file.read()
+        try:
+            # Parse XML.
+            # https://github.com/eerohele/sublime-lxml/issues/5#issuecomment-209781719
+            xml_reqif = etree.parse(io.BytesIO(bytes(content, "UTF-8")))
+        except Exception as exception:  # pylint: disable=broad-except
+            raise ReqIFXMLParsingError(str(exception)) from None
 
-        req_if_header = reqif_bundle.req_if_header
-        if req_if_header:
-            if req_if_header.title:
-                req_if_header.title = ANONYMIZED
-            if req_if_header.comment:
-                req_if_header.comment = ANONYMIZED
+        # https://stackoverflow.com/a/8056239/598057
+        xml_reqif_root = xml_reqif.getroot()
+        fixns = {"reqif": xml_reqif_root.nsmap[None]}
 
-        core_content = reqif_bundle.core_content
-        if core_content:
-            reqif_content = core_content.req_if_content
-            if reqif_content:
-                spec_objects = reqif_content.spec_objects
-                if spec_objects:
-                    AnonymizeCommand._anonymize_spec_objects(spec_objects)
-                specifications = reqif_content.specifications
-                if specifications:
-                    AnonymizeCommand._anonymize_specifications(specifications)
-        reqif_xml_output = ReqIFUnparser.unparse(reqif_bundle)
-        return reqif_xml_output
+        # Clear out HEADER comment.
+        xml_header_comment = xml_reqif.xpath(
+            "//reqif:REQ-IF-HEADER/reqif:COMMENT", namespaces=fixns
+        )
+        for xml_header_comment_singleton in xml_header_comment:
+            xml_header_comment_singleton.text = anonymize_string(
+                xml_header_comment_singleton.text
+            )
+
+        # Clear out TITLE comment.
+        xml_header_title = xml_reqif.xpath(
+            "//reqif:REQ-IF-HEADER/reqif:TITLE", namespaces=fixns
+        )
+        for xml_header_title_singleton in xml_header_title:
+            xml_header_title_singleton.text = anonymize_string(
+                xml_header_title_singleton.text
+            )
+
+        # Clear out all SPECIFICATION names.
+        xml_specifications = xml_reqif.xpath(
+            "//reqif:SPECIFICATION", namespaces=fixns
+        )
+        for xml_specification in xml_specifications:
+            if "LONG-NAME" in xml_specification.attrib:
+                xml_specification.attrib["LONG-NAME"] = anonymize_string(
+                    xml_specification.attrib["LONG-NAME"]
+                )
+
+        # Clear out all ATTRIBUTE-VALUE-STRINGs.
+        xml_attribute_value_strings = xml_reqif.xpath(
+            "//reqif:ATTRIBUTE-VALUE-STRING", namespaces=fixns
+        )
+        for xml_attribute_value_string in xml_attribute_value_strings:
+            if "THE-VALUE" in xml_attribute_value_string.attrib:
+                xml_attribute_value_string.attrib[
+                    "THE-VALUE"
+                ] = anonymize_string(
+                    xml_attribute_value_string.attrib["THE-VALUE"]
+                )
+
+        # Clear out all ATTRIBUTE-VALUE-XHTMLs.
+        xml_attribute_value_xhtmls = xml_reqif.xpath(
+            "//reqif:ATTRIBUTE-VALUE-XHTML/reqif:THE-VALUE", namespaces=fixns
+        )
+        for xml_attribute_value_xhtml in xml_attribute_value_xhtmls:
+            xml_attribute_value_xhtml.text = anonymize_string(
+                xml_attribute_value_xhtml.text
+            )
+            for child in list(xml_attribute_value_xhtml):
+                xml_attribute_value_xhtml.remove(child)
+
+        return str(
+            tostring(
+                xml_reqif,
+                encoding="UTF-8",
+                pretty_print=True,
+                doctype='<?xml version="1.0" encoding="UTF-8"?>',
+            ),
+            encoding="utf8",
+        )
 
     @staticmethod
     def _anonymize_spec_objects(spec_objects: List[ReqIFSpecObject]):
