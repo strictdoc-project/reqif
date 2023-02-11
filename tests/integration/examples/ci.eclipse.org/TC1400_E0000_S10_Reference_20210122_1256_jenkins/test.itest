@@ -1,4 +1,3 @@
-UNSUPPORTED: true
 RUN: mkdir -p %S/output
 RUN: %reqif passthrough %S/sample.reqif %S/output/sample.reqif
 RUN: diff %S/sample.reqif %S/output/sample.reqif

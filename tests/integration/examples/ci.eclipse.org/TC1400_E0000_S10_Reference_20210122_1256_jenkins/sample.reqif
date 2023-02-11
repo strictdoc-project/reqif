@@ -149,22 +149,22 @@
                 <SPEC-OBJECT-REF>ID_TC1400_SpecObject1</SPEC-OBJECT-REF>
               </OBJECT>
               <CHILDREN>
-                <SPEC-HIERARCHY IDENTIFIER="ID_TC1400_SpecHierarchy11" LAST-CHANGE="2012-04-07T01:51:37.112+02:00" LONG-NAME="TC1400 SpecHierarchy 11" IS-TABLE-INTERNAL="true">
+                <SPEC-HIERARCHY IDENTIFIER="ID_TC1400_SpecHierarchy11" IS-TABLE-INTERNAL="true" LAST-CHANGE="2012-04-07T01:51:37.112+02:00" LONG-NAME="TC1400 SpecHierarchy 11">
                   <OBJECT>
                     <SPEC-OBJECT-REF>ID_TC1400_SpecObject11</SPEC-OBJECT-REF>
                   </OBJECT>
                   <CHILDREN>
-                    <SPEC-HIERARCHY IDENTIFIER="ID_TC1400_SpecHierarchy111" LAST-CHANGE="2012-04-07T01:51:37.112+02:00" LONG-NAME="TC1400 SpecHierarchy Internal Table 111" IS-TABLE-INTERNAL="true">
+                    <SPEC-HIERARCHY IDENTIFIER="ID_TC1400_SpecHierarchy111" IS-TABLE-INTERNAL="true" LAST-CHANGE="2012-04-07T01:51:37.112+02:00" LONG-NAME="TC1400 SpecHierarchy Internal Table 111">
                       <OBJECT>
                         <SPEC-OBJECT-REF>ID_TC1400_SpecObject111</SPEC-OBJECT-REF>
                       </OBJECT>
                     </SPEC-HIERARCHY>
-                    <SPEC-HIERARCHY IDENTIFIER="ID_TC1400_SpecHierarchy112" LAST-CHANGE="2012-04-07T01:51:37.112+02:00" LONG-NAME="TC1400 SpecHierarchy Internal Table 112" IS-TABLE-INTERNAL="true">
+                    <SPEC-HIERARCHY IDENTIFIER="ID_TC1400_SpecHierarchy112" IS-TABLE-INTERNAL="true" LAST-CHANGE="2012-04-07T01:51:37.112+02:00" LONG-NAME="TC1400 SpecHierarchy Internal Table 112">
                       <OBJECT>
                         <SPEC-OBJECT-REF>ID_TC1400_SpecObject112</SPEC-OBJECT-REF>
                       </OBJECT>
                     </SPEC-HIERARCHY>
-                    <SPEC-HIERARCHY IDENTIFIER="ID_TC1400_SpecHierarchy113" LAST-CHANGE="2012-04-07T01:51:37.112+02:00" LONG-NAME="TC1400 SpecHierarchy Internal Table 113" IS-TABLE-INTERNAL="true">
+                    <SPEC-HIERARCHY IDENTIFIER="ID_TC1400_SpecHierarchy113" IS-TABLE-INTERNAL="true" LAST-CHANGE="2012-04-07T01:51:37.112+02:00" LONG-NAME="TC1400 SpecHierarchy Internal Table 113">
                       <OBJECT>
                         <SPEC-OBJECT-REF>ID_TC1400_SpecObject113</SPEC-OBJECT-REF>
                       </OBJECT>
