@@ -26,6 +26,11 @@ class ReqIFSpecHierarchyParser:
         if "IS-EDITABLE" in attributes:
             editable_str = attributes["IS-EDITABLE"]
             editable = editable_str == "true"
+        is_table_internal: Optional[bool] = None
+        if "IS-TABLE-INTERNAL" in attributes:
+            is_table_internal_str = attributes["IS-TABLE-INTERNAL"]
+            is_table_internal = is_table_internal_str == "true"
+
         ref_then_children_order = list(
             map(lambda el: el.tag, list(spec_hierarchy_xml))
         ) == ["OBJECT", "CHILDREN"]
@@ -47,8 +52,6 @@ class ReqIFSpecHierarchyParser:
                 )
                 spec_hierarchy_children.append(child_spec_hierarchy)
         return ReqIFSpecHierarchy(
-            xml_node=spec_hierarchy_xml,
-            is_self_closed=is_self_closed,
             identifier=identifier,
             last_change=last_change,
             long_name=long_name,
@@ -57,6 +60,9 @@ class ReqIFSpecHierarchyParser:
             children=spec_hierarchy_children,
             ref_then_children_order=ref_then_children_order,
             level=level,
+            is_table_internal=is_table_internal,
+            is_self_closed=is_self_closed,
+            xml_node=spec_hierarchy_xml,
         )
 
     @staticmethod
@@ -70,6 +76,11 @@ class ReqIFSpecHierarchyParser:
         if hierarchy.editable is not None:
             editable_value = "true" if hierarchy.editable else "false"
             output += f' IS-EDITABLE="{editable_value}"'
+        if hierarchy.is_table_internal is not None:
+            is_table_internal_value = (
+                "true" if hierarchy.is_table_internal else "false"
+            )
+            output += f' IS-TABLE-INTERNAL="{is_table_internal_value}"'
         if hierarchy.last_change:
             output += f' LAST-CHANGE="{hierarchy.last_change}"'
         if hierarchy.long_name:

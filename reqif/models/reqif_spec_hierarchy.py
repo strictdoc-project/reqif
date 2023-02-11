@@ -16,6 +16,7 @@ class ReqIFSpecHierarchy:  # pylint: disable=too-many-instance-attributes
         ref_then_children_order: bool = True,
         last_change: Optional[str] = None,
         editable: Optional[bool] = False,
+        is_table_internal: Optional[bool] = False,
         is_self_closed: bool = True,
         xml_node: Optional[Any] = None,
     ):
@@ -36,6 +37,7 @@ class ReqIFSpecHierarchy:  # pylint: disable=too-many-instance-attributes
         self.ref_then_children_order: bool = ref_then_children_order
         self.last_change: Optional[str] = last_change
         self.editable: Optional[bool] = editable
+        self.is_table_internal: Optional[bool] = is_table_internal
         self.is_self_closed: bool = is_self_closed
         self.xml_node = xml_node
 
