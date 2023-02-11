@@ -240,7 +240,8 @@ class SpecObjectParser:
             children_tags = list(
                 map(lambda el: el.tag, list(spec_object.xml_node))
             )
-            assert len(children_tags) == 2
+            assert "VALUES" in children_tags
+            assert "TYPE" in children_tags
         else:
             children_tags = ["VALUES", "TYPE"]
 
@@ -252,7 +253,7 @@ class SpecObjectParser:
                     spec_object
                 )
             else:
-                raise NotImplementedError
+                print(f"warning: Unknown child tag: {child_tag}.")  # noqa: T201
 
         output += "        </SPEC-OBJECT>\n"
 

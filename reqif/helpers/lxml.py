@@ -91,5 +91,10 @@ def stringify_children(node):
 
 
 def is_self_closed_tag(xml):
+    # The tag cannot be closed if it has children or has a non-None text.
+    if len(xml.getchildren()) > 0:
+        return False
+    if xml.text is not None:
+        return False
     data_type_string = etree.tostring(xml, pretty_print=True).decode("utf-8")
     return data_type_string.find(f"</{xml.tag}>") == -1
