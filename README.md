@@ -6,10 +6,11 @@ ReqIF is a Python library for working with ReqIF format.
 
 - Parsing/unparsing ReqIF
 - Formatting (pretty-printing) ReqIF
+- Basic validation of ReqIF
+- Anonymizing ReqIF files to safely exchange the problematic ReqIF files.
 
 To be implemented:
 
-- Validating ReqIF
 - Converting from/to Excel and other formats
 
 ## Getting started
@@ -23,6 +24,10 @@ pip install reqif
 ### Parsing ReqIF
 
 ```py
+from reqif.parser import ReqIFParser
+
+input_file_path = "input.sdoc"
+
 reqif_bundle = ReqIFParser.parse(input_file_path)
 for specification in reqif_bundle.core_content.req_if_content.specifications
     print(specification.long_name)
@@ -34,6 +39,12 @@ for specification in reqif_bundle.core_content.req_if_content.specifications
 ### Unparsing ReqIF
 
 ```py
+from reqif.parser import ReqIFParser
+from reqif.unparser import ReqIFUnparser
+
+input_file_path = "input.sdoc"
+output_file_path = "output.sdoc"
+
 reqif_bundle = ReqIFParser.parse(input_file_path)
 reqif_xml_output = ReqIFUnparser.unparse(reqif_bundle)
 with open(output_file_path, "w", encoding="UTF-8") as output_file:
@@ -73,6 +84,39 @@ The `tests/integration/commands/format` contains typical examples of
 incorrectly formatted ReqIF files. The integration tests ensure that the
 `format` command fixes these issues.
 
+### Anonymizing ReqIF
+
+The anonymization helps when exchanging ReqIF documents between different ReqIF
+tools including this `reqif` library. If a particular file is not recognized
+correctly by a tool, a user can send their anonymized file to a developer for
+further inspection.
+
+The anonymize command accepts an input `.reqif` file and produces an anonymized
+version of that file to the output `.reqif` file.
+
+```
+usage: reqif anonymize [-h] input_file output_file
+main.py anonymize: error: the following arguments are required: input_file, output_file
+```
+
+Examples of anonymization:
+
+```xml
+...
+<ATTRIBUTE-VALUE-STRING THE-VALUE="...Anonymized-2644691225...">
+...
+<ATTRIBUTE-VALUE-XHTML>
+  <DEFINITION>
+    <ATTRIBUTE-DEFINITION-XHTML-REF>rmf-7d0ed062-e964-424c-8305-45067118d959</ATTRIBUTE-DEFINITION-XHTML-REF>
+  </DEFINITION>
+  <THE-VALUE>...Anonymized-141441514...</THE-VALUE>
+...
+```
+
+The anonymization algorithm preserves the uniqueness of the anonymized strings
+in the document. This way, if the requirement UID identifiers are anonymized,
+they will still be unique strings in an anonymized document.
+
 ## Implementation details
 
 The core of the library is a **ReqIF first-stage parser** that only transforms
@@ -105,6 +149,20 @@ The first-stage parser is made tolerant against possible issues in ReqIF.
 It should be possible to parse a ReqIF file even if it is missing important
 information. A separate validation command shall be used to confirm the validity
 of the ReqIF contents.
+
+### Printing of the attributes
+
+The `reqif` library uses a simple convention for printing the XML attributes: the
+attributes are always printed in the alphabetic order of their attribute names.
+
+```xml
+<DATATYPE-DEFINITION-REAL ACCURACY="10" IDENTIFIER="ID_TC1000_DatatypeDefinitionReal" LAST-CHANGE="2012-04-07T01:51:37.112+02:00" LONG-NAME="TC1000 DatatypeDefinitionReal" MAX="1234.5678" MIN="-1234.5678"/>
+```
+
+Some tools do not respect this rule: for example some tools will print
+the attribute `ACCURACY="10"` after the `LONG-NAME` attribute but the `reqif`
+library does not provide support for preserving a non-alphabetic order of the
+attributes.
 
 ### A bottom-up overview of the ReqIF format
 
