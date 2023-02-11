@@ -1,6 +1,10 @@
 from lxml import etree
 
-from reqif.helpers.lxml import dump_xml_node, stringify_namespaced_children
+from reqif.helpers.lxml import (
+    dump_xml_node,
+    is_self_closed_tag,
+    stringify_namespaced_children,
+)
 
 
 def test_01_dump_xml() -> None:
@@ -45,3 +49,25 @@ AA<reqif-xhtml:div>\
     string = stringify_namespaced_children(spec_type_xml)
 
     assert string == expected_string
+
+
+def test__is_self_closed_tag() -> None:
+    spec_type_string = """\
+<THE-VALUE>\
+Text
+</THE-VALUE>
+"""
+    spec_type_xml = etree.fromstring(spec_type_string)
+    assert is_self_closed_tag(spec_type_xml) is False
+
+    spec_type_string = """\
+<THE-VALUE></THE-VALUE>
+"""
+    spec_type_xml = etree.fromstring(spec_type_string)
+    assert is_self_closed_tag(spec_type_xml) is True
+
+    spec_type_string = """\
+<THE-VALUE/>
+"""
+    spec_type_xml = etree.fromstring(spec_type_string)
+    assert is_self_closed_tag(spec_type_xml) is True
