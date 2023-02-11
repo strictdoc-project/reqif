@@ -147,7 +147,17 @@ objects to the ReqIF XML file.
 
 The first-stage parser is made tolerant against possible issues in ReqIF.
 It should be possible to parse a ReqIF file even if it is missing important
-information. A separate validation command shall be used to confirm the validity
+information.
+
+A minimum ReqIF parsed by the `reqif`:
+
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<REQ-IF xmlns="http://www.omg.org/spec/ReqIF/20110401/reqif.xsd" xmlns:configuration="http://eclipse.org/rmf/pror/toolextensions/1.0">
+</REQ-IF>
+```
+
+A separate validation command shall be used to confirm the validity
 of the ReqIF contents.
 
 ### Printing of the attributes

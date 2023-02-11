@@ -1,4 +1,4 @@
-from typing import Any, Dict, List, Optional
+from typing import Any, Dict, List, Optional, Union
 
 from reqif.helpers.debug import auto_described
 from reqif.models.reqif_types import SpecObjectAttributeType
@@ -10,12 +10,12 @@ class SpecObjectAttribute:
         self,
         attribute_type: SpecObjectAttributeType,
         definition_ref: str,
-        value: str,
+        value: Union[str, List[str]],
         xml_node: Optional[Any] = None,
     ):
         self.attribute_type: SpecObjectAttributeType = attribute_type
         self.definition_ref: str = definition_ref
-        self.value: str = value
+        self.value: Union[str, List[str]] = value
         self.xml_node: Optional[Any] = xml_node
 
 

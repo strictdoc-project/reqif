@@ -34,10 +34,13 @@ ATTRIBUTE_REAL_TEMPLATE = """\
             </ATTRIBUTE-VALUE-REAL>
 """
 
+ATTRIBUTE_ENUM_VALUE_TEMPLATE = """\
+                <ENUM-VALUE-REF>{value}</ENUM-VALUE-REF>
+"""
 ATTRIBUTE_ENUMERATION_TEMPLATE = """\
             <ATTRIBUTE-VALUE-ENUMERATION>
               <VALUES>
-                <ENUM-VALUE-REF>{value}</ENUM-VALUE-REF>
+{values}
               </VALUES>
               <DEFINITION>
                 <ATTRIBUTE-DEFINITION-ENUMERATION-REF>{definition_ref}</ATTRIBUTE-DEFINITION-ENUMERATION-REF>
@@ -50,7 +53,7 @@ ATTRIBUTE_ENUMERATION_TEMPLATE_REVERSE = """\
                 <ATTRIBUTE-DEFINITION-ENUMERATION-REF>{definition_ref}</ATTRIBUTE-DEFINITION-ENUMERATION-REF>
               </DEFINITION>
               <VALUES>
-                <ENUM-VALUE-REF>{value}</ENUM-VALUE-REF>
+{values}
               </VALUES>
             </ATTRIBUTE-VALUE-ENUMERATION>
 """
@@ -122,19 +125,23 @@ class SpecObjectParser:
                     value=attribute_value,
                 )
             elif attribute_xml.tag == "ATTRIBUTE-VALUE-ENUMERATION":
-                attribute_value = (
-                    attribute_xml.find("VALUES").find("ENUM-VALUE-REF").text
-                )
                 attribute_definition_ref = (
                     attribute_xml.find("DEFINITION")
                     .find("ATTRIBUTE-DEFINITION-ENUMERATION-REF")
                     .text
                 )
+                attribute_xml_values = attribute_xml.find("VALUES")
+                assert attribute_xml_values is not None
+                xml_enum_value_refs = attribute_xml_values.getchildren()
+                enum_value_refs: List[str] = []
+                for xml_enum_value_ref in xml_enum_value_refs:
+                    attribute_value = xml_enum_value_ref.text
+                    enum_value_refs.append(attribute_value)
                 attribute = SpecObjectAttribute(
                     xml_node=attribute_xml,
                     attribute_type=SpecObjectAttributeType.ENUMERATION,
                     definition_ref=attribute_definition_ref,
-                    value=attribute_value,
+                    value=enum_value_refs,
                 )
             elif attribute_xml.tag == "ATTRIBUTE-VALUE-INTEGER":
                 attribute_value = attribute_xml.attrib["THE-VALUE"]
@@ -278,16 +285,19 @@ class SpecObjectParser:
         output += "          <VALUES>\n"
         for attribute in spec_object.attributes:
             if attribute.attribute_type == SpecObjectAttributeType.STRING:
+                assert isinstance(attribute.value, str)
                 output += ATTRIBUTE_STRING_TEMPLATE.format(
                     definition_ref=attribute.definition_ref,
                     value=html.escape(attribute.value),
                 )
             elif attribute.attribute_type == SpecObjectAttributeType.INTEGER:
+                assert isinstance(attribute.value, str)
                 output += ATTRIBUTE_INTEGER_TEMPLATE.format(
                     definition_ref=attribute.definition_ref,
                     value=attribute.value,
                 )
             elif attribute.attribute_type == SpecObjectAttributeType.REAL:
+                assert isinstance(attribute.value, str)
                 output += ATTRIBUTE_REAL_TEMPLATE.format(
                     definition_ref=attribute.definition_ref,
                     value=attribute.value,
@@ -304,28 +314,44 @@ class SpecObjectParser:
                 enum_values_then_definition_order = children_tags.index(
                     "VALUES"
                 ) < children_tags.index("DEFINITION")
+
                 assert enum_values_then_definition_order is not None
+                assert isinstance(attribute.value, list)
+                enum_values: str = "".join(
+                    list(
+                        map(
+                            lambda v: ATTRIBUTE_ENUM_VALUE_TEMPLATE.format(
+                                value=v
+                            ),
+                            attribute.value,
+                        )
+                    )
+                ).rstrip()
+
                 if enum_values_then_definition_order:
                     output += ATTRIBUTE_ENUMERATION_TEMPLATE.format(
                         definition_ref=attribute.definition_ref,
-                        value=attribute.value,
+                        values=enum_values,
                     )
                 else:
                     output += ATTRIBUTE_ENUMERATION_TEMPLATE_REVERSE.format(
                         definition_ref=attribute.definition_ref,
-                        value=attribute.value,
+                        values=enum_values,
                     )
             elif attribute.attribute_type == SpecObjectAttributeType.DATE:
+                assert isinstance(attribute.value, str)
                 output += ATTRIBUTE_DATE_TEMPLATE.format(
                     definition_ref=attribute.definition_ref,
                     value=attribute.value,
                 )
             elif attribute.attribute_type == SpecObjectAttributeType.XHTML:
+                assert isinstance(attribute.value, str)
                 output += ATTRIBUTE_XHTML_TEMPLATE.format(
                     definition_ref=attribute.definition_ref,
                     value=attribute.value,
                 )
             elif attribute.attribute_type == SpecObjectAttributeType.BOOLEAN:
+                assert isinstance(attribute.value, str)
                 output += ATTRIBUTE_BOOLEAN_TEMPLATE.format(
                     definition_ref=attribute.definition_ref,
                     value=attribute.value,
