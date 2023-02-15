@@ -1,4 +1,4 @@
-from reqif.helpers.string import (
+from reqif.helpers.string.xhtml_indent import (
     reqif_indent_xhtml_string,
     reqif_unindent_xhtml_string,
 )
