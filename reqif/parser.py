@@ -6,6 +6,7 @@ from typing import Any, Dict, List, Optional, Tuple, Union
 from lxml import etree
 from lxml.etree import DocInfo
 
+from reqif.helpers.lxml import lxml_strip_namespace_from_xml
 from reqif.models.error_handling import (
     ReqIFMissingTagException,
     ReqIFSchemaError,
@@ -100,7 +101,7 @@ class ReqIFParser:
         schema_namespace = namespace_info.get("xsi")
 
         xml_reqif_nons = (
-            ReqIFParser._strip_namespace_from_xml(copy.deepcopy(xml_reqif))
+            lxml_strip_namespace_from_xml(copy.deepcopy(xml_reqif))
             if namespace is not None
             else xml_reqif
         )
@@ -317,16 +318,3 @@ class ReqIFParser:
             spec_relation_groups=spec_relation_groups,
         )
         return reqif_content, lookup, exceptions
-
-    @staticmethod
-    def _strip_namespace_from_xml(root_xml):
-        for elem in root_xml.getiterator():
-            # Remove an XML namespace URI in the element's name but keep the
-            # namespaces in the HTML content as found in the
-            # <ATTRIBUTE-VALUE-XHTML> of ReqIF XML.
-            if "http://www.w3.org/1999/xhtml" in elem.tag:
-                continue
-            elem.tag = etree.QName(elem).localname
-        # Remove unused namespace declarations
-        etree.cleanup_namespaces(root_xml)
-        return root_xml

@@ -1,7 +1,9 @@
+from copy import deepcopy
 from itertools import chain
 
 from lxml import etree
 from lxml.etree import tostring
+from lxml.html import fragment_fromstring
 
 
 def dump_xml_node(node):
@@ -41,10 +43,15 @@ def my_escape_title(string: str) -> str:
 # when the etree.tostring(...) method is used:
 # <reqif-xhtml:div xmlns:reqif-xhtml="http://www.w3.org/1999/xhtml">--</reqif-xhtml:div>  # noqa: E501
 # FIXME: Would be great to find a better solution for this.
-def stringify_namespaced_children(node) -> str:
+def stringify_namespaced_children(node, namespace_tag=None) -> str:
+    if namespace_tag is None:
+        nskey = next(iter(node.nsmap.keys()))
+    else:
+        nskey = namespace_tag
+
     def _stringify_reqif_ns_node(node):
         assert node is not None
-        nskey = next(iter(node.nsmap.keys()))
+
         output = ""
         node_no_ns_tag = etree.QName(node).localname
         output += f"<{nskey}:{node_no_ns_tag}"
@@ -90,6 +97,20 @@ def stringify_children(node):
     )
 
 
+def lxml_convert_to_reqif_ns_xhtml_string(string, reqif_xhtml=True) -> str:
+    namespace_tag = "reqif-xhtml" if reqif_xhtml else "xhtml"
+    node = fragment_fromstring(string, create_parent="NOT-USED")
+    return stringify_namespaced_children(node, namespace_tag=namespace_tag)
+
+
+def lxml_convert_from_reqif_ns_xhtml_string(lxml_node) -> str:
+    lxml_node_deep_copy = deepcopy(lxml_node)
+    lxml_strip_namespace_from_xml(lxml_node_deep_copy, full=True)
+    return tostring(
+        lxml_node_deep_copy, encoding=str, pretty_print=True
+    ).rstrip()
+
+
 def is_self_closed_tag(xml):
     # The tag cannot be closed if it has children or has a non-None text.
     if len(xml.getchildren()) > 0:
@@ -97,3 +118,16 @@ def is_self_closed_tag(xml):
     if xml.text is not None:
         return False
     return True
+
+
+def lxml_strip_namespace_from_xml(root_xml, full=False):
+    for elem in root_xml.getiterator():
+        # Remove an XML namespace URI in the element's name but keep the
+        # namespaces in the HTML content as found in the
+        # <ATTRIBUTE-VALUE-XHTML> of ReqIF XML.
+        if not full and "http://www.w3.org/1999/xhtml" in elem.tag:
+            continue
+        elem.tag = etree.QName(elem).localname
+    # Remove unused namespace declarations
+    etree.cleanup_namespaces(root_xml)
+    return root_xml
