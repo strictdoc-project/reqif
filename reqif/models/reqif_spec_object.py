@@ -6,16 +6,20 @@ from reqif.models.reqif_types import SpecObjectAttributeType
 
 @auto_described
 class SpecObjectAttribute:
-    def __init__(
+    def __init__(  # pylint: disable=too-many-arguments
         self,
         attribute_type: SpecObjectAttributeType,
         definition_ref: str,
         value: Union[str, List[str]],
+        value_stripped_xhtml: Optional[str] = None,
         xml_node: Optional[Any] = None,
     ):
         self.attribute_type: SpecObjectAttributeType = attribute_type
         self.definition_ref: str = definition_ref
         self.value: Union[str, List[str]] = value
+        # Only for XHTML attributes: A valud stripped of the
+        # <xhtml:...> namespace. <xhtml:div> becomes <div>...
+        self.value_stripped_xhtml: Optional[str] = value_stripped_xhtml
         self.xml_node: Optional[Any] = xml_node
 
 

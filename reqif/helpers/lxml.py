@@ -87,7 +87,15 @@ def stringify_children(node):
             (node.text,),
             chain(
                 *(
-                    (tostring(child, encoding=str, with_tail=False), child.tail)
+                    (
+                        tostring(
+                            child,
+                            encoding=str,
+                            with_tail=False,
+                            pretty_print=True,
+                        ),
+                        child.tail,
+                    )
                     for child in node.getchildren()
                 )
             ),
@@ -109,6 +117,12 @@ def lxml_convert_from_reqif_ns_xhtml_string(lxml_node) -> str:
     return tostring(
         lxml_node_deep_copy, encoding=str, pretty_print=True
     ).rstrip()
+
+
+def lxml_convert_children_from_reqif_ns_xhtml_string(lxml_node) -> str:
+    lxml_node_deep_copy = deepcopy(lxml_node)
+    lxml_strip_namespace_from_xml(lxml_node_deep_copy, full=True)
+    return stringify_children(lxml_node_deep_copy)
 
 
 def is_self_closed_tag(xml):
