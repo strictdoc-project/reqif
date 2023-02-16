@@ -17,7 +17,7 @@ class SpecObjectAttribute:
         self.attribute_type: SpecObjectAttributeType = attribute_type
         self.definition_ref: str = definition_ref
         self.value: Union[str, List[str]] = value
-        # Only for XHTML attributes: A valud stripped of the
+        # Only for XHTML attributes: A value stripped of the
         # <xhtml:...> namespace. <xhtml:div> becomes <div>...
         self.value_stripped_xhtml: Optional[str] = value_stripped_xhtml
         self.xml_node: Optional[Any] = xml_node
