@@ -3,7 +3,12 @@ from typing import List, Optional
 
 from lxml import etree
 
-from reqif.helpers.lxml import stringify_namespaced_children
+from reqif.helpers.lxml import (
+    lxml_convert_children_from_reqif_ns_xhtml_string,
+    stringify_children,
+    stringify_namespaced_children,
+)
+from reqif.helpers.string.xhtml_indent import reqif_unindent_xhtml_string
 from reqif.models.reqif_spec_object import (
     ReqIFSpecObject,
     SpecObjectAttribute,
@@ -201,17 +206,33 @@ class SpecObjectParser:
                 )
             elif attribute_xml.tag == "ATTRIBUTE-VALUE-XHTML":
                 the_value = attribute_xml.find("THE-VALUE")
-                attribute_value = stringify_namespaced_children(the_value)
+
+                # Edge: There are not <xhtml:...> or <reqif-xhtml...> tags.
+                if len(the_value.nsmap) > 0:
+                    attribute_value = stringify_namespaced_children(the_value)
+                    attribute_value_stripped_xhtml = (
+                        reqif_unindent_xhtml_string(
+                            lxml_convert_children_from_reqif_ns_xhtml_string(
+                                the_value
+                            )
+                        )
+                    )
+                else:
+                    attribute_value = stringify_children(the_value)
+                    attribute_value_stripped_xhtml = (
+                        reqif_unindent_xhtml_string(attribute_value)
+                    )
                 attribute_definition_ref = (
                     attribute_xml.find("DEFINITION")
                     .find("ATTRIBUTE-DEFINITION-XHTML-REF")
                     .text
                 )
                 attribute = SpecObjectAttribute(
-                    xml_node=attribute_xml,
                     attribute_type=SpecObjectAttributeType.XHTML,
                     definition_ref=attribute_definition_ref,
                     value=attribute_value,
+                    value_stripped_xhtml=attribute_value_stripped_xhtml,
+                    xml_node=attribute_xml,
                 )
             else:
                 raise NotImplementedError(etree.tostring(attribute_xml))

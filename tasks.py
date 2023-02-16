@@ -181,8 +181,8 @@ def check(_):
 
 
 @task
-def release(context, username=None, password=None):
-    user_password = f"-u{username} -p{password}" if username is not None else ""
+def release(context, password=None):
+    user_password = f"-ustanislaw -p{password}" if password is not None else ""
     command = f"""
         rm -rfv dist/ &&
         python3 -m build &&

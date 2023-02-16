@@ -45,6 +45,9 @@ def my_escape_title(string: str) -> str:
 # FIXME: Would be great to find a better solution for this.
 def stringify_namespaced_children(node, namespace_tag=None) -> str:
     if namespace_tag is None:
+        assert (
+            len(node.nsmap) > 0
+        ), f"This method must be called on a namespaced tag:\n{dump_xml_node(node)}"  # noqa: E501
         nskey = next(iter(node.nsmap.keys()))
     else:
         nskey = namespace_tag
@@ -79,7 +82,7 @@ def stringify_namespaced_children(node, namespace_tag=None) -> str:
     return string
 
 
-# https://stackoverflow.com/a/4624146/598057
+# https://stackoverflow.com/a/28173933/598057
 def stringify_children(node):
     return "".join(
         chunk
@@ -87,11 +90,22 @@ def stringify_children(node):
             (node.text,),
             chain(
                 *(
-                    (tostring(child, encoding=str, with_tail=False), child.tail)
+                    (
+                        tostring(
+                            child,
+                            encoding=str,
+                            with_tail=False,
+                            pretty_print=False,
+                        ),
+                        child.tail,
+                    )
                     for child in node.getchildren()
                 )
             ),
-            (node.tail,),
+            # The original snippet prints the node tail for some reason which is
+            # surprisingly unnecessary.
+            # (node.tail,),  # noqa: ERA001
+            (None,),
         )
         if chunk
     )
@@ -109,6 +123,12 @@ def lxml_convert_from_reqif_ns_xhtml_string(lxml_node) -> str:
     return tostring(
         lxml_node_deep_copy, encoding=str, pretty_print=True
     ).rstrip()
+
+
+def lxml_convert_children_from_reqif_ns_xhtml_string(lxml_node) -> str:
+    lxml_node_deep_copy = deepcopy(lxml_node)
+    lxml_strip_namespace_from_xml(lxml_node_deep_copy, full=True)
+    return stringify_children(lxml_node_deep_copy)
 
 
 def is_self_closed_tag(xml):
