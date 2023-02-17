@@ -1,6 +1,6 @@
 from typing import Optional
 
-from reqif.helpers.lxml import my_escape_title
+from reqif.helpers.lxml import lxml_escape_title
 from reqif.models.reqif_reqif_header import ReqIFReqIFHeader
 
 
@@ -114,7 +114,7 @@ class ReqIFHeaderParser:
                 )
             if header.title:
                 output += (
-                    f"      <TITLE>{my_escape_title(header.title)}</TITLE>\n"
+                    f"      <TITLE>{lxml_escape_title(header.title)}</TITLE>\n"
                 )
 
             output += "    </REQ-IF-HEADER>\n"

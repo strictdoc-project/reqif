@@ -5,8 +5,8 @@ from lxml import etree
 
 from reqif.helpers.lxml import (
     lxml_convert_children_from_reqif_ns_xhtml_string,
-    stringify_children,
-    stringify_namespaced_children,
+    lxml_stringify_children,
+    lxml_stringify_namespaced_children,
 )
 from reqif.helpers.string.xhtml_indent import reqif_unindent_xhtml_string
 from reqif.models.reqif_spec_object import (
@@ -209,7 +209,9 @@ class SpecObjectParser:
 
                 # Edge: There are not <xhtml:...> or <reqif-xhtml...> tags.
                 if len(the_value.nsmap) > 0:
-                    attribute_value = stringify_namespaced_children(the_value)
+                    attribute_value = lxml_stringify_namespaced_children(
+                        the_value
+                    )
                     attribute_value_stripped_xhtml = (
                         reqif_unindent_xhtml_string(
                             lxml_convert_children_from_reqif_ns_xhtml_string(
@@ -218,7 +220,7 @@ class SpecObjectParser:
                         )
                     )
                 else:
-                    attribute_value = stringify_children(the_value)
+                    attribute_value = lxml_stringify_children(the_value)
                     attribute_value_stripped_xhtml = (
                         reqif_unindent_xhtml_string(attribute_value)
                     )

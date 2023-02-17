@@ -1,6 +1,6 @@
 from typing import List, Optional
 
-from reqif.helpers.lxml import is_self_closed_tag
+from reqif.helpers.lxml import lxml_is_self_closed_tag
 from reqif.models.reqif_spec_hierarchy import (
     ReqIFSpecHierarchy,
 )
@@ -45,7 +45,9 @@ class ReqIFSpecHierarchyParser:
         if xml_spec_hierarchy_children is not None:
             spec_hierarchy_children = []
             if len(xml_spec_hierarchy_children) == 0:
-                is_self_closed = is_self_closed_tag(xml_spec_hierarchy_children)
+                is_self_closed = lxml_is_self_closed_tag(
+                    xml_spec_hierarchy_children
+                )
             for child_spec_hierarchy_xml in xml_spec_hierarchy_children:
                 child_spec_hierarchy = ReqIFSpecHierarchyParser.parse(
                     child_spec_hierarchy_xml, level + 1

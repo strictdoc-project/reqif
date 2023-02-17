@@ -8,7 +8,7 @@ from lxml import etree
 from lxml.etree import tostring
 
 from reqif.cli.cli_arg_parser import AnonimizeCommandConfig
-from reqif.helpers.lxml import stringify_namespaced_children
+from reqif.helpers.lxml import lxml_stringify_namespaced_children
 from reqif.models.error_handling import ReqIFXMLParsingError
 from reqif.models.reqif_spec_object import ReqIFSpecObject, SpecObjectAttribute
 from reqif.models.reqif_specification import ReqIFSpecification
@@ -106,8 +106,8 @@ class AnonymizeCommand:
             "//reqif:ATTRIBUTE-VALUE-XHTML/reqif:THE-VALUE", namespaces=fixns
         )
         for xml_attribute_value_xhtml in xml_attribute_value_xhtmls:
-            xml_attribute_value_xhtml_text: str = stringify_namespaced_children(
-                xml_attribute_value_xhtml
+            xml_attribute_value_xhtml_text: str = (
+                lxml_stringify_namespaced_children(xml_attribute_value_xhtml)
             )
             for child in list(xml_attribute_value_xhtml):
                 xml_attribute_value_xhtml.remove(child)
