@@ -1,4 +1,4 @@
-from reqif.helpers.lxml import dump_xml_node
+from reqif.helpers.lxml import lxml_dump_node
 
 
 class ReqIFXMLParsingError(Exception):
@@ -34,7 +34,7 @@ class ReqIFMissingTagException(ReqIFSchemaError):
         return (
             f"schema error: Tag <{self.xml_node.tag}> is missing a "
             f"<{self.tag}> child tag. "
-            f"Affected fragment:\n{dump_xml_node(self.xml_node)}"
+            f"Affected fragment:\n{lxml_dump_node(self.xml_node)}"
         )
 
 
@@ -50,7 +50,7 @@ class ReqIFSpecRelationMissingSpecObjectException(ReqIFSemanticError):
             f"schema error: A <{self.xml_node.tag}>'s <{self.tag}> "
             "contains a link to a non-existing <SPEC-OBJECT>: "
             f"{self.spec_object_identifier}\n"
-            f"Affected fragment:\n{dump_xml_node(self.xml_node)}"
+            f"Affected fragment:\n{lxml_dump_node(self.xml_node)}"
         )
 
 
@@ -65,5 +65,5 @@ class ReqIFSpecHierarchyMissingSpecObjectException(ReqIFSemanticError):
             f"schema error: A <SPEC-HIERARCHY>'s <SPEC-OBJECT-REF> "
             "contains a link to a non-existing <SPEC-OBJECT>: "
             f"{self.spec_object_identifier}\n"
-            f"Affected fragment:\n{dump_xml_node(self.xml_node)}"
+            f"Affected fragment:\n{lxml_dump_node(self.xml_node)}"
         )

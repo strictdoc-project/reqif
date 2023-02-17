@@ -1,7 +1,7 @@
 import html
 from typing import Optional
 
-from reqif.helpers.lxml import is_self_closed_tag
+from reqif.helpers.lxml import lxml_is_self_closed_tag
 from reqif.models.reqif_spec_relation_type import ReqIFSpecRelationType
 
 
@@ -11,7 +11,7 @@ class SpecRelationTypeParser:
         assert (
             xml_spec_relation_type_xml.tag == "SPEC-RELATION-TYPE"
         ), f"{xml_spec_relation_type_xml}"
-        is_self_closed = is_self_closed_tag(xml_spec_relation_type_xml)
+        is_self_closed = lxml_is_self_closed_tag(xml_spec_relation_type_xml)
 
         xml_attributes = xml_spec_relation_type_xml.attrib
         # Expecting all tools to implement IDENTIFIER and LONG-NAME.

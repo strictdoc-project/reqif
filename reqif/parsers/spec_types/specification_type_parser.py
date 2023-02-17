@@ -1,6 +1,6 @@
 from typing import List, Optional
 
-from reqif.helpers.lxml import is_self_closed_tag
+from reqif.helpers.lxml import lxml_is_self_closed_tag
 from reqif.models.reqif_spec_object_type import (
     SpecAttributeDefinition,
 )
@@ -14,7 +14,7 @@ class SpecificationTypeParser:
         assert (
             specification_type_xml.tag == "SPECIFICATION-TYPE"
         ), f"{specification_type_xml}"
-        is_self_closed = is_self_closed_tag(specification_type_xml)
+        is_self_closed = lxml_is_self_closed_tag(specification_type_xml)
 
         attribute_map = {}
 

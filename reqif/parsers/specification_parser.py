@@ -1,6 +1,6 @@
 from typing import List, Optional
 
-from reqif.helpers.lxml import stringify_namespaced_children
+from reqif.helpers.lxml import lxml_stringify_namespaced_children
 from reqif.models.reqif_spec_object import SpecObjectAttribute
 from reqif.models.reqif_specification import (
     ReqIFSpecification,
@@ -94,7 +94,9 @@ class ReqIFSpecificationParser:
                     values.append(values_attribute)
                 elif xml_attribute.tag == "ATTRIBUTE-VALUE-XHTML":
                     the_value = xml_attribute.find("THE-VALUE")
-                    attribute_value = stringify_namespaced_children(the_value)
+                    attribute_value = lxml_stringify_namespaced_children(
+                        the_value
+                    )
                     attribute_name = (
                         xml_attribute.find("DEFINITION")
                         .find("ATTRIBUTE-DEFINITION-XHTML-REF")

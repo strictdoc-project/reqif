@@ -1,7 +1,10 @@
 import html
 from typing import List, Optional, Union
 
-from reqif.helpers.lxml import is_self_closed_tag, stringify_namespaced_children
+from reqif.helpers.lxml import (
+    lxml_is_self_closed_tag,
+    lxml_stringify_namespaced_children,
+)
 from reqif.models.reqif_spec_object_type import (
     DefaultValueEmptySelfClosedTag,
     ReqIFSpecObjectType,
@@ -85,7 +88,7 @@ class SpecObjectTypeParser:
                         "DEFAULT-VALUE"
                     )
                     if xml_default_value is not None:
-                        if is_self_closed_tag(xml_default_value):
+                        if lxml_is_self_closed_tag(xml_default_value):
                             default_value = DefaultValueEmptySelfClosedTag()
                         else:
                             xml_attribute_value = xml_default_value.find(
@@ -194,7 +197,7 @@ class SpecObjectTypeParser:
                     )
                     if xml_default_value is None:
                         pass
-                    elif is_self_closed_tag(xml_default_value):
+                    elif lxml_is_self_closed_tag(xml_default_value):
                         default_value = DefaultValueEmptySelfClosedTag()
                     else:
                         xml_attribute_value = xml_default_value.find(
@@ -213,7 +216,7 @@ class SpecObjectTypeParser:
                                     xml_attribute_ref.text
                                 )
                             xml_values = xml_attribute_value.find("THE-VALUE")
-                            default_value = stringify_namespaced_children(
+                            default_value = lxml_stringify_namespaced_children(
                                 xml_values
                             )
                         else:
@@ -248,7 +251,7 @@ class SpecObjectTypeParser:
                         "DEFAULT-VALUE"
                     )
                     if xml_default_value is not None:
-                        if is_self_closed_tag(xml_default_value):
+                        if lxml_is_self_closed_tag(xml_default_value):
                             default_value = DefaultValueEmptySelfClosedTag()
                         else:
                             xml_attribute_value = xml_default_value.find(

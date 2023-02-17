@@ -2,7 +2,7 @@ from typing import List, Optional, Union
 
 from lxml import etree
 
-from reqif.helpers.lxml import is_self_closed_tag
+from reqif.helpers.lxml import lxml_is_self_closed_tag
 from reqif.models.reqif_data_type import (
     ReqIFDataTypeDefinitionBoolean,
     ReqIFDataTypeDefinitionDateIdentifier,
@@ -30,7 +30,7 @@ class DataTypeParser:
     ]:
         assert "DATATYPE-DEFINITION-" in data_type_xml.tag, f"{data_type_xml}"
 
-        is_self_closed = is_self_closed_tag(data_type_xml)
+        is_self_closed = lxml_is_self_closed_tag(data_type_xml)
 
         attributes = data_type_xml.attrib
         identifier = attributes["IDENTIFIER"]
