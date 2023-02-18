@@ -1,22 +1,9 @@
 from lxml import etree
 
 from reqif.helpers.lxml import (
-    lxml_dump_node,
     lxml_is_self_closed_tag,
     lxml_stringify_namespaced_children,
 )
-
-
-def test_01_dump_xml() -> None:
-    spec_type_string = """\
-<PARENT>
-  <CHILD>text</CHILD>
-</PARENT>\
-"""
-    spec_type_xml = etree.fromstring(spec_type_string)
-    dump = lxml_dump_node(spec_type_xml)
-
-    assert dump == spec_type_string
 
 
 def test__02_stringify_namespaced_children__01_basic() -> None:
