@@ -7,23 +7,7 @@ from lxml.html import fragment_fromstring
 
 
 def lxml_dump_node(node):
-    output = ""
-    node_no_ns_tag = etree.QName(node).localname
-    output += f"<{node_no_ns_tag}"
-    for attribute, attribute_value in node.attrib.items():
-        output += f' {attribute}="{lxml_escape_for_html(attribute_value)}"'
-    if node.text is not None or len(node.getchildren()) > 0:
-        output += ">"
-        if len(node.nsmap) > 0:
-            output += lxml_stringify_namespaced_children(node)
-        else:
-            output += lxml_stringify_children(node)
-        output += f"</{node_no_ns_tag}>"
-    else:
-        output += "/>"
-    if node.tail is not None:
-        output += lxml_escape_for_html(node.tail)
-    return output
+    return lxml_stringify_node(node)
 
 
 # This code is taken from Python 3.7. The addition is escaping of the tab
@@ -101,6 +85,30 @@ def lxml_stringify_namespaced_children(node, namespace_tag=None) -> str:
     for child in node.getchildren():
         string += _lxml_stringify_reqif_ns_node(child)
     return string
+
+
+def lxml_stringify_node(node):
+    nskey = None
+    if len(node.nsmap) > 0:
+        nskey = next(iter(node.nsmap.keys()))
+    output = ""
+    node_no_ns_tag = etree.QName(node).localname
+    tag = f"{nskey}:{node_no_ns_tag}" if node.tag[0] == "{" else node.tag
+    output += f"<{tag}"
+    for attribute, attribute_value in node.attrib.items():
+        output += f' {attribute}="{lxml_escape_for_html(attribute_value)}"'
+    if node.text is not None or len(node.getchildren()) > 0:
+        output += ">"
+        if node.text is not None:
+            output += lxml_escape_for_html(node.text)
+        for child in node.getchildren():
+            output += lxml_stringify_node(child)
+        output += f"</{tag}>"
+    else:
+        output += "/>"
+    if node.tail is not None:
+        output += lxml_escape_for_html(node.tail)
+    return output
 
 
 # https://stackoverflow.com/a/28173933/598057
