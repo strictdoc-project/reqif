@@ -7,7 +7,23 @@ from lxml.html import fragment_fromstring
 
 
 def lxml_dump_node(node):
-    return etree.tostring(node, method="xml").decode("utf8")
+    output = ""
+    node_no_ns_tag = etree.QName(node).localname
+    output += f"<{node_no_ns_tag}"
+    for attribute, attribute_value in node.attrib.items():
+        output += f' {attribute}="{lxml_escape_for_html(attribute_value)}"'
+    if node.text is not None or len(node.getchildren()) > 0:
+        output += ">"
+        if len(node.nsmap) > 0:
+            output += lxml_stringify_namespaced_children(node)
+        else:
+            output += lxml_stringify_children(node)
+        output += f"</{node_no_ns_tag}>"
+    else:
+        output += "/>"
+    if node.tail is not None:
+        output += lxml_escape_for_html(node.tail)
+    return output
 
 
 # This code is taken from Python 3.7. The addition is escaping of the tab
@@ -45,19 +61,24 @@ def lxml_escape_title(string: str) -> str:
 # FIXME: Would be great to find a better solution for this.
 def lxml_stringify_namespaced_children(node, namespace_tag=None) -> str:
     if namespace_tag is None:
-        assert (
-            len(node.nsmap) > 0
-        ), f"This method must be called on a namespaced tag:\n{lxml_dump_node(node)}"  # noqa: E501
+        assert len(node.nsmap) > 0, (
+            f"This method must be called on a namespaced tag. "
+            f"Tag: {node}, line: {node.sourceline}."
+        )
         nskey = next(iter(node.nsmap.keys()))
     else:
         nskey = namespace_tag
 
     def _lxml_stringify_reqif_ns_node(node):
         assert node is not None
-
         output = ""
         node_no_ns_tag = etree.QName(node).localname
-        output += f"<{nskey}:{node_no_ns_tag}"
+        tag = (
+            f"{nskey}:{node_no_ns_tag}"
+            if node.tag[0] == "{" or namespace_tag is not None
+            else node.tag
+        )
+        output += f"<{tag}"
         for attribute, attribute_value in node.attrib.items():
             output += f' {attribute}="{lxml_escape_for_html(attribute_value)}"'
         if node.text is not None or len(node.getchildren()) > 0:
@@ -66,7 +87,7 @@ def lxml_stringify_namespaced_children(node, namespace_tag=None) -> str:
                 output += lxml_escape_for_html(node.text)
             for child in node.getchildren():
                 output += _lxml_stringify_reqif_ns_node(child)
-            output += f"</{nskey}:{node_no_ns_tag}>"
+            output += f"</{tag}>"
         else:
             output += "/>"
 
