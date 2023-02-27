@@ -65,7 +65,13 @@ def lxml_stringify_namespaced_children(node, namespace_tag=None) -> str:
         output += f"<{tag}"
         for attribute, attribute_value in node.attrib.items():
             output += f' {attribute}="{lxml_escape_for_html(attribute_value)}"'
-        if node.text is not None or len(node.getchildren()) > 0:
+        # <object> is surprisingly a tag that must have a closing tag even
+        # if it is empty. If self-closed, it breaks all the following markup.
+        if (
+            node.text is not None
+            or len(node.getchildren()) > 0
+            or node.tag.casefold() == "object"
+        ):
             output += ">"
             if node.text is not None:
                 output += lxml_escape_for_html(node.text)
@@ -97,7 +103,13 @@ def lxml_stringify_node(node):
     output += f"<{tag}"
     for attribute, attribute_value in node.attrib.items():
         output += f' {attribute}="{lxml_escape_for_html(attribute_value)}"'
-    if node.text is not None or len(node.getchildren()) > 0:
+    # <object> is surprisingly a tag that must have a closing tag even if it
+    # is empty. If self-closed, it breaks all the following markup.
+    if (
+        node.text is not None
+        or len(node.getchildren()) > 0
+        or node.tag.casefold() == "object"
+    ):
         output += ">"
         if node.text is not None:
             output += lxml_escape_for_html(node.text)
@@ -120,12 +132,7 @@ def lxml_stringify_children(node):
             chain(
                 *(
                     (
-                        tostring(
-                            child,
-                            encoding=str,
-                            with_tail=False,
-                            pretty_print=False,
-                        ),
+                        lxml_stringify_node(child),
                         child.tail,
                     )
                     for child in node.getchildren()
