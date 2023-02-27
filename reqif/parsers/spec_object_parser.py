@@ -207,7 +207,7 @@ class SpecObjectParser:
             elif attribute_xml.tag == "ATTRIBUTE-VALUE-XHTML":
                 the_value = attribute_xml.find("THE-VALUE")
 
-                # Edge: There are not <xhtml:...> or <reqif-xhtml...> tags.
+                # Edge case: There are no <xhtml:...> or <reqif-xhtml...> tags.
                 if len(the_value.nsmap) > 0:
                     attribute_value = lxml_stringify_namespaced_children(
                         the_value
