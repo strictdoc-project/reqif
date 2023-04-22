@@ -1,7 +1,7 @@
-from typing import Optional
+from typing import Union
 
 from reqif.helpers.lxml import lxml_escape_title
-from reqif.models.reqif_reqif_header import ReqIFReqIFHeader
+from reqif.models.reqif_reqif_header import EmptyTag, ReqIFReqIFHeader
 
 
 class ReqIFHeaderParser:
@@ -21,7 +21,7 @@ class ReqIFHeaderParser:
 
         comment = None
         creation_time = None
-        repository_id: Optional[str] = None
+        repository_id: Union[None, str, EmptyTag] = None
         req_if_tool_id = None
         req_if_version = None
         source_tool_id = None
@@ -37,7 +37,10 @@ class ReqIFHeaderParser:
 
         xml_repository_id = xml_reqif_header.find("REPOSITORY-ID")
         if xml_repository_id is not None:
-            repository_id = xml_repository_id.text
+            if xml_repository_id.text is not None:
+                repository_id = xml_repository_id.text
+            else:
+                repository_id = EmptyTag()
 
         xml_req_if_tool_id = xml_reqif_header.find("REQ-IF-TOOL-ID")
         if xml_req_if_tool_id is not None:
@@ -84,13 +87,16 @@ class ReqIFHeaderParser:
                     f"{header.creation_time}"
                     "</CREATION-TIME>\n"
                 )
-            if header.repository_id:
-                output += (
-                    "      "
-                    "<REPOSITORY-ID>"
-                    f"{header.repository_id}"
-                    "</REPOSITORY-ID>\n"
-                )
+            if header.repository_id is not None:
+                if isinstance(header.repository_id, str):
+                    output += (
+                        "      "
+                        "<REPOSITORY-ID>"
+                        f"{header.repository_id}"
+                        "</REPOSITORY-ID>\n"
+                    )
+                else:
+                    output += "      <REPOSITORY-ID/>\n"
             if header.req_if_tool_id:
                 output += (
                     "      "

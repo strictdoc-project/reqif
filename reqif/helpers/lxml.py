@@ -1,3 +1,4 @@
+import re
 from copy import deepcopy
 from itertools import chain
 
@@ -54,15 +55,41 @@ def lxml_stringify_namespaced_children(node, namespace_tag=None) -> str:
         nskey = namespace_tag
 
     def _lxml_stringify_reqif_ns_node(node):
-        assert node is not None
         output = ""
         node_no_ns_tag = etree.QName(node).localname
+
+        # There are ReqIF files where the XHTML-based tags can have their own
+        # namespace that overrides the document-level namespace. Making the best
+        # effort to detect this case. Example:
+        # <THE-VALUE>
+        #   <div xmlns="http://www.w3.org/1999/xhtml">
+        #     &quot;New Header&quot; Template reqFile
+        #   </div>
+        # </THE-VALUE>
+        # FIXME: Such tricks can introduce further edge cases. Not clear how to
+        # implement this properly.
+        node_has_its_own_ns = False
+        node_ns_match = re.search("{(.+?)}", node.tag)
+        if node_ns_match:
+            node_ns = node_ns_match.group(1)
+
+            for nskey_, ns_ in node.nsmap.items():
+                if ns_ == node_ns and nskey_ is None:
+                    node_has_its_own_ns = True
+
         tag = (
-            f"{nskey}:{node_no_ns_tag}"
-            if node.tag[0] == "{" or namespace_tag is not None
-            else node.tag
+            node_no_ns_tag
+            if node_has_its_own_ns
+            else (
+                f"{nskey}:{node_no_ns_tag}"
+                if node.tag[0] == "{" or namespace_tag is not None
+                else node.tag
+            )
         )
         output += f"<{tag}"
+        if node_has_its_own_ns:
+            output += f' xmlns="{node.nsmap[None]}"'
+
         for attribute, attribute_value in node.attrib.items():
             output += f' {attribute}="{lxml_escape_for_html(attribute_value)}"'
         # <object> is surprisingly a tag that must have a closing tag even

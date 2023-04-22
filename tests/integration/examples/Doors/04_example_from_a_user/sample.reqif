@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<REQ-IF xmlns="http://www.omg.org/spec/ReqIF/20110401/reqif.xsd" xmlns:reqif-common="http://www.prostep.org/reqif" xmlns:rm-reqif="http://www.ibm.com/rm/reqif" xmlns:reqif="http://www.omg.org/spec/ReqIF/20110401/reqif.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:rm="http://www.ibm.com/rm" xmlns:xhtml="http://www.w3.org/1999/xhtml" xsi:schemaLocation="http://www.omg.org/spec/ReqIF/20110401/reqif.xsd reqif.xsd">
+  <THE-HEADER>
+    <REQ-IF-HEADER IDENTIFIER="_c9f16ebe-c3b5-4966-a5f8-b1090d3a6c2d">
+      <CREATION-TIME>2022-01-01T00:01:01.260Z</CREATION-TIME>
+      <REPOSITORY-ID/>
+      <REQ-IF-TOOL-ID>IBM</REQ-IF-TOOL-ID>
+      <REQ-IF-VERSION>1.0</REQ-IF-VERSION>
+      <SOURCE-TOOL-ID>IBM</SOURCE-TOOL-ID>
+      <TITLE>IBM Engineering Requirements</TITLE>
+    </REQ-IF-HEADER>
+  </THE-HEADER>
+  <CORE-CONTENT>
+    <REQ-IF-CONTENT>
+      <SPEC-OBJECTS>
+        <SPEC-OBJECT IDENTIFIER="_f05294de-d4cf-455d-9307-c130376dfd44" LAST-CHANGE="2022-01-01T00:01:01.260Z">
+          <TYPE>
+            <SPEC-OBJECT-TYPE-REF>_ee420d2b-599c-49ea-a298-6a732ece21eb</SPEC-OBJECT-TYPE-REF>
+          </TYPE>
+          <VALUES>
+            <ATTRIBUTE-VALUE-XHTML>
+              <DEFINITION>
+                <ATTRIBUTE-DEFINITION-XHTML-REF>_3ca983d9-5ec5-4752-898f-37ab52beafd0</ATTRIBUTE-DEFINITION-XHTML-REF>
+              </DEFINITION>
+              <THE-VALUE>
+                <div xmlns="http://www.w3.org/1999/xhtml">&lt;FOOOOO&gt; BAR</div>
+              </THE-VALUE>
+            </ATTRIBUTE-VALUE-XHTML>
+            <ATTRIBUTE-VALUE-XHTML>
+              <DEFINITION>
+                <ATTRIBUTE-DEFINITION-XHTML-REF>_1f20e97d-8b0f-4f64-a093-deedc195e91a</ATTRIBUTE-DEFINITION-XHTML-REF>
+              </DEFINITION>
+              <THE-VALUE>
+                <div xmlns="http://www.w3.org/1999/xhtml">&quot;New Header&quot; Template reqFile</div>
+              </THE-VALUE>
+            </ATTRIBUTE-VALUE-XHTML>
+            <ATTRIBUTE-VALUE-DATE THE-VALUE="2022-01-01T00:01:01.260Z">
+              <DEFINITION>
+                <ATTRIBUTE-DEFINITION-DATE-REF>_dc18f331-d466-4de2-8182-0ef4ced9e174</ATTRIBUTE-DEFINITION-DATE-REF>
+              </DEFINITION>
+            </ATTRIBUTE-VALUE-DATE>
+            <ATTRIBUTE-VALUE-STRING THE-VALUE="XSX_6qwe82_363">
+              <DEFINITION>
+                <ATTRIBUTE-DEFINITION-STRING-REF>_d2325dd8-82f3-43d6-b50b-6eb92820fd55</ATTRIBUTE-DEFINITION-STRING-REF>
+              </DEFINITION>
+            </ATTRIBUTE-VALUE-STRING>
+            <ATTRIBUTE-VALUE-BOOLEAN THE-VALUE="false">
+              <DEFINITION>
+                <ATTRIBUTE-DEFINITION-BOOLEAN-REF>_d09cedc9-c249-4ff3-affb-e863dcb732b9</ATTRIBUTE-DEFINITION-BOOLEAN-REF>
+              </DEFINITION>
+            </ATTRIBUTE-VALUE-BOOLEAN>
+            <ATTRIBUTE-VALUE-XHTML>
+              <DEFINITION>
+                <ATTRIBUTE-DEFINITION-XHTML-REF>_05ee3f1d-6c0c-4e86-8bca-67cc5355db9c</ATTRIBUTE-DEFINITION-XHTML-REF>
+              </DEFINITION>
+              <THE-VALUE>
+                <div xmlns="http://www.w3.org/1999/xhtml"/>
+              </THE-VALUE>
+            </ATTRIBUTE-VALUE-XHTML>
+            <ATTRIBUTE-VALUE-ENUMERATION>
+              <VALUES>
+                <ENUM-VALUE-REF>_91651ec0-8832-4553-a201-cad184aa6fdb</ENUM-VALUE-REF>
+              </VALUES>
+              <DEFINITION>
+                <ATTRIBUTE-DEFINITION-ENUMERATION-REF>_03fdb162-e81a-4724-809e-2b660994e18f</ATTRIBUTE-DEFINITION-ENUMERATION-REF>
+              </DEFINITION>
+            </ATTRIBUTE-VALUE-ENUMERATION>
+            <ATTRIBUTE-VALUE-DATE THE-VALUE="2022-01-01T00:01:01.260Z">
+              <DEFINITION>
+                <ATTRIBUTE-DEFINITION-DATE-REF>_136696e2-ada5-407a-b65b-e271a96ab983</ATTRIBUTE-DEFINITION-DATE-REF>
+              </DEFINITION>
+            </ATTRIBUTE-VALUE-DATE>
+            <ATTRIBUTE-VALUE-STRING THE-VALUE="0848764">
+              <DEFINITION>
+                <ATTRIBUTE-DEFINITION-STRING-REF>_a450fa62-c5ac-43fc-9d08-c90432810d15</ATTRIBUTE-DEFINITION-STRING-REF>
+              </DEFINITION>
+            </ATTRIBUTE-VALUE-STRING>
+            <ATTRIBUTE-VALUE-STRING THE-VALUE="SE6DAW">
+              <DEFINITION>
+                <ATTRIBUTE-DEFINITION-STRING-REF>_977a9dd7-8efb-40dd-8456-6e1b548a27c1</ATTRIBUTE-DEFINITION-STRING-REF>
+              </DEFINITION>
+            </ATTRIBUTE-VALUE-STRING>
+            <ATTRIBUTE-VALUE-STRING THE-VALUE="VZ6KYN">
+              <DEFINITION>
+                <ATTRIBUTE-DEFINITION-STRING-REF>_318a9d27-fdd6-44ea-8117-5ecc5b6b422a</ATTRIBUTE-DEFINITION-STRING-REF>
+              </DEFINITION>
+            </ATTRIBUTE-VALUE-STRING>
+          </VALUES>
+        </SPEC-OBJECT>
+      </SPEC-OBJECTS>
+      <SPEC-RELATION-GROUPS>
+      </SPEC-RELATION-GROUPS>
+    </REQ-IF-CONTENT>
+  </CORE-CONTENT>
+</REQ-IF>
