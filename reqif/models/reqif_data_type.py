@@ -146,7 +146,8 @@ class ReqIFDataTypeDefinitionEnumeration:  # pylint: disable=too-many-instance-a
         self.values_map: Dict[str, str] = {}
         if values is not None:
             for value in values:
-                self.values_map[value.identifier] = value.key
+                # adapted by em AG
+                self.values_map[value.identifier] = value
         self.is_self_closed: bool = is_self_closed
 
     @staticmethod
