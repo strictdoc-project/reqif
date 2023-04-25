@@ -143,7 +143,7 @@ class ReqIFDataTypeDefinitionEnumeration:  # pylint: disable=too-many-instance-a
         self.long_name: Optional[str] = long_name
         self.multi_valued: Optional[bool] = multi_valued
         self.values: Optional[List[ReqIFEnumValue]] = values
-        self.values_map: Dict[str, str] = {}
+        self.values_map: Dict[str, ReqIFEnumValue] = {}
         if values is not None:
             for value in values:
                 self.values_map[value.identifier] = value
