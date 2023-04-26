@@ -2,14 +2,14 @@ import html
 from typing import Optional
 
 from reqif.helpers.lxml import lxml_is_self_closed_tag
-from reqif.models.reqif_spec_relation_type import ReqIFSpecRelationType
+from reqif.models.reqif_relation_group_type import ReqIFRelationGroupType
 
 
-class SpecRelationTypeParser:
+class RelationGroupTypeParser:
     @staticmethod
-    def parse(xml_spec_relation_type_xml) -> ReqIFSpecRelationType:
+    def parse(xml_spec_relation_type_xml) -> ReqIFRelationGroupType:
         assert (
-            xml_spec_relation_type_xml.tag == "SPEC-RELATION-TYPE"
+            xml_spec_relation_type_xml.tag == "RELATION-GROUP-TYPE"
         ), f"{xml_spec_relation_type_xml}"
         is_self_closed = lxml_is_self_closed_tag(xml_spec_relation_type_xml)
 
@@ -30,7 +30,7 @@ class SpecRelationTypeParser:
             else None
         )
 
-        return ReqIFSpecRelationType(
+        return ReqIFRelationGroupType(
             is_self_closed=is_self_closed,
             description=description,
             identifier=identifier,
@@ -39,7 +39,7 @@ class SpecRelationTypeParser:
         )
 
     @staticmethod
-    def unparse(spec_relation_type: ReqIFSpecRelationType):
+    def unparse(spec_relation_type: ReqIFRelationGroupType):
         output = "        <SPEC-RELATION-TYPE"
         if spec_relation_type.description is not None:
             output += f' DESC="{html.escape(spec_relation_type.description)}"'

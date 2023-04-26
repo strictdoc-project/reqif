@@ -1,7 +1,7 @@
 from typing import Optional
 
 
-class ReqIFSpecRelationType:
+class ReqIFRelationGroupType:
     def __init__(  # pylint: disable=too-many-arguments
         self,
         identifier: str,

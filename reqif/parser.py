@@ -19,6 +19,7 @@ from reqif.models.reqif_reqif_header import ReqIFReqIFHeader
 from reqif.models.reqif_spec_object import ReqIFSpecObject
 from reqif.models.reqif_spec_object_type import ReqIFSpecObjectType
 from reqif.models.reqif_spec_relation import ReqIFSpecRelation
+from reqif.models.reqif_relation_group_type import ReqIFRelationGroupType
 from reqif.models.reqif_spec_relation_type import ReqIFSpecRelationType
 from reqif.models.reqif_specification import (
     ReqIFSpecification,
@@ -237,6 +238,7 @@ class ReqIFParser:
                     ReqIFSpecObjectType,
                     ReqIFSpecRelationType,
                     ReqIFSpecificationType,
+                    ReqIFRelationGroupType,
                 ]
                 if xml_spec_object_type_xml.tag == "SPEC-OBJECT-TYPE":
                     spec_type = SpecObjectTypeParser.parse(
