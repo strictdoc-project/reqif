@@ -44,6 +44,9 @@ from reqif.parsers.spec_types.spec_relation_type_parser import (
 from reqif.parsers.spec_types.specification_type_parser import (
     SpecificationTypeParser,
 )
+from reqif.parsers.spec_types.relation_group_type_parser import (
+    RelationGroupTypeParser,
+)
 from reqif.parsers.specification_parser import (
     ReqIFSpecificationParser,
 )
@@ -248,7 +251,7 @@ class ReqIFParser:
                         xml_spec_object_type_xml
                     )
                 elif xml_spec_object_type_xml.tag == "RELATION-GROUP-TYPE":
-                    spec_type = SpecificationTypeParser.parse(
+                    spec_type = RelationGroupTypeParser.parse(
                         xml_spec_object_type_xml
                     )                    
                 else:
