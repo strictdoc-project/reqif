@@ -19,6 +19,7 @@ from reqif.models.reqif_reqif_header import ReqIFReqIFHeader
 from reqif.models.reqif_spec_object import ReqIFSpecObject
 from reqif.models.reqif_spec_object_type import ReqIFSpecObjectType
 from reqif.models.reqif_spec_relation import ReqIFSpecRelation
+from reqif.models.reqif_relation_group_type import ReqIFRelationGroupType
 from reqif.models.reqif_spec_relation_type import ReqIFSpecRelationType
 from reqif.models.reqif_specification import (
     ReqIFSpecification,
@@ -43,6 +44,9 @@ from reqif.parsers.spec_types.spec_relation_type_parser import (
 )
 from reqif.parsers.spec_types.specification_type_parser import (
     SpecificationTypeParser,
+)
+from reqif.parsers.spec_types.relation_group_type_parser import (
+    RelationGroupTypeParser,
 )
 from reqif.parsers.specification_parser import (
     ReqIFSpecificationParser,
@@ -234,6 +238,7 @@ class ReqIFParser:
                     ReqIFSpecObjectType,
                     ReqIFSpecRelationType,
                     ReqIFSpecificationType,
+                    ReqIFRelationGroupType,
                 ]
                 if xml_spec_object_type_xml.tag == "SPEC-OBJECT-TYPE":
                     spec_type = SpecObjectTypeParser.parse(
@@ -247,6 +252,10 @@ class ReqIFParser:
                     spec_type = SpecificationTypeParser.parse(
                         xml_spec_object_type_xml
                     )
+                elif xml_spec_object_type_xml.tag == "RELATION-GROUP-TYPE":
+                    spec_type = RelationGroupTypeParser.parse(
+                        xml_spec_object_type_xml
+                    )                    
                 else:
                     raise NotImplementedError(
                         xml_spec_object_type_xml
@@ -301,7 +310,8 @@ class ReqIFParser:
         if xml_spec_relation_groups is not None:
             spec_relation_groups = []
             if len(xml_spec_relation_groups) != 0:
-                raise NotImplementedError(xml_spec_relation_groups) from None
+                spec_relation_groups = []
+                #raise NotImplementedError(xml_spec_relation_groups) from None
 
         lookup = ReqIFObjectLookup(
             data_types_lookup=data_types_lookup,
