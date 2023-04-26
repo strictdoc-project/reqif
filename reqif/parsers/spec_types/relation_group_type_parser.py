@@ -17,9 +17,12 @@ class RelationGroupTypeParser:
         # Expecting all tools to implement IDENTIFIER and LONG-NAME.
         try:
             identifier = xml_attributes["IDENTIFIER"]
-            long_name = xml_attributes["LONG-NAME"]
         except Exception:
             raise NotImplementedError(xml_attributes) from None
+        
+        long_name: Optional[str] = (
+            xml_attributes["LONG-NAME"] if "LONG-NAME" in xml_attributes else None
+        )
 
         description: Optional[str] = (
             xml_attributes["DESC"] if "DESC" in xml_attributes else None
