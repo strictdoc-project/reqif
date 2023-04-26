@@ -247,6 +247,10 @@ class ReqIFParser:
                     spec_type = SpecificationTypeParser.parse(
                         xml_spec_object_type_xml
                     )
+                elif xml_spec_object_type_xml.tag == "RELATION-GROUP-TYPE":
+                    spec_type = SpecificationTypeParser.parse(
+                        xml_spec_object_type_xml
+                    )                    
                 else:
                     raise NotImplementedError(
                         xml_spec_object_type_xml
