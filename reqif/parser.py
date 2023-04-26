@@ -310,7 +310,8 @@ class ReqIFParser:
         if xml_spec_relation_groups is not None:
             spec_relation_groups = []
             if len(xml_spec_relation_groups) != 0:
-                raise NotImplementedError(xml_spec_relation_groups) from None
+                spec_relation_groups = []
+                #raise NotImplementedError(xml_spec_relation_groups) from None
 
         lookup = ReqIFObjectLookup(
             data_types_lookup=data_types_lookup,
