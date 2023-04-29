@@ -1,11 +1,8 @@
-from typing import List, Optional
+from typing import Dict, Optional
 
 from reqif.helpers.lxml import lxml_is_self_closed_tag
-from reqif.models.reqif_spec_object_type import (
-    SpecAttributeDefinition,
-)
 from reqif.models.reqif_specification_type import ReqIFSpecificationType
-from reqif.models.reqif_types import SpecObjectAttributeType
+from reqif.parsers.attribute_definition_parser import AttributeDefinitionParser
 
 
 class SpecificationTypeParser:
@@ -16,7 +13,7 @@ class SpecificationTypeParser:
         ), f"{specification_type_xml}"
         is_self_closed = lxml_is_self_closed_tag(specification_type_xml)
 
-        attribute_map = {}
+        attribute_map: Dict[str, str] = {}
 
         xml_attributes = specification_type_xml.attrib
         description: Optional[str] = (
@@ -37,122 +34,18 @@ class SpecificationTypeParser:
             else None
         )
 
-        xml_spec_attributes = specification_type_xml.find("SPEC-ATTRIBUTES")
-        attribute_definitions: Optional[List[SpecAttributeDefinition]] = None
-        if xml_spec_attributes is not None:
-            attribute_definitions = []
-            for attribute_definition in xml_spec_attributes:
-                long_name = attribute_definition.attrib["LONG-NAME"]
-                identifier = attribute_definition.attrib["IDENTIFIER"]
-                attribute_description: Optional[str] = (
-                    attribute_definition.attrib["DESC"]
-                    if "DESC" in attribute_definition.attrib
-                    else None
-                )
-                last_change = (
-                    attribute_definition.attrib["LAST-CHANGE"]
-                    if "LAST-CHANGE" in attribute_definition.attrib
-                    else None
-                )
-                editable = (
-                    attribute_definition.attrib["IS-EDITABLE"]
-                    if "IS-EDITABLE" in attribute_definition.attrib
-                    else None
-                )
-                if attribute_definition.tag == "ATTRIBUTE-DEFINITION-STRING":
-                    attribute_type = SpecObjectAttributeType.STRING
-                    try:
-                        datatype_definition = (
-                            attribute_definition.find("TYPE")
-                            .find("DATATYPE-DEFINITION-STRING-REF")
-                            .text
-                        )
-                    except Exception:
-                        raise NotImplementedError(
-                            attribute_definition
-                        ) from None
-
-                elif attribute_definition.tag == "ATTRIBUTE-DEFINITION-INTEGER":
-                    attribute_type = SpecObjectAttributeType.INTEGER
-                    try:
-                        datatype_definition = (
-                            attribute_definition.find("TYPE")
-                            .find("DATATYPE-DEFINITION-INTEGER-REF")
-                            .text
-                        )
-                    except Exception as exception:
-                        raise NotImplementedError(
-                            attribute_definition
-                        ) from exception
-                elif attribute_definition.tag == "ATTRIBUTE-DEFINITION-BOOLEAN":
-                    attribute_type = SpecObjectAttributeType.BOOLEAN
-                    try:
-                        datatype_definition = (
-                            attribute_definition.find("TYPE")
-                            .find("DATATYPE-DEFINITION-BOOLEAN-REF")
-                            .text
-                        )
-                    except Exception as exception:
-                        raise NotImplementedError(
-                            attribute_definition
-                        ) from exception
-
-                elif attribute_definition.tag == "ATTRIBUTE-DEFINITION-XHTML":
-                    attribute_type = SpecObjectAttributeType.XHTML
-                    try:
-                        datatype_definition = (
-                            attribute_definition.find("TYPE")
-                            .find("DATATYPE-DEFINITION-XHTML-REF")
-                            .text
-                        )
-                    except Exception as exception:
-                        raise NotImplementedError(
-                            attribute_definition
-                        ) from exception
-                elif (
-                    attribute_definition.tag
-                    == "ATTRIBUTE-DEFINITION-ENUMERATION"
-                ):
-                    attribute_type = SpecObjectAttributeType.ENUMERATION
-                    try:
-                        datatype_definition = (
-                            attribute_definition.find("TYPE")
-                            .find("DATATYPE-DEFINITION-ENUMERATION-REF")
-                            .text
-                        )
-                    except Exception as exception:
-                        raise NotImplementedError(
-                            attribute_definition
-                        ) from exception
-                elif attribute_definition.tag == "ATTRIBUTE-DEFINITION-DATE":
-                    attribute_type = SpecObjectAttributeType.DATE
-                    try:
-                        datatype_definition = (
-                            attribute_definition.find("TYPE")
-                            .find("DATATYPE-DEFINITION-DATE-REF")
-                            .text
-                        )
-                    except Exception as exception:
-                        raise NotImplementedError(
-                            attribute_definition
-                        ) from exception
-                else:
-                    raise NotImplementedError(attribute_definition) from None
-                attribute_definition = SpecAttributeDefinition(
-                    xml_node=attribute_definition,
-                    attribute_type=attribute_type,
-                    description=attribute_description,
-                    identifier=identifier,
-                    last_change=last_change,
-                    datatype_definition=datatype_definition,
-                    long_name=long_name,
-                    editable=editable,
-                    default_value_definition_ref=None,
-                    default_value=None,
-                    multi_valued=None,
-                )
-                attribute_definitions.append(attribute_definition)
-                attribute_map[identifier] = long_name
+        attribute_definitions = (
+            AttributeDefinitionParser.parse_attribute_definitions(
+                specification_type_xml
+            )
+        )
+        # FIXME: Double-check if this is really needed.
+        if attribute_definitions is not None:
+            for attribute_definition in attribute_definitions:
+                assert attribute_definition.long_name is not None
+                attribute_map[
+                    attribute_definition.identifier
+                ] = attribute_definition.long_name
 
         return ReqIFSpecificationType(
             description=description,

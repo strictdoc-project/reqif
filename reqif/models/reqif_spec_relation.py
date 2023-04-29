@@ -15,6 +15,7 @@ class ReqIFSpecRelation:  # pylint: disable=too-many-instance-attributes
         xml_node: Optional[Any] = None,
         description: Optional[str] = None,
         last_change: Optional[str] = None,
+        long_name: Optional[str] = None,
         values_attribute: Optional[SpecObjectAttribute] = None,
     ):
         self.identifier: str = identifier
@@ -25,4 +26,5 @@ class ReqIFSpecRelation:  # pylint: disable=too-many-instance-attributes
         self.xml_node: Optional[Any] = xml_node
         self.description: Optional[str] = description
         self.last_change: Optional[str] = last_change
+        self.long_name: Optional[str] = long_name
         self.values_attribute: Optional[SpecObjectAttribute] = values_attribute
