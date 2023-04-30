@@ -14,6 +14,7 @@ from reqif.models.error_handling import (
 )
 from reqif.models.reqif_core_content import ReqIFCoreContent
 from reqif.models.reqif_namespace_info import ReqIFNamespaceInfo
+from reqif.models.reqif_relation_group_type import ReqIFRelationGroupType
 from reqif.models.reqif_req_if_content import ReqIFReqIFContent
 from reqif.models.reqif_reqif_header import ReqIFReqIFHeader
 from reqif.models.reqif_spec_object import ReqIFSpecObject
@@ -29,11 +30,15 @@ from reqif.parsers.data_type_parser import (
     DataTypeParser,
 )
 from reqif.parsers.header_parser import ReqIFHeaderParser
+from reqif.parsers.relation_group_parser import ReqIFRelationGroupParser
 from reqif.parsers.spec_object_parser import (
     SpecObjectParser,
 )
 from reqif.parsers.spec_relation_parser import (
     SpecRelationParser,
+)
+from reqif.parsers.spec_types.relation_group_type_parser import (
+    RelationGroupTypeParser,
 )
 from reqif.parsers.spec_types.spec_object_type_parser import (
     SpecObjectTypeParser,
@@ -224,7 +229,16 @@ class ReqIFParser:
                 data_types.append(data_type)
                 data_types_lookup[data_type.identifier] = data_type
 
-        spec_types = None
+        spec_types: Optional[
+            List[
+                Union[
+                    ReqIFSpecObjectType,
+                    ReqIFSpecRelationType,
+                    ReqIFSpecificationType,
+                    ReqIFRelationGroupType,
+                ]
+            ]
+        ] = None
         spec_types_lookup: Dict = {}
         xml_spec_types = xml_req_if_content.find("SPEC-TYPES")
         if xml_spec_types is not None:
@@ -234,6 +248,7 @@ class ReqIFParser:
                     ReqIFSpecObjectType,
                     ReqIFSpecRelationType,
                     ReqIFSpecificationType,
+                    ReqIFRelationGroupType,
                 ]
                 if xml_spec_object_type_xml.tag == "SPEC-OBJECT-TYPE":
                     spec_type = SpecObjectTypeParser.parse(
@@ -245,6 +260,10 @@ class ReqIFParser:
                     )
                 elif xml_spec_object_type_xml.tag == "SPECIFICATION-TYPE":
                     spec_type = SpecificationTypeParser.parse(
+                        xml_spec_object_type_xml
+                    )
+                elif xml_spec_object_type_xml.tag == "RELATION-GROUP-TYPE":
+                    spec_type = RelationGroupTypeParser.parse(
                         xml_spec_object_type_xml
                     )
                 else:
@@ -301,7 +320,12 @@ class ReqIFParser:
         if xml_spec_relation_groups is not None:
             spec_relation_groups = []
             if len(xml_spec_relation_groups) != 0:
-                raise NotImplementedError(xml_spec_relation_groups) from None
+                spec_relation_groups = []
+                for xml_relation_group in xml_spec_relation_groups:
+                    relation_group = ReqIFRelationGroupParser.parse(
+                        xml_relation_group
+                    )
+                    spec_relation_groups.append(relation_group)
 
         lookup = ReqIFObjectLookup(
             data_types_lookup=data_types_lookup,

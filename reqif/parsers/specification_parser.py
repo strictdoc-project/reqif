@@ -1,18 +1,12 @@
 from typing import List, Optional
 
-from reqif.helpers.lxml import lxml_stringify_namespaced_children
 from reqif.models.reqif_spec_object import SpecObjectAttribute
 from reqif.models.reqif_specification import (
     ReqIFSpecification,
 )
-from reqif.models.reqif_types import SpecObjectAttributeType
+from reqif.parsers.attribute_value_parser import AttributeValueParser
 from reqif.parsers.spec_hierarchy_parser import (
     ReqIFSpecHierarchyParser,
-)
-from reqif.parsers.spec_object_parser import (
-    ATTRIBUTE_DATE_TEMPLATE,
-    ATTRIBUTE_STRING_TEMPLATE,
-    ATTRIBUTE_XHTML_TEMPLATE,
 )
 
 
@@ -66,51 +60,11 @@ class ReqIFSpecificationParser:
                 spec_hierarchy_xml = ReqIFSpecHierarchyParser.parse(child_xml)
                 children.append(spec_hierarchy_xml)
 
-        values: Optional[List[SpecObjectAttribute]] = None
-        xml_values = specification_xml.find("VALUES")
-        if xml_values is not None:
-            values = []
-            for xml_value in xml_values:
-                xml_attribute = xml_value
-                if xml_attribute.tag == "ATTRIBUTE-VALUE-STRING":
-                    attribute_value = xml_attribute.attrib["THE-VALUE"]
-                    definition_ref = xml_attribute[0][0].text
-                    values_attribute = SpecObjectAttribute(
-                        xml_node=xml_attribute,
-                        attribute_type=SpecObjectAttributeType.STRING,
-                        definition_ref=definition_ref,
-                        value=attribute_value,
-                    )
-                    values.append(values_attribute)
-                elif xml_attribute.tag == "ATTRIBUTE-VALUE-DATE":
-                    attribute_value = xml_attribute.attrib["THE-VALUE"]
-                    definition_ref = xml_attribute[0][0].text
-                    values_attribute = SpecObjectAttribute(
-                        xml_node=xml_attribute,
-                        attribute_type=SpecObjectAttributeType.DATE,
-                        definition_ref=definition_ref,
-                        value=attribute_value,
-                    )
-                    values.append(values_attribute)
-                elif xml_attribute.tag == "ATTRIBUTE-VALUE-XHTML":
-                    the_value = xml_attribute.find("THE-VALUE")
-                    attribute_value = lxml_stringify_namespaced_children(
-                        the_value
-                    )
-                    attribute_name = (
-                        xml_attribute.find("DEFINITION")
-                        .find("ATTRIBUTE-DEFINITION-XHTML-REF")
-                        .text
-                    )
-                    values_attribute = SpecObjectAttribute(
-                        xml_node=xml_attribute,
-                        attribute_type=SpecObjectAttributeType.XHTML,
-                        definition_ref=attribute_name,
-                        value=attribute_value,
-                    )
-                    values.append(values_attribute)
-                else:
-                    raise NotImplementedError(xml_attribute)
+        xml_spec_values = specification_xml.find("VALUES")
+        values: Optional[
+            List[SpecObjectAttribute]
+        ] = AttributeValueParser.parse_attribute_values(xml_spec_values)
+
         return ReqIFSpecification(
             xml_node=specification_xml,
             description=description,
@@ -164,42 +118,9 @@ class ReqIFSpecificationParser:
                     )
                     # fmt: on
             elif tag == "VALUES":
-                xml_values_attributes = specification.values
-                if xml_values_attributes is not None:
-                    if len(xml_values_attributes) == 0:
-                        output += "          <VALUES/>\n"
-                    else:
-                        output += "          <VALUES>\n"
-                        for xml_attribute in xml_values_attributes:
-                            if (
-                                xml_attribute.attribute_type
-                                == SpecObjectAttributeType.DATE
-                            ):
-                                output += ATTRIBUTE_DATE_TEMPLATE.format(
-                                    definition_ref=xml_attribute.definition_ref,
-                                    value=xml_attribute.value,
-                                )
-                            elif (
-                                xml_attribute.attribute_type
-                                == SpecObjectAttributeType.XHTML
-                            ):
-                                output += ATTRIBUTE_XHTML_TEMPLATE.format(
-                                    definition_ref=xml_attribute.definition_ref,
-                                    value=xml_attribute.value,
-                                )
-                            elif (
-                                xml_attribute.attribute_type
-                                == SpecObjectAttributeType.STRING
-                            ):
-                                output += ATTRIBUTE_STRING_TEMPLATE.format(
-                                    definition_ref=xml_attribute.definition_ref,
-                                    value=xml_attribute.value,
-                                )
-                            else:
-                                raise NotImplementedError(
-                                    xml_attribute, xml_attribute.attribute_type
-                                )
-                        output += "          </VALUES>\n"
+                output += AttributeValueParser.unparse_attribute_values(
+                    specification.values
+                )
         output += "        </SPECIFICATION>\n"
 
         return output
