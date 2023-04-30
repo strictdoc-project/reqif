@@ -58,7 +58,10 @@ def test_02_enumeration_type():
     assert isinstance(data_type, ReqIFDataTypeDefinitionEnumeration)
 
     assert data_type.identifier == "NODE_TYPE"
-    assert data_type.values_map == {
-        "NODE_TYPE_SECTION": "1",
-        "NODE_TYPE_REQUIREMENT": "2",
-    }
+    assert len(data_type.values_map) == 2
+
+    value_1 = data_type.values_map["NODE_TYPE_SECTION"]
+    value_2 = data_type.values_map["NODE_TYPE_REQUIREMENT"]
+
+    assert value_1.key == "1"
+    assert value_2.key == "2"
