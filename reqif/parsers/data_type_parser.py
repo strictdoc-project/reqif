@@ -2,7 +2,7 @@ from typing import List, Optional, Union
 
 from lxml import etree
 
-from reqif.helpers.lxml import lxml_is_self_closed_tag
+from reqif.helpers.lxml import lxml_escape_for_html, lxml_is_self_closed_tag
 from reqif.models.reqif_data_type import (
     ReqIFDataTypeDefinitionBoolean,
     ReqIFDataTypeDefinitionDateIdentifier,
@@ -192,13 +192,19 @@ class DataTypeParser:
     ) -> str:
         if isinstance(data_type_definition, ReqIFDataTypeDefinitionString):
             output = "        <DATATYPE-DEFINITION-STRING"
-            if data_type_definition.description:
-                output += f' DESC="{data_type_definition.description}"'
+            if data_type_definition.description is not None:
+                escaped_description = lxml_escape_for_html(
+                    data_type_definition.description
+                )
+                output += f' DESC="{escaped_description}"'
             output += f' IDENTIFIER="{data_type_definition.identifier}"'
             if data_type_definition.last_change:
                 output += f' LAST-CHANGE="{data_type_definition.last_change}"'
-            if data_type_definition.long_name:
-                output += f' LONG-NAME="{data_type_definition.long_name}"'
+            if data_type_definition.long_name is not None:
+                escaped_long_name = lxml_escape_for_html(
+                    data_type_definition.long_name
+                )
+                output += f' LONG-NAME="{escaped_long_name}"'
             if data_type_definition.max_length:
                 output += f' MAX-LENGTH="{data_type_definition.max_length}"'
             if data_type_definition.is_self_closed:
@@ -209,14 +215,19 @@ class DataTypeParser:
             return output
         if isinstance(data_type_definition, ReqIFDataTypeDefinitionBoolean):
             output = "        <DATATYPE-DEFINITION-BOOLEAN"
-            if data_type_definition.description:
-                output += f' DESC="{data_type_definition.description}"'
-
+            if data_type_definition.description is not None:
+                escaped_description = lxml_escape_for_html(
+                    data_type_definition.description
+                )
+                output += f' DESC="{escaped_description}"'
             output += f' IDENTIFIER="{data_type_definition.identifier}"'
             if data_type_definition.last_change:
                 output += f' LAST-CHANGE="{data_type_definition.last_change}"'
-            if data_type_definition.long_name:
-                output += f' LONG-NAME="{data_type_definition.long_name}"'
+            if data_type_definition.long_name is not None:
+                escaped_long_name = lxml_escape_for_html(
+                    data_type_definition.long_name
+                )
+                output += f' LONG-NAME="{escaped_long_name}"'
             if data_type_definition.is_self_closed:
                 output += "/>\n"
             else:
@@ -225,8 +236,11 @@ class DataTypeParser:
             return output
         if isinstance(data_type_definition, ReqIFDataTypeDefinitionInteger):
             output = "        <DATATYPE-DEFINITION-INTEGER"
-            if data_type_definition.description:
-                output += f' DESC="{data_type_definition.description}"'
+            if data_type_definition.description is not None:
+                escaped_description = lxml_escape_for_html(
+                    data_type_definition.description
+                )
+                output += f' DESC="{escaped_description}"'
             output += f' IDENTIFIER="{data_type_definition.identifier}"'
             if data_type_definition.last_change:
                 output += f' LAST-CHANGE="{data_type_definition.last_change}"'
@@ -248,7 +262,10 @@ class DataTypeParser:
                 output += f' ACCURACY="{data_type_definition.accuracy}"'
 
             if data_type_definition.description is not None:
-                output += f' DESC="{data_type_definition.description}"'
+                escaped_description = lxml_escape_for_html(
+                    data_type_definition.description
+                )
+                output += f' DESC="{escaped_description}"'
 
             output += f' IDENTIFIER="{data_type_definition.identifier}"'
 
@@ -266,14 +283,19 @@ class DataTypeParser:
             return output
         if isinstance(data_type_definition, ReqIFDataTypeDefinitionEnumeration):
             output = "        <DATATYPE-DEFINITION-ENUMERATION"
-            if data_type_definition.description:
-                output += f' DESC="{data_type_definition.description}"'
-
+            if data_type_definition.description is not None:
+                escaped_description = lxml_escape_for_html(
+                    data_type_definition.description
+                )
+                output += f' DESC="{escaped_description}"'
             output += f' IDENTIFIER="{data_type_definition.identifier}"'
             if data_type_definition.last_change:
                 output += f' LAST-CHANGE="{data_type_definition.last_change}"'
-            if data_type_definition.long_name:
-                output += f' LONG-NAME="{data_type_definition.long_name}"'
+            if data_type_definition.long_name is not None:
+                escaped_long_name = lxml_escape_for_html(
+                    data_type_definition.long_name
+                )
+                output += f' LONG-NAME="{escaped_long_name}"'
             if data_type_definition.is_self_closed:
                 output += "/>\n"
             else:
@@ -290,7 +312,10 @@ class DataTypeParser:
                     if value.last_change is not None:
                         output += f' LAST-CHANGE="{value.last_change}"'
                     if value.long_name is not None:
-                        output += f' LONG-NAME="{value.long_name}"'
+                        escaped_long_name = lxml_escape_for_html(
+                            value.long_name
+                        )
+                        output += f' LONG-NAME="{escaped_long_name}"'
                     output += ">\n"
 
                     output += "              <PROPERTIES>\n"
@@ -313,8 +338,11 @@ class DataTypeParser:
             data_type_definition, ReqIFDataTypeDefinitionDateIdentifier
         ):
             output = "        <DATATYPE-DEFINITION-DATE"
-            if data_type_definition.description:
-                output += f' DESC="{data_type_definition.description}"'
+            if data_type_definition.description is not None:
+                escaped_description = lxml_escape_for_html(
+                    data_type_definition.description
+                )
+                output += f' DESC="{escaped_description}"'
 
             output += f' IDENTIFIER="{data_type_definition.identifier}"'
             if data_type_definition.last_change:
@@ -329,14 +357,20 @@ class DataTypeParser:
             return output
         if isinstance(data_type_definition, ReqIFDataTypeDefinitionXHTML):
             output = "        <DATATYPE-DEFINITION-XHTML"
-            if data_type_definition.description:
-                output += f' DESC="{data_type_definition.description}"'
+            if data_type_definition.description is not None:
+                escaped_description = lxml_escape_for_html(
+                    data_type_definition.description
+                )
+                output += f' DESC="{escaped_description}"'
 
             output += f' IDENTIFIER="{data_type_definition.identifier}"'
             if data_type_definition.last_change:
                 output += f' LAST-CHANGE="{data_type_definition.last_change}"'
-            if data_type_definition.long_name:
-                output += f' LONG-NAME="{data_type_definition.long_name}"'
+            if data_type_definition.long_name is not None:
+                escaped_long_name = lxml_escape_for_html(
+                    data_type_definition.long_name
+                )
+                output += f' LONG-NAME="{escaped_long_name}"'
             if data_type_definition.is_self_closed:
                 output += "/>\n"
             else:

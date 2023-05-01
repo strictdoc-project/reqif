@@ -1,6 +1,7 @@
 from typing import List, Optional, Union
 
 from reqif.helpers.lxml import (
+    lxml_escape_for_html,
     lxml_is_self_closed_tag,
     lxml_stringify_namespaced_children,
 )
@@ -364,15 +365,16 @@ class AttributeDefinitionParser:
         output = ""
         output += f"            <{attribute.attribute_type.get_spec_type_tag()}"
         if attribute.description is not None:
-            output += f' DESC="{attribute.description}"'
+            output += f' DESC="{lxml_escape_for_html(attribute.description)}"'
         output += f' IDENTIFIER="{attribute.identifier}"'
         if attribute.editable is not None:
             editable_value = "true" if attribute.editable else "false"
             output += f' IS-EDITABLE="{editable_value}"'
         if attribute.last_change:
             output += f' LAST-CHANGE="{attribute.last_change}"'
-        if attribute.long_name:
-            output += f' LONG-NAME="{attribute.long_name}"'
+        if attribute.long_name is not None:
+            escaped_long_name = lxml_escape_for_html(attribute.long_name)
+            output += f' LONG-NAME="{escaped_long_name}"'
         if attribute.multi_valued is not None:
             multi_valued_value = "true" if attribute.multi_valued else "false"
             output += f' MULTI-VALUED="{multi_valued_value}"'
