@@ -181,13 +181,27 @@ def check(_):
 
 
 @task
-def release(context, password=None):
-    user_password = f"-ustanislaw -p{password}" if password is not None else ""
+def release(context, username=None, password=None):
+    """
+    A release can be made to PyPI or test package index (TestPyPI):
+    https://pypi.org/project/strictdoc/
+    https://test.pypi.org/project/strictdoc/
+    """
+
+    # When a username is provided, we also need password, and then we don't use
+    # tokens set up on a local machine.
+    assert username is None or password is not None
+
+    repository_argument_or_none = (
+        "" if username else ("--repository reqif_release")
+    )
+    user_password = f"-u{username} -p{password}" if username is not None else ""
     command = f"""
         rm -rfv dist/ &&
         python3 -m build &&
             twine check dist/* &&
             twine upload dist/reqif-*.tar.gz
+                {repository_argument_or_none}
                 {user_password}
     """
     run_invoke_cmd(context, command)
