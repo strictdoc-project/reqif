@@ -1,5 +1,6 @@
 from typing import List, Optional
 
+from reqif.helpers.lxml import lxml_escape_for_html
 from reqif.models.reqif_spec_object import SpecObjectAttribute
 from reqif.models.reqif_specification import (
     ReqIFSpecification,
@@ -82,14 +83,19 @@ class ReqIFSpecificationParser:
 
         output += "        <SPECIFICATION"
         if specification.description is not None:
-            output += f' DESC="{specification.description}"'
+            escaped_description = lxml_escape_for_html(
+                specification.description
+            )
+            output += f' DESC="{escaped_description}"'
 
         output += f' IDENTIFIER="{specification.identifier}"'
 
         if specification.last_change is not None:
             output += f' LAST-CHANGE="{specification.last_change}"'
-        if specification.long_name:
-            output += f' LONG-NAME="{specification.long_name}"'
+        if specification.long_name is not None:
+            escaped_long_name = lxml_escape_for_html(specification.long_name)
+            output += f' LONG-NAME="{escaped_long_name}"'
+
         output += ">\n"
 
         if specification.xml_node is not None:

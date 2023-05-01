@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<REQ-IF xmlns="http://www.omg.org/spec/ReqIF/20110401/reqif.xsd" xmlns:reqif-common="http://www.prostep.org/reqif" xmlns:rm-reqif="http://www.ibm.com/rm/reqif" xmlns:reqif="http://www.omg.org/spec/ReqIF/20110401/reqif.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:rm="http://www.ibm.com/rm" xmlns:xhtml="http://www.w3.org/1999/xhtml" xsi:schemaLocation="http://www.omg.org/spec/ReqIF/20110401/reqif.xsd reqif.xsd">
+  <THE-HEADER>
+    <REQ-IF-HEADER IDENTIFIER="_c9f16ebe-c3b5-4966-a5f8-b1090d3a6c2d">
+      <CREATION-TIME>2022-01-01T00:01:01.260Z</CREATION-TIME>
+      <REPOSITORY-ID/>
+      <REQ-IF-TOOL-ID>IBM</REQ-IF-TOOL-ID>
+      <REQ-IF-VERSION>1.0</REQ-IF-VERSION>
+      <SOURCE-TOOL-ID>IBM</SOURCE-TOOL-ID>
+      <TITLE>IBM Engineering Requirements</TITLE>
+    </REQ-IF-HEADER>
+  </THE-HEADER>
+  <CORE-CONTENT>
+    <REQ-IF-CONTENT>
+      <DATATYPES>
+        <DATATYPE-DEFINITION-ENUMERATION DESC="" IDENTIFIER="_ff5c4c39-157b-4b9f-b3bd-665c5d34dcd1" LAST-CHANGE="2022-01-01T01:01:01.260Z" LONG-NAME="Free text. &quot;Comments&quot;">
+          <SPECIFIED-VALUES>
+            <ENUM-VALUE IDENTIFIER="_1a8e8df5-197d-4052-921e-e01efd761803" LAST-CHANGE="2022-01-01T01:01:01.260Z" LONG-NAME="Free text. &quot;Comments&quot;">
+              <PROPERTIES>
+                <EMBEDDED-VALUE KEY="0" OTHER-CONTENT=""/>
+              </PROPERTIES>
+            </ENUM-VALUE>
+          </SPECIFIED-VALUES>
+        </DATATYPE-DEFINITION-ENUMERATION>
+      </DATATYPES>
+      <SPEC-TYPES>
+        <SPEC-OBJECT-TYPE DESC="Free text. &quot;Comments&quot;" IDENTIFIER="_4f317bbb-186b-411f-9167-14b80b64fc75" LAST-CHANGE="2022-01-01T01:01:01.260Z" LONG-NAME="Free text. &quot;Comments&quot;">
+          <SPEC-ATTRIBUTES>
+            <ATTRIBUTE-DEFINITION-STRING DESC="Free text. &quot;Comments&quot;" IDENTIFIER="_fb94d121-dc5a-4624-b1ef-c9d27fe7ede5" IS-EDITABLE="true" LAST-CHANGE="2022-01-01T01:01:01.260Z" LONG-NAME="Free text. &quot;Comments&quot;">
+              <TYPE>
+                <DATATYPE-DEFINITION-STRING-REF>_92c4bf49-17fc-4fde-8994-a246546c6bc5</DATATYPE-DEFINITION-STRING-REF>
+              </TYPE>
+            </ATTRIBUTE-DEFINITION-STRING>
+          </SPEC-ATTRIBUTES>
+        </SPEC-OBJECT-TYPE>
+      </SPEC-TYPES>
+      <SPEC-OBJECTS>
+        <SPEC-OBJECT IDENTIFIER="_f05294de-d4cf-455d-9307-c130376dfd44" LAST-CHANGE="2022-01-01T01:01:01.260Z">
+          <TYPE>
+            <SPEC-OBJECT-TYPE-REF>_ee420d2b-599c-49ea-a298-6a732ece21eb</SPEC-OBJECT-TYPE-REF>
+          </TYPE>
+          <VALUES>
+            <ATTRIBUTE-VALUE-XHTML>
+              <DEFINITION>
+                <ATTRIBUTE-DEFINITION-XHTML-REF>_3ca983d9-5ec5-4752-898f-37ab52beafd0</ATTRIBUTE-DEFINITION-XHTML-REF>
+              </DEFINITION>
+              <THE-VALUE>
+                <div xmlns="http://www.w3.org/1999/xhtml">&lt;A Header&gt; Subtitle</div>
+              </THE-VALUE>
+            </ATTRIBUTE-VALUE-XHTML>
+          </VALUES>
+        </SPEC-OBJECT>
+      </SPEC-OBJECTS>
+      <SPEC-RELATIONS>
+      </SPEC-RELATIONS>
+      <SPECIFICATIONS>
+        <SPECIFICATION IDENTIFIER="_3a15c15b-8af5-46d8-b844-c83695bba33e" LAST-CHANGE="2022-01-01T01:01:01.260Z" LONG-NAME="Free text. &quot;Comments&quot;">
+          <TYPE>
+            <SPECIFICATION-TYPE-REF>_04650f03-0093-48ec-bf6a-bc0108a415a3</SPECIFICATION-TYPE-REF>
+          </TYPE>
+          <VALUES>
+            <ATTRIBUTE-VALUE-STRING THE-VALUE="Free text. &quot;Comments&quot;">
+              <DEFINITION>
+                <ATTRIBUTE-DEFINITION-STRING-REF>_2dfa99dd-619f-4f4c-9a2d-c92caa4a33df</ATTRIBUTE-DEFINITION-STRING-REF>
+              </DEFINITION>
+            </ATTRIBUTE-VALUE-STRING>
+          </VALUES>
+          <CHILDREN>
+            <SPEC-HIERARCHY IDENTIFIER="_93c9cabf-3f57-4122-80a7-03e2f1fe8f7c" LAST-CHANGE="2022-01-01T01:01:01.260Z">
+              <OBJECT>
+                <SPEC-OBJECT-REF>_82602fb9-8243-4753-a395-2714b4082b4c</SPEC-OBJECT-REF>
+              </OBJECT>
+              <CHILDREN>
+                <SPEC-HIERARCHY IDENTIFIER="_7afe693a-108d-45a4-be16-5743f07a4e22" LAST-CHANGE="2022-01-01T01:01:01.260Z">
+                  <OBJECT>
+                    <SPEC-OBJECT-REF>_2ce107e5-6bf2-4c45-b6b0-a097a4f279d2</SPEC-OBJECT-REF>
+                  </OBJECT>
+                </SPEC-HIERARCHY>
+              </CHILDREN>
+            </SPEC-HIERARCHY>
+          </CHILDREN>
+        </SPECIFICATION>
+      </SPECIFICATIONS>
+      <SPEC-RELATION-GROUPS>
+      </SPEC-RELATION-GROUPS>
+    </REQ-IF-CONTENT>
+  </CORE-CONTENT>
+</REQ-IF>

@@ -1,6 +1,6 @@
-import html
 from typing import Optional
 
+from reqif.helpers.lxml import lxml_escape_for_html
 from reqif.models.reqif_spec_object_type import (
     ReqIFSpecObjectType,
 )
@@ -53,12 +53,13 @@ class SpecObjectTypeParser:
 
         output += "        <SPEC-OBJECT-TYPE"
         if spec_type.description is not None:
-            output += f' DESC="{html.escape(spec_type.description)}"'
+            output += f' DESC="{lxml_escape_for_html(spec_type.description)}"'
         output += f' IDENTIFIER="{spec_type.identifier}"'
         if spec_type.last_change is not None:
             output += f' LAST-CHANGE="{spec_type.last_change}"'
         if spec_type.long_name is not None:
-            output += f' LONG-NAME="{spec_type.long_name}"'
+            escaped_long_name = lxml_escape_for_html(spec_type.long_name)
+            output += f' LONG-NAME="{escaped_long_name}"'
         output += ">\n"
 
         if spec_type.attribute_definitions is not None:
