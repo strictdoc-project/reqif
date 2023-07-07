@@ -9,13 +9,13 @@ try:
         raise FileNotFoundError(ROOT_PATH)
     sys.path.append(ROOT_PATH)
 
-    from reqif.cli.cli_arg_parser import create_reqif_args_parser
-    from reqif.commands.anonymize.anonymize import AnonymizeCommand
-    from reqif.commands.dump.dump import DumpCommand
-    from reqif.commands.format.format import FormatCommand
-    from reqif.commands.passthrough.passthrough import PassthroughCommand
-    from reqif.commands.validate.validate import ValidateCommand
-    from reqif.commands.version.version_command import VersionCommand
+    from .cli_arg_parser import create_reqif_args_parser
+    from ..commands.anonymize.anonymize import AnonymizeCommand
+    from ..commands.dump.dump import DumpCommand
+    from ..commands.format.format import FormatCommand
+    from ..commands.passthrough.passthrough import PassthroughCommand
+    from ..commands.validate.validate import ValidateCommand
+    from ..commands.version.version_command import VersionCommand
 
 except FileNotFoundError:
     print("error: could not locate reqif's root folder.")  # noqa: T201

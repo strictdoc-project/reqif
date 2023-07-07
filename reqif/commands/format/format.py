@@ -1,6 +1,6 @@
 from lxml import etree
 
-from reqif.cli.cli_arg_parser import FormatCommandConfig
+from ...cli.cli_arg_parser import FormatCommandConfig
 
 
 class FormatCommand:

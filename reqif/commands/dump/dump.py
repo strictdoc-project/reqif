@@ -1,7 +1,7 @@
 from jinja2 import Environment, PackageLoader, StrictUndefined
 
-from reqif.cli.cli_arg_parser import DumpCommandConfig
-from reqif.parser import ReqIFParser
+from ...cli.cli_arg_parser import DumpCommandConfig
+from ...parser import ReqIFParser
 
 
 class DumpCommand:

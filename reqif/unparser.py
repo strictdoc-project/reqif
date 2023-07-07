@@ -1,29 +1,29 @@
 from typing import List
 
-from reqif.models.reqif_namespace_info import ReqIFNamespaceInfo
-from reqif.models.reqif_relation_group_type import ReqIFRelationGroupType
-from reqif.models.reqif_spec_object_type import ReqIFSpecObjectType
-from reqif.models.reqif_spec_relation_type import ReqIFSpecRelationType
-from reqif.models.reqif_specification_type import ReqIFSpecificationType
-from reqif.parsers.data_type_parser import DataTypeParser
-from reqif.parsers.header_parser import ReqIFHeaderParser
-from reqif.parsers.relation_group_parser import ReqIFRelationGroupParser
-from reqif.parsers.spec_object_parser import SpecObjectParser
-from reqif.parsers.spec_relation_parser import SpecRelationParser
-from reqif.parsers.spec_types.relation_group_type_parser import (
+from .models.reqif_namespace_info import ReqIFNamespaceInfo
+from .models.reqif_relation_group_type import ReqIFRelationGroupType
+from .models.reqif_spec_object_type import ReqIFSpecObjectType
+from .models.reqif_spec_relation_type import ReqIFSpecRelationType
+from .models.reqif_specification_type import ReqIFSpecificationType
+from .parsers.data_type_parser import DataTypeParser
+from .parsers.header_parser import ReqIFHeaderParser
+from .parsers.relation_group_parser import ReqIFRelationGroupParser
+from .parsers.spec_object_parser import SpecObjectParser
+from .parsers.spec_relation_parser import SpecRelationParser
+from .parsers.spec_types.relation_group_type_parser import (
     RelationGroupTypeParser,
 )
-from reqif.parsers.spec_types.spec_object_type_parser import (
+from .parsers.spec_types.spec_object_type_parser import (
     SpecObjectTypeParser,
 )
-from reqif.parsers.spec_types.spec_relation_type_parser import (
+from .parsers.spec_types.spec_relation_type_parser import (
     SpecRelationTypeParser,
 )
-from reqif.parsers.spec_types.specification_type_parser import (
+from .parsers.spec_types.specification_type_parser import (
     SpecificationTypeParser,
 )
-from reqif.parsers.specification_parser import ReqIFSpecificationParser
-from reqif.reqif_bundle import ReqIFBundle
+from .parsers.specification_parser import ReqIFSpecificationParser
+from .reqif_bundle import ReqIFBundle
 
 
 class ReqIFUnparser:

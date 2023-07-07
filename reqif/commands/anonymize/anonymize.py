@@ -7,12 +7,12 @@ from typing import List
 from lxml import etree
 from lxml.etree import tostring
 
-from reqif.cli.cli_arg_parser import AnonimizeCommandConfig
-from reqif.helpers.lxml import lxml_stringify_namespaced_children
-from reqif.models.error_handling import ReqIFXMLParsingError
-from reqif.models.reqif_spec_object import ReqIFSpecObject, SpecObjectAttribute
-from reqif.models.reqif_specification import ReqIFSpecification
-from reqif.models.reqif_types import SpecObjectAttributeType
+from ...cli.cli_arg_parser import AnonimizeCommandConfig
+from ...helpers.lxml import lxml_stringify_namespaced_children
+from ...models.error_handling import ReqIFXMLParsingError
+from ...models.reqif_spec_object import ReqIFSpecObject, SpecObjectAttribute
+from ...models.reqif_specification import ReqIFSpecification
+from ...models.reqif_types import SpecObjectAttributeType
 
 ANONYMIZED = "Anonymized"
 

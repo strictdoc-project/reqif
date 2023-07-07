@@ -2,8 +2,8 @@ import os
 import sys
 from typing import List
 
-from reqif.cli.cli_arg_parser import ValidateCommandConfig
-from reqif.models.error_handling import (
+from ...cli.cli_arg_parser import ValidateCommandConfig
+from ...models.error_handling import (
     ReqIFGeneralSemanticError,
     ReqIFSchemaError,
     ReqIFSemanticError,
@@ -11,10 +11,10 @@ from reqif.models.error_handling import (
     ReqIFSpecRelationMissingSpecObjectException,
     ReqIFXMLParsingError,
 )
-from reqif.models.reqif_spec_relation import ReqIFSpecRelation
-from reqif.models.reqif_specification import ReqIFSpecification
-from reqif.parser import ReqIFParser
-from reqif.reqif_bundle import ReqIFBundle
+from ...models.reqif_spec_relation import ReqIFSpecRelation
+from ...models.reqif_specification import ReqIFSpecification
+from ...parser import ReqIFParser
+from ...reqif_bundle import ReqIFBundle
 
 
 class ReqIFErrorBundle:

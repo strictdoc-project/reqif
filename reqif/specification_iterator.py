@@ -1,7 +1,7 @@
 import collections
 from typing import Deque, Generator
 
-from reqif.models.reqif_spec_hierarchy import ReqIFSpecHierarchy
+from .models.reqif_spec_hierarchy import ReqIFSpecHierarchy
 
 
 class SpecificationIterator:

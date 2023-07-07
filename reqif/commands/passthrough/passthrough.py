@@ -1,9 +1,9 @@
 import os
 import sys
 
-from reqif.cli.cli_arg_parser import PassthroughCommandConfig
-from reqif.parser import ReqIFParser
-from reqif.unparser import ReqIFUnparser
+from ...cli.cli_arg_parser import PassthroughCommandConfig
+from ...parser import ReqIFParser
+from ...unparser import ReqIFUnparser
 
 
 class PassthroughCommand:
