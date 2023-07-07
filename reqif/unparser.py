@@ -1,4 +1,6 @@
+import io
 from typing import List
+from zipfile import ZIP_DEFLATED, ZipFile
 
 from reqif.models.reqif_namespace_info import ReqIFNamespaceInfo
 from reqif.models.reqif_relation_group_type import ReqIFRelationGroupType
@@ -23,7 +25,7 @@ from reqif.parsers.spec_types.specification_type_parser import (
     SpecificationTypeParser,
 )
 from reqif.parsers.specification_parser import ReqIFSpecificationParser
-from reqif.reqif_bundle import ReqIFBundle
+from reqif.reqif_bundle import ReqIFBundle, ReqIFZBundle
 
 
 class ReqIFUnparser:
@@ -164,3 +166,21 @@ class ReqIFUnparser:
 
         xml_output += ">\n"
         return xml_output
+
+
+class ReqIFZUnparser:
+    @staticmethod
+    def unparse(bundle: ReqIFZBundle) -> bytes:
+        zip_buffer = io.BytesIO()
+
+        with ZipFile(zip_buffer, "a", ZIP_DEFLATED) as zip_file:
+            # First write, the ReqIF files themselves.
+            for filename_, reqif_bundle_ in bundle.reqif_bundles.items():
+                reqif_string_ = ReqIFUnparser.unparse(reqif_bundle_)
+                zip_file.writestr(filename_, reqif_string_)
+
+            # Then write the attachments.
+            for attachment, attachment_bytes in bundle.attachments.items():
+                zip_file.writestr(attachment, attachment_bytes)
+
+        return zip_buffer.getvalue()
