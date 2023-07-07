@@ -1,15 +1,15 @@
 from typing import List, Optional, Union
 
-from reqif.helpers.lxml import (
+from ..helpers.lxml import (
     lxml_escape_for_html,
     lxml_is_self_closed_tag,
     lxml_stringify_namespaced_children,
 )
-from reqif.models.reqif_spec_object_type import (
+from ..models.reqif_spec_object_type import (
     DefaultValueEmptySelfClosedTag,
     SpecAttributeDefinition,
 )
-from reqif.models.reqif_types import SpecObjectAttributeType
+from ..models.reqif_types import SpecObjectAttributeType
 
 
 class AttributeDefinitionParser:

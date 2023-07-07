@@ -1,6 +1,6 @@
 from typing import List, Optional
 
-from reqif.models.reqif_spec_object_type import SpecAttributeDefinition
+from .reqif_spec_object_type import SpecAttributeDefinition
 
 
 class ReqIFSpecRelationType:

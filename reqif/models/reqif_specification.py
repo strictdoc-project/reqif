@@ -1,10 +1,10 @@
 from typing import Any, List, Optional
 
-from reqif.helpers.debug import auto_described
-from reqif.models.reqif_spec_hierarchy import (
+from ..helpers.debug import auto_described
+from .reqif_spec_hierarchy import (
     ReqIFSpecHierarchy,
 )
-from reqif.models.reqif_spec_object import SpecObjectAttribute
+from .reqif_spec_object import SpecObjectAttribute
 
 
 @auto_described

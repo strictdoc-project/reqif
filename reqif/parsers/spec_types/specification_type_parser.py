@@ -1,8 +1,8 @@
 from typing import Dict, Optional
 
-from reqif.helpers.lxml import lxml_is_self_closed_tag
-from reqif.models.reqif_specification_type import ReqIFSpecificationType
-from reqif.parsers.attribute_definition_parser import AttributeDefinitionParser
+from ...helpers.lxml import lxml_is_self_closed_tag
+from ...models.reqif_specification_type import ReqIFSpecificationType
+from ...parsers.attribute_definition_parser import AttributeDefinitionParser
 
 
 class SpecificationTypeParser:

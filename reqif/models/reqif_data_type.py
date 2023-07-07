@@ -1,6 +1,6 @@
 from typing import Dict, List, Optional
 
-from reqif.helpers.debug import auto_described
+from ..helpers.debug import auto_described
 
 
 @auto_described

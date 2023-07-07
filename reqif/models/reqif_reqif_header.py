@@ -1,6 +1,6 @@
 from typing import Optional, Union
 
-from reqif.helpers.debug import auto_described
+from ..helpers.debug import auto_described
 
 
 # Sometimes, the ReqIFs have empty tags. Example:

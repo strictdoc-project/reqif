@@ -1,9 +1,9 @@
 import html
 from typing import Optional
 
-from reqif.helpers.lxml import lxml_is_self_closed_tag
-from reqif.models.reqif_spec_relation_type import ReqIFSpecRelationType
-from reqif.parsers.attribute_definition_parser import AttributeDefinitionParser
+from ...helpers.lxml import lxml_is_self_closed_tag
+from ...models.reqif_spec_relation_type import ReqIFSpecRelationType
+from ..attribute_definition_parser import AttributeDefinitionParser
 
 
 class SpecRelationTypeParser:

@@ -1,7 +1,7 @@
 from typing import Union
 
-from reqif.helpers.lxml import lxml_escape_title
-from reqif.models.reqif_reqif_header import EmptyTag, ReqIFReqIFHeader
+from ..helpers.lxml import lxml_escape_title
+from ..models.reqif_reqif_header import EmptyTag, ReqIFReqIFHeader
 
 
 class ReqIFHeaderParser:

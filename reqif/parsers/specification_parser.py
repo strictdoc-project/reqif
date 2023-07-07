@@ -1,12 +1,12 @@
 from typing import List, Optional
 
-from reqif.helpers.lxml import lxml_escape_for_html
-from reqif.models.reqif_spec_object import SpecObjectAttribute
-from reqif.models.reqif_specification import (
+from ..helpers.lxml import lxml_escape_for_html
+from ..models.reqif_spec_object import SpecObjectAttribute
+from ..models.reqif_specification import (
     ReqIFSpecification,
 )
-from reqif.parsers.attribute_value_parser import AttributeValueParser
-from reqif.parsers.spec_hierarchy_parser import (
+from .attribute_value_parser import AttributeValueParser
+from .spec_hierarchy_parser import (
     ReqIFSpecHierarchyParser,
 )
 

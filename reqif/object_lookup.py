@@ -1,7 +1,7 @@
 from typing import Any, Dict, List
 
-from reqif.helpers.debug import auto_described
-from reqif.models.reqif_spec_object import ReqIFSpecObject
+from .helpers.debug import auto_described
+from .models.reqif_spec_object import ReqIFSpecObject
 
 
 @auto_described

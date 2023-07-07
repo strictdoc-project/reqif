@@ -1,10 +1,10 @@
 from typing import List, Optional
 
-from reqif.models.reqif_spec_object import (
+from ..models.reqif_spec_object import (
     ReqIFSpecObject,
     SpecObjectAttribute,
 )
-from reqif.parsers.attribute_value_parser import AttributeValueParser
+from .attribute_value_parser import AttributeValueParser
 
 
 class SpecObjectParser:

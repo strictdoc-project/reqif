@@ -6,53 +6,53 @@ from typing import Any, Dict, List, Optional, Tuple, Union
 from lxml import etree
 from lxml.etree import DocInfo
 
-from reqif.helpers.lxml import lxml_strip_namespace_from_xml
-from reqif.models.error_handling import (
+from .helpers.lxml import lxml_strip_namespace_from_xml
+from .models.error_handling import (
     ReqIFMissingTagException,
     ReqIFSchemaError,
     ReqIFXMLParsingError,
 )
-from reqif.models.reqif_core_content import ReqIFCoreContent
-from reqif.models.reqif_namespace_info import ReqIFNamespaceInfo
-from reqif.models.reqif_relation_group_type import ReqIFRelationGroupType
-from reqif.models.reqif_req_if_content import ReqIFReqIFContent
-from reqif.models.reqif_reqif_header import ReqIFReqIFHeader
-from reqif.models.reqif_spec_object import ReqIFSpecObject
-from reqif.models.reqif_spec_object_type import ReqIFSpecObjectType
-from reqif.models.reqif_spec_relation import ReqIFSpecRelation
-from reqif.models.reqif_spec_relation_type import ReqIFSpecRelationType
-from reqif.models.reqif_specification import (
+from .models.reqif_core_content import ReqIFCoreContent
+from .models.reqif_namespace_info import ReqIFNamespaceInfo
+from .models.reqif_relation_group_type import ReqIFRelationGroupType
+from .models.reqif_req_if_content import ReqIFReqIFContent
+from .models.reqif_reqif_header import ReqIFReqIFHeader
+from .models.reqif_spec_object import ReqIFSpecObject
+from .models.reqif_spec_object_type import ReqIFSpecObjectType
+from .models.reqif_spec_relation import ReqIFSpecRelation
+from .models.reqif_spec_relation_type import ReqIFSpecRelationType
+from .models.reqif_specification import (
     ReqIFSpecification,
 )
-from reqif.models.reqif_specification_type import ReqIFSpecificationType
-from reqif.object_lookup import ReqIFObjectLookup
-from reqif.parsers.data_type_parser import (
+from .models.reqif_specification_type import ReqIFSpecificationType
+from .object_lookup import ReqIFObjectLookup
+from .parsers.data_type_parser import (
     DataTypeParser,
 )
-from reqif.parsers.header_parser import ReqIFHeaderParser
-from reqif.parsers.relation_group_parser import ReqIFRelationGroupParser
-from reqif.parsers.spec_object_parser import (
+from .parsers.header_parser import ReqIFHeaderParser
+from .parsers.relation_group_parser import ReqIFRelationGroupParser
+from .parsers.spec_object_parser import (
     SpecObjectParser,
 )
-from reqif.parsers.spec_relation_parser import (
+from .parsers.spec_relation_parser import (
     SpecRelationParser,
 )
-from reqif.parsers.spec_types.relation_group_type_parser import (
+from .parsers.spec_types.relation_group_type_parser import (
     RelationGroupTypeParser,
 )
-from reqif.parsers.spec_types.spec_object_type_parser import (
+from .parsers.spec_types.spec_object_type_parser import (
     SpecObjectTypeParser,
 )
-from reqif.parsers.spec_types.spec_relation_type_parser import (
+from .parsers.spec_types.spec_relation_type_parser import (
     SpecRelationTypeParser,
 )
-from reqif.parsers.spec_types.specification_type_parser import (
+from .parsers.spec_types.specification_type_parser import (
     SpecificationTypeParser,
 )
-from reqif.parsers.specification_parser import (
+from .parsers.specification_parser import (
     ReqIFSpecificationParser,
 )
-from reqif.reqif_bundle import ReqIFBundle
+from .reqif_bundle import ReqIFBundle
 
 
 class ReqIFParser:

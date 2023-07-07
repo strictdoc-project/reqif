@@ -1,4 +1,4 @@
-from reqif.helpers.lxml import lxml_dump_node
+from ..helpers.lxml import lxml_dump_node
 
 
 class ReqIFXMLParsingError(Exception):

@@ -1,12 +1,12 @@
 from typing import List, Optional
 
-from reqif.models.error_handling import ReqIFMissingTagException
-from reqif.models.reqif_spec_object import SpecObjectAttribute
-from reqif.models.reqif_spec_relation import (
+from ..models.error_handling import ReqIFMissingTagException
+from ..models.reqif_spec_object import SpecObjectAttribute
+from ..models.reqif_spec_relation import (
     ReqIFSpecRelation,
 )
-from reqif.models.reqif_types import SpecObjectAttributeType
-from reqif.parsers.attribute_value_parser import AttributeValueParser
+from ..models.reqif_types import SpecObjectAttributeType
+from ..parsers.attribute_value_parser import AttributeValueParser
 
 
 class SpecRelationParser:

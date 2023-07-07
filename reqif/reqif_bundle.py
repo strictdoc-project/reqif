@@ -1,20 +1,20 @@
 import collections
 from typing import Deque, Generator, List, Optional
 
-from reqif.helpers.debug import auto_described
-from reqif.models.error_handling import ReqIFSchemaError
-from reqif.models.reqif_core_content import ReqIFCoreContent
-from reqif.models.reqif_namespace_info import ReqIFNamespaceInfo
-from reqif.models.reqif_req_if_content import ReqIFReqIFContent
-from reqif.models.reqif_reqif_header import ReqIFReqIFHeader
-from reqif.models.reqif_spec_hierarchy import (
+from .helpers.debug import auto_described
+from .models.error_handling import ReqIFSchemaError
+from .models.reqif_core_content import ReqIFCoreContent
+from .models.reqif_namespace_info import ReqIFNamespaceInfo
+from .models.reqif_req_if_content import ReqIFReqIFContent
+from .models.reqif_reqif_header import ReqIFReqIFHeader
+from .models.reqif_spec_hierarchy import (
     ReqIFSpecHierarchy,
 )
-from reqif.models.reqif_spec_object import (
+from .models.reqif_spec_object import (
     ReqIFSpecObject,
 )
-from reqif.models.reqif_spec_object_type import ReqIFSpecObjectType
-from reqif.object_lookup import ReqIFObjectLookup
+from .models.reqif_spec_object_type import ReqIFSpecObjectType
+from .object_lookup import ReqIFObjectLookup
 
 
 @auto_described

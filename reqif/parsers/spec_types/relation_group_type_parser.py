@@ -1,8 +1,8 @@
 import html
 from typing import Optional
 
-from reqif.helpers.lxml import lxml_is_self_closed_tag
-from reqif.models.reqif_relation_group_type import ReqIFRelationGroupType
+from ...helpers.lxml import lxml_is_self_closed_tag
+from ...models.reqif_relation_group_type import ReqIFRelationGroupType
 
 
 class RelationGroupTypeParser:

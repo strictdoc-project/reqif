@@ -1,6 +1,6 @@
 from typing import List, Optional
 
-from reqif.models.reqif_relation_group import ReqIFRelationGroup
+from ..models.reqif_relation_group import ReqIFRelationGroup
 
 
 class ReqIFRelationGroupParser:

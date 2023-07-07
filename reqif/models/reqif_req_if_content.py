@@ -1,14 +1,14 @@
 from typing import List, Optional, Union
 
-from reqif.helpers.debug import auto_described
-from reqif.models.reqif_relation_group import ReqIFRelationGroup
-from reqif.models.reqif_relation_group_type import ReqIFRelationGroupType
-from reqif.models.reqif_spec_object import ReqIFSpecObject
-from reqif.models.reqif_spec_object_type import ReqIFSpecObjectType
-from reqif.models.reqif_spec_relation import ReqIFSpecRelation
-from reqif.models.reqif_spec_relation_type import ReqIFSpecRelationType
-from reqif.models.reqif_specification import ReqIFSpecification
-from reqif.models.reqif_specification_type import ReqIFSpecificationType
+from ..helpers.debug import auto_described
+from .reqif_relation_group import ReqIFRelationGroup
+from .reqif_relation_group_type import ReqIFRelationGroupType
+from .reqif_spec_object import ReqIFSpecObject
+from .reqif_spec_object_type import ReqIFSpecObjectType
+from .reqif_spec_relation import ReqIFSpecRelation
+from .reqif_spec_relation_type import ReqIFSpecRelationType
+from .reqif_specification import ReqIFSpecification
+from .reqif_specification_type import ReqIFSpecificationType
 
 
 @auto_described

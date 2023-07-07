@@ -1,10 +1,10 @@
 from typing import Optional
 
-from reqif.helpers.lxml import lxml_escape_for_html
-from reqif.models.reqif_spec_object_type import (
+from ...helpers.lxml import lxml_escape_for_html
+from ...models.reqif_spec_object_type import (
     ReqIFSpecObjectType,
 )
-from reqif.parsers.attribute_definition_parser import AttributeDefinitionParser
+from ...parsers.attribute_definition_parser import AttributeDefinitionParser
 
 
 class SpecObjectTypeParser:

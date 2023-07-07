@@ -2,8 +2,8 @@ from typing import List, Optional, Union
 
 from lxml import etree
 
-from reqif.helpers.lxml import lxml_escape_for_html, lxml_is_self_closed_tag
-from reqif.models.reqif_data_type import (
+from ..helpers.lxml import lxml_escape_for_html, lxml_is_self_closed_tag
+from ..models.reqif_data_type import (
     ReqIFDataTypeDefinitionBoolean,
     ReqIFDataTypeDefinitionDateIdentifier,
     ReqIFDataTypeDefinitionEnumeration,

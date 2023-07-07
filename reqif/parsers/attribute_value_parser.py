@@ -3,14 +3,14 @@ from typing import Any, List, Optional
 
 from lxml import etree
 
-from reqif.helpers.lxml import (
+from ..helpers.lxml import (
     lxml_convert_children_from_reqif_ns_xhtml_string,
     lxml_stringify_children,
     lxml_stringify_namespaced_children,
 )
-from reqif.helpers.string.xhtml_indent import reqif_unindent_xhtml_string
-from reqif.models.reqif_spec_object import SpecObjectAttribute
-from reqif.models.reqif_types import SpecObjectAttributeType
+from ..helpers.string.xhtml_indent import reqif_unindent_xhtml_string
+from ..models.reqif_spec_object import SpecObjectAttribute
+from ..models.reqif_types import SpecObjectAttributeType
 
 ATTRIBUTE_STRING_TEMPLATE = """\
             <ATTRIBUTE-VALUE-STRING THE-VALUE="{value}">

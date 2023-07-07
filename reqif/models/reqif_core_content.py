@@ -1,7 +1,7 @@
 from typing import Optional
 
-from reqif.helpers.debug import auto_described
-from reqif.models.reqif_req_if_content import ReqIFReqIFContent
+from ..helpers.debug import auto_described
+from .reqif_req_if_content import ReqIFReqIFContent
 
 
 @auto_described

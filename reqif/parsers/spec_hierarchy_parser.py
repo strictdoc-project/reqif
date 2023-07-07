@@ -1,7 +1,7 @@
 from typing import List, Optional
 
-from reqif.helpers.lxml import lxml_is_self_closed_tag
-from reqif.models.reqif_spec_hierarchy import (
+from ..helpers.lxml import lxml_is_self_closed_tag
+from ..models.reqif_spec_hierarchy import (
     ReqIFSpecHierarchy,
 )
 

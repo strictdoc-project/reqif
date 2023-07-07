@@ -1,7 +1,7 @@
 from typing import Any, Optional
 
-from reqif.helpers.debug import auto_described
-from reqif.models.reqif_spec_object import SpecObjectAttribute
+from ..helpers.debug import auto_described
+from .reqif_spec_object import SpecObjectAttribute
 
 
 @auto_described
