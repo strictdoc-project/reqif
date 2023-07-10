@@ -1,6 +1,7 @@
 name: "ReqIF on Windows"
 
 on:
+  workflow_dispatch:
   push:
     branches: [ "master" ]
   pull_request:
