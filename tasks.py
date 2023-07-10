@@ -36,13 +36,9 @@ def clean(context):
             \\)
             -not -path "**Expected**"
             -not -path "**Input**"
+        | xargs rm -rfv
     """
-
-    find_result = run_invoke_cmd(context, find_command)
-    find_result_stdout = find_result.stdout.strip()
-    echo_command = f"""echo {find_result_stdout} | xargs rm -rfv"""
-
-    run_invoke_cmd(context, echo_command)
+    run_invoke_cmd(context, find_command)
 
 
 @task
@@ -79,7 +75,7 @@ def test_coverage_report(context):
 def test_integration(context, focus=None, debug=False):
     cwd = os.getcwd()
 
-    reqif_exec = f'python \\"{cwd}/reqif/cli/main.py\\"'
+    reqif_exec = "python -m reqif.cli.main"
 
     focus_or_none = f"--filter {focus}" if focus else ""
     debug_opts = "-vv --show-all" if debug else ""
