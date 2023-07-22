@@ -64,6 +64,13 @@ class ReqIFParser:
 
     @staticmethod
     def parse_from_string(reqif_content: str) -> ReqIFBundle:
+        # LXML used to produce this error on an empty content string, but now
+        # it simply raises an XMLSyntaxError with no message.
+        # FIXME: No time to investigate/report this now.
+        if len(reqif_content) == 0:
+            raise ReqIFXMLParsingError(
+                "Document is empty, line 1, column 1 (<string>, line 1)"
+            ) from None
         try:
             # Parse XML.
             # https://github.com/eerohele/sublime-lxml/issues/5#issuecomment-209781719

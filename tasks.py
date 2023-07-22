@@ -79,7 +79,7 @@ def test_coverage_report(context):
 def test_integration(context, focus=None, debug=False):
     cwd = os.getcwd()
 
-    reqif_exec = f'python \\"{cwd}/reqif/cli/main.py\\"'
+    reqif_exec = "python -m reqif.cli.main"
 
     focus_or_none = f"--filter {focus}" if focus else ""
     debug_opts = "-vv --show-all" if debug else ""
