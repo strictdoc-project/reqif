@@ -36,6 +36,22 @@ for specification in reqif_bundle.core_content.req_if_content.specifications:
         print(current_hierarchy)
 ```
 
+or for ReqIFz files:
+
+```py
+from reqif.parser import ReqIFZParser
+
+input_file_path = "input.reqifz"
+
+reqifz_bundle = ReqIFZParser.parse(input_file_path)
+for reqif_bundle in reqifz_bundle.reqif_bundles:
+    for specification in reqif_bundle.core_content.req_if_content.specifications:
+        print(specification.long_name)
+
+for attachment in reqifz_bundle.attachments:
+    print(attachment)
+```
+
 ### Unparsing ReqIF
 
 ```py

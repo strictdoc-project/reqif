@@ -1,5 +1,7 @@
 import copy
 import io
+import os
+import zipfile
 from collections import OrderedDict, defaultdict
 from typing import Any, Dict, List, Optional, Tuple, Union
 
@@ -11,6 +13,7 @@ from reqif.models.error_handling import (
     ReqIFMissingTagException,
     ReqIFSchemaError,
     ReqIFXMLParsingError,
+    ReqIFZParsingError,
 )
 from reqif.models.reqif_core_content import ReqIFCoreContent
 from reqif.models.reqif_namespace_info import ReqIFNamespaceInfo
@@ -52,7 +55,7 @@ from reqif.parsers.spec_types.specification_type_parser import (
 from reqif.parsers.specification_parser import (
     ReqIFSpecificationParser,
 )
-from reqif.reqif_bundle import ReqIFBundle
+from reqif.reqif_bundle import ReqIFBundle, ReqIFZBundle
 
 
 class ReqIFParser:
@@ -349,3 +352,27 @@ class ReqIFParser:
             spec_relation_groups=spec_relation_groups,
         )
         return reqif_content, lookup, exceptions
+
+
+class ReqIFZParser:
+    @staticmethod
+    def parse(input_path: str) -> ReqIFZBundle:
+        try:
+            with zipfile.ZipFile(input_path) as zip_file:
+                attachments = {}
+                reqif_bundles: Dict[str, ReqIFBundle] = {}
+                for filename in zip_file.namelist():
+                    if os.path.splitext(filename)[1] in [".reqif", ".xml"]:
+                        with zip_file.open(filename) as file:
+                            content = file.read().decode(encoding="UTF-8")
+                            reqif_bundles[
+                                filename
+                            ] = ReqIFParser.parse_from_string(content)
+                    else:
+                        with zip_file.open(filename) as file:
+                            attachments[filename] = file.read()
+
+                return ReqIFZBundle(reqif_bundles, attachments)
+
+        except Exception as exception:
+            raise ReqIFZParsingError(exception) from None

@@ -67,3 +67,7 @@ class ReqIFSpecHierarchyMissingSpecObjectException(ReqIFSemanticError):
             f"{self.spec_object_identifier}\n"
             f"Affected fragment:\n{lxml_dump_node(self.xml_node)}"
         )
+
+
+class ReqIFZParsingError(Exception):
+    pass
