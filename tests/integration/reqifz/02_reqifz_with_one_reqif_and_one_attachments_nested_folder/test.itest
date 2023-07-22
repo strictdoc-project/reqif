@@ -1,0 +1,3 @@
+RUN: mkdir -p %S/output
+RUN: %reqif passthrough %S/sample.reqifz %S/output/sample.reqifz
+RUN: %compare_zip_files %S/sample.reqifz %S/output/sample.reqifz
