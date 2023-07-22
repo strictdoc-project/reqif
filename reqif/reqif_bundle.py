@@ -1,5 +1,5 @@
 import collections
-from typing import Deque, Generator, List, Optional
+from typing import Deque, Dict, Generator, List, Optional
 
 from reqif.helpers.debug import auto_described
 from reqif.models.error_handling import ReqIFSchemaError
@@ -97,3 +97,14 @@ class ReqIFBundle:  # pylint: disable=too-many-instance-attributes
 
     def get_spec_object_parents(self, ref) -> List:
         return self.lookup.get_spec_object_parents(ref)
+
+
+@auto_described
+class ReqIFZBundle:
+    def __init__(
+        self,
+        reqif_bundles: Dict[str, ReqIFBundle],
+        attachments: Dict[str, bytes],
+    ):  # pylint: disable=too-many-arguments
+        self.reqif_bundles: Dict[str, ReqIFBundle] = reqif_bundles
+        self.attachments: Dict[str, bytes] = attachments
