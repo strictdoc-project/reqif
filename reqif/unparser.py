@@ -171,8 +171,13 @@ class ReqIFUnparser:
 class ReqIFZUnparser:
     @staticmethod
     def unparse(bundle: ReqIFZBundle) -> bytes:
-        zip_buffer = io.BytesIO()
+        """
+        Based on:
+        Python in-memory zip library
+        https://stackoverflow.com/a/44946732/598057
+        """
 
+        zip_buffer = io.BytesIO()
         with ZipFile(zip_buffer, "a", ZIP_DEFLATED) as zip_file:
             # First write, the ReqIF files themselves.
             for filename_, reqif_bundle_ in bundle.reqif_bundles.items():
