@@ -58,6 +58,10 @@ class ValidateCommand:
     def _validate(
         passthrough_config: ValidateCommandConfig,
     ) -> ReqIFErrorBundle:
+        import xmlschema
+        schema = xmlschema.XMLSchema("https://www.omg.org/spec/ReqIF/20110401/reqif.xsd")
+        raise NotImplementedError(schema)
+
         semantic_warnings: List[ReqIFSemanticError] = []
         try:
             reqif_bundle = ReqIFParser.parse(passthrough_config.input_file)
