@@ -22,6 +22,7 @@ class SpecAttributeDefinition:  # pylint: disable=too-many-instance-attributes
         editable: Optional[bool] = None,
         default_value_definition_ref: Optional[str] = None,
         default_value: Union[None, DefaultValueEmptySelfClosedTag, str] = None,
+        editable_dedicated_tag: Optional[bool] = None,
         multi_valued: Optional[bool] = None,
     ):
         self.attribute_type: SpecObjectAttributeType = attribute_type
@@ -41,6 +42,10 @@ class SpecAttributeDefinition:  # pylint: disable=too-many-instance-attributes
         self.default_value: Union[
             None, DefaultValueEmptySelfClosedTag, str
         ] = default_value
+        self.editable_dedicated_tag: Optional[bool] = (
+            editable == "true" if editable is not None else None
+        )
+
         self.multi_valued: Optional[bool] = multi_valued
 
     @staticmethod

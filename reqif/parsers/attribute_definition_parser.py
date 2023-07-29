@@ -399,6 +399,10 @@ class AttributeDefinitionParser:
                 output += AttributeDefinitionParser._unparse_attribute_type(
                     attribute
                 )
+            elif tag == "IS-EDITABLE":
+                output += AttributeDefinitionParser._unparse_attribute_editable(
+                    attribute
+                )
             else:
                 raise NotImplementedError(tag)
 
@@ -421,6 +425,18 @@ class AttributeDefinitionParser:
             "\n"
         )
         output += "              </TYPE>\n"
+        return output
+
+    @staticmethod
+    def _unparse_attribute_editable(
+        attribute: SpecAttributeDefinition,
+    ):
+        output = ""
+        output += (
+            "              <IS-EDITABLE>"
+            f"{attribute.editable_dedicated_tag}"            
+            "</IS-EDITABLE>\n"
+        )
         return output
 
     @staticmethod
