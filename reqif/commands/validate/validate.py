@@ -2,6 +2,9 @@ import os
 import sys
 from typing import List
 
+import xmlschema
+
+from reqif import PATH_TO_REQIF_ROOT
 from reqif.cli.cli_arg_parser import ValidateCommandConfig
 from reqif.models.error_handling import (
     ReqIFGeneralSemanticError,
@@ -38,6 +41,21 @@ class ValidateCommand:
             message = "error: passthrough command's input file does not exist"
             print(f"{message}: {input_file}")  # noqa: T201
             sys.exit(1)
+
+        if config.reqif_schema:
+            old_cwd = os.getcwd()
+            os.chdir(PATH_TO_REQIF_ROOT)
+            schema = xmlschema.XMLSchema(
+                os.path.join(
+                    PATH_TO_REQIF_ROOT,
+                    "reqif/reqif_schema/reqif.xsd",
+                ),
+                # FIXME: This parameter seems to have no effect, this is why
+                # we do os.chdir.
+                base_url=os.path.join(PATH_TO_REQIF_ROOT),
+            )
+            schema.validate(input_file)
+            os.chdir(old_cwd)
 
         error_bundle = ValidateCommand._validate(config)
         for xml_error in error_bundle.xml_errors:

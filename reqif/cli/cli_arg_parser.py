@@ -76,11 +76,16 @@ def cli_args_parser() -> argparse.ArgumentParser:
     # Command – Validate
     command_parser_validate = command_subparsers.add_parser(
         "validate",
-        help=("Read a ReqIF file and validate its content."),
+        help="Read a ReqIF file and validate its content.",
         formatter_class=formatter,
     )
     command_parser_validate.add_argument(
         "input_file", type=str, help="Path to an input ReqIF file"
+    )
+    command_parser_validate.add_argument(
+        "--reqif-schema",
+        action="store_true",
+        help="Enable ReqIF schema validation.",
     )
 
     # Command – Version
@@ -117,8 +122,9 @@ class FormatCommandConfig:
 
 
 class ValidateCommandConfig:
-    def __init__(self, input_file: str):
+    def __init__(self, input_file: str, reqif_schema: bool):
         self.input_file: str = input_file
+        self.reqif_schema: bool = reqif_schema
 
 
 class ReqIFArgsParser:
@@ -166,7 +172,9 @@ class ReqIFArgsParser:
         return FormatCommandConfig(self.args.input_file, self.args.output_file)
 
     def get_validate_config(self) -> ValidateCommandConfig:
-        return ValidateCommandConfig(self.args.input_file)
+        return ValidateCommandConfig(
+            self.args.input_file, self.args.reqif_schema
+        )
 
 
 def create_reqif_args_parser(testing_args=None) -> ReqIFArgsParser:
