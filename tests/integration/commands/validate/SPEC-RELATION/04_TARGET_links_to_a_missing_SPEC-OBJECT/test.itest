@@ -1,4 +1,4 @@
-RUN: %reqif validate %S/sample.reqif | filecheck %s --dump-input=fail
+RUN: %expect_exit 1 %reqif validate %S/sample.reqif | filecheck %s --dump-input=fail
 
 CHECK: warning: semantic error: schema error: A <SPEC-RELATION>'s <TARGET> contains a link to a non-existing <SPEC-OBJECT>: NON_EXISTING_UID
 CHECK: Affected fragment:

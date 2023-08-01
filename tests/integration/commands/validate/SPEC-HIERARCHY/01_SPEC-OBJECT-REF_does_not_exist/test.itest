@@ -1,4 +1,4 @@
-RUN: %reqif validate %S/sample.reqif | filecheck %s --dump-input=fail
+RUN: %expect_exit 1 %reqif validate %S/sample.reqif | filecheck %s --dump-input=fail
 
 CHECK: warning: semantic error: schema error: A <SPEC-HIERARCHY>'s <SPEC-OBJECT-REF> contains a link to a non-existing <SPEC-OBJECT>: _gFhrY2ojEeuExICsU7Acmg
 CHECK: Affected fragment:
