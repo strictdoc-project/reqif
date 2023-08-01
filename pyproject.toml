@@ -5,6 +5,18 @@ build-backend = "hatchling.build"
 [tool.hatch.version]
 path = "reqif/__init__.py"
 
+[tool.hatch.build]
+include = [
+  "LICENSE",
+  "README.md",
+  "pyproject.toml",
+  "reqif/"
+]
+exclude = [
+  "/.*",
+  "/tests",
+]
+
 [project]
 name = "reqif"
 dynamic = ["version"]
