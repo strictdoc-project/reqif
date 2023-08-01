@@ -1,4 +1,4 @@
-RUN: %reqif validate %S/sample.reqif | filecheck %s --dump-input=fail
+RUN: %expect_exit 1 %reqif validate %S/sample.reqif | filecheck %s --dump-input=fail
 
 CHECK: warning: schema error: Tag <SPEC-RELATION> is missing a <TARGET> child tag. Affected fragment:
 CHECK: <SPEC-RELATION IDENTIFIER="_67JkkGyBEeuM1tJZu08zdg" LAST-CHANGE="2021-02-11T16:57:54.293+01:00">

@@ -9,10 +9,6 @@ ReqIF is a Python library for working with ReqIF format.
 - Basic validation of ReqIF
 - Anonymizing ReqIF files to safely exchange the problematic ReqIF files.
 
-To be implemented:
-
-- Converting from/to Excel and other formats
-
 ## Getting started
 
 ```bash
@@ -72,12 +68,41 @@ The contents of `reqif_xml_output` should be the same as the contents of the
 
 ## Using ReqIF as a command-line tool
 
+After installing the `reqif` Pip package, the `reqif` command becomes available
+and can be executed from the command line.
+
+```commandline
+reqif
+usage: reqif [-h] {passthrough,anonymize,dump,format,validate,version} ...
+reqif: error: the following arguments are required: command
+```
+
+### Validate command
+
+The `validate` command is the first command to run against a ReqIF file. The
+`reqif` library contains two sets of checks: 
+
+1. reqif-internal checks of a ReqIF file's schema and semantics.
+2. a check of a ReqIF file against the
+   [ReqIF's official schema](https://www.omg.org/spec/ReqIF/20110401/reqif.xsd)
+   maintained by the Object Management Group (OMG).
+
+The first set of checks is always enabled. To enable the second set of the 
+official ReqIF schema checks, use `--use-reqif-schema`:
+
+```commandline
+reqif validate --use-reqif-schema sample.reqif 
+```
+
+If an error is found, the `reqif validate` command exits with 1. If no errors
+are found, the exit code is `0`.
+
 ### Passthrough command
 
-Before using the ReqIF library, it is useful to check if it fully understands a
-particular ReqIF file format that a user has in hand. The `passthrough` command
-first parses the ReqIF XML into in-memory Python objects and then unparses
-these Python objects back to an output ReqIF file.
+The `reqif passthrough` command is a useful tool for verifying whether the reqif
+tool correctly parses a given ReqIF file format that the user has at hand.
+The `passthrough` command first parses the ReqIF XML into in-memory Python 
+objects and then unparses these Python objects back to an output ReqIF file.
 
 If everything goes fine, the output of the passthrough command should be
 identical to the contents of the input file.
@@ -92,9 +117,9 @@ The `format` command is similar to `clang-format` for C/C++ files or
 `cmake-format` for CMake files. The input file is parsed and then pretty-printed
 back to an output file.
 
-This command is useful when dealing with ReqIF files that are hand-written or
-ReqIF files produced by the ReqIF tools that do not generate a well-formed XML
-with consistent indentation.  
+This command is useful when dealing with the ReqIF files that are hand-written
+or the ReqIF files produced by the ReqIF tools that do not generate well-formed
+XML with consistent indentation.  
 
 The `tests/integration/commands/format` contains typical examples of
 incorrectly formatted ReqIF files. The integration tests ensure that the

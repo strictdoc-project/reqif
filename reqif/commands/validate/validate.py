@@ -3,6 +3,7 @@ import sys
 from typing import List
 
 import xmlschema
+from xmlschema import XMLSchemaValidationError
 
 from reqif import PATH_TO_REQIF_ROOT
 from reqif.cli.cli_arg_parser import ValidateCommandConfig
@@ -13,6 +14,7 @@ from reqif.models.error_handling import (
     ReqIFSpecHierarchyMissingSpecObjectException,
     ReqIFSpecRelationMissingSpecObjectException,
     ReqIFXMLParsingError,
+    ReqIFXMLSchemaValidationError,
 )
 from reqif.models.reqif_spec_relation import ReqIFSpecRelation
 from reqif.models.reqif_specification import ReqIFSpecification
@@ -31,6 +33,13 @@ class ReqIFErrorBundle:
         self.schema_errors: List[ReqIFSchemaError] = schema_errors
         self.semantic_warnings: List[ReqIFSemanticError] = semantic_warnings
 
+    def has_any_errors(self) -> bool:
+        return (
+            len(self.xml_errors) > 0
+            or len(self.schema_errors) > 0
+            or len(self.semantic_warnings) > 0
+        )
+
 
 class ValidateCommand:
     @classmethod
@@ -41,21 +50,6 @@ class ValidateCommand:
             message = "error: passthrough command's input file does not exist"
             print(f"{message}: {input_file}")  # noqa: T201
             sys.exit(1)
-
-        if config.reqif_schema:
-            old_cwd = os.getcwd()
-            os.chdir(PATH_TO_REQIF_ROOT)
-            schema = xmlschema.XMLSchema(
-                os.path.join(
-                    PATH_TO_REQIF_ROOT,
-                    "reqif/reqif_schema/reqif.xsd",
-                ),
-                # FIXME: This parameter seems to have no effect, this is why
-                # we do os.chdir.
-                base_url=os.path.join(PATH_TO_REQIF_ROOT),
-            )
-            schema.validate(input_file)
-            os.chdir(old_cwd)
 
         error_bundle = ValidateCommand._validate(config)
         for xml_error in error_bundle.xml_errors:
@@ -71,12 +65,41 @@ class ValidateCommand:
             f"{len(error_bundle.schema_errors)} schema issues found, "
             f"{len(error_bundle.semantic_warnings)} semantic issues found."
         )
+        exit_code = 0 if not error_bundle.has_any_errors() else 1
+        sys.exit(exit_code)
 
     @staticmethod
     def _validate(
         passthrough_config: ValidateCommandConfig,
     ) -> ReqIFErrorBundle:
         semantic_warnings: List[ReqIFSemanticError] = []
+
+        if passthrough_config.use_reqif_schema:
+            old_cwd = os.getcwd()
+            try:
+                os.chdir(PATH_TO_REQIF_ROOT)
+                schema = xmlschema.XMLSchema(
+                    os.path.join(
+                        PATH_TO_REQIF_ROOT,
+                        "reqif/reqif_schema/reqif.xsd",
+                    ),
+                    # FIXME: This parameter seems to have no effect, this is why
+                    # we do os.chdir.
+                    base_url=os.path.join(PATH_TO_REQIF_ROOT),
+                )
+                schema.validate(passthrough_config.input_file)
+            except XMLSchemaValidationError as xml_schema_validation_error_:
+                xml_schema_validation_error = ReqIFXMLSchemaValidationError(
+                    xml_schema_validation_error_
+                )
+                return ReqIFErrorBundle(
+                    xml_errors=[],
+                    schema_errors=[xml_schema_validation_error],
+                    semantic_warnings=[],
+                )
+            finally:
+                os.chdir(old_cwd)
+
         try:
             reqif_bundle = ReqIFParser.parse(passthrough_config.input_file)
         except ReqIFXMLParsingError as exception:
