@@ -1,5 +1,5 @@
 import collections
-from typing import Deque, Dict, Generator, List, Optional
+from typing import Deque, Dict, Iterator, List, Optional
 
 from reqif.helpers.debug import auto_described
 from reqif.models.error_handling import ReqIFSchemaError
@@ -14,6 +14,7 @@ from reqif.models.reqif_spec_object import (
     ReqIFSpecObject,
 )
 from reqif.models.reqif_spec_object_type import ReqIFSpecObjectType
+from reqif.models.reqif_specification import ReqIFSpecification
 from reqif.object_lookup import ReqIFObjectLookup
 
 
@@ -51,7 +52,9 @@ class ReqIFBundle:  # pylint: disable=too-many-instance-attributes
         self.lookup = lookup
         self.exceptions: List[ReqIFSchemaError] = exceptions
 
-    def iterate_specification_hierarchy(self, specification) -> Generator:
+    def iterate_specification_hierarchy(
+        self, specification: ReqIFSpecification
+    ) -> Iterator[ReqIFSpecHierarchy]:
         assert isinstance(self.core_content, ReqIFCoreContent)
         assert isinstance(self.core_content.req_if_content, ReqIFReqIFContent)
         assert isinstance(self.core_content.req_if_content.specifications, list)
