@@ -57,5 +57,5 @@ class RelationGroupTypeParser:
             output += "/>\n"
         else:
             output += ">\n"
-            output += "        </SPEC-RELATION-TYPE>\n"
+            output += "        </RELATION-GROUP-TYPE>\n"
         return output

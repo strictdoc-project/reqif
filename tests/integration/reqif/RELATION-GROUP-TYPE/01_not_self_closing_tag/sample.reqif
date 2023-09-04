@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<REQ-IF xmlns="http://www.omg.org/spec/ReqIF/20110401/reqif.xsd" xmlns:configuration="http://eclipse.org/rmf/pror/toolextensions/1.0">
+  <CORE-CONTENT>
+    <REQ-IF-CONTENT>
+      <SPEC-TYPES>
+        <RELATION-GROUP-TYPE IDENTIFIER="ID_TC1300_SpecRelationGroupType" LAST-CHANGE="2012-04-07T01:51:37.112+02:00" LONG-NAME="TC 1300 SpecRelationGroupType">
+        </RELATION-GROUP-TYPE>
+      </SPEC-TYPES>
+    </REQ-IF-CONTENT>
+  </CORE-CONTENT>
+</REQ-IF>
