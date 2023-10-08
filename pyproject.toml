@@ -72,6 +72,9 @@ development = [
   "filecheck >= 0.0.20",
   "html5lib >= 1.1",
   "pytidylib >= 0.3.2",
+
+  # Examples
+  "dataclasses-json"
 ]
 
 [project.scripts]

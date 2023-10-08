@@ -91,7 +91,7 @@ def cli_args_parser() -> argparse.ArgumentParser:
     # Command – Version
     command_subparsers.add_parser(
         "version",
-        help="Print the version of StrictDoc.",
+        help="Print the version of ReqIF.",
         formatter_class=formatter,
     )
     return main_parser
@@ -127,6 +127,12 @@ class ValidateCommandConfig:
         self.use_reqif_schema: bool = use_reqif_schema
 
 
+class ConvertCommandConfig:
+    def __init__(self, input_file: str, output_file: str):
+        self.input_file: str = input_file
+        self.output_file: str = output_file
+
+
 class ReqIFArgsParser:
     def __init__(self, args):
         self.args = args
@@ -138,6 +144,10 @@ class ReqIFArgsParser:
     @property
     def is_anonymize_command(self):
         return self.args.command == "anonymize"
+
+    @property
+    def is_convert_command(self):
+        return self.args.command == "convert-to-csv"
 
     @property
     def is_dump_command(self):
@@ -154,6 +164,9 @@ class ReqIFArgsParser:
     @property
     def is_version_command(self):
         return self.args.command == "version"
+
+    def get_convert_config(self) -> ConvertCommandConfig:
+        return ConvertCommandConfig(self.args.input_file, self.args.output_file)
 
     def get_passthrough_config(self) -> PassthroughCommandConfig:
         return PassthroughCommandConfig(
