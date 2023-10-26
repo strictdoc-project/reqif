@@ -1,0 +1,14 @@
+RUN: mkdir -p %S/Output
+RUN: %reqif passthrough %S/sample.reqif %S/Output/sample.reqif
+RUN: %diff %S/sample.reqif %S/Output/sample.reqif
+
+RUN: python %S/script.py %S/sample.reqif %S/Output/reqif
+RUN: %diff %S/expected/output.json %S/Output/reqif/output.json
+
+RUN: python %S/script.py %S/sample.reqifz %S/Output/reqifz
+RUN: %diff %S/expected/output.json %S/Output/reqifz/output.json
+
+TODO:
+- output file vs output stdout
+- Make the nodes nested.
+- Type fields

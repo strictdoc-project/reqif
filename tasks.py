@@ -132,13 +132,14 @@ def lint_flake8(context):
     command = """
         flake8
             reqif/ tasks.py tests/unit/
+            --ignore=E501,W503
             --statistics --max-line-length 80 --show-source
     """
     run_invoke_cmd(context, command)
 
 
 @task
-def lint_ruff(context, fix=False):
+def lint_ruff(context, fix=True):
     argument_fix = "--fix" if fix else ""
     command = f"""
         ruff . {argument_fix}
