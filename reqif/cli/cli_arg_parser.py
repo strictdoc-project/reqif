@@ -85,7 +85,7 @@ def cli_args_parser() -> argparse.ArgumentParser:
     command_parser_validate.add_argument(
         "--use-reqif-schema",
         action="store_true",
-        help="Enable ReqIF schema validation.",
+        help="Enable a strict ReqIF schema validation.",
     )
 
     # Command – Version

@@ -1,0 +1,8 @@
+RUN: %expect_exit 0 %reqif validate %S/sample.reqif | filecheck %s --dump-input=fail --check-prefix=CHECK-NOSTRICT
+
+CHECK-NOSTRICT: Validation complete with 0 errors, 0 schema issues found, 0 semantic issues found.
+
+RUN: %expect_exit 1 %reqif validate --use-reqif-schema %S/sample.reqif | filecheck %s --dump-input=fail --check-prefix=CHECK-STRICT
+
+CHECK-STRICT: Reason: 'REQ-IF-TOOL-ID' attribute not allowed for element
+CHECK-STRICT: Validation complete with 0 errors, 1 schema issues found, 0 semantic issues found.

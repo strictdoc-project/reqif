@@ -65,6 +65,13 @@ class ValidateCommand:
             f"{len(error_bundle.schema_errors)} schema issues found, "
             f"{len(error_bundle.semantic_warnings)} semantic issues found."
         )
+        if not config.use_reqif_schema:
+            print(  # noqa: T201
+                "NOTE: By default, the validation does not perform a strict "
+                "check of the ReqIF schema conformance. "
+                "To enable the strict conformance check, "
+                "rerun the validation with --use-reqif-schema."
+            )
         exit_code = 0 if not error_bundle.has_any_errors() else 1
         sys.exit(exit_code)
 
