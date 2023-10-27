@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<REQ-IF xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns="http://www.omg.org/spec/ReqIF/20110401/reqif.xsd" xsi:schemaLocation="http://www.omg.org/spec/ReqIF/20110401/reqif.xsd reqif.xsd">
+  <THE-HEADER>
+    <REQ-IF-HEADER IDENTIFIER="ReqIF-Header" REQ-IF-TOOL-ID="OpenAI GPT-3.5" SOURCE-TOOL-ID="YourToolName" CREATION-TIME="2023-07-07T00:00:00Z" TITLE="Coffee Machine System-Level Requirements" COMMENT="System-level requirements for a coffee machine."/>
+  </THE-HEADER>
+  <CORE-CONTENT>
+    <SPECIFICATIONS>
+      <SPEC-OBJECT-TYPE IDENTIFIER="reqif.standard.requirement" LONG-NAME="Requirement">
+        <SPEC-ATTRIBUTES>
+          <ATTRIBUTE-DEFINITION-STRING IDENTIFIER="reqif.standard.requirement.description" LONG-NAME="Description" TYPE="HTML"/>
+          <ATTRIBUTE-DEFINITION-ENUMERATION IDENTIFIER="reqif.standard.requirement.status" LONG-NAME="Status">
+            <VALUES>
+              <ENUM-VALUE IDENTIFIER="reqif.standard.requirement.status.open" LONG-NAME="Open"/>
+              <ENUM-VALUE IDENTIFIER="reqif.standard.requirement.status.inprogress" LONG-NAME="In Progress"/>
+              <ENUM-VALUE IDENTIFIER="reqif.standard.requirement.status.completed" LONG-NAME="Completed"/>
+            </VALUES>
+          </ATTRIBUTE-DEFINITION-ENUMERATION>
+        </SPEC-ATTRIBUTES>
+      </SPEC-OBJECT-TYPE>
+      <SPECIFICATION IDENTIFIER="reqif.specification.systemlevel" LONG-NAME="System-Level Requirements">
+        <TYPE>reqif.standard.requirement</TYPE>
+        <VALUES>
+          <SPEC-OBJECT IDENTIFIER="RQ1" LAST-CHANGE="2023-07-07T00:00:00Z">
+            <VALUES>
+              <ATTRIBUTE-VALUE-STRING THE-VALUE="The coffee machine should support multiple brewing options, such as espresso, cappuccino, and latte." DEFINITION="reqif.standard.requirement.description"/>
+              <ATTRIBUTE-VALUE-ENUMERATION THE-VALUE="reqif.standard.requirement.status.open" DEFINITION="reqif.standard.requirement.status"/>
+            </VALUES>
+          </SPEC-OBJECT>
+          <SPEC-OBJECT IDENTIFIER="RQ2" LAST-CHANGE="2023-07-07T00:00:00Z">
+            <VALUES>
+              <ATTRIBUTE-VALUE-STRING THE-VALUE="The coffee machine should have a water reservoir with a capacity of at least 1 liter." DEFINITION="reqif.standard.requirement.description"/>
+              <ATTRIBUTE-VALUE-ENUMERATION THE-VALUE="reqif.standard.requirement.status.open" DEFINITION="reqif.standard.requirement.status"/>
+            </VALUES>
+          </SPEC-OBJECT>
+          <SPEC-OBJECT IDENTIFIER="RQ3" LAST-CHANGE="2023-07-07T00:00:00Z">
+            <VALUES>
+              <ATTRIBUTE-VALUE-STRING THE-VALUE="The coffee machine should allow users to adjust the grinding settings for different coffee beans." DEFINITION="reqif.standard.requirement.description"/>
+              <ATTRIBUTE-VALUE-ENUMERATION THE-VALUE="reqif.standard.requirement.status.open" DEFINITION="reqif.standard.requirement.status"/>
+            </VALUES>
+          </SPEC-OBJECT>
+          <SPEC-OBJECT IDENTIFIER="RQ4" LAST-CHANGE="2023-07-07T00:00:00Z">
+            <VALUES>
+              <ATTRIBUTE-VALUE-STRING THE-VALUE="Users should be able to select the desired brew strength, such as strong or mild." DEFINITION="reqif.standard.requirement.description"/>
+              <ATTRIBUTE-VALUE-ENUMERATION THE-VALUE="reqif.standard.requirement.status.open" DEFINITION="reqif.standard.requirement.status"/>
+            </VALUES>
+          </SPEC-OBJECT>
+          <SPEC-OBJECT IDENTIFIER="RQ5" LAST-CHANGE="2023-07-07T00:00:00Z">
+            <VALUES>
+              <ATTRIBUTE-VALUE-STRING THE-VALUE="The coffee machine should have a milk frothing functionality to prepare beverages that require frothed milk." DEFINITION="reqif.standard.requirement.description"/>
+              <ATTRIBUTE-VALUE-ENUMERATION THE-VALUE="reqif.standard.requirement.status.open" DEFINITION="reqif.standard.requirement.status"/>
+            </VALUES>
+          </SPEC-OBJECT>
+          <SPEC-OBJECT IDENTIFIER="RQ6" LAST-CHANGE="2023-07-07T00:00:00Z">
+            <VALUES>
+              <ATTRIBUTE-VALUE-STRING THE-VALUE="The coffee machine should have an intuitive user interface with easy-to-use controls and a display for status and settings." DEFINITION="reqif.standard.requirement.description"/>
+              <ATTRIBUTE-VALUE-ENUMERATION THE-VALUE="reqif.standard.requirement.status.open" DEFINITION="reqif.standard.requirement.status"/>
+            </VALUES>
+          </SPEC-OBJECT>
+          <SPEC-OBJECT IDENTIFIER="RQ7" LAST-CHANGE="2023-07-07T00:00:00Z">
+            <VALUES>
+              <ATTRIBUTE-VALUE-STRING THE-VALUE="The coffee machine should have features to facilitate easy cleaning and maintenance, such as removable parts and self-cleaning functionality." DEFINITION="reqif.standard.requirement.description"/>
+              <ATTRIBUTE-VALUE-ENUMERATION THE-VALUE="reqif.standard.requirement.status.open" DEFINITION="reqif.standard.requirement.status"/>
+            </VALUES>
+          </SPEC-OBJECT>
+          <SPEC-OBJECT IDENTIFIER="RQ8" LAST-CHANGE="2023-07-07T00:00:00Z">
+            <VALUES>
+              <ATTRIBUTE-VALUE-STRING THE-VALUE="The coffee machine should have a power-saving mode that automatically turns off the machine after a period of inactivity." DEFINITION="reqif.standard.requirement.description"/>
+              <ATTRIBUTE-VALUE-ENUMERATION THE-VALUE="reqif.standard.requirement.status.open" DEFINITION="reqif.standard.requirement.status"/>
+            </VALUES>
+          </SPEC-OBJECT>
+          <SPEC-OBJECT IDENTIFIER="RQ9" LAST-CHANGE="2023-07-07T00:00:00Z">
+            <VALUES>
+              <ATTRIBUTE-VALUE-STRING THE-VALUE="The coffee machine should be compatible with standard coffee capsules or pods available in the market." DEFINITION="reqif.standard.requirement.description"/>
+              <ATTRIBUTE-VALUE-ENUMERATION THE-VALUE="reqif.standard.requirement.status.open" DEFINITION="reqif.standard.requirement.status"/>
+            </VALUES>
+          </SPEC-OBJECT>
+          <SPEC-OBJECT IDENTIFIER="RQ10" LAST-CHANGE="2023-07-07T00:00:00Z">
+            <VALUES>
+              <ATTRIBUTE-VALUE-STRING THE-VALUE="The coffee machine should provide informative error messages and handle exceptions gracefully." DEFINITION="reqif.standard.requirement.description"/>
+              <ATTRIBUTE-VALUE-ENUMERATION THE-VALUE="reqif.standard.requirement.status.open" DEFINITION="reqif.standard.requirement.status"/>
+            </VALUES>
+          </SPEC-OBJECT>
+        </VALUES>
+      </SPECIFICATION>
+    </SPECIFICATIONS>
+  </CORE-CONTENT>
+</REQ-IF>
