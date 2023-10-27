@@ -187,11 +187,30 @@ def main():
         "input_file", type=str, help="Path to the input ReqIF file."
     )
     main_parser.add_argument(
-        "output_dir", type=str, help="Path to the output dir."
+        "--output-dir",
+        type=str,
+        help="Path to the output dir.",
+        default="output/",
+    )
+    main_parser.add_argument(
+        "--stdout",
+        help="Makes the script write the output ReqIF to standard output.",
+        action="store_true",
+    )
+    main_parser.add_argument(
+        "--no-filesystem",
+        help=(
+            "Disables writing to the file system. "
+            "Should be used in combination with --stdout."
+        ),
+        action="store_true",
     )
 
     args = main_parser.parse_args()
     input_file: str = args.input_file
+    should_use_file_system: bool = not args.no_filesystem
+    should_use_stdout: bool = args.stdout
+
     if input_file.endswith(".reqifz"):
         reqifz_bundle: ReqIFZBundle = ReqIFZParser.parse(input_file)
         assert len(reqifz_bundle.reqif_bundles) == 1
@@ -199,16 +218,20 @@ def main():
     else:
         reqif_bundle = ReqIFParser.parse(input_file)
 
-    path_to_output_dir = args.output_dir
-    Path(path_to_output_dir).mkdir(exist_ok=True)
-
     req_dict = ReqIFToDictConverter.convert(reqif_bundle)
+    reqif_json = json.dumps(req_dict.get_as_dict(), indent=4)
 
-    path_to_output_file = os.path.join(path_to_output_dir, "output.json")
-    with open(path_to_output_file, "w", encoding="utf8") as json_file:
-        json.dump(
-            req_dict.get_as_dict(), json_file, ensure_ascii=False, indent=4
-        )
+    if should_use_file_system:
+        path_to_output_dir = args.output_dir
+        Path(path_to_output_dir).mkdir(exist_ok=True)
+
+        path_to_output_file = os.path.join(path_to_output_dir, "output.json")
+        with open(path_to_output_file, "w", encoding="utf8") as json_file:
+            json_file.write(reqif_json)
+            json_file.write("\n")
+
+    if should_use_stdout:
+        print(reqif_json)  # noqa: T201
 
 
 main()
