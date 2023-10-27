@@ -159,6 +159,14 @@ The anonymization algorithm preserves the uniqueness of the anonymized strings
 in the document. This way, if the requirement UID identifiers are anonymized,
 they will still be unique strings in an anonymized document.
 
+## How-to examples
+
+The `tests/integration/examples` folder contains various examples of how the
+ReqIF library can be used. Some examples could be and will be made more
+advanced over time. The examples are stored in the integration tests folder, so
+that they don't regress over time. The feedback and other example requests are
+welcome.
+
 ## Implementation details
 
 The core of the library is a **ReqIF first-stage parser** that only transforms
