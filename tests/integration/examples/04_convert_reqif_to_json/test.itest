@@ -2,10 +2,14 @@ RUN: mkdir -p %S/Output
 RUN: %reqif passthrough %S/sample.reqif %S/Output/sample.reqif
 RUN: %diff %S/sample.reqif %S/Output/sample.reqif
 
-RUN: python %S/script.py %S/sample.reqif %S/Output/reqif
+RUN: python %S/script.py %S/sample.reqif --output-dir %S/Output/reqif
 RUN: %diff %S/expected/output.json %S/Output/reqif/output.json
 
-RUN: python %S/script.py %S/sample.reqifz %S/Output/reqifz
+RUN: mkdir %S/Output/reqif_stdout
+RUN: python %S/script.py %S/sample.reqif --stdout --no-filesystem | tee %S/Output/reqif_stdout/output.json
+RUN: %diff %S/expected/output.json %S/Output/reqif_stdout/output.json
+
+RUN: python %S/script.py %S/sample.reqifz --output-dir %S/Output/reqifz
 RUN: %diff %S/expected/output.json %S/Output/reqifz/output.json
 
 TODO:
