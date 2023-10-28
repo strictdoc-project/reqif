@@ -1,16 +1,22 @@
 RUN: mkdir -p %S/Output
-RUN: %reqif passthrough %S/sample.reqif %S/Output/sample.reqif
-RUN: %diff %S/sample.reqif %S/Output/sample.reqif
 
-RUN: python %S/script.py %S/sample.reqif --output-dir %S/Output/reqif
-RUN: %diff %S/expected/output.json %S/Output/reqif/output.json
+# First, check that the ReqIF library fully understands the input ReqIF files.
+RUN: %reqif passthrough %S/sample1_polarion.reqif %S/Output/sample1_polarion.reqif
+RUN: %diff %S/sample1_polarion.reqif %S/Output/sample1_polarion.reqif
+RUN: %reqif passthrough %S/sample2_sdoc.reqif %S/Output/sample2_sdoc.reqif
+RUN: %diff %S/sample2_sdoc.reqif %S/Output/sample2_sdoc.reqif
+
+RUN: python %S/script.py %S/sample1_polarion.reqif --output-dir %S/Output/reqif
+RUN: python %S/script.py %S/sample2_sdoc.reqif --output-dir %S/Output/reqif
+RUN: %diff %S/expected/sample1_polarion.json %S/Output/reqif/sample1_polarion.json
+RUN: %diff %S/expected/sample2_sdoc.json %S/Output/reqif/sample2_sdoc.json
 
 RUN: mkdir %S/Output/reqif_stdout
-RUN: python %S/script.py %S/sample.reqif --stdout --no-filesystem | tee %S/Output/reqif_stdout/output.json
-RUN: %diff %S/expected/output.json %S/Output/reqif_stdout/output.json
+RUN: python %S/script.py %S/sample1_polarion.reqif --stdout --no-filesystem | tee %S/Output/reqif_stdout/sample1_polarion.json
+RUN: %diff %S/expected/sample1_polarion.json %S/Output/reqif_stdout/sample1_polarion.json
 
-RUN: python %S/script.py %S/sample.reqifz --output-dir %S/Output/reqifz
-RUN: %diff %S/expected/output.json %S/Output/reqifz/output.json
+RUN: python %S/script.py %S/sample_polarion_reqifz.reqifz --output-dir %S/Output/reqifz
+RUN: %diff %S/expected/sample1_polarion.json %S/Output/reqifz/sample1_polarion.reqif.json
 
 TODO:
 - output file vs output stdout

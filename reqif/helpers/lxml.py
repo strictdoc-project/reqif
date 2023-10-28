@@ -3,7 +3,7 @@ from copy import deepcopy
 from itertools import chain
 
 from lxml import etree
-from lxml.etree import tostring
+from lxml.etree import _Comment, tostring
 from lxml.html import fragment_fromstring
 
 
@@ -208,9 +208,16 @@ def lxml_strip_namespace_from_xml(root_xml, full=False):
         # Remove an XML namespace URI in the element's name but keep the
         # namespaces in the HTML content as found in the
         # <ATTRIBUTE-VALUE-XHTML> of ReqIF XML.
-        if not full and "http://www.w3.org/1999/xhtml" in elem.tag:
+        if lxml_is_comment_node(elem) or (
+            not full and "http://www.w3.org/1999/xhtml" in elem.tag
+        ):
             continue
         elem.tag = etree.QName(elem).localname
     # Remove unused namespace declarations
     etree.cleanup_namespaces(root_xml)
     return root_xml
+
+
+def lxml_is_comment_node(xml_node):
+    # FIXME: Accessing a "_"-marked Comment class of lxml is not great.
+    return isinstance(xml_node, _Comment)
