@@ -3,29 +3,49 @@ import json
 import os
 from dataclasses import dataclass, field
 from pathlib import Path
-from typing import Any, Dict, List
+from typing import Dict, List, Union
 
 from dataclasses_json import dataclass_json
 
+from reqif.experimental.reqif_schema import ReqIFSchema
 from reqif.models.reqif_data_type import (
     ReqIFDataTypeDefinitionDateIdentifier,
     ReqIFDataTypeDefinitionEnumeration,
     ReqIFDataTypeDefinitionString,
     ReqIFDataTypeDefinitionXHTML,
 )
-from reqif.models.reqif_spec_object_type import (
-    ReqIFSpecObjectType,
-    SpecAttributeDefinition,
-)
+from reqif.models.reqif_spec_object import ReqIFSpecObject
 from reqif.parser import ReqIFParser, ReqIFZParser
 from reqif.reqif_bundle import ReqIFBundle, ReqIFZBundle
 
 
 @dataclass_json
 @dataclass
+class Node:
+    node_type: str
+    level: int
+    fields: Dict
+    nodes: List["Node"] = field(default_factory=list)
+
+    def get_as_dict(self):
+        return self.to_dict()  # noqa: E1101
+
+    def __str__(self):
+        return f"Node(node_type = {self.node_type}, level = {self.level}, fields = {self.fields})"
+
+    def __repr__(self):
+        return self.__str__()
+
+
+@dataclass_json
+@dataclass
 class Specification:
     name: str
-    content: List
+    nodes: List[Node]
+
+    @property
+    def level(self):
+        return 0
 
     def get_as_dict(self):
         return self.to_dict()  # noqa: E1101
@@ -50,42 +70,18 @@ class ReqIFToDictConverter:
         # This dictionary will be written to CSV.
         reqif_dict = ReqDict()
 
-        data_type_definitions: Dict[str, Any] = {}
-        spec_object_type_attributes: Dict[str, SpecAttributeDefinition] = {}
-        spec_object_type_names: Dict[str, str] = {}
+        reqif_schema = ReqIFSchema(reqif_bundle)
 
-        # First, collect iterate over all spec object types and collect all attributes
-        # which are essentially the requirements fields.
-        assert reqif_bundle.core_content is not None
-        assert reqif_bundle.core_content.req_if_content is not None
-        assert reqif_bundle.core_content.req_if_content.spec_types is not None
-        for spec_type in reqif_bundle.core_content.req_if_content.spec_types:
-            if not isinstance(spec_type, ReqIFSpecObjectType):
-                continue
-
-            assert spec_type.long_name is not None
-            spec_object_type_names[spec_type.identifier] = spec_type.long_name
-
-            assert spec_type.attribute_definitions is not None
-            for attribute_definition in spec_type.attribute_definitions:
-                spec_object_type_attributes[
-                    attribute_definition.identifier
-                ] = attribute_definition
-
-        assert reqif_bundle.core_content.req_if_content.data_types is not None
-        for data_type in reqif_bundle.core_content.req_if_content.data_types:
-            data_type_definitions[data_type.identifier] = data_type
-
-        # The easiest way to define the CSV columns is to collect all field names
-        # available in the ReqIF file.
-        # NOTE: This can create many unused columns if the requirements and chapters
-        # attributes are two distinct sets of fields.
+        # The easiest way to define the JSON/CSV columns is to collect all
+        # field names available in the ReqIF file.
+        # NOTE: This can create many unused columns if the requirements and
+        # chapters attributes are two distinct sets of fields.
         reqif_dict.fields = []
         reqif_dict.fields.extend(
             list(
                 {
                     attribute_definition_.long_name: 1
-                    for attribute_definition_ in spec_object_type_attributes.values()
+                    for attribute_definition_ in reqif_schema.spec_object_type_attributes.values()
                 }.keys()
             )
         )
@@ -98,8 +94,11 @@ class ReqIFToDictConverter:
         ) in reqif_bundle.core_content.req_if_content.specifications:
             assert specification.long_name is not None
             specification_dict: Specification = Specification(
-                name=specification.long_name, content=[]
+                name=specification.long_name, nodes=[]
             )
+            section_stack: List[Union[Specification, Node]] = [
+                specification_dict
+            ]
 
             for (
                 current_hierarchy
@@ -107,77 +106,110 @@ class ReqIFToDictConverter:
                 spec_object = reqif_bundle.get_spec_object_by_ref(
                     current_hierarchy.spec_object
                 )
-
-                spec_object_type_ref = spec_object.spec_object_type
-
-                spec_object_type = reqif_bundle.get_spec_object_type_by_ref(
-                    spec_object_type_ref
+                node: Node = ReqIFToDictConverter.convert_spec_object_to_node(
+                    spec_object,
+                    reqif_bundle,
+                    reqif_schema,
+                    current_hierarchy.level,
                 )
-                assert spec_object_type is not None
-                row_dict = {
-                    "Type": spec_object_type_names[spec_object_type.identifier]
-                }
-                for spec_object_attribute_ in spec_object.attributes:
-                    attribute_definition = spec_object_type_attributes[
-                        spec_object_attribute_.definition_ref
-                    ]
-                    assert attribute_definition.long_name is not None
-
-                    data_type = data_type_definitions[
-                        attribute_definition.datatype_definition
-                    ]
-                    assert data_type is not None
-                    if isinstance(
-                        data_type, ReqIFDataTypeDefinitionDateIdentifier
-                    ):
-                        assert isinstance(spec_object_attribute_.value, str)
-                        row_dict[
-                            attribute_definition.long_name
-                        ] = spec_object_attribute_.value
-                    elif isinstance(
-                        data_type, ReqIFDataTypeDefinitionEnumeration
-                    ):
-                        assert isinstance(spec_object_attribute_.value, list)
-
-                        enum_values: List[str] = []
-                        for (
-                            enum_value_identifier_
-                        ) in spec_object_attribute_.value:
-                            assert data_type.values is not None
-                            for data_type_enum_value_ in data_type.values:
-                                if (
-                                    data_type_enum_value_.identifier
-                                    == enum_value_identifier_
-                                ):
-                                    assert (
-                                        data_type_enum_value_.long_name
-                                        is not None
-                                    )
-                                    enum_values.append(
-                                        data_type_enum_value_.long_name
-                                    )
-                                    break
-                            else:
-                                raise AssertionError("Enum value not found.")
-                        row_dict[attribute_definition.long_name] = ", ".join(
-                            enum_values
-                        )
-                    elif isinstance(data_type, ReqIFDataTypeDefinitionString):
-                        assert isinstance(spec_object_attribute_.value, str)
-                        row_dict[
-                            attribute_definition.long_name
-                        ] = spec_object_attribute_.value
-                    elif isinstance(data_type, ReqIFDataTypeDefinitionXHTML):
-                        assert isinstance(spec_object_attribute_.value, str)
-                        row_dict[
-                            attribute_definition.long_name
-                        ] = spec_object_attribute_.value
+                current_node = section_stack[-1]
+                if not reqif_schema.is_spec_object_a_heading(spec_object):
+                    if node.level > current_node.level:
+                        assert node.level == (
+                            current_node.level + 1
+                        ), "Something went wrong with the spec hierarchy levels."
+                        current_node.nodes.append(node)
+                    elif node.level == current_node.level:
+                        section_stack.pop()
+                        current_node = section_stack[-1]
+                        current_node.nodes.append(node)
                     else:
-                        raise NotImplementedError(data_type)
-                specification_dict.content.append(row_dict)
+                        raise NotImplementedError
+                else:
+                    if node.level > current_node.level:
+                        section_stack.append(node)
+                        current_node.nodes.append(node)
+                    elif node.level == current_node.level:
+                        section_stack[-1] = node
+                        current_node.nodes.append(node)
+                    else:
+                        while current_node.level >= node.level:
+                            assert not isinstance(current_node, Specification)
+                            section_stack.pop()
+                            current_node = section_stack[-1]
+                        section_stack.append(node)
+                        current_node.nodes.append(node)
+
             reqif_dict.documents.append(specification_dict)
 
         return reqif_dict
+
+    @staticmethod
+    def convert_spec_object_to_node(
+        spec_object: ReqIFSpecObject,
+        reqif_bundle: ReqIFBundle,
+        reqif_schema: ReqIFSchema,
+        level,
+    ):
+        assert 1 <= level <= 10, "Expecting a reasonable level of nesting."
+        spec_object_type_ref = spec_object.spec_object_type
+
+        spec_object_type = reqif_bundle.get_spec_object_type_by_ref(
+            spec_object_type_ref
+        )
+        assert spec_object_type is not None
+        row_dict = {}
+        for spec_object_attribute_ in spec_object.attributes:
+            attribute_definition = reqif_schema.spec_object_type_attributes[
+                spec_object_attribute_.definition_ref
+            ]
+            assert attribute_definition.long_name is not None
+
+            data_type = reqif_schema.data_type_definitions[
+                attribute_definition.datatype_definition
+            ]
+            assert data_type is not None
+            if isinstance(data_type, ReqIFDataTypeDefinitionDateIdentifier):
+                assert isinstance(spec_object_attribute_.value, str)
+                row_dict[
+                    attribute_definition.long_name
+                ] = spec_object_attribute_.value
+            elif isinstance(data_type, ReqIFDataTypeDefinitionEnumeration):
+                assert isinstance(spec_object_attribute_.value, list)
+
+                enum_values: List[str] = []
+                for enum_value_identifier_ in spec_object_attribute_.value:
+                    assert data_type.values is not None
+                    for data_type_enum_value_ in data_type.values:
+                        if (
+                            data_type_enum_value_.identifier
+                            == enum_value_identifier_
+                        ):
+                            assert data_type_enum_value_.long_name is not None
+                            enum_values.append(data_type_enum_value_.long_name)
+                            break
+                    else:
+                        raise AssertionError("Enum value not found.")
+                row_dict[attribute_definition.long_name] = ", ".join(
+                    enum_values
+                )
+            elif isinstance(data_type, ReqIFDataTypeDefinitionString):
+                assert isinstance(spec_object_attribute_.value, str)
+                row_dict[
+                    attribute_definition.long_name
+                ] = spec_object_attribute_.value
+            elif isinstance(data_type, ReqIFDataTypeDefinitionXHTML):
+                assert isinstance(spec_object_attribute_.value, str)
+                row_dict[
+                    attribute_definition.long_name
+                ] = spec_object_attribute_.value
+            else:
+                raise NotImplementedError(data_type)
+
+        node_type = reqif_schema.spec_object_type_names[
+            spec_object_type.identifier
+        ]
+        return Node(node_type=node_type, level=level, fields=row_dict)
 
 
 def main():
@@ -208,13 +240,16 @@ def main():
 
     args = main_parser.parse_args()
     input_file: str = args.input_file
+    input_file_name = Path(input_file).stem
     should_use_file_system: bool = not args.no_filesystem
     should_use_stdout: bool = args.stdout
 
     if input_file.endswith(".reqifz"):
         reqifz_bundle: ReqIFZBundle = ReqIFZParser.parse(input_file)
         assert len(reqifz_bundle.reqif_bundles) == 1
-        reqif_bundle = (list(reqifz_bundle.reqif_bundles.values()))[0]
+        reqif_filename = next(iter(reqifz_bundle.reqif_bundles.keys()))
+        input_file_name = reqif_filename
+        reqif_bundle = reqifz_bundle.reqif_bundles[reqif_filename]
     else:
         reqif_bundle = ReqIFParser.parse(input_file)
 
@@ -225,7 +260,9 @@ def main():
         path_to_output_dir = args.output_dir
         Path(path_to_output_dir).mkdir(exist_ok=True)
 
-        path_to_output_file = os.path.join(path_to_output_dir, "output.json")
+        path_to_output_file = os.path.join(
+            path_to_output_dir, f"{input_file_name}.json"
+        )
         with open(path_to_output_file, "w", encoding="utf8") as json_file:
             json_file.write(reqif_json)
             json_file.write("\n")

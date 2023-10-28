@@ -8,7 +8,10 @@ from typing import Any, Dict, List, Optional, Tuple, Union
 from lxml import etree
 from lxml.etree import DocInfo
 
-from reqif.helpers.lxml import lxml_strip_namespace_from_xml
+from reqif.helpers.lxml import (
+    lxml_is_comment_node,
+    lxml_strip_namespace_from_xml,
+)
 from reqif.models.error_handling import (
     ReqIFMissingTagException,
     ReqIFSchemaError,
@@ -276,6 +279,9 @@ class ReqIFParser:
                     spec_type = RelationGroupTypeParser.parse(
                         xml_spec_object_type_xml
                     )
+                elif lxml_is_comment_node(xml_spec_object_type_xml):
+                    # Skip comments for now.
+                    continue
                 else:
                     raise NotImplementedError(
                         xml_spec_object_type_xml
@@ -318,6 +324,8 @@ class ReqIFParser:
         if xml_spec_objects is not None:
             spec_objects = []
             for xml_spec_object in xml_spec_objects:
+                if lxml_is_comment_node(xml_spec_object):
+                    continue
                 spec_object = SpecObjectParser.parse(xml_spec_object)
                 spec_objects.append(spec_object)
                 spec_objects_lookup[spec_object.identifier] = spec_object

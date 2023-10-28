@@ -1,0 +1,180 @@
+{
+    "documents": [
+        {
+            "name": "Sample document",
+            "nodes": [
+                {
+                    "node_type": "REQUIREMENT",
+                    "level": 1,
+                    "fields": {
+                        "ReqIF.ChapterName": "Section 1"
+                    },
+                    "nodes": [
+                        {
+                            "node_type": "REQUIREMENT",
+                            "level": 2,
+                            "fields": {
+                                "ReqIF.ChapterName": "Section 1.1"
+                            },
+                            "nodes": [
+                                {
+                                    "node_type": "REQUIREMENT",
+                                    "level": 3,
+                                    "fields": {
+                                        "ReqIF.Name": "Requirement A",
+                                        "ReqIF.Text": "The system shall do A."
+                                    },
+                                    "nodes": []
+                                },
+                                {
+                                    "node_type": "REQUIREMENT",
+                                    "level": 3,
+                                    "fields": {
+                                        "ReqIF.Name": "Requirement B",
+                                        "ReqIF.Text": "The system shall do B."
+                                    },
+                                    "nodes": []
+                                },
+                                {
+                                    "node_type": "REQUIREMENT",
+                                    "level": 3,
+                                    "fields": {
+                                        "ReqIF.Name": "Requirement C",
+                                        "ReqIF.Text": "The system shall do C."
+                                    },
+                                    "nodes": []
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "node_type": "REQUIREMENT",
+                    "level": 1,
+                    "fields": {
+                        "ReqIF.ChapterName": "Section 2"
+                    },
+                    "nodes": [
+                        {
+                            "node_type": "REQUIREMENT",
+                            "level": 2,
+                            "fields": {
+                                "ReqIF.ChapterName": "Section 2.1"
+                            },
+                            "nodes": [
+                                {
+                                    "node_type": "REQUIREMENT",
+                                    "level": 3,
+                                    "fields": {
+                                        "ReqIF.Name": "Requirement A",
+                                        "ReqIF.Text": "The system shall do A."
+                                    },
+                                    "nodes": []
+                                },
+                                {
+                                    "node_type": "REQUIREMENT",
+                                    "level": 3,
+                                    "fields": {
+                                        "ReqIF.Name": "Requirement B",
+                                        "ReqIF.Text": "The system shall do B."
+                                    },
+                                    "nodes": []
+                                },
+                                {
+                                    "node_type": "REQUIREMENT",
+                                    "level": 3,
+                                    "fields": {
+                                        "ReqIF.Name": "Requirement C",
+                                        "ReqIF.Text": "The system shall do C."
+                                    },
+                                    "nodes": []
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "node_type": "REQUIREMENT",
+                    "level": 1,
+                    "fields": {
+                        "ReqIF.ChapterName": "Section 3"
+                    },
+                    "nodes": [
+                        {
+                            "node_type": "REQUIREMENT",
+                            "level": 2,
+                            "fields": {
+                                "ReqIF.ChapterName": "Section 3.1"
+                            },
+                            "nodes": [
+                                {
+                                    "node_type": "REQUIREMENT",
+                                    "level": 3,
+                                    "fields": {
+                                        "ReqIF.ChapterName": "Section 3.1.1"
+                                    },
+                                    "nodes": [
+                                        {
+                                            "node_type": "REQUIREMENT",
+                                            "level": 4,
+                                            "fields": {
+                                                "ReqIF.ChapterName": "Section 3.1.1.1"
+                                            },
+                                            "nodes": [
+                                                {
+                                                    "node_type": "REQUIREMENT",
+                                                    "level": 5,
+                                                    "fields": {
+                                                        "ReqIF.Name": "Requirement A",
+                                                        "ReqIF.Text": "The system shall do A."
+                                                    },
+                                                    "nodes": []
+                                                },
+                                                {
+                                                    "node_type": "REQUIREMENT",
+                                                    "level": 5,
+                                                    "fields": {
+                                                        "ReqIF.ChapterName": "Section 3.1.1.1.2 (section between requirements)"
+                                                    },
+                                                    "nodes": []
+                                                },
+                                                {
+                                                    "node_type": "REQUIREMENT",
+                                                    "level": 5,
+                                                    "fields": {
+                                                        "ReqIF.Name": "Requirement B",
+                                                        "ReqIF.Text": "The system shall do B."
+                                                    },
+                                                    "nodes": []
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "node_type": "REQUIREMENT",
+                    "level": 1,
+                    "fields": {
+                        "ReqIF.ChapterName": "Section 4"
+                    },
+                    "nodes": []
+                }
+            ]
+        }
+    ],
+    "fields": [
+        "ReqIF.ForeignID",
+        "LEVEL",
+        "STATUS",
+        "TAGS",
+        "ReqIF.Name",
+        "ReqIF.Text",
+        "RATIONALE",
+        "NOTES",
+        "ReqIF.ChapterName"
+    ]
+}

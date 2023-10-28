@@ -1,0 +1,450 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<REQ-IF xmlns="http://www.omg.org/spec/ReqIF/20110401/reqif.xsd" xmlns:configuration="https://github.com/strictdoc-project/strictdoc">
+  <THE-HEADER>
+    <REQ-IF-HEADER IDENTIFIER="REQ-IF-HEADER-a20dd782-7a56-497e-bfae-14d534bdca25">
+      <CREATION-TIME>2023-10-28T18:09:00.468457+02:00</CREATION-TIME>
+      <REQ-IF-TOOL-ID>strictdoc</REQ-IF-TOOL-ID>
+      <REQ-IF-VERSION>1.0</REQ-IF-VERSION>
+      <SOURCE-TOOL-ID>strictdoc</SOURCE-TOOL-ID>
+      <TITLE>Documentation export by StrictDoc</TITLE>
+    </REQ-IF-HEADER>
+  </THE-HEADER>
+  <CORE-CONTENT>
+    <REQ-IF-CONTENT>
+      <DATATYPES>
+        <DATATYPE-DEFINITION-STRING IDENTIFIER="SDOC_DATATYPE_SINGLE_LINE_STRING"/>
+      </DATATYPES>
+      <SPEC-TYPES>
+        <SPEC-OBJECT-TYPE IDENTIFIER="REQUIREMENT_OR_SECTION_55880716ee0e4c2d9ed88783c323dc07" LONG-NAME="REQUIREMENT">
+          <SPEC-ATTRIBUTES>
+            <ATTRIBUTE-DEFINITION-STRING IDENTIFIER="ReqIF.ForeignID" LONG-NAME="ReqIF.ForeignID">
+              <TYPE>
+                <DATATYPE-DEFINITION-STRING-REF>SDOC_DATATYPE_SINGLE_LINE_STRING</DATATYPE-DEFINITION-STRING-REF>
+              </TYPE>
+            </ATTRIBUTE-DEFINITION-STRING>
+            <ATTRIBUTE-DEFINITION-STRING IDENTIFIER="LEVEL" LONG-NAME="LEVEL">
+              <TYPE>
+                <DATATYPE-DEFINITION-STRING-REF>SDOC_DATATYPE_SINGLE_LINE_STRING</DATATYPE-DEFINITION-STRING-REF>
+              </TYPE>
+            </ATTRIBUTE-DEFINITION-STRING>
+            <ATTRIBUTE-DEFINITION-STRING IDENTIFIER="STATUS" LONG-NAME="STATUS">
+              <TYPE>
+                <DATATYPE-DEFINITION-STRING-REF>SDOC_DATATYPE_SINGLE_LINE_STRING</DATATYPE-DEFINITION-STRING-REF>
+              </TYPE>
+            </ATTRIBUTE-DEFINITION-STRING>
+            <ATTRIBUTE-DEFINITION-STRING IDENTIFIER="TAGS" LONG-NAME="TAGS">
+              <TYPE>
+                <DATATYPE-DEFINITION-STRING-REF>SDOC_DATATYPE_SINGLE_LINE_STRING</DATATYPE-DEFINITION-STRING-REF>
+              </TYPE>
+            </ATTRIBUTE-DEFINITION-STRING>
+            <ATTRIBUTE-DEFINITION-STRING IDENTIFIER="ReqIF.Name" LONG-NAME="ReqIF.Name">
+              <TYPE>
+                <DATATYPE-DEFINITION-STRING-REF>SDOC_DATATYPE_SINGLE_LINE_STRING</DATATYPE-DEFINITION-STRING-REF>
+              </TYPE>
+            </ATTRIBUTE-DEFINITION-STRING>
+            <ATTRIBUTE-DEFINITION-STRING IDENTIFIER="ReqIF.Text" LONG-NAME="ReqIF.Text">
+              <TYPE>
+                <DATATYPE-DEFINITION-STRING-REF>SDOC_DATATYPE_SINGLE_LINE_STRING</DATATYPE-DEFINITION-STRING-REF>
+              </TYPE>
+            </ATTRIBUTE-DEFINITION-STRING>
+            <ATTRIBUTE-DEFINITION-STRING IDENTIFIER="RATIONALE" LONG-NAME="RATIONALE">
+              <TYPE>
+                <DATATYPE-DEFINITION-STRING-REF>SDOC_DATATYPE_SINGLE_LINE_STRING</DATATYPE-DEFINITION-STRING-REF>
+              </TYPE>
+            </ATTRIBUTE-DEFINITION-STRING>
+            <ATTRIBUTE-DEFINITION-STRING IDENTIFIER="NOTES" LONG-NAME="NOTES">
+              <TYPE>
+                <DATATYPE-DEFINITION-STRING-REF>SDOC_DATATYPE_SINGLE_LINE_STRING</DATATYPE-DEFINITION-STRING-REF>
+              </TYPE>
+            </ATTRIBUTE-DEFINITION-STRING>
+            <ATTRIBUTE-DEFINITION-STRING IDENTIFIER="ReqIF.ChapterName" LONG-NAME="ReqIF.ChapterName">
+              <TYPE>
+                <DATATYPE-DEFINITION-STRING-REF>SDOC_DATATYPE_SINGLE_LINE_STRING</DATATYPE-DEFINITION-STRING-REF>
+              </TYPE>
+            </ATTRIBUTE-DEFINITION-STRING>
+          </SPEC-ATTRIBUTES>
+        </SPEC-OBJECT-TYPE>
+        <SPECIFICATION-TYPE IDENTIFIER="SDOC_SPECIFICATION_TYPE_SINGLETON" LAST-CHANGE="2023-10-28T18:09:00.468457+02:00" LONG-NAME="SDOC_SPECIFICATION_TYPE_SINGLETON"/>
+      </SPEC-TYPES>
+      <SPEC-OBJECTS>
+        <SPEC-OBJECT IDENTIFIER="SECTION-0e3961d4-b93e-4209-9bfe-8b43831e09bc">
+          <VALUES>
+            <ATTRIBUTE-VALUE-STRING THE-VALUE="Section 1">
+              <DEFINITION>
+                <ATTRIBUTE-DEFINITION-STRING-REF>ReqIF.ChapterName</ATTRIBUTE-DEFINITION-STRING-REF>
+              </DEFINITION>
+            </ATTRIBUTE-VALUE-STRING>
+          </VALUES>
+          <TYPE>
+            <SPEC-OBJECT-TYPE-REF>REQUIREMENT_OR_SECTION_55880716ee0e4c2d9ed88783c323dc07</SPEC-OBJECT-TYPE-REF>
+          </TYPE>
+        </SPEC-OBJECT>
+        <SPEC-OBJECT IDENTIFIER="SECTION-56518691-1a69-40b7-ac31-aab358ace026">
+          <VALUES>
+            <ATTRIBUTE-VALUE-STRING THE-VALUE="Section 1.1">
+              <DEFINITION>
+                <ATTRIBUTE-DEFINITION-STRING-REF>ReqIF.ChapterName</ATTRIBUTE-DEFINITION-STRING-REF>
+              </DEFINITION>
+            </ATTRIBUTE-VALUE-STRING>
+          </VALUES>
+          <TYPE>
+            <SPEC-OBJECT-TYPE-REF>REQUIREMENT_OR_SECTION_55880716ee0e4c2d9ed88783c323dc07</SPEC-OBJECT-TYPE-REF>
+          </TYPE>
+        </SPEC-OBJECT>
+        <SPEC-OBJECT IDENTIFIER="REQUIREMENT-bcfba793-7caa-46c0-8522-ba9e2d919df9">
+          <VALUES>
+            <ATTRIBUTE-VALUE-STRING THE-VALUE="Requirement A">
+              <DEFINITION>
+                <ATTRIBUTE-DEFINITION-STRING-REF>ReqIF.Name</ATTRIBUTE-DEFINITION-STRING-REF>
+              </DEFINITION>
+            </ATTRIBUTE-VALUE-STRING>
+            <ATTRIBUTE-VALUE-STRING THE-VALUE="The system shall do A.">
+              <DEFINITION>
+                <ATTRIBUTE-DEFINITION-STRING-REF>ReqIF.Text</ATTRIBUTE-DEFINITION-STRING-REF>
+              </DEFINITION>
+            </ATTRIBUTE-VALUE-STRING>
+          </VALUES>
+          <TYPE>
+            <SPEC-OBJECT-TYPE-REF>REQUIREMENT_OR_SECTION_55880716ee0e4c2d9ed88783c323dc07</SPEC-OBJECT-TYPE-REF>
+          </TYPE>
+        </SPEC-OBJECT>
+        <SPEC-OBJECT IDENTIFIER="REQUIREMENT-e83944ee-8223-4a8f-a59c-370191e140d1">
+          <VALUES>
+            <ATTRIBUTE-VALUE-STRING THE-VALUE="Requirement B">
+              <DEFINITION>
+                <ATTRIBUTE-DEFINITION-STRING-REF>ReqIF.Name</ATTRIBUTE-DEFINITION-STRING-REF>
+              </DEFINITION>
+            </ATTRIBUTE-VALUE-STRING>
+            <ATTRIBUTE-VALUE-STRING THE-VALUE="The system shall do B.">
+              <DEFINITION>
+                <ATTRIBUTE-DEFINITION-STRING-REF>ReqIF.Text</ATTRIBUTE-DEFINITION-STRING-REF>
+              </DEFINITION>
+            </ATTRIBUTE-VALUE-STRING>
+          </VALUES>
+          <TYPE>
+            <SPEC-OBJECT-TYPE-REF>REQUIREMENT_OR_SECTION_55880716ee0e4c2d9ed88783c323dc07</SPEC-OBJECT-TYPE-REF>
+          </TYPE>
+        </SPEC-OBJECT>
+        <SPEC-OBJECT IDENTIFIER="REQUIREMENT-e82abedd-a637-4f2c-889e-a8454b30d4a4">
+          <VALUES>
+            <ATTRIBUTE-VALUE-STRING THE-VALUE="Requirement C">
+              <DEFINITION>
+                <ATTRIBUTE-DEFINITION-STRING-REF>ReqIF.Name</ATTRIBUTE-DEFINITION-STRING-REF>
+              </DEFINITION>
+            </ATTRIBUTE-VALUE-STRING>
+            <ATTRIBUTE-VALUE-STRING THE-VALUE="The system shall do C.">
+              <DEFINITION>
+                <ATTRIBUTE-DEFINITION-STRING-REF>ReqIF.Text</ATTRIBUTE-DEFINITION-STRING-REF>
+              </DEFINITION>
+            </ATTRIBUTE-VALUE-STRING>
+          </VALUES>
+          <TYPE>
+            <SPEC-OBJECT-TYPE-REF>REQUIREMENT_OR_SECTION_55880716ee0e4c2d9ed88783c323dc07</SPEC-OBJECT-TYPE-REF>
+          </TYPE>
+        </SPEC-OBJECT>
+        <SPEC-OBJECT IDENTIFIER="SECTION-8b8ed5fb-f7b5-4603-8cb4-35d854f4fcae">
+          <VALUES>
+            <ATTRIBUTE-VALUE-STRING THE-VALUE="Section 2">
+              <DEFINITION>
+                <ATTRIBUTE-DEFINITION-STRING-REF>ReqIF.ChapterName</ATTRIBUTE-DEFINITION-STRING-REF>
+              </DEFINITION>
+            </ATTRIBUTE-VALUE-STRING>
+          </VALUES>
+          <TYPE>
+            <SPEC-OBJECT-TYPE-REF>REQUIREMENT_OR_SECTION_55880716ee0e4c2d9ed88783c323dc07</SPEC-OBJECT-TYPE-REF>
+          </TYPE>
+        </SPEC-OBJECT>
+        <SPEC-OBJECT IDENTIFIER="SECTION-9a5186b8-5ae6-4096-99ef-13d808b103b0">
+          <VALUES>
+            <ATTRIBUTE-VALUE-STRING THE-VALUE="Section 2.1">
+              <DEFINITION>
+                <ATTRIBUTE-DEFINITION-STRING-REF>ReqIF.ChapterName</ATTRIBUTE-DEFINITION-STRING-REF>
+              </DEFINITION>
+            </ATTRIBUTE-VALUE-STRING>
+          </VALUES>
+          <TYPE>
+            <SPEC-OBJECT-TYPE-REF>REQUIREMENT_OR_SECTION_55880716ee0e4c2d9ed88783c323dc07</SPEC-OBJECT-TYPE-REF>
+          </TYPE>
+        </SPEC-OBJECT>
+        <SPEC-OBJECT IDENTIFIER="REQUIREMENT-67ef625f-b903-47e1-aa9f-d60e568074d4">
+          <VALUES>
+            <ATTRIBUTE-VALUE-STRING THE-VALUE="Requirement A">
+              <DEFINITION>
+                <ATTRIBUTE-DEFINITION-STRING-REF>ReqIF.Name</ATTRIBUTE-DEFINITION-STRING-REF>
+              </DEFINITION>
+            </ATTRIBUTE-VALUE-STRING>
+            <ATTRIBUTE-VALUE-STRING THE-VALUE="The system shall do A.">
+              <DEFINITION>
+                <ATTRIBUTE-DEFINITION-STRING-REF>ReqIF.Text</ATTRIBUTE-DEFINITION-STRING-REF>
+              </DEFINITION>
+            </ATTRIBUTE-VALUE-STRING>
+          </VALUES>
+          <TYPE>
+            <SPEC-OBJECT-TYPE-REF>REQUIREMENT_OR_SECTION_55880716ee0e4c2d9ed88783c323dc07</SPEC-OBJECT-TYPE-REF>
+          </TYPE>
+        </SPEC-OBJECT>
+        <SPEC-OBJECT IDENTIFIER="REQUIREMENT-21fb0ad6-05eb-428f-b67b-c279328db503">
+          <VALUES>
+            <ATTRIBUTE-VALUE-STRING THE-VALUE="Requirement B">
+              <DEFINITION>
+                <ATTRIBUTE-DEFINITION-STRING-REF>ReqIF.Name</ATTRIBUTE-DEFINITION-STRING-REF>
+              </DEFINITION>
+            </ATTRIBUTE-VALUE-STRING>
+            <ATTRIBUTE-VALUE-STRING THE-VALUE="The system shall do B.">
+              <DEFINITION>
+                <ATTRIBUTE-DEFINITION-STRING-REF>ReqIF.Text</ATTRIBUTE-DEFINITION-STRING-REF>
+              </DEFINITION>
+            </ATTRIBUTE-VALUE-STRING>
+          </VALUES>
+          <TYPE>
+            <SPEC-OBJECT-TYPE-REF>REQUIREMENT_OR_SECTION_55880716ee0e4c2d9ed88783c323dc07</SPEC-OBJECT-TYPE-REF>
+          </TYPE>
+        </SPEC-OBJECT>
+        <SPEC-OBJECT IDENTIFIER="REQUIREMENT-5fd3d97c-4acc-4f48-9f3a-bb8b7a399b23">
+          <VALUES>
+            <ATTRIBUTE-VALUE-STRING THE-VALUE="Requirement C">
+              <DEFINITION>
+                <ATTRIBUTE-DEFINITION-STRING-REF>ReqIF.Name</ATTRIBUTE-DEFINITION-STRING-REF>
+              </DEFINITION>
+            </ATTRIBUTE-VALUE-STRING>
+            <ATTRIBUTE-VALUE-STRING THE-VALUE="The system shall do C.">
+              <DEFINITION>
+                <ATTRIBUTE-DEFINITION-STRING-REF>ReqIF.Text</ATTRIBUTE-DEFINITION-STRING-REF>
+              </DEFINITION>
+            </ATTRIBUTE-VALUE-STRING>
+          </VALUES>
+          <TYPE>
+            <SPEC-OBJECT-TYPE-REF>REQUIREMENT_OR_SECTION_55880716ee0e4c2d9ed88783c323dc07</SPEC-OBJECT-TYPE-REF>
+          </TYPE>
+        </SPEC-OBJECT>
+        <SPEC-OBJECT IDENTIFIER="SECTION-c0b3ed74-ea4e-408f-9a3b-456c599943a7">
+          <VALUES>
+            <ATTRIBUTE-VALUE-STRING THE-VALUE="Section 3">
+              <DEFINITION>
+                <ATTRIBUTE-DEFINITION-STRING-REF>ReqIF.ChapterName</ATTRIBUTE-DEFINITION-STRING-REF>
+              </DEFINITION>
+            </ATTRIBUTE-VALUE-STRING>
+          </VALUES>
+          <TYPE>
+            <SPEC-OBJECT-TYPE-REF>REQUIREMENT_OR_SECTION_55880716ee0e4c2d9ed88783c323dc07</SPEC-OBJECT-TYPE-REF>
+          </TYPE>
+        </SPEC-OBJECT>
+        <SPEC-OBJECT IDENTIFIER="SECTION-3e241867-bbd1-4d8f-8457-055f41295b9d">
+          <VALUES>
+            <ATTRIBUTE-VALUE-STRING THE-VALUE="Section 3.1">
+              <DEFINITION>
+                <ATTRIBUTE-DEFINITION-STRING-REF>ReqIF.ChapterName</ATTRIBUTE-DEFINITION-STRING-REF>
+              </DEFINITION>
+            </ATTRIBUTE-VALUE-STRING>
+          </VALUES>
+          <TYPE>
+            <SPEC-OBJECT-TYPE-REF>REQUIREMENT_OR_SECTION_55880716ee0e4c2d9ed88783c323dc07</SPEC-OBJECT-TYPE-REF>
+          </TYPE>
+        </SPEC-OBJECT>
+        <SPEC-OBJECT IDENTIFIER="SECTION-bf0bc7d9-24e2-4963-9009-d4e565652136">
+          <VALUES>
+            <ATTRIBUTE-VALUE-STRING THE-VALUE="Section 3.1.1">
+              <DEFINITION>
+                <ATTRIBUTE-DEFINITION-STRING-REF>ReqIF.ChapterName</ATTRIBUTE-DEFINITION-STRING-REF>
+              </DEFINITION>
+            </ATTRIBUTE-VALUE-STRING>
+          </VALUES>
+          <TYPE>
+            <SPEC-OBJECT-TYPE-REF>REQUIREMENT_OR_SECTION_55880716ee0e4c2d9ed88783c323dc07</SPEC-OBJECT-TYPE-REF>
+          </TYPE>
+        </SPEC-OBJECT>
+        <SPEC-OBJECT IDENTIFIER="SECTION-d63b35da-678f-4d8d-b95d-8a4afd2d7fb9">
+          <VALUES>
+            <ATTRIBUTE-VALUE-STRING THE-VALUE="Section 3.1.1.1">
+              <DEFINITION>
+                <ATTRIBUTE-DEFINITION-STRING-REF>ReqIF.ChapterName</ATTRIBUTE-DEFINITION-STRING-REF>
+              </DEFINITION>
+            </ATTRIBUTE-VALUE-STRING>
+          </VALUES>
+          <TYPE>
+            <SPEC-OBJECT-TYPE-REF>REQUIREMENT_OR_SECTION_55880716ee0e4c2d9ed88783c323dc07</SPEC-OBJECT-TYPE-REF>
+          </TYPE>
+        </SPEC-OBJECT>
+        <SPEC-OBJECT IDENTIFIER="REQUIREMENT-7f4e29b0-f41b-47d2-a38a-7361df93777d">
+          <VALUES>
+            <ATTRIBUTE-VALUE-STRING THE-VALUE="Requirement A">
+              <DEFINITION>
+                <ATTRIBUTE-DEFINITION-STRING-REF>ReqIF.Name</ATTRIBUTE-DEFINITION-STRING-REF>
+              </DEFINITION>
+            </ATTRIBUTE-VALUE-STRING>
+            <ATTRIBUTE-VALUE-STRING THE-VALUE="The system shall do A.">
+              <DEFINITION>
+                <ATTRIBUTE-DEFINITION-STRING-REF>ReqIF.Text</ATTRIBUTE-DEFINITION-STRING-REF>
+              </DEFINITION>
+            </ATTRIBUTE-VALUE-STRING>
+          </VALUES>
+          <TYPE>
+            <SPEC-OBJECT-TYPE-REF>REQUIREMENT_OR_SECTION_55880716ee0e4c2d9ed88783c323dc07</SPEC-OBJECT-TYPE-REF>
+          </TYPE>
+        </SPEC-OBJECT>
+        <SPEC-OBJECT IDENTIFIER="SECTION-71112096-3522-4338-b6e9-484315decee6">
+          <VALUES>
+            <ATTRIBUTE-VALUE-STRING THE-VALUE="Section 3.1.1.1.2 (section between requirements)">
+              <DEFINITION>
+                <ATTRIBUTE-DEFINITION-STRING-REF>ReqIF.ChapterName</ATTRIBUTE-DEFINITION-STRING-REF>
+              </DEFINITION>
+            </ATTRIBUTE-VALUE-STRING>
+          </VALUES>
+          <TYPE>
+            <SPEC-OBJECT-TYPE-REF>REQUIREMENT_OR_SECTION_55880716ee0e4c2d9ed88783c323dc07</SPEC-OBJECT-TYPE-REF>
+          </TYPE>
+        </SPEC-OBJECT>
+        <SPEC-OBJECT IDENTIFIER="REQUIREMENT-3259d4fe-6714-4f0f-9089-bef67eb4112c">
+          <VALUES>
+            <ATTRIBUTE-VALUE-STRING THE-VALUE="Requirement B">
+              <DEFINITION>
+                <ATTRIBUTE-DEFINITION-STRING-REF>ReqIF.Name</ATTRIBUTE-DEFINITION-STRING-REF>
+              </DEFINITION>
+            </ATTRIBUTE-VALUE-STRING>
+            <ATTRIBUTE-VALUE-STRING THE-VALUE="The system shall do B.">
+              <DEFINITION>
+                <ATTRIBUTE-DEFINITION-STRING-REF>ReqIF.Text</ATTRIBUTE-DEFINITION-STRING-REF>
+              </DEFINITION>
+            </ATTRIBUTE-VALUE-STRING>
+          </VALUES>
+          <TYPE>
+            <SPEC-OBJECT-TYPE-REF>REQUIREMENT_OR_SECTION_55880716ee0e4c2d9ed88783c323dc07</SPEC-OBJECT-TYPE-REF>
+          </TYPE>
+        </SPEC-OBJECT>
+        <SPEC-OBJECT IDENTIFIER="SECTION-bccb2673-a5ff-4665-95ad-c8c14ba4cf7a">
+          <VALUES>
+            <ATTRIBUTE-VALUE-STRING THE-VALUE="Section 4">
+              <DEFINITION>
+                <ATTRIBUTE-DEFINITION-STRING-REF>ReqIF.ChapterName</ATTRIBUTE-DEFINITION-STRING-REF>
+              </DEFINITION>
+            </ATTRIBUTE-VALUE-STRING>
+          </VALUES>
+          <TYPE>
+            <SPEC-OBJECT-TYPE-REF>REQUIREMENT_OR_SECTION_55880716ee0e4c2d9ed88783c323dc07</SPEC-OBJECT-TYPE-REF>
+          </TYPE>
+        </SPEC-OBJECT>
+      </SPEC-OBJECTS>
+      <SPEC-RELATIONS>
+      </SPEC-RELATIONS>
+      <SPECIFICATIONS>
+        <SPECIFICATION IDENTIFIER="SPECIFICATION-b570d748-dd17-4c3f-bef2-317fb2271ec3" LONG-NAME="Sample document">
+          <TYPE>
+            <SPECIFICATION-TYPE-REF>SDOC_SPECIFICATION_TYPE_SINGLETON</SPECIFICATION-TYPE-REF>
+          </TYPE>
+          <CHILDREN>
+            <SPEC-HIERARCHY IDENTIFIER="SPEC-HIERARCHY-8ce95433-6437-436d-a701-32940769068b" IS-EDITABLE="false" IS-TABLE-INTERNAL="false">
+              <OBJECT>
+                <SPEC-OBJECT-REF>SECTION-0e3961d4-b93e-4209-9bfe-8b43831e09bc</SPEC-OBJECT-REF>
+              </OBJECT>
+              <CHILDREN>
+                <SPEC-HIERARCHY IDENTIFIER="SPEC-HIERARCHY-d1f17a49-9dcf-477a-9d07-afa1f428885f" IS-EDITABLE="false" IS-TABLE-INTERNAL="false">
+                  <OBJECT>
+                    <SPEC-OBJECT-REF>SECTION-56518691-1a69-40b7-ac31-aab358ace026</SPEC-OBJECT-REF>
+                  </OBJECT>
+                  <CHILDREN>
+                    <SPEC-HIERARCHY IDENTIFIER="SPEC-IDENTIFIER-da47ec2b-fafe-41b9-adc3-7a7c688c8500" IS-EDITABLE="false" IS-TABLE-INTERNAL="false">
+                      <OBJECT>
+                        <SPEC-OBJECT-REF>REQUIREMENT-bcfba793-7caa-46c0-8522-ba9e2d919df9</SPEC-OBJECT-REF>
+                      </OBJECT>
+                    </SPEC-HIERARCHY>
+                    <SPEC-HIERARCHY IDENTIFIER="SPEC-IDENTIFIER-4624c18f-7ae6-45c7-807d-91b582f07c43" IS-EDITABLE="false" IS-TABLE-INTERNAL="false">
+                      <OBJECT>
+                        <SPEC-OBJECT-REF>REQUIREMENT-e83944ee-8223-4a8f-a59c-370191e140d1</SPEC-OBJECT-REF>
+                      </OBJECT>
+                    </SPEC-HIERARCHY>
+                    <SPEC-HIERARCHY IDENTIFIER="SPEC-IDENTIFIER-a823c363-5b7e-4060-b7d4-bd2001edf0c0" IS-EDITABLE="false" IS-TABLE-INTERNAL="false">
+                      <OBJECT>
+                        <SPEC-OBJECT-REF>REQUIREMENT-e82abedd-a637-4f2c-889e-a8454b30d4a4</SPEC-OBJECT-REF>
+                      </OBJECT>
+                    </SPEC-HIERARCHY>
+                  </CHILDREN>
+                </SPEC-HIERARCHY>
+              </CHILDREN>
+            </SPEC-HIERARCHY>
+            <SPEC-HIERARCHY IDENTIFIER="SPEC-HIERARCHY-3c3f95eb-e507-4921-ae63-c07ea0d8af0c" IS-EDITABLE="false" IS-TABLE-INTERNAL="false">
+              <OBJECT>
+                <SPEC-OBJECT-REF>SECTION-8b8ed5fb-f7b5-4603-8cb4-35d854f4fcae</SPEC-OBJECT-REF>
+              </OBJECT>
+              <CHILDREN>
+                <SPEC-HIERARCHY IDENTIFIER="SPEC-HIERARCHY-60c554b5-2bf8-411e-b3c2-046bd8567f8c" IS-EDITABLE="false" IS-TABLE-INTERNAL="false">
+                  <OBJECT>
+                    <SPEC-OBJECT-REF>SECTION-9a5186b8-5ae6-4096-99ef-13d808b103b0</SPEC-OBJECT-REF>
+                  </OBJECT>
+                  <CHILDREN>
+                    <SPEC-HIERARCHY IDENTIFIER="SPEC-IDENTIFIER-459071a3-da8a-496e-8cd7-2f49bacaf0db" IS-EDITABLE="false" IS-TABLE-INTERNAL="false">
+                      <OBJECT>
+                        <SPEC-OBJECT-REF>REQUIREMENT-67ef625f-b903-47e1-aa9f-d60e568074d4</SPEC-OBJECT-REF>
+                      </OBJECT>
+                    </SPEC-HIERARCHY>
+                    <SPEC-HIERARCHY IDENTIFIER="SPEC-IDENTIFIER-aa5231e8-730c-4e29-b259-936af4e04229" IS-EDITABLE="false" IS-TABLE-INTERNAL="false">
+                      <OBJECT>
+                        <SPEC-OBJECT-REF>REQUIREMENT-21fb0ad6-05eb-428f-b67b-c279328db503</SPEC-OBJECT-REF>
+                      </OBJECT>
+                    </SPEC-HIERARCHY>
+                    <SPEC-HIERARCHY IDENTIFIER="SPEC-IDENTIFIER-d677132c-0179-45b8-9144-13f01f71d386" IS-EDITABLE="false" IS-TABLE-INTERNAL="false">
+                      <OBJECT>
+                        <SPEC-OBJECT-REF>REQUIREMENT-5fd3d97c-4acc-4f48-9f3a-bb8b7a399b23</SPEC-OBJECT-REF>
+                      </OBJECT>
+                    </SPEC-HIERARCHY>
+                  </CHILDREN>
+                </SPEC-HIERARCHY>
+              </CHILDREN>
+            </SPEC-HIERARCHY>
+            <SPEC-HIERARCHY IDENTIFIER="SPEC-HIERARCHY-df99f67f-b6bb-4a6f-9eea-d762891187fb" IS-EDITABLE="false" IS-TABLE-INTERNAL="false">
+              <OBJECT>
+                <SPEC-OBJECT-REF>SECTION-c0b3ed74-ea4e-408f-9a3b-456c599943a7</SPEC-OBJECT-REF>
+              </OBJECT>
+              <CHILDREN>
+                <SPEC-HIERARCHY IDENTIFIER="SPEC-HIERARCHY-9dc9704c-b368-49a2-8936-1f18f47de434" IS-EDITABLE="false" IS-TABLE-INTERNAL="false">
+                  <OBJECT>
+                    <SPEC-OBJECT-REF>SECTION-3e241867-bbd1-4d8f-8457-055f41295b9d</SPEC-OBJECT-REF>
+                  </OBJECT>
+                  <CHILDREN>
+                    <SPEC-HIERARCHY IDENTIFIER="SPEC-HIERARCHY-c0f3c73f-38b1-4188-a9a7-94db5a5e637f" IS-EDITABLE="false" IS-TABLE-INTERNAL="false">
+                      <OBJECT>
+                        <SPEC-OBJECT-REF>SECTION-bf0bc7d9-24e2-4963-9009-d4e565652136</SPEC-OBJECT-REF>
+                      </OBJECT>
+                      <CHILDREN>
+                        <SPEC-HIERARCHY IDENTIFIER="SPEC-HIERARCHY-a128577d-7224-4c22-9663-7fc1c83cfca0" IS-EDITABLE="false" IS-TABLE-INTERNAL="false">
+                          <OBJECT>
+                            <SPEC-OBJECT-REF>SECTION-d63b35da-678f-4d8d-b95d-8a4afd2d7fb9</SPEC-OBJECT-REF>
+                          </OBJECT>
+                          <CHILDREN>
+                            <SPEC-HIERARCHY IDENTIFIER="SPEC-IDENTIFIER-5e7c74db-4658-4bf4-84c1-7e5b251368ff" IS-EDITABLE="false" IS-TABLE-INTERNAL="false">
+                              <OBJECT>
+                                <SPEC-OBJECT-REF>REQUIREMENT-7f4e29b0-f41b-47d2-a38a-7361df93777d</SPEC-OBJECT-REF>
+                              </OBJECT>
+                            </SPEC-HIERARCHY>
+                            <SPEC-HIERARCHY IDENTIFIER="SPEC-HIERARCHY-55a3e1a2-ebd9-4050-8b56-151bf6422dc2" IS-EDITABLE="false" IS-TABLE-INTERNAL="false">
+                              <OBJECT>
+                                <SPEC-OBJECT-REF>SECTION-71112096-3522-4338-b6e9-484315decee6</SPEC-OBJECT-REF>
+                              </OBJECT>
+                              <CHILDREN>
+                              </CHILDREN>
+                            </SPEC-HIERARCHY>
+                            <SPEC-HIERARCHY IDENTIFIER="SPEC-IDENTIFIER-72354be2-c573-41cb-884c-407e632b299f" IS-EDITABLE="false" IS-TABLE-INTERNAL="false">
+                              <OBJECT>
+                                <SPEC-OBJECT-REF>REQUIREMENT-3259d4fe-6714-4f0f-9089-bef67eb4112c</SPEC-OBJECT-REF>
+                              </OBJECT>
+                            </SPEC-HIERARCHY>
+                          </CHILDREN>
+                        </SPEC-HIERARCHY>
+                      </CHILDREN>
+                    </SPEC-HIERARCHY>
+                  </CHILDREN>
+                </SPEC-HIERARCHY>
+              </CHILDREN>
+            </SPEC-HIERARCHY>
+            <SPEC-HIERARCHY IDENTIFIER="SPEC-HIERARCHY-0ffb776a-e31a-418e-bc6c-219ad744e666" IS-EDITABLE="false" IS-TABLE-INTERNAL="false">
+              <OBJECT>
+                <SPEC-OBJECT-REF>SECTION-bccb2673-a5ff-4665-95ad-c8c14ba4cf7a</SPEC-OBJECT-REF>
+              </OBJECT>
+              <CHILDREN>
+              </CHILDREN>
+            </SPEC-HIERARCHY>
+          </CHILDREN>
+        </SPECIFICATION>
+      </SPECIFICATIONS>
+    </REQ-IF-CONTENT>
+  </CORE-CONTENT>
+</REQ-IF>

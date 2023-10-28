@@ -5,6 +5,7 @@ from lxml import etree
 
 from reqif.helpers.lxml import (
     lxml_convert_children_from_reqif_ns_xhtml_string,
+    lxml_is_comment_node,
     lxml_stringify_children,
     lxml_stringify_namespaced_children,
 )
@@ -96,6 +97,8 @@ class AttributeValueParser:
 
         attributes: List[SpecObjectAttribute] = []
         for attribute_xml in xml_attribute_values:
+            if lxml_is_comment_node(attribute_xml):
+                continue
             if attribute_xml.tag == "ATTRIBUTE-VALUE-STRING":
                 attribute_value = attribute_xml.attrib["THE-VALUE"]
                 attribute_definition_ref = attribute_xml[0][0].text

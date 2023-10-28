@@ -109,6 +109,23 @@
         </SPEC-OBJECT-TYPE>
       </SPEC-TYPES>
       <SPEC-OBJECTS>
+        <SPEC-OBJECT IDENTIFIER="rmf-bd312f1z-fa7c-4de3-b8f3-ab105179fccc" LAST-CHANGE="2021-07-01T01:12:06.082Z">
+          <VALUES>
+            <ATTRIBUTE-VALUE-STRING THE-VALUE="Section 1">
+              <DEFINITION>
+                <ATTRIBUTE-DEFINITION-STRING-REF>rmf-d8e70e15-dd88-4f6a-a383-07b7d25466a2</ATTRIBUTE-DEFINITION-STRING-REF>
+              </DEFINITION>
+            </ATTRIBUTE-VALUE-STRING>
+            <ATTRIBUTE-VALUE-STRING THE-VALUE="Section text...">
+              <DEFINITION>
+                <ATTRIBUTE-DEFINITION-STRING-REF>rmf-a6468304-cb04-41a2-b714-f2531c8acc4b</ATTRIBUTE-DEFINITION-STRING-REF>
+              </DEFINITION>
+            </ATTRIBUTE-VALUE-STRING>
+          </VALUES>
+          <TYPE>
+            <SPEC-OBJECT-TYPE-REF>_820f7cab-e89d-4793-a093-15c66d554fa4</SPEC-OBJECT-TYPE-REF>
+          </TYPE>
+        </SPEC-OBJECT>
         <SPEC-OBJECT IDENTIFIER="rmf-1d312f18-fa7c-4de3-b8f3-ab105179fddf" LAST-CHANGE="2021-07-01T01:12:06.082Z">
           <VALUES>
             <ATTRIBUTE-VALUE-STRING THE-VALUE="redacted@mail.com">
@@ -161,8 +178,15 @@
           <CHILDREN>
             <SPEC-HIERARCHY IDENTIFIER="rmf-0c4d996f-31e9-41d5-bbf0-73c13fc68f3c" LAST-CHANGE="2021-07-01T01:12:06.078Z">
               <OBJECT>
-                <SPEC-OBJECT-REF>rmf-1d312f18-fa7c-4de3-b8f3-ab105179fddf</SPEC-OBJECT-REF>
+                <SPEC-OBJECT-REF>rmf-bd312f1z-fa7c-4de3-b8f3-ab105179fccc</SPEC-OBJECT-REF>
               </OBJECT>
+              <CHILDREN>
+                <SPEC-HIERARCHY IDENTIFIER="rmf-0c4d996f-31e9-41d5-bbf0-73c13fc68f3c" LAST-CHANGE="2021-07-01T01:12:06.078Z">
+                  <OBJECT>
+                    <SPEC-OBJECT-REF>rmf-1d312f18-fa7c-4de3-b8f3-ab105179fddf</SPEC-OBJECT-REF>
+                  </OBJECT>
+                </SPEC-HIERARCHY>
+              </CHILDREN>
             </SPEC-HIERARCHY>
           </CHILDREN>
         </SPECIFICATION>

@@ -1,0 +1,40 @@
+{
+    "documents": [
+        {
+            "name": "Test Export",
+            "nodes": [
+                {
+                    "node_type": "Heading",
+                    "level": 1,
+                    "fields": {
+                        "ReqIF.ChapterName": "Section 1",
+                        "ReqIF.Text": "Section text..."
+                    },
+                    "nodes": [
+                        {
+                            "node_type": "System Requirement",
+                            "level": 2,
+                            "fields": {
+                                "ReqIF.ForeignCreatedBy": "redacted@mail.com",
+                                "ReqIF.ForeignID": "LOREM-818",
+                                "Status": "Draft",
+                                "ReqIF.ForeignCreatedOn": "2023-03-15T10:46:58.611Z",
+                                "ReqIF.ChapterName": "SW: Lorem Ipsum",
+                                "ReqIF.Text": "\n                <xhtml:div>The Lorem Ipsum shall do something.</xhtml:div>\n              "
+                            },
+                            "nodes": []
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+    "fields": [
+        "ReqIF.ChapterName",
+        "ReqIF.ForeignCreatedBy",
+        "ReqIF.ForeignCreatedOn",
+        "ReqIF.ForeignID",
+        "ReqIF.Text",
+        "Status"
+    ]
+}
