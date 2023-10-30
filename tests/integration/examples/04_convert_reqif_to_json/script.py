@@ -77,15 +77,13 @@ class ReqIFToDictConverter:
         # field names available in the ReqIF file.
         # NOTE: This can create many unused columns if the requirements and
         # chapters attributes are two distinct sets of fields.
-        reqif_dict.fields = []
-        reqif_dict.fields.extend(
+        reqif_dict.fields = list(
             map(
-                lambda attribute_definition_:
-                    {
-                        "name": attribute_definition_.long_name,
-                        "type": attribute_definition_.attribute_type.name
-                    },
-                reqif_schema.spec_object_type_attributes.values()
+                lambda attribute_tuple_: {
+                    "name": attribute_tuple_[0],
+                    "type": attribute_tuple_[1],
+                },
+                reqif_schema.iterate_unique_field_names(),
             )
         )
 
