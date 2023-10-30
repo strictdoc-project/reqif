@@ -1,0 +1,85 @@
+{
+    "documents": [
+        {
+            "name": null,
+            "nodes": [
+                {
+                    "node_type": "TC18xx SpecObjectType",
+                    "level": 1,
+                    "fields": {
+                        "ReqIF.Name": "\n                <xhtml:p>Obj-01</xhtml:p>\n              ",
+                        "A1": "no change",
+                        "A2": "no change",
+                        "E1": "one"
+                    },
+                    "nodes": []
+                },
+                {
+                    "node_type": "TC18xx SpecObjectType",
+                    "level": 1,
+                    "fields": {
+                        "ReqIF.Name": "\n                <xhtml:p>Obj-03</xhtml:p>\n              ",
+                        "A1": "O3.A1 initial",
+                        "A2": "O3.A2 initial",
+                        "E1": "one"
+                    },
+                    "nodes": []
+                },
+                {
+                    "node_type": "TC18xx SpecObjectType",
+                    "level": 1,
+                    "fields": {
+                        "ReqIF.Name": "\n                <xhtml:p>Obj-06</xhtml:p>\n              ",
+                        "A1": "no change",
+                        "A2": "no change",
+                        "E1": "one"
+                    },
+                    "nodes": []
+                },
+                {
+                    "node_type": "TC18xx SpecObjectType",
+                    "level": 1,
+                    "fields": {
+                        "ReqIF.Name": "\n                <xhtml:p>Obj-07</xhtml:p>\n              ",
+                        "A1": "no change",
+                        "A2": "no change",
+                        "E1": "one"
+                    },
+                    "nodes": []
+                },
+                {
+                    "node_type": "TC18xx SpecObjectType",
+                    "level": 1,
+                    "fields": {
+                        "ReqIF.Name": "\n                <xhtml:p>Obj-08</xhtml:p>\n              ",
+                        "A1": "no change",
+                        "A2": "no change",
+                        "E1": "one"
+                    },
+                    "nodes": []
+                },
+                {
+                    "node_type": "TC18xx SpecObjectType",
+                    "level": 1,
+                    "fields": {
+                        "ReqIF.Name": "\n                <xhtml:p>Obj-09</xhtml:p>\n              ",
+                        "A1": "no change",
+                        "A2": "no change",
+                        "E1": "one"
+                    },
+                    "nodes": []
+                }
+            ]
+        },
+        {
+            "name": null,
+            "nodes": []
+        }
+    ],
+    "fields": [
+        "ReqIF.Name",
+        "A1",
+        "A2",
+        "E1"
+    ]
+}
