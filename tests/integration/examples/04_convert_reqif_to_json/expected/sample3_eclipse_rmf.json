@@ -77,9 +77,21 @@
         }
     ],
     "fields": [
-        "ReqIF.Name",
-        "A1",
-        "A2",
-        "E1"
+        {
+            "name": "ReqIF.Name",
+            "type": "XHTML"
+        },
+        {
+            "name": "A1",
+            "type": "STRING"
+        },
+        {
+            "name": "A2",
+            "type": "STRING"
+        },
+        {
+            "name": "E1",
+            "type": "ENUMERATION"
+        }
     ]
 }

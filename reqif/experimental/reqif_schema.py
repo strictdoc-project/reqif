@@ -31,6 +31,7 @@ class ReqIFSchema:
         assert reqif_bundle.core_content is not None
         assert reqif_bundle.core_content.req_if_content is not None
         assert reqif_bundle.core_content.req_if_content.spec_types is not None
+
         for spec_type in reqif_bundle.core_content.req_if_content.spec_types:
             if not isinstance(spec_type, ReqIFSpecObjectType):
                 continue
@@ -84,3 +85,11 @@ class ReqIFSchema:
         # could be detected, assume that all spec objects in the ReqIF file are
         # simply requirements.
         return False
+
+    def iterate_unique_field_names(self):
+        unique_names_so_far = set()
+        for attribute_definition_ in self.spec_object_type_attributes.values():
+            if attribute_definition_.long_name in unique_names_so_far:
+                continue
+            unique_names_so_far.add(attribute_definition_.long_name)
+            yield attribute_definition_.long_name, attribute_definition_.attribute_type.name
