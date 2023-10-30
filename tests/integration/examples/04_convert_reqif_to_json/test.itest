@@ -19,6 +19,3 @@ RUN: %diff %S/expected/sample1_polarion.json %S/Output/reqif_stdout/sample1_pola
 
 RUN: python %S/script.py %S/sample_polarion_reqifz.reqifz --output-dir %S/Output/reqifz
 RUN: %diff %S/expected/sample1_polarion.json %S/Output/reqifz/sample1_polarion.reqif.json
-
-TODO:
-- Type fields

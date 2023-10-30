@@ -167,14 +167,41 @@
         }
     ],
     "fields": [
-        "ReqIF.ForeignID",
-        "LEVEL",
-        "STATUS",
-        "TAGS",
-        "ReqIF.Name",
-        "ReqIF.Text",
-        "RATIONALE",
-        "NOTES",
-        "ReqIF.ChapterName"
+        {
+            "name": "ReqIF.ForeignID",
+            "type": "STRING"
+        },
+        {
+            "name": "LEVEL",
+            "type": "STRING"
+        },
+        {
+            "name": "STATUS",
+            "type": "STRING"
+        },
+        {
+            "name": "TAGS",
+            "type": "STRING"
+        },
+        {
+            "name": "ReqIF.Name",
+            "type": "STRING"
+        },
+        {
+            "name": "ReqIF.Text",
+            "type": "STRING"
+        },
+        {
+            "name": "RATIONALE",
+            "type": "STRING"
+        },
+        {
+            "name": "NOTES",
+            "type": "STRING"
+        },
+        {
+            "name": "ReqIF.ChapterName",
+            "type": "STRING"
+        }
     ]
 }

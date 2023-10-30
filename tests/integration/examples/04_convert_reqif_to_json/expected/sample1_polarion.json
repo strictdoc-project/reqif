@@ -30,11 +30,49 @@
         }
     ],
     "fields": [
-        "ReqIF.ChapterName",
-        "ReqIF.ForeignCreatedBy",
-        "ReqIF.ForeignCreatedOn",
-        "ReqIF.ForeignID",
-        "ReqIF.Text",
-        "Status"
+        {
+            "name": "ReqIF.ChapterName",
+            "type": "STRING"
+        },
+        {
+            "name": "ReqIF.ForeignCreatedBy",
+            "type": "STRING"
+        },
+        {
+            "name": "ReqIF.ForeignCreatedOn",
+            "type": "DATE"
+        },
+        {
+            "name": "ReqIF.ForeignID",
+            "type": "STRING"
+        },
+        {
+            "name": "ReqIF.Text",
+            "type": "XHTML"
+        },
+        {
+            "name": "ReqIF.ChapterName",
+            "type": "STRING"
+        },
+        {
+            "name": "ReqIF.ForeignCreatedBy",
+            "type": "STRING"
+        },
+        {
+            "name": "ReqIF.ForeignCreatedOn",
+            "type": "DATE"
+        },
+        {
+            "name": "ReqIF.ForeignID",
+            "type": "STRING"
+        },
+        {
+            "name": "ReqIF.Text",
+            "type": "XHTML"
+        },
+        {
+            "name": "Status",
+            "type": "ENUMERATION"
+        }
     ]
 }

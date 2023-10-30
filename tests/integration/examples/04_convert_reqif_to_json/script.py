@@ -79,11 +79,13 @@ class ReqIFToDictConverter:
         # chapters attributes are two distinct sets of fields.
         reqif_dict.fields = []
         reqif_dict.fields.extend(
-            list(
-                {
-                    attribute_definition_.long_name: 1
-                    for attribute_definition_ in reqif_schema.spec_object_type_attributes.values()
-                }.keys()
+            map(
+                lambda attribute_definition_:
+                    {
+                        "name": attribute_definition_.long_name,
+                        "type": attribute_definition_.attribute_type.name
+                    },
+                reqif_schema.spec_object_type_attributes.values()
             )
         )
 
