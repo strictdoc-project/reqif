@@ -8,8 +8,10 @@ RUN: %diff %S/sample2_sdoc.reqif %S/Output/sample2_sdoc.reqif
 
 RUN: python %S/script.py %S/sample1_polarion.reqif --output-dir %S/Output/reqif
 RUN: python %S/script.py %S/sample2_sdoc.reqif --output-dir %S/Output/reqif
+RUN: python %S/script.py %S/sample3_eclipse_rmf.reqif --output-dir %S/Output/reqif
 RUN: %diff %S/expected/sample1_polarion.json %S/Output/reqif/sample1_polarion.json
 RUN: %diff %S/expected/sample2_sdoc.json %S/Output/reqif/sample2_sdoc.json
+RUN: %diff %S/expected/sample3_eclipse_rmf.json %S/Output/reqif/sample3_eclipse_rmf.json
 
 RUN: mkdir %S/Output/reqif_stdout
 RUN: python %S/script.py %S/sample1_polarion.reqif --stdout --no-filesystem | tee %S/Output/reqif_stdout/sample1_polarion.json
@@ -19,6 +21,4 @@ RUN: python %S/script.py %S/sample_polarion_reqifz.reqifz --output-dir %S/Output
 RUN: %diff %S/expected/sample1_polarion.json %S/Output/reqifz/sample1_polarion.reqif.json
 
 TODO:
-- output file vs output stdout
-- Make the nodes nested.
 - Type fields

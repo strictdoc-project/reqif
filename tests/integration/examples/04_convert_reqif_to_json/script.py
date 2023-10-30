@@ -3,7 +3,7 @@ import json
 import os
 from dataclasses import dataclass, field
 from pathlib import Path
-from typing import Dict, List, Union
+from typing import Dict, List, Optional, Union
 
 from dataclasses_json import dataclass_json
 
@@ -40,7 +40,8 @@ class Node:
 @dataclass_json
 @dataclass
 class Specification:
-    name: str
+    # Some ReqIF documents may have no name.
+    name: Optional[str]
     nodes: List[Node]
 
     @property
@@ -92,7 +93,6 @@ class ReqIFToDictConverter:
         for (
             specification
         ) in reqif_bundle.core_content.req_if_content.specifications:
-            assert specification.long_name is not None
             specification_dict: Specification = Specification(
                 name=specification.long_name, nodes=[]
             )
