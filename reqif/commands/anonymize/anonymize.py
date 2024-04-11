@@ -20,7 +20,7 @@ ANONYMIZED = "Anonymized"
 def anonymize_string(string: str) -> str:
     # https://stackoverflow.com/a/42089311/598057
     hash_number = (
-        int(hashlib.sha256(string.encode("utf8")).hexdigest(), 16) % 10**10
+        int(hashlib.sha256(str(string).encode("utf8")).hexdigest(), 16) % 10**10
     )
     return "..." + ANONYMIZED + "-" + str(hash_number) + "..."
 
