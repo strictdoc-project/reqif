@@ -3,7 +3,7 @@ import json
 import os
 from dataclasses import dataclass, field
 from pathlib import Path
-from typing import Dict, List, Optional, Union
+from typing import Any, Dict, List, Optional
 
 from dataclasses_json import dataclass_json
 
@@ -15,6 +15,7 @@ from reqif.models.reqif_data_type import (
     ReqIFDataTypeDefinitionXHTML,
 )
 from reqif.models.reqif_spec_object import ReqIFSpecObject
+from reqif.models.reqif_specification import ReqIFSpecification
 from reqif.parser import ReqIFParser, ReqIFZParser
 from reqif.reqif_bundle import ReqIFBundle, ReqIFZBundle
 
@@ -96,53 +97,66 @@ class ReqIFToDictConverter:
             specification_dict: Specification = Specification(
                 name=specification.long_name, nodes=[]
             )
-            section_stack: List[Union[Specification, Node]] = [
-                specification_dict
-            ]
 
-            for (
-                current_hierarchy
-            ) in reqif_bundle.iterate_specification_hierarchy(specification):
+            def node_converter_lambda(
+                current_hierarchy_,
+                current_section_,
+            ):
                 spec_object = reqif_bundle.get_spec_object_by_ref(
-                    current_hierarchy.spec_object
+                    current_hierarchy_.spec_object
                 )
                 node: Node = ReqIFToDictConverter.convert_spec_object_to_node(
                     spec_object,
                     reqif_bundle,
                     reqif_schema,
-                    current_hierarchy.level,
+                    current_hierarchy_.level,
                 )
-                current_node = section_stack[-1]
-                if not reqif_schema.is_spec_object_a_heading(spec_object):
-                    if node.level > current_node.level:
-                        assert node.level == (
-                            current_node.level + 1
-                        ), "Something went wrong with the spec hierarchy levels."
-                        current_node.nodes.append(node)
-                    elif node.level == current_node.level:
-                        section_stack.pop()
-                        current_node = section_stack[-1]
-                        current_node.nodes.append(node)
-                    else:
-                        raise NotImplementedError
-                else:
-                    if node.level > current_node.level:
-                        section_stack.append(node)
-                        current_node.nodes.append(node)
-                    elif node.level == current_node.level:
-                        section_stack[-1] = node
-                        current_node.nodes.append(node)
-                    else:
-                        while current_node.level >= node.level:
-                            assert not isinstance(current_node, Specification)
-                            section_stack.pop()
-                            current_node = section_stack[-1]
-                        section_stack.append(node)
-                        current_node.nodes.append(node)
+                current_section_.nodes.append(node)
+                is_section = reqif_schema.is_spec_object_a_heading(spec_object)
+                return node, is_section
+
+            ReqIFToDictConverter._iterate(
+                specification,
+                reqif_bundle,
+                specification_dict,
+                lambda s: s.level,
+                node_converter_lambda,
+            )
 
             reqif_dict.documents.append(specification_dict)
 
         return reqif_dict
+
+    @staticmethod
+    def _iterate(
+        specification: ReqIFSpecification,
+        reqif_bundle: ReqIFBundle,
+        root_node: Any,
+        get_level_lambda,
+        node_converter_lambda,
+    ):
+        section_stack: List = [root_node]
+
+        for current_hierarchy in reqif_bundle.iterate_specification_hierarchy(
+            specification
+        ):
+            current_section = section_stack[-1]
+            section_level = get_level_lambda(current_section)
+
+            if current_hierarchy.level <= section_level:
+                for _ in range(
+                    0,
+                    (section_level - current_hierarchy.level) + 1,
+                ):
+                    assert len(section_stack) > 0
+                    section_stack.pop()
+
+            current_section = section_stack[-1]
+            converted_node, converted_node_is_section = node_converter_lambda(
+                current_hierarchy, current_section
+            )
+            if converted_node_is_section:
+                section_stack.append(converted_node)
 
     @staticmethod
     def convert_spec_object_to_node(
