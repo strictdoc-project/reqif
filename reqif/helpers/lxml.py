@@ -183,9 +183,7 @@ def lxml_convert_to_reqif_ns_xhtml_string(string, reqif_xhtml=True) -> str:
 def lxml_convert_from_reqif_ns_xhtml_string(lxml_node) -> str:
     lxml_node_deep_copy = deepcopy(lxml_node)
     lxml_strip_namespace_from_xml(lxml_node_deep_copy, full=True)
-    return tostring(
-        lxml_node_deep_copy, encoding=str, pretty_print=True
-    ).rstrip()
+    return tostring(lxml_node_deep_copy, encoding=str, pretty_print=True).rstrip()
 
 
 def lxml_convert_children_from_reqif_ns_xhtml_string(lxml_node) -> str:

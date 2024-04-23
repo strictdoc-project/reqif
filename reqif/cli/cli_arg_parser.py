@@ -11,9 +11,7 @@ def cli_args_parser() -> argparse.ArgumentParser:
     main_parser = argparse.ArgumentParser()
     main_parser.formatter_class = formatter
 
-    command_subparsers = main_parser.add_subparsers(
-        title="command", dest="command"
-    )
+    command_subparsers = main_parser.add_subparsers(title="command", dest="command")
     command_subparsers.required = True
 
     # Command – Passthrough
@@ -60,10 +58,7 @@ def cli_args_parser() -> argparse.ArgumentParser:
     # Command – Format
     command_parser_format = command_subparsers.add_parser(
         "format",
-        help=(
-            "Read a ReqIF file and pretty-print its contents to "
-            "an output file."
-        ),
+        help=("Read a ReqIF file and pretty-print its contents to " "an output file."),
         formatter_class=formatter,
     )
     command_parser_format.add_argument(
@@ -169,14 +164,10 @@ class ReqIFArgsParser:
         return ConvertCommandConfig(self.args.input_file, self.args.output_file)
 
     def get_passthrough_config(self) -> PassthroughCommandConfig:
-        return PassthroughCommandConfig(
-            self.args.input_file, self.args.output_file
-        )
+        return PassthroughCommandConfig(self.args.input_file, self.args.output_file)
 
     def get_anonymize_config(self) -> AnonimizeCommandConfig:
-        return AnonimizeCommandConfig(
-            self.args.input_file, self.args.output_file
-        )
+        return AnonimizeCommandConfig(self.args.input_file, self.args.output_file)
 
     def get_dump_config(self) -> DumpCommandConfig:
         return DumpCommandConfig(self.args.input_file, self.args.output_file)
@@ -185,9 +176,7 @@ class ReqIFArgsParser:
         return FormatCommandConfig(self.args.input_file, self.args.output_file)
 
     def get_validate_config(self) -> ValidateCommandConfig:
-        return ValidateCommandConfig(
-            self.args.input_file, self.args.use_reqif_schema
-        )
+        return ValidateCommandConfig(self.args.input_file, self.args.use_reqif_schema)
 
 
 def create_reqif_args_parser(testing_args=None) -> ReqIFArgsParser:

@@ -65,9 +65,7 @@ def test_01_indenting_unintended_xhtml():
 """  # noqa: E501
 
     reqif_bundle = ReqIFParser.parse_from_string(input_reqif)
-    spec_object = reqif_bundle.get_spec_object_by_ref(
-        "TEST_SPEC_OBJECT_IDENTIFIER"
-    )
+    spec_object = reqif_bundle.get_spec_object_by_ref("TEST_SPEC_OBJECT_IDENTIFIER")
 
     multiline_text = reqif_indent_xhtml_string(
         """\

@@ -32,10 +32,10 @@ def test_01_get_spec_object_type_by_ref():
     parser = ReqIFParser()
     bundle = parser.parse_from_string(reqif)
 
-    spec_object_type_or_none: Optional[
-        ReqIFSpecObjectType
-    ] = bundle.get_spec_object_type_by_ref(
-        "TEST_SPEC_OBJECT_TYPE_IDENTIFIER_FUNCTIONAL"
+    spec_object_type_or_none: Optional[ReqIFSpecObjectType] = (
+        bundle.get_spec_object_type_by_ref(
+            "TEST_SPEC_OBJECT_TYPE_IDENTIFIER_FUNCTIONAL"
+        )
     )
     assert spec_object_type_or_none is not None
     assert (

@@ -45,8 +45,6 @@ class PassthroughCommand:
     def _passthrough_reqifz(
         passthrough_config: PassthroughCommandConfig,
     ) -> bytes:
-        reqifz_bundle: ReqIFZBundle = ReqIFZParser.parse(
-            passthrough_config.input_file
-        )
+        reqifz_bundle: ReqIFZBundle = ReqIFZParser.parse(passthrough_config.input_file)
         reqifz_output = ReqIFZUnparser.unparse(reqifz_bundle)
         return reqifz_output

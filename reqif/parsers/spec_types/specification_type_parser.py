@@ -29,23 +29,19 @@ class SpecificationTypeParser:
             raise NotImplementedError from None
 
         spec_type_long_name = (
-            xml_attributes["LONG-NAME"]
-            if "LONG-NAME" in xml_attributes
-            else None
+            xml_attributes["LONG-NAME"] if "LONG-NAME" in xml_attributes else None
         )
 
-        attribute_definitions = (
-            AttributeDefinitionParser.parse_attribute_definitions(
-                specification_type_xml
-            )
+        attribute_definitions = AttributeDefinitionParser.parse_attribute_definitions(
+            specification_type_xml
         )
         # FIXME: Double-check if this is really needed.
         if attribute_definitions is not None:
             for attribute_definition in attribute_definitions:
                 assert attribute_definition.long_name is not None
-                attribute_map[
-                    attribute_definition.identifier
-                ] = attribute_definition.long_name
+                attribute_map[attribute_definition.identifier] = (
+                    attribute_definition.long_name
+                )
 
         return ReqIFSpecificationType(
             description=description,
@@ -82,9 +78,7 @@ class SpecificationTypeParser:
 
             for attribute in spec_type.spec_attributes:
                 output += (
-                    "            "
-                    "<"
-                    f"{attribute.attribute_type.get_spec_type_tag()}"
+                    "            " "<" f"{attribute.attribute_type.get_spec_type_tag()}"
                 )
                 if attribute.description is not None:
                     output += f' DESC="{attribute.description}"'

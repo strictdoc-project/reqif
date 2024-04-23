@@ -63,9 +63,7 @@ class ReqIFBundle:  # pylint: disable=too-many-instance-attributes
         if specification.children is None:
             return
 
-        task_list: Deque[ReqIFSpecHierarchy] = collections.deque(
-            specification.children
-        )
+        task_list: Deque[ReqIFSpecHierarchy] = collections.deque(specification.children)
 
         while True:
             if not task_list:

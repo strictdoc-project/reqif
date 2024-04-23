@@ -21,18 +21,14 @@ class RelationGroupTypeParser:
             raise NotImplementedError(xml_attributes) from None
 
         long_name: Optional[str] = (
-            xml_attributes["LONG-NAME"]
-            if "LONG-NAME" in xml_attributes
-            else None
+            xml_attributes["LONG-NAME"] if "LONG-NAME" in xml_attributes else None
         )
 
         description: Optional[str] = (
             xml_attributes["DESC"] if "DESC" in xml_attributes else None
         )
         last_change: Optional[str] = (
-            xml_attributes["LAST-CHANGE"]
-            if "LAST-CHANGE" in xml_attributes
-            else None
+            xml_attributes["LAST-CHANGE"] if "LAST-CHANGE" in xml_attributes else None
         )
 
         return ReqIFRelationGroupType(

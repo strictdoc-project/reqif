@@ -10,9 +10,7 @@ from reqif.parsers.attribute_definition_parser import AttributeDefinitionParser
 class SpecObjectTypeParser:
     @staticmethod
     def parse(spec_object_type_xml) -> ReqIFSpecObjectType:
-        assert (
-            spec_object_type_xml.tag == "SPEC-OBJECT-TYPE"
-        ), f"{spec_object_type_xml}"
+        assert spec_object_type_xml.tag == "SPEC-OBJECT-TYPE", f"{spec_object_type_xml}"
 
         xml_attributes = spec_object_type_xml.attrib
         spec_description: Optional[str] = (
@@ -23,20 +21,14 @@ class SpecObjectTypeParser:
         except Exception:
             raise NotImplementedError from None
         spec_last_change = (
-            xml_attributes["LAST-CHANGE"]
-            if "LAST-CHANGE" in xml_attributes
-            else None
+            xml_attributes["LAST-CHANGE"] if "LAST-CHANGE" in xml_attributes else None
         )
         spec_type_long_name: Optional[str] = (
-            xml_attributes["LONG-NAME"]
-            if "LONG-NAME" in xml_attributes
-            else None
+            xml_attributes["LONG-NAME"] if "LONG-NAME" in xml_attributes else None
         )
 
-        attribute_definitions = (
-            AttributeDefinitionParser.parse_attribute_definitions(
-                spec_object_type_xml
-            )
+        attribute_definitions = AttributeDefinitionParser.parse_attribute_definitions(
+            spec_object_type_xml
         )
 
         return ReqIFSpecObjectType(
@@ -65,10 +57,8 @@ class SpecObjectTypeParser:
         if spec_type.attribute_definitions is not None:
             output += "          <SPEC-ATTRIBUTES>\n"
 
-            output += (
-                AttributeDefinitionParser.unparse_xhtml_attribute_definition(
-                    attribute_definitions=spec_type.attribute_definitions
-                )
+            output += AttributeDefinitionParser.unparse_xhtml_attribute_definition(
+                attribute_definitions=spec_type.attribute_definitions
             )
 
             output += "          </SPEC-ATTRIBUTES>\n"

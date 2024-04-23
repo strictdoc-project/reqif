@@ -34,10 +34,7 @@ def test_01_nominal_case() -> None:
     assert reqif_spec_object_type.long_name == "TEST_SPEC_OBJECT_TYPE_LONG_NAME"
     attribute_map = reqif_spec_object_type.attribute_map
     assert len(attribute_map) == 2
-    assert (
-        attribute_map.get("_gFhrW2ojEeuExICsU7Acmg").long_name
-        == "ReqIF.ForeignID"
-    )
+    assert attribute_map.get("_gFhrW2ojEeuExICsU7Acmg").long_name == "ReqIF.ForeignID"
     assert attribute_map.get("_aqZG4GxpEeuaU7fHySy8Bw").long_name == "NOTES"
 
 
@@ -62,8 +59,7 @@ def test_02_integer_attribute_definition() -> None:
     attribute_map = reqif_spec_object_type.attribute_map
     assert len(attribute_map) == 1
     assert (
-        attribute_map.get("TEST_INTEGER_ATTRIBUTE_ID").long_name
-        == "IntegerAttributeId"
+        attribute_map.get("TEST_INTEGER_ATTRIBUTE_ID").long_name == "IntegerAttributeId"
     )
 
 
@@ -95,8 +91,7 @@ def test_03_boolean_attribute_definition() -> None:
     attribute_map = reqif_spec_object_type.attribute_map
     assert len(attribute_map) == 1
     assert (
-        attribute_map.get("TEST_BOOLEAN_ATTRIBUTE_ID").long_name
-        == "BooleanAttributeId"
+        attribute_map.get("TEST_BOOLEAN_ATTRIBUTE_ID").long_name == "BooleanAttributeId"
     )
 
 
@@ -176,6 +171,4 @@ def test_06_string_attribute_default_value() -> None:
         attribute_map.get("TEST_STRING_ATTRIBUTE_ID").long_name
         == "TEST_STRING_ATTRIBUTE_LONG_NAME"
     )
-    assert (
-        reqif_spec_object_type.attribute_definitions[0].default_value == "TBD"
-    )
+    assert reqif_spec_object_type.attribute_definitions[0].default_value == "TBD"

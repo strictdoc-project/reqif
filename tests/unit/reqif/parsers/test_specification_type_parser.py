@@ -23,13 +23,9 @@ def test_01_nominal_case() -> None:
     reqif_specification_type = SpecificationTypeParser.parse(spec_type_xml)
     assert isinstance(reqif_specification_type, ReqIFSpecificationType)
     assert reqif_specification_type.identifier == "TEST_SPECIFICATION_TYPE_ID"
-    assert (
-        reqif_specification_type.long_name
-        == "TEST_SPECIFICATION_TYPE_LONG_NAME"
-    )
+    assert reqif_specification_type.long_name == "TEST_SPECIFICATION_TYPE_LONG_NAME"
     attribute_map = reqif_specification_type.spec_attribute_map
     assert len(attribute_map) == 1
     assert (
-        attribute_map.get("TEST_SPEC_ATTRIBUTE_ID")
-        == "TEST_SPEC_ATTRIBUTE_LONG_NAME"
+        attribute_map.get("TEST_SPEC_ATTRIBUTE_ID") == "TEST_SPEC_ATTRIBUTE_LONG_NAME"
     )

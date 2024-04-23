@@ -2,9 +2,7 @@ import os
 import sys
 
 try:
-    ROOT_PATH = os.path.abspath(
-        os.path.join(os.path.dirname(__file__), "..", "..")
-    )
+    ROOT_PATH = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".."))
     if not os.path.isdir(ROOT_PATH):
         raise FileNotFoundError(ROOT_PATH)
     sys.path.append(ROOT_PATH)

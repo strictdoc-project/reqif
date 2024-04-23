@@ -45,9 +45,7 @@ class ReqIFSpecHierarchyParser:
         if xml_spec_hierarchy_children is not None:
             spec_hierarchy_children = []
             if len(xml_spec_hierarchy_children) == 0:
-                is_self_closed = lxml_is_self_closed_tag(
-                    xml_spec_hierarchy_children
-                )
+                is_self_closed = lxml_is_self_closed_tag(xml_spec_hierarchy_children)
             for child_spec_hierarchy_xml in xml_spec_hierarchy_children:
                 child_spec_hierarchy = ReqIFSpecHierarchyParser.parse(
                     child_spec_hierarchy_xml, level + 1
@@ -72,16 +70,13 @@ class ReqIFSpecHierarchyParser:
         base_level = hierarchy.calculate_base_level()
         base_level_str = " " * base_level
         output = (
-            base_level_str + f"<SPEC-HIERARCHY"
-            f' IDENTIFIER="{hierarchy.identifier}"'
+            base_level_str + f"<SPEC-HIERARCHY" f' IDENTIFIER="{hierarchy.identifier}"'
         )
         if hierarchy.editable is not None:
             editable_value = "true" if hierarchy.editable else "false"
             output += f' IS-EDITABLE="{editable_value}"'
         if hierarchy.is_table_internal is not None:
-            is_table_internal_value = (
-                "true" if hierarchy.is_table_internal else "false"
-            )
+            is_table_internal_value = "true" if hierarchy.is_table_internal else "false"
             output += f' IS-TABLE-INTERNAL="{is_table_internal_value}"'
         if hierarchy.last_change:
             output += f' LAST-CHANGE="{hierarchy.last_change}"'

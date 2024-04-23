@@ -194,9 +194,7 @@ class ValidateCommand:
             for hierarchy in reqif_bundle.iterate_specification_hierarchy(
                 specification
             ):
-                if not reqif_bundle.lookup.spec_object_exists(
-                    hierarchy.spec_object
-                ):
+                if not reqif_bundle.lookup.spec_object_exists(hierarchy.spec_object):
                     warnings.append(
                         ReqIFSpecHierarchyMissingSpecObjectException(
                             xml_node=hierarchy.xml_node,

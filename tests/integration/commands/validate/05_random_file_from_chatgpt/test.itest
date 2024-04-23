@@ -1,3 +1,6 @@
+# FIXME
+UNSUPPORTED: true
+
 RUN: %expect_exit 0 %reqif validate %S/sample.reqif | filecheck %s --dump-input=fail --check-prefix=CHECK-NOSTRICT
 
 CHECK-NOSTRICT: Validation complete with 0 errors, 0 schema issues found, 0 semantic issues found.

@@ -19,9 +19,7 @@ ANONYMIZED = "Anonymized"
 
 def anonymize_string(string: str) -> str:
     # https://stackoverflow.com/a/42089311/598057
-    hash_number = (
-        int(hashlib.sha256(string.encode("utf8")).hexdigest(), 16) % 10**10
-    )
+    hash_number = int(hashlib.sha256(string.encode("utf8")).hexdigest(), 16) % 10**10
     return "..." + ANONYMIZED + "-" + str(hash_number) + "..."
 
 
@@ -80,9 +78,7 @@ class AnonymizeCommand:
             )
 
         # Clear out all SPECIFICATION names.
-        xml_specifications = xml_reqif.xpath(
-            "//reqif:SPECIFICATION", namespaces=fixns
-        )
+        xml_specifications = xml_reqif.xpath("//reqif:SPECIFICATION", namespaces=fixns)
         for xml_specification in xml_specifications:
             if "LONG-NAME" in xml_specification.attrib:
                 xml_specification.attrib["LONG-NAME"] = anonymize_string(
@@ -95,9 +91,7 @@ class AnonymizeCommand:
         )
         for xml_attribute_value_string in xml_attribute_value_strings:
             if "THE-VALUE" in xml_attribute_value_string.attrib:
-                xml_attribute_value_string.attrib[
-                    "THE-VALUE"
-                ] = anonymize_string(
+                xml_attribute_value_string.attrib["THE-VALUE"] = anonymize_string(
                     xml_attribute_value_string.attrib["THE-VALUE"]
                 )
 
@@ -106,8 +100,8 @@ class AnonymizeCommand:
             "//reqif:ATTRIBUTE-VALUE-XHTML/reqif:THE-VALUE", namespaces=fixns
         )
         for xml_attribute_value_xhtml in xml_attribute_value_xhtmls:
-            xml_attribute_value_xhtml_text: str = (
-                lxml_stringify_namespaced_children(xml_attribute_value_xhtml)
+            xml_attribute_value_xhtml_text: str = lxml_stringify_namespaced_children(
+                xml_attribute_value_xhtml
             )
             for child in list(xml_attribute_value_xhtml):
                 xml_attribute_value_xhtml.remove(child)

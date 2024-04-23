@@ -119,9 +119,7 @@ class ReqIFHeaderParser:
                     "</SOURCE-TOOL-ID>\n"
                 )
             if header.title:
-                output += (
-                    f"      <TITLE>{lxml_escape_title(header.title)}</TITLE>\n"
-                )
+                output += f"      <TITLE>{lxml_escape_title(header.title)}</TITLE>\n"
 
             output += "    </REQ-IF-HEADER>\n"
         else:

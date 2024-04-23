@@ -33,9 +33,7 @@ class ReqIFUnparser:
     def unparse(bundle: ReqIFBundle) -> str:
         reqif_xml_output = '<?xml version="1.0" encoding="UTF-8"?>\n'
 
-        reqif_xml_output += ReqIFUnparser.unparse_namespace_info(
-            bundle.namespace_info
-        )
+        reqif_xml_output += ReqIFUnparser.unparse_namespace_info(bundle.namespace_info)
 
         if bundle.req_if_header is not None:
             reqif_xml_output += ReqIFHeaderParser.unparse(bundle.req_if_header)
@@ -56,9 +54,7 @@ class ReqIFUnparser:
                     reqif_xml_output += "      <SPEC-TYPES>\n"
                     for spec_type in reqif_content.spec_types:
                         if isinstance(spec_type, ReqIFSpecObjectType):
-                            reqif_xml_output += SpecObjectTypeParser.unparse(
-                                spec_type
-                            )
+                            reqif_xml_output += SpecObjectTypeParser.unparse(spec_type)
                         elif isinstance(spec_type, ReqIFSpecRelationType):
                             reqif_xml_output += SpecRelationTypeParser.unparse(
                                 spec_type
@@ -77,9 +73,7 @@ class ReqIFUnparser:
                     reqif_xml_output += "      <SPEC-OBJECTS>\n"
 
                     for spec_object in reqif_content.spec_objects:
-                        reqif_xml_output += SpecObjectParser.unparse(
-                            spec_object
-                        )
+                        reqif_xml_output += SpecObjectParser.unparse(spec_object)
 
                     reqif_xml_output += "      </SPEC-OBJECTS>\n"
 
@@ -87,9 +81,7 @@ class ReqIFUnparser:
                     reqif_xml_output += "      <SPEC-RELATIONS>\n"
 
                     for spec_relation in reqif_content.spec_relations:
-                        reqif_xml_output += SpecRelationParser.unparse(
-                            spec_relation
-                        )
+                        reqif_xml_output += SpecRelationParser.unparse(spec_relation)
 
                     reqif_xml_output += "      </SPEC-RELATIONS>\n"
 
@@ -106,9 +98,7 @@ class ReqIFUnparser:
                 if reqif_content.spec_relation_groups is not None:
                     reqif_xml_output += "      <SPEC-RELATION-GROUPS>\n"
 
-                    for (
-                        spec_relation_group
-                    ) in reqif_content.spec_relation_groups:
+                    for spec_relation_group in reqif_content.spec_relation_groups:
                         reqif_xml_output += ReqIFRelationGroupParser.unparse(
                             spec_relation_group
                         )
@@ -146,9 +136,7 @@ class ReqIFUnparser:
                 f'xmlns:configuration="{namespace_info.configuration}"'
             )
         if namespace_info.namespace_id is not None:
-            namespace_components.append(
-                f'xmlns:id="{namespace_info.namespace_id}"'
-            )
+            namespace_components.append(f'xmlns:id="{namespace_info.namespace_id}"')
         if namespace_info.namespace_xhtml is not None:
             namespace_components.append(
                 f'xmlns:xhtml="{namespace_info.namespace_xhtml}"'

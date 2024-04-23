@@ -35,12 +35,10 @@ class SpecAttributeDefinition:  # pylint: disable=too-many-instance-attributes
         self.editable: Optional[bool] = (
             editable == "true" if editable is not None else None
         )
-        self.default_value_definition_ref: Optional[
-            str
-        ] = default_value_definition_ref
-        self.default_value: Union[
-            None, DefaultValueEmptySelfClosedTag, str
-        ] = default_value
+        self.default_value_definition_ref: Optional[str] = default_value_definition_ref
+        self.default_value: Union[None, DefaultValueEmptySelfClosedTag, str] = (
+            default_value
+        )
         self.multi_valued: Optional[bool] = multi_valued
 
     @staticmethod
@@ -75,16 +73,16 @@ class ReqIFSpecObjectType:
         self.description: Optional[str] = description
         self.last_change: Optional[str] = last_change
         self.long_name: Optional[str] = long_name
-        self.attribute_definitions: Optional[
-            List[SpecAttributeDefinition]
-        ] = attribute_definitions
+        self.attribute_definitions: Optional[List[SpecAttributeDefinition]] = (
+            attribute_definitions
+        )
 
         self.attribute_map: Dict[str, SpecAttributeDefinition] = {}
         if attribute_definitions is not None:
             for attribute_definition in attribute_definitions:
-                self.attribute_map[
-                    attribute_definition.identifier
-                ] = attribute_definition
+                self.attribute_map[attribute_definition.identifier] = (
+                    attribute_definition
+                )
 
     @staticmethod
     def create(  # pylint: disable=too-many-arguments
