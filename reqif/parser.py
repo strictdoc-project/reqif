@@ -80,9 +80,7 @@ class ReqIFParser:
         try:
             # Parse XML.
             # https://github.com/eerohele/sublime-lxml/issues/5#issuecomment-209781719
-            xml_reqif_root = etree.parse(
-                io.BytesIO(bytes(reqif_content, "UTF-8"))
-            )
+            xml_reqif_root = etree.parse(io.BytesIO(bytes(reqif_content, "UTF-8")))
         except Exception as exception:  # pylint: disable=broad-except
             raise ReqIFXMLParsingError(str(exception)) from None
 
@@ -129,8 +127,7 @@ class ReqIFParser:
             raise NotImplementedError(xml_reqif_nons_root) from None
         if xml_reqif_nons_root.tag != "REQ-IF":
             raise ReqIFXMLParsingError(
-                "Expected root tag to be REQ-IF, got: "
-                f"{xml_reqif_nons_root.tag}."
+                "Expected root tag to be REQ-IF, got: " f"{xml_reqif_nons_root.tag}."
             ) from None
 
         # The best workaround I could find for getting the exact content of
@@ -150,9 +147,7 @@ class ReqIFParser:
         if schema_namespace:
             schema_location_attribute = f"{{{schema_namespace}}}schemaLocation"
             if schema_location_attribute in xml_reqif_nons_root.attrib:
-                schema_location = xml_reqif_nons_root.attrib[
-                    schema_location_attribute
-                ]
+                schema_location = xml_reqif_nons_root.attrib[schema_location_attribute]
         language: Optional[str] = None
         xml_namespace = "http://www.w3.org/XML/1998/namespace"
         language_attribute = f"{{{xml_namespace}}}lang"
@@ -264,28 +259,18 @@ class ReqIFParser:
                     ReqIFRelationGroupType,
                 ]
                 if xml_spec_object_type_xml.tag == "SPEC-OBJECT-TYPE":
-                    spec_type = SpecObjectTypeParser.parse(
-                        xml_spec_object_type_xml
-                    )
+                    spec_type = SpecObjectTypeParser.parse(xml_spec_object_type_xml)
                 elif xml_spec_object_type_xml.tag == "SPEC-RELATION-TYPE":
-                    spec_type = SpecRelationTypeParser.parse(
-                        xml_spec_object_type_xml
-                    )
+                    spec_type = SpecRelationTypeParser.parse(xml_spec_object_type_xml)
                 elif xml_spec_object_type_xml.tag == "SPECIFICATION-TYPE":
-                    spec_type = SpecificationTypeParser.parse(
-                        xml_spec_object_type_xml
-                    )
+                    spec_type = SpecificationTypeParser.parse(xml_spec_object_type_xml)
                 elif xml_spec_object_type_xml.tag == "RELATION-GROUP-TYPE":
-                    spec_type = RelationGroupTypeParser.parse(
-                        xml_spec_object_type_xml
-                    )
+                    spec_type = RelationGroupTypeParser.parse(xml_spec_object_type_xml)
                 elif lxml_is_comment_node(xml_spec_object_type_xml):
                     # Skip comments for now.
                     continue
                 else:
-                    raise NotImplementedError(
-                        xml_spec_object_type_xml
-                    ) from None
+                    raise NotImplementedError(xml_spec_object_type_xml) from None
                 spec_types_lookup[spec_type.identifier] = spec_type
                 spec_types.append(spec_type)
 
@@ -295,9 +280,7 @@ class ReqIFParser:
         if xml_specifications is not None:
             specifications = []
             for xml_specification in xml_specifications:
-                specification = ReqIFSpecificationParser.parse(
-                    xml_specification
-                )
+                specification = ReqIFSpecificationParser.parse(xml_specification)
                 specifications.append(specification)
 
         # <SPEC-RELATIONS>
@@ -332,17 +315,13 @@ class ReqIFParser:
 
         # <SPEC-RELATION-GROUPS>
         spec_relation_groups: Optional[List] = None
-        xml_spec_relation_groups = xml_req_if_content.find(
-            "SPEC-RELATION-GROUPS"
-        )
+        xml_spec_relation_groups = xml_req_if_content.find("SPEC-RELATION-GROUPS")
         if xml_spec_relation_groups is not None:
             spec_relation_groups = []
             if len(xml_spec_relation_groups) != 0:
                 spec_relation_groups = []
                 for xml_relation_group in xml_spec_relation_groups:
-                    relation_group = ReqIFRelationGroupParser.parse(
-                        xml_relation_group
-                    )
+                    relation_group = ReqIFRelationGroupParser.parse(xml_relation_group)
                     spec_relation_groups.append(relation_group)
 
         lookup = ReqIFObjectLookup(
@@ -373,9 +352,9 @@ class ReqIFZParser:
                     if os.path.splitext(filename)[1] in [".reqif", ".xml"]:
                         with zip_file.open(filename) as file:
                             content = file.read().decode(encoding="UTF-8")
-                            reqif_bundles[
-                                filename
-                            ] = ReqIFParser.parse_from_string(content)
+                            reqif_bundles[filename] = ReqIFParser.parse_from_string(
+                                content
+                            )
                     else:
                         with zip_file.open(filename) as file:
                             attachments[filename] = file.read()

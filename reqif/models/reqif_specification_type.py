@@ -21,8 +21,6 @@ class ReqIFSpecificationType:
         self.description: Optional[str] = description
         self.last_change: Optional[str] = last_change
         self.long_name: Optional[str] = long_name
-        self.spec_attributes: Optional[
-            List[SpecAttributeDefinition]
-        ] = spec_attributes
+        self.spec_attributes: Optional[List[SpecAttributeDefinition]] = spec_attributes
         self.spec_attribute_map: Optional[Dict[str, str]] = spec_attribute_map
         self.is_self_closed: bool = is_self_closed

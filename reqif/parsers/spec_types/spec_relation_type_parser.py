@@ -26,15 +26,11 @@ class SpecRelationTypeParser:
             xml_attributes["DESC"] if "DESC" in xml_attributes else None
         )
         last_change: Optional[str] = (
-            xml_attributes["LAST-CHANGE"]
-            if "LAST-CHANGE" in xml_attributes
-            else None
+            xml_attributes["LAST-CHANGE"] if "LAST-CHANGE" in xml_attributes else None
         )
 
-        attribute_definitions = (
-            AttributeDefinitionParser.parse_attribute_definitions(
-                xml_spec_relation_type_xml
-            )
+        attribute_definitions = AttributeDefinitionParser.parse_attribute_definitions(
+            xml_spec_relation_type_xml
         )
 
         return ReqIFSpecRelationType(

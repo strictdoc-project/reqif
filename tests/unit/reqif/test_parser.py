@@ -90,6 +90,5 @@ def test_error_03_minimal_non_reqif_xml():
         parser.parse_from_string("<xml_garbage></xml_garbage>")
 
     assert (
-        str(exception_info.value)
-        == "Expected root tag to be REQ-IF, got: xml_garbage."
+        str(exception_info.value) == "Expected root tag to be REQ-IF, got: xml_garbage."
     )

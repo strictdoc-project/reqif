@@ -37,10 +37,7 @@ def test_01_nominal_case():
     assert spec_object.spec_object_type == "TEST_SPEC_OBJECT_TYPE"
     assert spec_object.attribute_map["TEST_FIELD_UID"].value == "SR001"
     assert spec_object.attribute_map["TEST_FIELD_STATUS"].value == "Draft"
-    assert (
-        spec_object.attribute_map["TEST_FIELD_STATEMENT"].value
-        == "Test statement"
-    )
+    assert spec_object.attribute_map["TEST_FIELD_STATEMENT"].value == "Test statement"
 
 
 def test_02_attributes_xhtml():
@@ -67,9 +64,7 @@ def test_02_attributes_xhtml():
     spec_object = SpecObjectParser.parse(spec_object_xml)
     assert spec_object.identifier == "TEST_SPEC_OBJECT_ID"
 
-    expected_xhtml = (
-        "\n        <reqif-xhtml:div>susan</reqif-xhtml:div>\n      "
-    )
+    expected_xhtml = "\n        <reqif-xhtml:div>susan</reqif-xhtml:div>\n      "
     assert (
         spec_object.attribute_map[
             "_7f123ed4-98dd-4eed-b96a-edc8828963a8_CREATEDBY"

@@ -19,9 +19,7 @@ class ReqIFSchema:
         spec_object_type_attributes: Dict[str, SpecAttributeDefinition] = {}
         spec_object_type_names: Dict[str, str] = {}
         detected_section_spec_type: Optional[ReqIFSpecObjectType] = None
-        detected_chapter_name_attribute: Optional[
-            SpecAttributeDefinition
-        ] = None
+        detected_chapter_name_attribute: Optional[SpecAttributeDefinition] = None
         detected_schema_type: ReqIFSchema.ReqIFSchemaType = (
             ReqIFSchema.ReqIFSchemaType.DEFAULT
         )
@@ -47,27 +45,25 @@ class ReqIFSchema:
             for attribute_definition in spec_type.attribute_definitions:
                 if attribute_definition.long_name == "ReqIF.ChapterName":
                     detected_chapter_name_attribute = attribute_definition
-                spec_object_type_attributes[
-                    attribute_definition.identifier
-                ] = attribute_definition
+                spec_object_type_attributes[attribute_definition.identifier] = (
+                    attribute_definition
+                )
 
         assert reqif_bundle.core_content.req_if_content.data_types is not None
         for data_type in reqif_bundle.core_content.req_if_content.data_types:
             data_type_definitions[data_type.identifier] = data_type
 
         self.data_type_definitions: Dict[str, Any] = data_type_definitions
-        self.spec_object_type_attributes: Dict[
-            str, SpecAttributeDefinition
-        ] = spec_object_type_attributes
+        self.spec_object_type_attributes: Dict[str, SpecAttributeDefinition] = (
+            spec_object_type_attributes
+        )
         self.spec_object_type_names: Dict[str, str] = spec_object_type_names
         self.reqif_bundle: ReqIFBundle = reqif_bundle
         self.detected_heading_spec_type = detected_section_spec_type
-        self.detected_chapter_name_attribute: Optional[
-            SpecAttributeDefinition
-        ] = detected_chapter_name_attribute
-        self.detected_schema_type: ReqIFSchema.ReqIFSchemaType = (
-            detected_schema_type
+        self.detected_chapter_name_attribute: Optional[SpecAttributeDefinition] = (
+            detected_chapter_name_attribute
         )
+        self.detected_schema_type: ReqIFSchema.ReqIFSchemaType = detected_schema_type
 
     def is_spec_object_a_heading(self, spec_object: ReqIFSpecObject):
         if self.detected_heading_spec_type is not None:
@@ -92,4 +88,7 @@ class ReqIFSchema:
             if attribute_definition_.long_name in unique_names_so_far:
                 continue
             unique_names_so_far.add(attribute_definition_.long_name)
-            yield attribute_definition_.long_name, attribute_definition_.attribute_type.name
+            yield (
+                attribute_definition_.long_name,
+                attribute_definition_.attribute_type.name,
+            )

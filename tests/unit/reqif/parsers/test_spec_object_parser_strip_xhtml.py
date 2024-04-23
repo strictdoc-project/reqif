@@ -38,14 +38,10 @@ def test_01_normal_case():
 """  # noqa: E501
 
     reqif_bundle = ReqIFParser.parse_from_string(input_reqif)
-    spec_object = reqif_bundle.get_spec_object_by_ref(
-        "TEST_SPEC_OBJECT_IDENTIFIER"
-    )
+    spec_object = reqif_bundle.get_spec_object_by_ref("TEST_SPEC_OBJECT_IDENTIFIER")
 
     assert (
-        spec_object.attribute_map[
-            "_gFhrXWojEeuExICsU7Acmg"
-        ].value_stripped_xhtml
+        spec_object.attribute_map["_gFhrXWojEeuExICsU7Acmg"].value_stripped_xhtml
         == expected_stripped_xhtml
     )
 
@@ -87,14 +83,10 @@ def test_02_edge_case_object_tag_no_xhtml_ns():
 """  # noqa: E501
 
     reqif_bundle = ReqIFParser.parse_from_string(input_reqif)
-    spec_object = reqif_bundle.get_spec_object_by_ref(
-        "TEST_SPEC_OBJECT_IDENTIFIER"
-    )
+    spec_object = reqif_bundle.get_spec_object_by_ref("TEST_SPEC_OBJECT_IDENTIFIER")
 
     assert (
-        spec_object.attribute_map[
-            "_gFhrXWojEeuExICsU7Acmg"
-        ].value_stripped_xhtml
+        spec_object.attribute_map["_gFhrXWojEeuExICsU7Acmg"].value_stripped_xhtml
         == expected_stripped_xhtml
     )
 
@@ -136,13 +128,9 @@ def test_03_edge_case_object_tag_xhtml_ns():
 """  # noqa: E501
 
     reqif_bundle = ReqIFParser.parse_from_string(input_reqif)
-    spec_object = reqif_bundle.get_spec_object_by_ref(
-        "TEST_SPEC_OBJECT_IDENTIFIER"
-    )
+    spec_object = reqif_bundle.get_spec_object_by_ref("TEST_SPEC_OBJECT_IDENTIFIER")
 
     assert (
-        spec_object.attribute_map[
-            "_gFhrXWojEeuExICsU7Acmg"
-        ].value_stripped_xhtml
+        spec_object.attribute_map["_gFhrXWojEeuExICsU7Acmg"].value_stripped_xhtml
         == expected_stripped_xhtml
     )

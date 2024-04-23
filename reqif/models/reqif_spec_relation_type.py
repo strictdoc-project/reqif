@@ -18,6 +18,6 @@ class ReqIFSpecRelationType:
         self.last_change: Optional[str] = last_change
         self.long_name: Optional[str] = long_name
         self.is_self_closed: bool = is_self_closed
-        self.attribute_definitions: Optional[
-            List[SpecAttributeDefinition]
-        ] = attribute_definitions
+        self.attribute_definitions: Optional[List[SpecAttributeDefinition]] = (
+            attribute_definitions
+        )

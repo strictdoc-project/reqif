@@ -7,9 +7,7 @@ from reqif.models.reqif_spec_hierarchy import ReqIFSpecHierarchy
 class SpecificationIterator:
     @staticmethod
     def iterate_specification(specification) -> Generator:
-        task_list: Deque[ReqIFSpecHierarchy] = collections.deque(
-            specification.children
-        )
+        task_list: Deque[ReqIFSpecHierarchy] = collections.deque(specification.children)
 
         while True:
             if not task_list:

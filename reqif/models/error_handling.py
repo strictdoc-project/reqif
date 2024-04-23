@@ -18,9 +18,7 @@ class ReqIFSemanticError(Exception):
 class ReqIFXMLSchemaValidationError(ReqIFSchemaError):
     def __init__(self, xml_schema_validation_error):
         super().__init__(xml_schema_validation_error)
-        self.xml_schema_validation_error: Exception = (
-            xml_schema_validation_error
-        )
+        self.xml_schema_validation_error: Exception = xml_schema_validation_error
 
     def get_description(self) -> str:
         return str(self.xml_schema_validation_error)

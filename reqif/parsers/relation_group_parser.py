@@ -6,9 +6,7 @@ from reqif.models.reqif_relation_group import ReqIFRelationGroup
 class ReqIFRelationGroupParser:
     @staticmethod
     def parse(xml_relation_group) -> ReqIFRelationGroup:
-        assert (
-            "RELATION-GROUP" in xml_relation_group.tag
-        ), f"{xml_relation_group}"
+        assert "RELATION-GROUP" in xml_relation_group.tag, f"{xml_relation_group}"
 
         attributes = xml_relation_group.attrib
         try:

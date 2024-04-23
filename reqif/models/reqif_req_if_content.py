@@ -45,6 +45,6 @@ class ReqIFReqIFContent:
         self.spec_objects: Optional[List[ReqIFSpecObject]] = spec_objects
         self.spec_relations: Optional[List[ReqIFSpecRelation]] = spec_relations
         self.specifications: Optional[List[ReqIFSpecification]] = specifications
-        self.spec_relation_groups: Optional[
-            List[ReqIFRelationGroup]
-        ] = spec_relation_groups
+        self.spec_relation_groups: Optional[List[ReqIFRelationGroup]] = (
+            spec_relation_groups
+        )

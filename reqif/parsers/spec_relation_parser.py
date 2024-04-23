@@ -67,10 +67,8 @@ class SpecRelationParser:
                         value=attribute_value,
                     )
                 elif xml_value.tag == "ATTRIBUTE-VALUE-XHTML":
-                    values_attribute = (
-                        AttributeValueParser.parse_xhtml_attribute_value(
-                            xml_value
-                        )
+                    values_attribute = AttributeValueParser.parse_xhtml_attribute_value(
+                        xml_value
                     )
                 else:
                     raise NotImplementedError
@@ -103,16 +101,12 @@ class SpecRelationParser:
 
         children_tags: List[str]
         if spec_relation.xml_node is not None:
-            children_tags = list(
-                map(lambda el: el.tag, list(spec_relation.xml_node))
-            )
+            children_tags = list(map(lambda el: el.tag, list(spec_relation.xml_node)))
         else:
             children_tags = ["TYPE", "SOURCE", "TARGET", "VALUES"]
         for tag in children_tags:
             if tag == "TYPE":
-                output += SpecRelationParser._unparse_spec_relation_type(
-                    spec_relation
-                )
+                output += SpecRelationParser._unparse_spec_relation_type(spec_relation)
             elif tag == "SOURCE":
                 output += SpecRelationParser._unparse_spec_relation_source(
                     spec_relation

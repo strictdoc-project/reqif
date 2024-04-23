@@ -21,14 +21,10 @@ class SpecObjectParser:
         except Exception:
             raise NotImplementedError from None
         spec_object_last_change: Optional[str] = (
-            xml_attributes["LAST-CHANGE"]
-            if "LAST-CHANGE" in xml_attributes
-            else None
+            xml_attributes["LAST-CHANGE"] if "LAST-CHANGE" in xml_attributes else None
         )
         spec_object_long_name: Optional[str] = (
-            xml_attributes["LONG-NAME"]
-            if "LONG-NAME" in xml_attributes
-            else None
+            xml_attributes["LONG-NAME"] if "LONG-NAME" in xml_attributes else None
         )
 
         spec_object_type = (
@@ -36,9 +32,9 @@ class SpecObjectParser:
         )
 
         xml_spec_values = spec_object_xml.find("VALUES")
-        attributes: Optional[
-            List[SpecObjectAttribute]
-        ] = AttributeValueParser.parse_attribute_values(xml_spec_values)
+        attributes: Optional[List[SpecObjectAttribute]] = (
+            AttributeValueParser.parse_attribute_values(xml_spec_values)
+        )
 
         # FIXME: Technically, we can get a ReqIF file where VALUES is empty.
         # But don't want to break the interfaces for now.
@@ -71,9 +67,7 @@ class SpecObjectParser:
         output += ">\n"
 
         if spec_object.xml_node is not None:
-            children_tags = list(
-                map(lambda el: el.tag, list(spec_object.xml_node))
-            )
+            children_tags = list(map(lambda el: el.tag, list(spec_object.xml_node)))
             assert "VALUES" in children_tags
             assert "TYPE" in children_tags
         else:
@@ -85,9 +79,7 @@ class SpecObjectParser:
                     spec_object.attributes
                 )
             elif child_tag == "TYPE":
-                output += SpecObjectParser._unparse_spec_object_type(
-                    spec_object
-                )
+                output += SpecObjectParser._unparse_spec_object_type(spec_object)
             else:
                 print(f"warning: Unknown child tag: {child_tag}.")  # noqa: T201
 

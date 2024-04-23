@@ -47,9 +47,7 @@ class AttributeDefinitionParser:
             )
 
             default_value_definition_ref: Optional[str] = None
-            default_value: Union[
-                None, DefaultValueEmptySelfClosedTag, str
-            ] = None
+            default_value: Union[None, DefaultValueEmptySelfClosedTag, str] = None
             multi_valued: Optional[bool] = None
             if attribute_definition.tag == "ATTRIBUTE-DEFINITION-STRING":
                 attribute_type = SpecObjectAttributeType.STRING
@@ -71,9 +69,7 @@ class AttributeDefinitionParser:
                             "ATTRIBUTE-VALUE-STRING"
                         )
                         if xml_attribute_value is not None:
-                            default_value = xml_attribute_value.attrib[
-                                "THE-VALUE"
-                            ]
+                            default_value = xml_attribute_value.attrib["THE-VALUE"]
                         else:
                             raise NotImplementedError
 
@@ -86,9 +82,7 @@ class AttributeDefinitionParser:
                         .text
                     )
                 except Exception as exception:
-                    raise NotImplementedError(
-                        attribute_definition
-                    ) from exception
+                    raise NotImplementedError(attribute_definition) from exception
 
                 xml_default_value = attribute_definition.find("DEFAULT-VALUE")
                 if xml_default_value is not None:
@@ -107,9 +101,7 @@ class AttributeDefinitionParser:
                         .text
                     )
                 except Exception as exception:
-                    raise NotImplementedError(
-                        attribute_definition
-                    ) from exception
+                    raise NotImplementedError(attribute_definition) from exception
 
                 xml_default_value = attribute_definition.find("DEFAULT-VALUE")
                 if xml_default_value is not None:
@@ -128,9 +120,7 @@ class AttributeDefinitionParser:
                         .text
                     )
                 except Exception as exception:
-                    raise NotImplementedError(
-                        attribute_definition
-                    ) from exception
+                    raise NotImplementedError(attribute_definition) from exception
 
                 xml_default_value = attribute_definition.find("DEFAULT-VALUE")
                 if xml_default_value is not None:
@@ -146,9 +136,7 @@ class AttributeDefinitionParser:
                             "ATTRIBUTE-DEFINITION-BOOLEAN-REF"
                         )
                         if xml_attribute_definition is not None:
-                            default_value_definition_ref = (
-                                xml_attribute_definition.text
-                            )
+                            default_value_definition_ref = xml_attribute_definition.text
             elif attribute_definition.tag == "ATTRIBUTE-DEFINITION-XHTML":
                 attribute_type = SpecObjectAttributeType.XHTML
                 try:
@@ -158,9 +146,7 @@ class AttributeDefinitionParser:
                         .text
                     )
                 except Exception as exception:
-                    raise NotImplementedError(
-                        attribute_definition
-                    ) from exception
+                    raise NotImplementedError(attribute_definition) from exception
 
                 xml_default_value = attribute_definition.find("DEFAULT-VALUE")
                 if xml_default_value is None:
@@ -172,21 +158,15 @@ class AttributeDefinitionParser:
                         "ATTRIBUTE-VALUE-XHTML"
                     )
                     if xml_attribute_value is not None:
-                        xml_definition_value = xml_attribute_value.find(
-                            "DEFINITION"
-                        )
+                        xml_definition_value = xml_attribute_value.find("DEFINITION")
                         if xml_definition_value is not None:
                             xml_attribute_ref = xml_definition_value.find(
                                 "ATTRIBUTE-DEFINITION-XHTML-REF"
                             )
                             assert xml_attribute_ref is not None
-                            default_value_definition_ref = (
-                                xml_attribute_ref.text
-                            )
+                            default_value_definition_ref = xml_attribute_ref.text
                         xml_values = xml_attribute_value.find("THE-VALUE")
-                        default_value = lxml_stringify_namespaced_children(
-                            xml_values
-                        )
+                        default_value = lxml_stringify_namespaced_children(xml_values)
                     else:
                         raise NotImplementedError
             elif attribute_definition.tag == "ATTRIBUTE-DEFINITION-ENUMERATION":
@@ -197,9 +177,7 @@ class AttributeDefinitionParser:
                     else None
                 )
                 multi_valued = (
-                    multi_valued_string == "true"
-                    if multi_valued_string
-                    else None
+                    multi_valued_string == "true" if multi_valued_string else None
                 )
                 try:
                     datatype_definition = (
@@ -208,9 +186,7 @@ class AttributeDefinitionParser:
                         .text
                     )
                 except Exception as exception:
-                    raise NotImplementedError(
-                        attribute_definition
-                    ) from exception
+                    raise NotImplementedError(attribute_definition) from exception
 
                 xml_default_value = attribute_definition.find("DEFAULT-VALUE")
                 if xml_default_value is not None:
@@ -225,19 +201,13 @@ class AttributeDefinitionParser:
                                 "DEFINITION"
                             )
                             if xml_definition_value is not None:
-                                xml_attribute_ref = (
-                                    xml_definition_value.find(  # noqa: E501
-                                        "ATTRIBUTE-DEFINITION-ENUMERATION-REF"
-                                    )
+                                xml_attribute_ref = xml_definition_value.find(  # noqa: E501
+                                    "ATTRIBUTE-DEFINITION-ENUMERATION-REF"
                                 )
-                                default_value_definition_ref = (
-                                    xml_attribute_ref.text
-                                )
+                                default_value_definition_ref = xml_attribute_ref.text
                             xml_values = xml_attribute_value.find("VALUES")
                             if xml_values is not None:
-                                xml_enum_value_ref = xml_values.find(
-                                    "ENUM-VALUE-REF"
-                                )
+                                xml_enum_value_ref = xml_values.find("ENUM-VALUE-REF")
                                 default_value = xml_enum_value_ref.text
                         else:
                             raise NotImplementedError
@@ -250,9 +220,7 @@ class AttributeDefinitionParser:
                         .text
                     )
                 except Exception as exception:
-                    raise NotImplementedError(
-                        attribute_definition
-                    ) from exception
+                    raise NotImplementedError(attribute_definition) from exception
             else:
                 raise NotImplementedError(attribute_definition) from None
             attribute_definition = SpecAttributeDefinition(
@@ -319,9 +287,7 @@ class AttributeDefinitionParser:
         elif lxml_is_self_closed_tag(xml_default_value):
             default_value = DefaultValueEmptySelfClosedTag()
         else:
-            xml_attribute_value = xml_default_value.find(
-                "ATTRIBUTE-VALUE-XHTML"
-            )
+            xml_attribute_value = xml_default_value.find("ATTRIBUTE-VALUE-XHTML")
             if xml_attribute_value is not None:
                 xml_definition_value = xml_attribute_value.find("DEFINITION")
                 if xml_definition_value is not None:
@@ -355,9 +321,7 @@ class AttributeDefinitionParser:
     ) -> str:
         output = ""
         for attribute in attribute_definitions:
-            output += AttributeDefinitionParser._unparse_attribute_definition(
-                attribute
-            )
+            output += AttributeDefinitionParser._unparse_attribute_definition(attribute)
         return output
 
     @staticmethod
@@ -382,23 +346,21 @@ class AttributeDefinitionParser:
 
         children_tags: List[str]
         if attribute.xml_node is not None:
-            children_tags = list(
-                map(lambda el: el.tag, list(attribute.xml_node))
-            )
+            children_tags = list(map(lambda el: el.tag, list(attribute.xml_node)))
         else:
             children_tags = ["DEFAULT-VALUE", "TYPE"]
         for tag in children_tags:
             if tag == "DEFAULT-VALUE":
                 attribute_default_value = attribute.default_value
                 if attribute_default_value is not None:
-                    unparsed_default_value = AttributeDefinitionParser._unparse_attribute_default_value(  # noqa: E501
-                        attribute, attribute_default_value
+                    unparsed_default_value = (
+                        AttributeDefinitionParser._unparse_attribute_default_value(  # noqa: E501
+                            attribute, attribute_default_value
+                        )
                     )
                     output += unparsed_default_value
             elif tag == "TYPE":
-                output += AttributeDefinitionParser._unparse_attribute_type(
-                    attribute
-                )
+                output += AttributeDefinitionParser._unparse_attribute_type(attribute)
             else:
                 raise NotImplementedError(tag)
 

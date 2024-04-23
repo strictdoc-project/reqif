@@ -96,35 +96,22 @@ def test_integration(context, focus=None, debug=False):
 
 
 @task
-def lint_black_diff(context):
-    command = """
-        black . --color 2>&1
-    """
-    result = run_invoke_cmd(context, command)
-
-    # black always exits with 0, so we handle the output.
+def lint_ruff_format(context):
+    result: invoke.runners.Result = run_invoke_cmd(
+        context,
+        """
+            ruff
+                format
+                *.py
+                reqif/
+                tests/unit
+        """,
+    )
+    # Ruff always exits with 0, so we handle the output.
     if "reformatted" in result.stdout:
-        print("invoke: black found issues")  # noqa: T201
+        print("invoke: ruff format found issues")  # noqa: T201
         result.exited = 1
         raise invoke.exceptions.UnexpectedExit(result)
-
-
-@task
-def lint_pylint(context):
-    command = """
-        pylint
-          --rcfile=.pylint.ini
-          --disable=c-extension-no-member
-          reqif/ tasks.py
-    """
-    try:
-        run_invoke_cmd(context, command)
-    except invoke.exceptions.UnexpectedExit as exc:
-        # pylint doesn't show an error message when exit code != 0, so we do.
-        print(  # noqa: T201
-            f"invoke: pylint exited with error code {exc.result.exited}"
-        )
-        raise exc
 
 
 @task
@@ -139,10 +126,10 @@ def lint_flake8(context):
 
 
 @task
-def lint_ruff(context, fix=True):
+def lint_ruff_check(context, fix=True):
     argument_fix = "--fix" if fix else ""
     command = f"""
-        ruff . {argument_fix}
+        ruff check . {argument_fix}
     """
     run_invoke_cmd(context, command)
 
@@ -161,9 +148,8 @@ def lint_mypy(context):
 
 
 @task(
-    lint_black_diff,
-    lint_ruff,
-    lint_pylint,
+    lint_ruff_format,
+    lint_ruff_check,
     lint_flake8,
     lint_mypy,
 )
@@ -193,9 +179,7 @@ def release(context, username=None, password=None):
     # tokens set up on a local machine.
     assert username is None or password is not None
 
-    repository_argument_or_none = (
-        "" if username else ("--repository reqif_release")
-    )
+    repository_argument_or_none = "" if username else ("--repository reqif_release")
     user_password = f"-u{username} -p{password}" if username is not None else ""
     command = f"""
         rm -rfv dist/ &&

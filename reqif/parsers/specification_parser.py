@@ -62,9 +62,9 @@ class ReqIFSpecificationParser:
                 children.append(spec_hierarchy_xml)
 
         xml_spec_values = specification_xml.find("VALUES")
-        values: Optional[
-            List[SpecObjectAttribute]
-        ] = AttributeValueParser.parse_attribute_values(xml_spec_values)
+        values: Optional[List[SpecObjectAttribute]] = (
+            AttributeValueParser.parse_attribute_values(xml_spec_values)
+        )
 
         return ReqIFSpecification(
             xml_node=specification_xml,
@@ -83,9 +83,7 @@ class ReqIFSpecificationParser:
 
         output += "        <SPECIFICATION"
         if specification.description is not None:
-            escaped_description = lxml_escape_for_html(
-                specification.description
-            )
+            escaped_description = lxml_escape_for_html(specification.description)
             output += f' DESC="{escaped_description}"'
 
         output += f' IDENTIFIER="{specification.identifier}"'
@@ -99,19 +97,15 @@ class ReqIFSpecificationParser:
         output += ">\n"
 
         if specification.xml_node is not None:
-            children_tags = list(
-                map(lambda el: el.tag, list(specification.xml_node))
-            )
+            children_tags = list(map(lambda el: el.tag, list(specification.xml_node)))
         else:
             children_tags = ["TYPE", "CHILDREN", "VALUES"]
 
         for tag in children_tags:
             if tag == "TYPE":
                 if specification.specification_type:
-                    output += (
-                        ReqIFSpecificationParser._unparse_specification_type(
-                            specification
-                        )
+                    output += ReqIFSpecificationParser._unparse_specification_type(
+                        specification
                     )
             elif tag == "CHILDREN":
                 if specification.children is not None:

@@ -223,9 +223,7 @@ class AttributeValueParser:
                     definition_ref=attribute.definition_ref,
                     value=attribute.value,
                 )
-            elif (
-                attribute.attribute_type == SpecObjectAttributeType.ENUMERATION
-            ):
+            elif attribute.attribute_type == SpecObjectAttributeType.ENUMERATION:
                 if attribute.xml_node is not None:
                     children_tags = list(
                         map(lambda el: el.tag, list(attribute.xml_node))
@@ -241,9 +239,7 @@ class AttributeValueParser:
                 enum_values: str = "".join(
                     list(
                         map(
-                            lambda v: ATTRIBUTE_ENUM_VALUE_TEMPLATE.format(
-                                value=v
-                            ),
+                            lambda v: ATTRIBUTE_ENUM_VALUE_TEMPLATE.format(value=v),
                             attribute.value,
                         )
                     )
