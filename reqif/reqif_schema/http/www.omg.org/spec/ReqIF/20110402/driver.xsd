@@ -6,20 +6,20 @@
     xmlns="http://www.w3.org/1999/xhtml"
     elementFormDefault="qualified" >
     
-    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" schemaLocation="http://www.w3.org/2001/xml.xsd" />
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" schemaLocation="" />
     
     <xsd:import namespace="http://www.w3.org/1999/xhtml/datatypes/" 
-    	schemaLocation="reqif/reqif_schema/www.w3.org/TR/xhtml-modularization/SCHEMA/xhtml-datatypes-1.xsd" />
+    	schemaLocation="../../../../www.w3.org/TR/xhtml-modularization/SCHEMA/xhtml-datatypes-1.xsd" />
     	
-    <xsd:include schemaLocation="reqif/reqif_schema/www.w3.org/TR/xhtml-modularization/SCHEMA/xhtml-framework-1.xsd" />
-    <xsd:include schemaLocation="reqif/reqif_schema/www.w3.org/TR/xhtml-modularization/SCHEMA/xhtml-text-1.xsd" />
-    <xsd:include schemaLocation="reqif/reqif_schema/www.w3.org/TR/xhtml-modularization/SCHEMA/xhtml-hypertext-1.xsd" />
-    <xsd:include schemaLocation="reqif/reqif_schema/www.w3.org/TR/xhtml-modularization/SCHEMA/xhtml-list-1.xsd" />
-    <xsd:include schemaLocation="reqif/reqif_schema/www.w3.org/TR/xhtml-modularization/SCHEMA/xhtml-edit-1.xsd" />
-    <xsd:include schemaLocation="reqif/reqif_schema/www.w3.org/TR/xhtml-modularization/SCHEMA/xhtml-pres-1.xsd" />
-    <xsd:include schemaLocation="reqif/reqif_schema/www.w3.org/TR/xhtml-modularization/SCHEMA/xhtml-inlstyle-1.xsd" />
-    <xsd:include schemaLocation="reqif/reqif_schema/www.w3.org/TR/xhtml-modularization/SCHEMA/xhtml-object-1.xsd" />
-    <xsd:include schemaLocation="reqif/reqif_schema/www.w3.org/TR/xhtml-modularization/SCHEMA/xhtml-table-1.xsd" />
+    <xsd:include schemaLocation="../../../../www.w3.org/TR/xhtml-modularization/SCHEMA/xhtml-framework-1.xsd" />
+    <xsd:include schemaLocation="../../../../www.w3.org/TR/xhtml-modularization/SCHEMA/xhtml-text-1.xsd" />
+    <xsd:include schemaLocation="../../../../www.w3.org/TR/xhtml-modularization/SCHEMA/xhtml-hypertext-1.xsd" />
+    <xsd:include schemaLocation="../../../../www.w3.org/TR/xhtml-modularization/SCHEMA/xhtml-list-1.xsd" />
+    <xsd:include schemaLocation="../../../../www.w3.org/TR/xhtml-modularization/SCHEMA/xhtml-edit-1.xsd" />
+    <xsd:include schemaLocation="../../../../www.w3.org/TR/xhtml-modularization/SCHEMA/xhtml-pres-1.xsd" />
+    <xsd:include schemaLocation="../../../../www.w3.org/TR/xhtml-modularization/SCHEMA/xhtml-inlstyle-1.xsd" />
+    <xsd:include schemaLocation="../../../../www.w3.org/TR/xhtml-modularization/SCHEMA/xhtml-object-1.xsd" />
+    <xsd:include schemaLocation="../../../../www.w3.org/TR/xhtml-modularization/SCHEMA/xhtml-table-1.xsd" />
     
     <xsd:attributeGroup name="xhtml.I18n.extra.attrib"/>
     

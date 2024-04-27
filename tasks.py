@@ -1,8 +1,13 @@
+import inspect
 import os
 import re
 
 import invoke
 from invoke import task
+
+# FIXME
+if not hasattr(inspect, "getargspec"):
+    inspect.getargspec = inspect.getfullargspec
 
 
 def one_line_command(string):

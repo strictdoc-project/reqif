@@ -3,8 +3,8 @@
     xmlns="http://www.w3.org/1999/xhtml" xmlns:REQIF="http://www.omg.org/spec/ReqIF/20110401/reqif.xsd"
     xmlns:xml="http://www.w3.org/XML/1998/namespace" xmlns:xsd="http://www.w3.org/2001/XMLSchema" attributeFormDefault="unqualified"
     elementFormDefault="qualified" targetNamespace="http://www.omg.org/spec/ReqIF/20110401/reqif.xsd">
-  <xsd:import namespace="http://www.w3.org/XML/1998/namespace" schemaLocation="http://www.w3.org/2001/xml.xsd"/>
-  <xsd:import namespace="http://www.w3.org/1999/xhtml" schemaLocation="reqif/reqif_schema/www.omg.org/spec/ReqIF/20110402/driver.xsd"/>
+  <xsd:import namespace="http://www.w3.org/XML/1998/namespace" schemaLocation=""/>
+  <xsd:import namespace="http://www.w3.org/1999/xhtml" schemaLocation="http/www.omg.org/spec/ReqIF/20110402/driver.xsd"/>
   <xsd:element name="REQ-IF" type="REQIF:REQ-IF"/>
   <xsd:simpleType name="LOCAL-REF">
     <xsd:restriction base="xsd:IDREF"/>
