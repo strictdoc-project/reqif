@@ -147,8 +147,13 @@ def lint_mypy(context):
         mypy reqif/
             --show-error-codes
             --disable-error-code=import
+            --disable-error-code=arg-type
             --disable-error-code=no-untyped-call
-        """,  # --strict
+            --disable-error-code=no-untyped-def
+            --disable-error-code=type-arg
+            --disable-error-code=union-attr
+            --strict
+        """,
     )
 
 
