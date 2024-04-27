@@ -1,5 +1,5 @@
 import collections
-from typing import Deque, Dict, Iterator, List, Optional
+from typing import Deque, Dict, Iterator, List, Optional, Any
 
 from reqif.helpers.debug import auto_described
 from reqif.models.error_handling import ReqIFSchemaError
@@ -74,6 +74,34 @@ class ReqIFBundle:  # pylint: disable=too-many-instance-attributes
 
             if current.children is not None:
                 task_list.extendleft(reversed(current.children))
+
+    def iterate_specification_hierarchy_for_conversion(
+        self,
+        specification: ReqIFSpecification,
+        root_node: Any,
+        get_level_lambda,
+        node_lambda,
+    ):
+        section_stack: List[Any] = [root_node]
+
+        for current_hierarchy in self.iterate_specification_hierarchy(specification):
+            current_section = section_stack[-1]
+            section_level = get_level_lambda(current_section)
+
+            if current_hierarchy.level <= section_level:
+                for _ in range(
+                    0,
+                    (section_level - current_hierarchy.level) + 1,
+                ):
+                    assert len(section_stack) > 0
+                    section_stack.pop()
+
+            current_section = section_stack[-1]
+            converted_node, converted_node_is_section = node_lambda(
+                current_hierarchy, current_section
+            )
+            if converted_node_is_section:
+                section_stack.append(converted_node)
 
     def get_spec_object_by_ref(self, ref) -> ReqIFSpecObject:
         return self.lookup.get_spec_object_by_ref(ref)

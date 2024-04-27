@@ -115,9 +115,8 @@ class ReqIFToDictConverter:
                 is_section = reqif_schema.is_spec_object_a_heading(spec_object)
                 return node, is_section
 
-            ReqIFToDictConverter._iterate(
+            reqif_bundle.iterate_specification_hierarchy_for_conversion(
                 specification,
-                reqif_bundle,
                 specification_dict,
                 lambda s: s.level,
                 node_converter_lambda,
@@ -126,37 +125,6 @@ class ReqIFToDictConverter:
             reqif_dict.documents.append(specification_dict)
 
         return reqif_dict
-
-    @staticmethod
-    def _iterate(
-        specification: ReqIFSpecification,
-        reqif_bundle: ReqIFBundle,
-        root_node: Any,
-        get_level_lambda,
-        node_converter_lambda,
-    ):
-        section_stack: List = [root_node]
-
-        for current_hierarchy in reqif_bundle.iterate_specification_hierarchy(
-            specification
-        ):
-            current_section = section_stack[-1]
-            section_level = get_level_lambda(current_section)
-
-            if current_hierarchy.level <= section_level:
-                for _ in range(
-                    0,
-                    (section_level - current_hierarchy.level) + 1,
-                ):
-                    assert len(section_stack) > 0
-                    section_stack.pop()
-
-            current_section = section_stack[-1]
-            converted_node, converted_node_is_section = node_converter_lambda(
-                current_hierarchy, current_section
-            )
-            if converted_node_is_section:
-                section_stack.append(converted_node)
 
     @staticmethod
     def convert_spec_object_to_node(
