@@ -3,7 +3,7 @@ import json
 import os
 from dataclasses import dataclass, field
 from pathlib import Path
-from typing import Any, Dict, List, Optional
+from typing import Dict, List, Optional
 
 from dataclasses_json import dataclass_json
 
@@ -15,7 +15,6 @@ from reqif.models.reqif_data_type import (
     ReqIFDataTypeDefinitionXHTML,
 )
 from reqif.models.reqif_spec_object import ReqIFSpecObject
-from reqif.models.reqif_specification import ReqIFSpecification
 from reqif.parser import ReqIFParser, ReqIFZParser
 from reqif.reqif_bundle import ReqIFBundle, ReqIFZBundle
 
