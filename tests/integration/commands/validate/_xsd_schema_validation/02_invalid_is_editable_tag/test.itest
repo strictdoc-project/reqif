@@ -1,5 +1,2 @@
-# FIXME
-UNSUPPORTED: true
-
 RUN: %expect_exit 1 %reqif validate --use-reqif-schema %S/sample.reqif | filecheck %s --dump-input=fail
 CHECK: Reason: Unexpected child with tag 'REQIF:IS-EDITABLE' at position 2.

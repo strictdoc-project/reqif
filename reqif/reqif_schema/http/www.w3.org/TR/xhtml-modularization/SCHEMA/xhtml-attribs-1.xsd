@@ -16,7 +16,7 @@
         <xs:documentation source="http://www.w3.org/TR/xhtml-modularization/abstract_modules.html#s_commonatts"/>
     </xs:annotation>
   <xs:import namespace="http://www.w3.org/XML/1998/namespace"
-             schemaLocation="http://www.w3.org/2001/xml.xsd">
+             schemaLocation="">
         <xs:annotation>
             <xs:documentation>
         This import brings in the XML namespace attributes
