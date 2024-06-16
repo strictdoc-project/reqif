@@ -50,7 +50,7 @@ def clean(context):
     run_invoke_cmd(context, echo_command)
 
 
-@task
+@task(aliases=["tu"])
 def test_unit(context):
     run_invoke_cmd(
         context,
@@ -80,7 +80,7 @@ def test_coverage_report(context):
     )
 
 
-@task(clean)
+@task(clean, aliases=["ti"])
 def test_integration(context, focus=None, debug=False):
     cwd = os.getcwd()
 
@@ -139,7 +139,7 @@ def lint_ruff_check(context, fix=True):
     run_invoke_cmd(context, command)
 
 
-@task
+@task(aliases=["lm"])
 def lint_mypy(context):
     run_invoke_cmd(
         context,
@@ -157,22 +157,17 @@ def lint_mypy(context):
     )
 
 
-@task(
-    lint_ruff_format,
-    lint_ruff_check,
-    lint_flake8,
-    lint_mypy,
-)
+@task(lint_ruff_format, lint_ruff_check, lint_flake8, lint_mypy, aliases=["l"])
 def lint(_):
     pass
 
 
-@task(test_unit, test_integration)
+@task(test_unit, test_integration, aliases=["t"])
 def test(_):
     pass
 
 
-@task(lint, test)
+@task(lint, test, aliases=["c"])
 def check(_):
     pass
 
