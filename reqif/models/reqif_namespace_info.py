@@ -4,8 +4,10 @@ from reqif.helpers.debug import auto_described
 
 
 @auto_described
-class ReqIFNamespaceInfo:  # pylint: disable=too-many-instance-attributes
-    def __init__(  # pylint: disable=too-many-arguments
+class ReqIFNamespaceInfo:
+    REQIF_XSD = "http://www.omg.org/spec/ReqIF/20110401/reqif.xsd"
+
+    def __init__(
         self,
         original_reqif_tag_dump: Optional[str],
         doctype_is_present: bool,
@@ -42,6 +44,21 @@ class ReqIFNamespaceInfo:  # pylint: disable=too-many-instance-attributes
             configuration=configuration,
             namespace_id=None,
             namespace_xhtml=None,
+            schema_namespace=None,
+            schema_location=None,
+            language=None,
+        )
+
+    @staticmethod
+    def create_default():
+        return ReqIFNamespaceInfo(
+            original_reqif_tag_dump=None,
+            doctype_is_present=True,
+            encoding="UTF-8",
+            namespace=ReqIFNamespaceInfo.REQIF_XSD,
+            configuration=None,
+            namespace_id=None,
+            namespace_xhtml="http://www.w3.org/1999/xhtml",
             schema_namespace=None,
             schema_location=None,
             language=None,

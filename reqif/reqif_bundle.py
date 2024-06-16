@@ -19,7 +19,7 @@ from reqif.object_lookup import ReqIFObjectLookup
 
 
 @auto_described
-class ReqIFBundle:  # pylint: disable=too-many-instance-attributes
+class ReqIFBundle:
     @staticmethod
     def create_empty(
         namespace: Optional[str],
@@ -44,7 +44,7 @@ class ReqIFBundle:  # pylint: disable=too-many-instance-attributes
         tool_extensions_tag_exists: bool,
         lookup: ReqIFObjectLookup,
         exceptions: List[ReqIFSchemaError],
-    ):  # pylint: disable=too-many-arguments
+    ):
         self.namespace_info: ReqIFNamespaceInfo = namespace_info
         self.req_if_header: Optional[ReqIFReqIFHeader] = req_if_header
         self.core_content: Optional[ReqIFCoreContent] = core_content

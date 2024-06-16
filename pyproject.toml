@@ -47,6 +47,7 @@ dependencies = [
     "lxml >= 4.6.2",
     "jinja2 >= 2.11.2",
     "xmlschema >= 2.4.0",
+    "openpyxl",
 ]
 
 [project.optional-dependencies]
