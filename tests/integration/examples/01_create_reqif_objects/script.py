@@ -42,7 +42,7 @@ class ExampleIdentifiers:
 
 
 string_data_type = ReqIFDataTypeDefinitionString(
-    identifier=(ExampleIdentifiers.STRING_DATATYPE_ID),
+    identifier=ExampleIdentifiers.STRING_DATATYPE_ID,
     last_change=date_now,
     long_name="String type",
     max_length="50",
@@ -51,7 +51,7 @@ string_data_type = ReqIFDataTypeDefinitionString(
 requirement_text_attribute = SpecAttributeDefinition(
     attribute_type=SpecObjectAttributeType.STRING,
     identifier=ExampleIdentifiers.SPEC_ATTRIBUTE_ID,
-    datatype_definition=(ExampleIdentifiers.STRING_DATATYPE_ID),
+    datatype_definition=ExampleIdentifiers.STRING_DATATYPE_ID,
     last_change=date_now,
     long_name="Requirement text",
 )

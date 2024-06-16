@@ -206,7 +206,7 @@ class AttributeValueParser:
         output += "          <VALUES>\n"
         for attribute in attribute_values:
             if attribute.attribute_type == SpecObjectAttributeType.STRING:
-                assert isinstance(attribute.value, str)
+                assert isinstance(attribute.value, str), attribute.value
                 output += ATTRIBUTE_STRING_TEMPLATE.format(
                     definition_ref=attribute.definition_ref,
                     value=html.escape(attribute.value),

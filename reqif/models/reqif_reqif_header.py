@@ -10,8 +10,8 @@ class EmptyTag:
 
 
 @auto_described
-class ReqIFReqIFHeader:  # pylint: disable=too-many-instance-attributes
-    def __init__(  # pylint: disable=too-many-arguments
+class ReqIFReqIFHeader:
+    def __init__(
         self,
         identifier: Optional[str] = None,
         comment: Optional[str] = None,
