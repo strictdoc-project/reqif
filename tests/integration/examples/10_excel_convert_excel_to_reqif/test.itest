@@ -1,4 +1,5 @@
 RUN: mkdir -p %S/Output
 
 RUN: python %S/script.py %S/input.xlsx --output-dir %S/Output/reqif
+RUN: python %S/script.py %S/Output/reqif/input.reqif --output-dir %S/Output/
 _UN: %excel_diff %S/input.xlsx %S/Output/your_modified_file.xlsx

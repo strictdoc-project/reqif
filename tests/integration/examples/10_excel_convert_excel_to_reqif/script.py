@@ -4,11 +4,16 @@ import uuid
 from pathlib import Path
 from typing import Dict, List
 
+from lxml import etree
 from openpyxl import load_workbook
+from openpyxl.workbook import Workbook
 
+from reqif.experimental.reqif_schema import ReqIFSchema
 from reqif.helpers.string.xhtml_indent import reqif_indent_xhtml_string
 from reqif.models.reqif_core_content import ReqIFCoreContent
-from reqif.models.reqif_data_type import ReqIFDataTypeDefinitionString
+from reqif.models.reqif_data_type import ReqIFDataTypeDefinitionString, \
+    ReqIFDataTypeDefinitionXHTML, ReqIFDataTypeDefinitionDateIdentifier, \
+    ReqIFDataTypeDefinitionEnumeration
 from reqif.models.reqif_namespace_info import ReqIFNamespaceInfo
 from reqif.models.reqif_req_if_content import ReqIFReqIFContent
 from reqif.models.reqif_reqif_header import ReqIFReqIFHeader
@@ -22,6 +27,7 @@ from reqif.models.reqif_specification import ReqIFSpecification
 from reqif.models.reqif_specification_type import ReqIFSpecificationType
 from reqif.models.reqif_types import SpecObjectAttributeType
 from reqif.object_lookup import ReqIFObjectLookup
+from reqif.parser import ReqIFParser
 from reqif.reqif_bundle import ReqIFBundle
 from reqif.unparser import ReqIFUnparser
 
@@ -29,6 +35,70 @@ from reqif.unparser import ReqIFUnparser
 # "_" is needed to make the ReqIF XML schema validator happy.
 def create_uuid():
     return "_" + uuid.uuid4().hex
+
+
+def _convert_spec_object_to_node(
+    spec_object: ReqIFSpecObject,
+    reqif_bundle: ReqIFBundle,
+    reqif_schema: ReqIFSchema,
+    level,
+):
+    assert 1 <= level <= 10, "Expecting a reasonable level of nesting."
+    spec_object_type_ref = spec_object.spec_object_type
+
+    spec_object_type = reqif_bundle.get_spec_object_type_by_ref(
+        spec_object_type_ref
+    )
+    assert spec_object_type is not None
+    row_dict = {}
+    for spec_object_attribute_ in spec_object.attributes:
+        attribute_definition = reqif_schema.spec_object_type_attributes[
+            spec_object_attribute_.definition_ref
+        ]
+        assert attribute_definition.long_name is not None
+
+        data_type = reqif_schema.data_type_definitions[
+            attribute_definition.datatype_definition
+        ]
+        assert data_type is not None
+        if isinstance(data_type, ReqIFDataTypeDefinitionDateIdentifier):
+            assert isinstance(spec_object_attribute_.value, str)
+            row_dict[
+                attribute_definition.long_name
+            ] = spec_object_attribute_.value
+        elif isinstance(data_type, ReqIFDataTypeDefinitionEnumeration):
+            assert isinstance(spec_object_attribute_.value, list)
+
+            enum_values: List[str] = []
+            for enum_value_identifier_ in spec_object_attribute_.value:
+                assert data_type.values is not None
+                for data_type_enum_value_ in data_type.values:
+                    if (
+                        data_type_enum_value_.identifier
+                        == enum_value_identifier_
+                    ):
+                        assert data_type_enum_value_.long_name is not None
+                        enum_values.append(data_type_enum_value_.long_name)
+                        break
+                else:
+                    raise AssertionError("Enum value not found.")
+            row_dict[attribute_definition.long_name] = ", ".join(
+                enum_values
+            )
+        elif isinstance(data_type, ReqIFDataTypeDefinitionString):
+            assert isinstance(spec_object_attribute_.value, str)
+            row_dict[
+                attribute_definition.long_name
+            ] = spec_object_attribute_.value
+        elif isinstance(data_type, ReqIFDataTypeDefinitionXHTML):
+            assert isinstance(spec_object_attribute_.value, str)
+            row_dict[
+                attribute_definition.long_name
+            ] = spec_object_attribute_.value
+        else:
+            raise NotImplementedError(data_type)
+
+    return row_dict
 
 
 def convert_excel_to_reqif(path_to_excel: str) -> str:
@@ -231,6 +301,54 @@ def convert_excel_to_reqif(path_to_excel: str) -> str:
     return reqif_string_content
 
 
+def convert_reqif_to_excel(path_to_reqif: str, path_to_output_dir: str) -> None:
+    assert os.path.isfile(path_to_reqif), path_to_reqif
+
+    input_file_name = Path(path_to_reqif).stem
+
+    wb = Workbook()
+    ws = wb.active
+
+    reqif_bundle: ReqIFBundle = ReqIFParser.parse(path_to_reqif)
+    reqif_schema = ReqIFSchema(reqif_bundle)
+
+    document_dict = []
+
+    # For now, only one document per ReqIF is supported.
+    specification: ReqIFSpecification = reqif_bundle.core_content.req_if_content.specifications[0]
+
+    for current_hierarchy_ in reqif_bundle.iterate_specification_hierarchy(specification):
+        spec_object = reqif_bundle.get_spec_object_by_ref(
+            current_hierarchy_.spec_object
+        )
+        row_dict = _convert_spec_object_to_node(spec_object, reqif_bundle, reqif_schema, 1)
+        document_dict.append(row_dict)
+
+    for row_dict_ in document_dict:
+        values_no_xhtml = []
+        for value_ in row_dict_.values():
+            parser = etree.XMLParser(recover=True)
+            tree = etree.XML(value_, parser)
+
+            # Extract text content, ignoring the tags.
+            text_content = ''.join(tree.itertext())
+
+            values_no_xhtml.append(text_content)
+
+        ws.append(values_no_xhtml)
+
+    """
+    Writing the workbook to an output file.
+    """
+    path_to_output_dir = path_to_output_dir
+    Path(path_to_output_dir).mkdir(exist_ok=True)
+
+    path_to_output_file = os.path.join(
+        path_to_output_dir, f"{input_file_name}.xlsx"
+    )
+    wb.save(path_to_output_file)
+
+
 def main():
     main_parser = argparse.ArgumentParser()
 
@@ -263,20 +381,23 @@ def main():
     should_use_file_system: bool = not args.no_filesystem
     should_use_stdout: bool = args.stdout
 
-    reqif_string_content: str = convert_excel_to_reqif(input_file)
+    if ".xlsx" in input_file:
+        reqif_string_content: str = convert_excel_to_reqif(input_file)
 
-    if should_use_file_system:
-        path_to_output_dir = args.output_dir
-        Path(path_to_output_dir).mkdir(exist_ok=True)
+        if should_use_file_system:
+            path_to_output_dir = args.output_dir
+            Path(path_to_output_dir).mkdir(exist_ok=True)
 
-        path_to_output_file = os.path.join(
-            path_to_output_dir, f"{input_file_name}.reqif"
-        )
-        with open(path_to_output_file, "w") as output_reqif_file:
-            output_reqif_file.write(reqif_string_content)
+            path_to_output_file = os.path.join(
+                path_to_output_dir, f"{input_file_name}.reqif"
+            )
+            with open(path_to_output_file, "w") as output_reqif_file:
+                output_reqif_file.write(reqif_string_content)
 
-    if should_use_stdout:
-        print(reqif_string_content)  # noqa: T201
+        if should_use_stdout:
+            print(reqif_string_content)  # noqa: T201
+    elif ".reqif" in input_file:
+        convert_reqif_to_excel(input_file, args.output_dir)
 
 
 main()
