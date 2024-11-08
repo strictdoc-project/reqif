@@ -93,25 +93,25 @@ class ReqIFSpecHierarchyParser:
             object_output += base_level_str + "  </OBJECT>\n"
             return object_output
 
-        def print_children():
+        def print_children(children: List[ReqIFSpecHierarchy]):
             children_output = ""
-            if len(hierarchy.children) == 0:
+            if len(children) == 0:
                 if hierarchy.is_self_closed:
                     children_output += base_level_str + "  <CHILDREN/>\n"
                     return children_output
             children_output += base_level_str + "  <CHILDREN>\n"
-            for child in hierarchy.children:
-                children_output += ReqIFSpecHierarchyParser.unparse(child)
+            for child_ in children:
+                children_output += ReqIFSpecHierarchyParser.unparse(child_)
             children_output += base_level_str + "  </CHILDREN>\n"
             return children_output
 
         if hierarchy.ref_then_children_order:
             output += print_object()
             if hierarchy.children is not None:
-                output += print_children()
+                output += print_children(hierarchy.children)
         else:
             if hierarchy.children is not None:
-                output += print_children()
+                output += print_children(hierarchy.children)
             output += print_object()
 
         output += base_level_str + "</SPEC-HIERARCHY>\n"
