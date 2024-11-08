@@ -2,7 +2,7 @@ import argparse
 import os
 import sys
 from io import StringIO
-from xml.etree import ElementTree as etree
+from xml.etree import ElementTree
 
 import html5lib
 from tidylib import tidy_document
@@ -53,7 +53,7 @@ for message in tidylib_messages_string.split("\n"):
 
 # Validation #3: xml.etree
 try:
-    etree.parse(StringIO(html_content), etree.XMLParser())
+    ElementTree.parse(StringIO(html_content), ElementTree.XMLParser())
 except Exception as e:
     errors.append("Error: {}".format(str(e)))
 

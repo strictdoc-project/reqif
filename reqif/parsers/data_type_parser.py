@@ -40,12 +40,6 @@ class DataTypeParser:
         description = attributes["DESC"] if "DESC" in attributes else None
 
         if data_type_xml.tag == "DATATYPE-DEFINITION-ENUMERATION":
-            multi_valued_string = (
-                attributes["MULTI-VALUED"] if "MULTI-VALUED" in attributes else None
-            )
-            multi_valued = (
-                multi_valued_string == "true" if multi_valued_string else None
-            )
             values: Optional[List[ReqIFEnumValue]] = None
             xml_specified_values = data_type_xml.find("SPECIFIED-VALUES")
             if xml_specified_values is not None:
@@ -97,7 +91,6 @@ class DataTypeParser:
                 identifier=identifier,
                 last_change=last_change,
                 long_name=long_name,
-                multi_valued=multi_valued,
                 values=values,
             )
 

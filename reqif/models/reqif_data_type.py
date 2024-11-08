@@ -133,7 +133,6 @@ class ReqIFDataTypeDefinitionEnumeration:  # pylint: disable=too-many-instance-a
         description: Optional[str] = None,
         last_change: Optional[str] = None,
         long_name: Optional[str] = None,
-        multi_valued: Optional[bool] = None,
         values: Optional[List[ReqIFEnumValue]] = None,
         is_self_closed: bool = False,
     ):
@@ -141,7 +140,6 @@ class ReqIFDataTypeDefinitionEnumeration:  # pylint: disable=too-many-instance-a
         self.description: Optional[str] = description
         self.last_change: Optional[str] = last_change
         self.long_name: Optional[str] = long_name
-        self.multi_valued: Optional[bool] = multi_valued
         self.values: Optional[List[ReqIFEnumValue]] = values
         self.values_map: Dict[str, ReqIFEnumValue] = {}
         if values is not None:

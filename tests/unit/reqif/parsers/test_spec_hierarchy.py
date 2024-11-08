@@ -1,4 +1,4 @@
-from xml.etree import ElementTree as etree
+from xml.etree import ElementTree
 
 from reqif.parsers.spec_hierarchy_parser import (
     ReqIFSpecHierarchyParser,
@@ -28,7 +28,7 @@ def test_01_nominal_case() -> None:
 </SPEC-HIERARCHY>
     """  # noqa: E501
 
-    specification_xml = etree.fromstring(specification_string)
+    specification_xml = ElementTree.fromstring(specification_string)
     specification_1 = ReqIFSpecHierarchyParser.parse(specification_xml)
     assert specification_1.identifier == "LEVEL_1"
     assert specification_1.spec_object == "TEST_OBJECT_REF_1"
