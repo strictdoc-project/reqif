@@ -1,3 +1,5 @@
+[lint]
+
 select = [
   "A",
   "ARG",
@@ -42,6 +44,9 @@ ignore = [
   # Never enforce `E501` (line length violations).
   "E501",
 
+  # ICN001 `xml.etree.ElementTree` should be imported as `ET`
+  "ICN001",
+
   # A warning by ruff format:
   # warning: The following rules may cause conflicts when used with the formatter: `ISC001`.
   "ISC001",
@@ -50,7 +55,7 @@ ignore = [
 # Avoid trying to fix flake8-bugbear (`B`) violations.
 unfixable = ["B"]
 
-[per-file-ignores]
+[lint.per-file-ignores]
 "strictdoc/server/routers/main_router.py" = ["B008"]
 "tests/integration/check_exists.py" = ["T201"]
 "tests/integration/diff.py" = ["T201"]

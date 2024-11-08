@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<REQ-IF xmlns="http://www.omg.org/spec/ReqIF/20110401/reqif.xsd" xmlns:configuration="http://eclipse.org/rmf/pror/toolextensions/1.0">
+  <CORE-CONTENT>
+    <REQ-IF-CONTENT>
+      <DATATYPES>
+        <DATATYPE-DEFINITION-ENUMERATION DESC="Requirement category" IDENTIFIER="type-reqtype" LAST-CHANGE="2019-01-01T00:00:00.000+02:00" LONG-NAME="Requirement type">
+          <SPECIFIED-VALUES>
+            <ENUM-VALUE IDENTIFIER="value-reqtype-hardware" LAST-CHANGE="2019-01-01T00:00:00.000+02:00" LONG-NAME="hardware">
+              <PROPERTIES>
+                <EMBEDDED-VALUE KEY="0" OTHER-CONTENT="hardware"/>
+              </PROPERTIES>
+            </ENUM-VALUE>
+            <ENUM-VALUE IDENTIFIER="value-reqtype-project" LAST-CHANGE="2019-01-01T00:00:00.000+02:00" LONG-NAME="project">
+              <PROPERTIES>
+                <EMBEDDED-VALUE KEY="1" OTHER-CONTENT="project"/>
+              </PROPERTIES>
+            </ENUM-VALUE>
+            <ENUM-VALUE IDENTIFIER="value-reqtype-software" LAST-CHANGE="2019-01-01T00:00:00.000+02:00" LONG-NAME="software">
+              <PROPERTIES>
+                <EMBEDDED-VALUE KEY="2" OTHER-CONTENT="software"/>
+              </PROPERTIES>
+            </ENUM-VALUE>
+          </SPECIFIED-VALUES>
+        </DATATYPE-DEFINITION-ENUMERATION>
+      </DATATYPES>
+      <SPEC-TYPES>
+        <SPEC-OBJECT-TYPE IDENTIFIER="TEST_SPEC_OBJECT_TYPE_ID" LAST-CHANGE="2021-02-08T16:37:07.454+01:00" LONG-NAME="TEST_SPEC_OBJECT_TYPE_LONG_NAME">
+          <SPEC-ATTRIBUTES>
+            <ATTRIBUTE-DEFINITION-ENUMERATION IDENTIFIER="attr-reqtype" IS-EDITABLE="true" LAST-CHANGE="2019-01-01T00:00:00.000+02:00" LONG-NAME="Requirement type" MULTI-VALUED="true">
+              <TYPE>
+                <DATATYPE-DEFINITION-ENUMERATION-REF>type-reqtype</DATATYPE-DEFINITION-ENUMERATION-REF>
+              </TYPE>
+              <DEFAULT-VALUE>
+                <ATTRIBUTE-VALUE-ENUMERATION>
+                  <DEFINITION>
+                    <ATTRIBUTE-DEFINITION-ENUMERATION-REF>attr-reqtype</ATTRIBUTE-DEFINITION-ENUMERATION-REF>
+                  </DEFINITION>
+                  <VALUES>
+                    <ENUM-VALUE-REF>value-reqtype-software</ENUM-VALUE-REF>
+                  </VALUES>
+                </ATTRIBUTE-VALUE-ENUMERATION>
+              </DEFAULT-VALUE>
+            </ATTRIBUTE-DEFINITION-ENUMERATION>
+          </SPEC-ATTRIBUTES>
+        </SPEC-OBJECT-TYPE>
+      </SPEC-TYPES>
+    </REQ-IF-CONTENT>
+  </CORE-CONTENT>
+</REQ-IF>

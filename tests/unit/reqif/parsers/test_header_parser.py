@@ -1,4 +1,4 @@
-from xml.etree import ElementTree as etree
+from xml.etree import ElementTree
 
 from reqif.models.reqif_reqif_header import ReqIFReqIFHeader
 from reqif.parsers.header_parser import (
@@ -18,7 +18,7 @@ def test_01_title() -> None:
     </REQ-IF-HEADER>
   </THE-HEADER>
     """
-    xml_header = etree.fromstring(spec_type_string)
+    xml_header = ElementTree.fromstring(spec_type_string)
 
     header = ReqIFHeaderParser.parse(xml_header)
     assert isinstance(header, ReqIFReqIFHeader)

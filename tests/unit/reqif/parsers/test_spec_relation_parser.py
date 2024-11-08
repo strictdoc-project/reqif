@@ -1,4 +1,4 @@
-from xml.etree import ElementTree as etree
+from xml.etree import ElementTree
 
 from reqif.parsers.spec_relation_parser import (
     SpecRelationParser,
@@ -20,7 +20,7 @@ def test_01_nominal_case() -> None:
 </SPEC-RELATION>
     """  # noqa: E501
 
-    spec_object_xml = etree.fromstring(spec_object_string)
+    spec_object_xml = ElementTree.fromstring(spec_object_string)
     spec_object = SpecRelationParser.parse(spec_object_xml)
     assert spec_object.identifier == "TEST_SPEC_RELATION_ID"
     assert spec_object.relation_type_ref == "PARENT"
