@@ -1,3 +1,4 @@
+import html
 from typing import List, Optional
 
 from reqif.models.error_handling import ReqIFMissingTagException
@@ -96,7 +97,7 @@ class SpecRelationParser:
         if spec_relation.last_change is not None:
             output += f' LAST-CHANGE="{spec_relation.last_change}"'
         if spec_relation.long_name is not None:
-            output += f' LONG-NAME="{spec_relation.long_name}"'
+            output += f' LONG-NAME="{html.escape(spec_relation.long_name)}"'
         output += ">\n"
 
         children_tags: List[str]
