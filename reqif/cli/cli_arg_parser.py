@@ -58,7 +58,7 @@ def cli_args_parser() -> argparse.ArgumentParser:
     # Command – Format
     command_parser_format = command_subparsers.add_parser(
         "format",
-        help=("Read a ReqIF file and pretty-print its contents to " "an output file."),
+        help=("Read a ReqIF file and pretty-print its contents to an output file."),
         formatter_class=formatter,
     )
     command_parser_format.add_argument(

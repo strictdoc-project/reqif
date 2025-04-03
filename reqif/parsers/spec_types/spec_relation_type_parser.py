@@ -9,9 +9,9 @@ from reqif.parsers.attribute_definition_parser import AttributeDefinitionParser
 class SpecRelationTypeParser:
     @staticmethod
     def parse(xml_spec_relation_type_xml) -> ReqIFSpecRelationType:
-        assert (
-            xml_spec_relation_type_xml.tag == "SPEC-RELATION-TYPE"
-        ), f"{xml_spec_relation_type_xml}"
+        assert xml_spec_relation_type_xml.tag == "SPEC-RELATION-TYPE", (
+            f"{xml_spec_relation_type_xml}"
+        )
         is_self_closed = lxml_is_self_closed_tag(xml_spec_relation_type_xml)
 
         xml_attributes = xml_spec_relation_type_xml.attrib

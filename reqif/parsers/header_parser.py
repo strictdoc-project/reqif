@@ -82,41 +82,26 @@ class ReqIFHeaderParser:
                 output += f"      <COMMENT>{header.comment}</COMMENT>\n"
             if header.creation_time:
                 output += (
-                    "      "
-                    "<CREATION-TIME>"
-                    f"{header.creation_time}"
-                    "</CREATION-TIME>\n"
+                    f"      <CREATION-TIME>{header.creation_time}</CREATION-TIME>\n"
                 )
             if header.repository_id is not None:
                 if isinstance(header.repository_id, str):
                     output += (
-                        "      "
-                        "<REPOSITORY-ID>"
-                        f"{header.repository_id}"
-                        "</REPOSITORY-ID>\n"
+                        f"      <REPOSITORY-ID>{header.repository_id}</REPOSITORY-ID>\n"
                     )
                 else:
                     output += "      <REPOSITORY-ID/>\n"
             if header.req_if_tool_id:
                 output += (
-                    "      "
-                    "<REQ-IF-TOOL-ID>"
-                    f"{header.req_if_tool_id}"
-                    "</REQ-IF-TOOL-ID>\n"
+                    f"      <REQ-IF-TOOL-ID>{header.req_if_tool_id}</REQ-IF-TOOL-ID>\n"
                 )
             if header.req_if_version:
                 output += (
-                    "      "
-                    "<REQ-IF-VERSION>"
-                    f"{header.req_if_version}"
-                    "</REQ-IF-VERSION>\n"
+                    f"      <REQ-IF-VERSION>{header.req_if_version}</REQ-IF-VERSION>\n"
                 )
             if header.source_tool_id:
                 output += (
-                    "      "
-                    "<SOURCE-TOOL-ID>"
-                    f"{header.source_tool_id}"
-                    "</SOURCE-TOOL-ID>\n"
+                    f"      <SOURCE-TOOL-ID>{header.source_tool_id}</SOURCE-TOOL-ID>\n"
                 )
             if header.title:
                 output += f"      <TITLE>{lxml_escape_title(header.title)}</TITLE>\n"

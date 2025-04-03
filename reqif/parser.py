@@ -127,7 +127,7 @@ class ReqIFParser:
             raise NotImplementedError(xml_reqif_nons_root) from None
         if xml_reqif_nons_root.tag != "REQ-IF":
             raise ReqIFXMLParsingError(
-                "Expected root tag to be REQ-IF, got: " f"{xml_reqif_nons_root.tag}."
+                f"Expected root tag to be REQ-IF, got: {xml_reqif_nons_root.tag}."
             ) from None
 
         # The best workaround I could find for getting the exact content of
