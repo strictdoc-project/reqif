@@ -8,9 +8,9 @@ from reqif.parsers.attribute_definition_parser import AttributeDefinitionParser
 class SpecificationTypeParser:
     @staticmethod
     def parse(specification_type_xml) -> ReqIFSpecificationType:
-        assert (
-            specification_type_xml.tag == "SPECIFICATION-TYPE"
-        ), f"{specification_type_xml}"
+        assert specification_type_xml.tag == "SPECIFICATION-TYPE", (
+            f"{specification_type_xml}"
+        )
         is_self_closed = lxml_is_self_closed_tag(specification_type_xml)
 
         attribute_map: Dict[str, str] = {}
@@ -77,9 +77,7 @@ class SpecificationTypeParser:
             output += "          <SPEC-ATTRIBUTES>\n"
 
             for attribute in spec_type.spec_attributes:
-                output += (
-                    "            " "<" f"{attribute.attribute_type.get_spec_type_tag()}"
-                )
+                output += f"            <{attribute.attribute_type.get_spec_type_tag()}"
                 if attribute.description is not None:
                     output += f' DESC="{attribute.description}"'
                 output += f' IDENTIFIER="{attribute.identifier}"'

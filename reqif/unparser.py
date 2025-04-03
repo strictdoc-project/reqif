@@ -147,9 +147,9 @@ class ReqIFUnparser:
             )
         if namespace_info.language is not None:
             namespace_components.append(f'xml:lang="{namespace_info.language}"')
-        assert (
-            len(namespace_components) > 0
-        ), "Expect at least one namespace component, got none."
+        assert len(namespace_components) > 0, (
+            "Expect at least one namespace component, got none."
+        )
         xml_output += " ".join(namespace_components)
 
         xml_output += ">\n"

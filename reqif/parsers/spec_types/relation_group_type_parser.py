@@ -8,9 +8,9 @@ from reqif.models.reqif_relation_group_type import ReqIFRelationGroupType
 class RelationGroupTypeParser:
     @staticmethod
     def parse(xml_spec_relation_type_xml) -> ReqIFRelationGroupType:
-        assert (
-            xml_spec_relation_type_xml.tag == "RELATION-GROUP-TYPE"
-        ), f"{xml_spec_relation_type_xml}"
+        assert xml_spec_relation_type_xml.tag == "RELATION-GROUP-TYPE", (
+            f"{xml_spec_relation_type_xml}"
+        )
         is_self_closed = lxml_is_self_closed_tag(xml_spec_relation_type_xml)
 
         xml_attributes = xml_spec_relation_type_xml.attrib
