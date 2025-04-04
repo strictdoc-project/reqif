@@ -208,7 +208,8 @@ class AttributeDefinitionParser:
                             xml_values = xml_attribute_value.find("VALUES")
                             if xml_values is not None:
                                 xml_enum_value_ref = xml_values.find("ENUM-VALUE-REF")
-                                default_value = xml_enum_value_ref.text
+                                if xml_enum_value_ref is not None:
+                                    default_value = xml_enum_value_ref.text
                         else:
                             raise NotImplementedError
             elif attribute_definition.tag == "ATTRIBUTE-DEFINITION-DATE":
