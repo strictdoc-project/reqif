@@ -71,6 +71,15 @@ class SpecRelationParser:
                     values_attribute = AttributeValueParser.parse_xhtml_attribute_value(
                         xml_value
                     )
+                elif xml_value.tag == "ATTRIBUTE-VALUE-INTEGER":
+                    attribute_value = xml_value.attrib["THE-VALUE"]
+                    definition_ref = xml_value[0][0].text
+                    values_attribute = SpecObjectAttribute(
+                        xml_node=xml_value,
+                        attribute_type=SpecObjectAttributeType.INTEGER,
+                        definition_ref=definition_ref,
+                        value=attribute_value,
+                    )
                 else:
                     raise NotImplementedError
                 break
