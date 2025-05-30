@@ -68,8 +68,10 @@ class ReqIFSpecHierarchyParser:
     @staticmethod
     def unparse(hierarchy: ReqIFSpecHierarchy) -> str:
         base_level = hierarchy.calculate_base_level()
-        base_level_str = " " * base_level
-        output = base_level_str + f'<SPEC-HIERARCHY IDENTIFIER="{hierarchy.identifier}"'
+        base_level_str: str = " " * base_level
+        output: str = (
+            base_level_str + f'<SPEC-HIERARCHY IDENTIFIER="{hierarchy.identifier}"'
+        )
         if hierarchy.editable is not None:
             editable_value = "true" if hierarchy.editable else "false"
             output += f' IS-EDITABLE="{editable_value}"'
@@ -82,7 +84,7 @@ class ReqIFSpecHierarchyParser:
             output += f' LONG-NAME="{hierarchy.long_name}"'
         output += ">\n"
 
-        def print_object():
+        def print_object() -> str:
             object_output = base_level_str + "  <OBJECT>\n"
             object_output += (
                 base_level_str + "    "

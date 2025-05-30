@@ -28,7 +28,7 @@ class Node:
     nodes: List["Node"] = field(default_factory=list)
 
     def get_as_dict(self):
-        return self.to_dict()  # noqa: E1101
+        return self.to_dict()
 
     def __str__(self):
         return f"Node(node_type = {self.node_type}, level = {self.level}, fields = {self.fields})"
@@ -49,7 +49,7 @@ class Specification:
         return 0
 
     def get_as_dict(self):
-        return self.to_dict()  # noqa: E1101
+        return self.to_dict()
 
 
 @dataclass_json
@@ -59,7 +59,7 @@ class ReqDict:
     fields: List = field(default_factory=list)
 
     def get_as_dict(self):
-        return self.to_dict()  # noqa: E1101
+        return self.to_dict()
 
 
 class ReqIFToDictConverter:
