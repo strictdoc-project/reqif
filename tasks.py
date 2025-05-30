@@ -120,17 +120,6 @@ def lint_ruff_format(context):
 
 
 @task
-def lint_flake8(context):
-    command = """
-        flake8
-            reqif/ tasks.py tests/unit/
-            --ignore=E501,W503
-            --statistics --max-line-length 80 --show-source
-    """
-    run_invoke_cmd(context, command)
-
-
-@task
 def lint_ruff_check(context, fix=True):
     argument_fix = "--fix" if fix else ""
     command = f"""
@@ -152,11 +141,12 @@ def lint_mypy(context):
             --disable-error-code=type-arg
             --disable-error-code=union-attr
             --strict
+            --python-version=3.8
         """,
     )
 
 
-@task(lint_ruff_format, lint_ruff_check, lint_flake8, lint_mypy, aliases=["l"])
+@task(lint_ruff_format, lint_ruff_check, lint_mypy, aliases=["l"])
 def lint(_):
     pass
 
