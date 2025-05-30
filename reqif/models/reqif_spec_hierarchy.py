@@ -11,7 +11,7 @@ class ReqIFSpecHierarchy:  # pylint: disable=too-many-instance-attributes
         identifier: str,
         spec_object: str,
         level: int,
-        children: Optional[List] = None,
+        children: Optional[List["ReqIFSpecHierarchy"]] = None,
         long_name: Optional[str] = None,
         ref_then_children_order: bool = True,
         last_change: Optional[str] = None,
@@ -28,8 +28,8 @@ class ReqIFSpecHierarchy:  # pylint: disable=too-many-instance-attributes
         # Not part of ReqIF, but helpful to calculate the section depth levels.
         self.level = level
 
-        # Optional fields.
-        self.children: Optional[List] = children
+        # Optional fields
+        self.children: Optional[List[ReqIFSpecHierarchy]] = children
         self.long_name: Optional[str] = long_name
         # Not part of REqIF, but helpful for printing the
         # <OBJECT> and <CHILDREN> tags depending on which tool produced the
@@ -42,6 +42,8 @@ class ReqIFSpecHierarchy:  # pylint: disable=too-many-instance-attributes
         self.xml_node = xml_node
 
     def add_child(self, spec_hierarchy):
+        if self.children is None:
+            self.children = []
         assert (self.level + 1) == spec_hierarchy.level, (
             f"Broken parent-child level relationship.\n"
             f"Parent: {self}\nChild: {spec_hierarchy}"
