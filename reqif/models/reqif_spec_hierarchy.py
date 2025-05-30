@@ -1,5 +1,3 @@
-from __future__ import annotations
-
 from typing import Any, List, Optional
 
 from reqif.helpers.debug import auto_described
@@ -13,7 +11,7 @@ class ReqIFSpecHierarchy:  # pylint: disable=too-many-instance-attributes
         identifier: str,
         spec_object: str,
         level: int,
-        children: Optional[List[ReqIFSpecHierarchy]] = None,
+        children: Optional[List["ReqIFSpecHierarchy"]] = None,
         long_name: Optional[str] = None,
         ref_then_children_order: bool = True,
         last_change: Optional[str] = None,
