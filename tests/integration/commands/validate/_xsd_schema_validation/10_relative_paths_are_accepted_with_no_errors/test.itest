@@ -1,0 +1,10 @@
+# This test verifies that the relative paths are interpreted correctly by the
+# validation command.
+#
+# Ths issue was reported here:
+# Validate against official schema does not work as expected #198,
+# https://github.com/strictdoc-project/reqif/issues/198
+#
+
+RUN: %expect_exit 1 %reqif validate --use-reqif-schema sample.reqif | filecheck %s --dump-input=fail
+CHECK: Reason: must have the fixed value '1.0'

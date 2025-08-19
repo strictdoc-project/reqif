@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<REQ-IF xmlns="http://www.omg.org/spec/ReqIF/20110401/reqif.xsd" xmlns:configuration="http://eclipse.org/rmf/pror/toolextensions/1.0" xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  <THE-HEADER>
+    <REQ-IF-HEADER IDENTIFIER="EF5AEFF3-C695-488A-9955-EDAAEACFE359">
+      <COMMENT>Author: Mathilda Musterfrau</COMMENT>
+      <CREATION-TIME>2018-05-08T11:24:18+02:00</CREATION-TIME>
+      <REPOSITORY-ID>A4123EB9-CC82-4B62-95E1-31CB3203E39C</REPOSITORY-ID>
+      <REQ-IF-TOOL-ID>microTOOL in-STEP BLUE</REQ-IF-TOOL-ID>
+      <REQ-IF-VERSION>1.2</REQ-IF-VERSION>
+      <SOURCE-TOOL-ID>microTOOL objectiF RPM</SOURCE-TOOL-ID>
+      <TITLE>Beispiel einer ReqIF-Datei</TITLE>
+    </REQ-IF-HEADER>
+  </THE-HEADER>
+  <CORE-CONTENT>
+    <REQ-IF-CONTENT>
+      <DATATYPES>
+        <DATATYPE-DEFINITION-STRING MAX-LENGTH="1000" IDENTIFIER="Text" LAST-CHANGE="2018-04-13T01:00:00+02:00"/>
+      </DATATYPES>
+      <SPEC-TYPES>
+        <SPEC-OBJECT-TYPE DESC="Eine funktionale Anforderung beschreibt eine Systemfunktion, d.h.   sie beschreibt, was das System tun muss bzw. welche Funktionalit&#228;t das System den   Anwendern bereitstellt." IDENTIFIER="FUNC-REQ" LAST-CHANGE="2018-04-13T11:24:18+02:00" LONG-NAME="Funktionale Anforderung">
+          <SPEC-ATTRIBUTES>
+            <ATTRIBUTE-DEFINITION-STRING DESC="Der Beschreibungstext der Anforderung." IDENTIFIER="FUNC-REQ-TXT" LAST-CHANGE="2018-04-13T11:24:18+02:00">
+              <TYPE>
+                <DATATYPE-DEFINITION-STRING-REF>Text</DATATYPE-DEFINITION-STRING-REF>
+              </TYPE>
+              <IS-EDITABLE>False</IS-EDITABLE>
+            </ATTRIBUTE-DEFINITION-STRING>
+          </SPEC-ATTRIBUTES>
+        </SPEC-OBJECT-TYPE>
+        <SPEC-RELATION-TYPE DESC="Die Ableitungsbeziehung wird genutzt, um zu spezifizieren, dass eine Anforderung von einer   anderen abgeleitet ist." IDENTIFIER="Ableitungsbeziehung" LAST-CHANGE="2018-04-13T11:24:18+02:00" LONG-NAME="Ableitungsbeziehung Anforderung"/>
+        <SPECIFICATION-TYPE DESC="Ein Kundenanforderungsdokument (oder auch: User Requirements Specification (URS) beschreibt die Anforderungen,die Anwender an das zu entwickelnde System stellen. Kundenanforderungen sind die obersten Anforderungen. Sie dokumentieren die Bef&#252;rfnisse der Anwender, Kunden und anderer Anforderungsquellen wie z.B. rechtliche Vorgaben oder Anforderungen, die intern vom Unternehmen kommen." IDENTIFIER="URS" LAST-CHANGE="2018-04-13T01:00:00+02:00" LONG-NAME="User Requirements Specification"/>
+      </SPEC-TYPES>
+      <SPEC-OBJECTS>
+        <SPEC-OBJECT IDENTIFIER="&#252;berwachungBodentemperatur" LAST-CHANGE="2018-04-13T11:24:18+02:00" LONG-NAME="&#220;berwachung der Bodentemperatur">
+          <TYPE>
+            <SPEC-OBJECT-TYPE-REF>FUNC-REQ</SPEC-OBJECT-TYPE-REF>
+          </TYPE>
+          <VALUES>
+            <ATTRIBUTE-VALUE-STRING THE-VALUE="Das System soll die Bodentemperatur &#252;berwachen.">
+              <DEFINITION>
+                <ATTRIBUTE-DEFINITION-STRING-REF>FUNC-REQ-TXT</ATTRIBUTE-DEFINITION-STRING-REF>
+              </DEFINITION>
+            </ATTRIBUTE-VALUE-STRING>
+          </VALUES>
+        </SPEC-OBJECT>
+        <SPEC-OBJECT IDENTIFIER="erkennungFeuer" LAST-CHANGE="2018-04-13T11:24:18+02:00" LONG-NAME="Erkennung von Feuer">
+          <TYPE>
+            <SPEC-OBJECT-TYPE-REF>FUNC-REQ</SPEC-OBJECT-TYPE-REF>
+          </TYPE>
+          <VALUES>
+            <ATTRIBUTE-VALUE-STRING THE-VALUE="Das System soll den Ausbruch von Feuer melden.">
+              <DEFINITION>
+                <ATTRIBUTE-DEFINITION-STRING-REF>FUNC-REQ-TXT</ATTRIBUTE-DEFINITION-STRING-REF>
+              </DEFINITION>
+            </ATTRIBUTE-VALUE-STRING>
+          </VALUES>
+        </SPEC-OBJECT>
+      </SPEC-OBJECTS>
+      <SPECIFICATIONS>
+        <SPECIFICATION DESC="Im Folgenden sind die Kundenanforderungen f&#252;r   das System zur Erkennung von Waldbr&#228;nden von Kunde X zusammengestellt" IDENTIFIER="specification_0" LAST-CHANGE="2018-04-13T11:24:18+02:00" LONG-NAME="System zur Erkennung von Waldbr&#228;nden">
+          <TYPE>
+            <SPECIFICATION-TYPE-REF>URS</SPECIFICATION-TYPE-REF>
+          </TYPE>
+          <CHILDREN>
+            <SPEC-HIERARCHY IDENTIFIER="anforderungshierarchie_0" LAST-CHANGE="2018-04-13T11:24:18+02:00">
+              <IS-TABLE-INTERNAL>False</IS-TABLE-INTERNAL>
+              <OBJECT>
+                <SPEC-OBJECT-REF>&#252;berwachungBodentemperatur</SPEC-OBJECT-REF>
+              </OBJECT>
+              <CHILDREN>
+                <SPEC-HIERARCHY IDENTIFIER="anforderungshierarchie_1" LAST-CHANGE="2018-04-13T11:24:18+02:00">
+                  <IS-TABLE-INTERNAL>False</IS-TABLE-INTERNAL>
+                  <OBJECT>
+                    <SPEC-OBJECT-REF>erkennungFeuer</SPEC-OBJECT-REF>
+                  </OBJECT>
+                  <IS-EDITABLE>False</IS-EDITABLE>
+                </SPEC-HIERARCHY>
+              </CHILDREN>
+              <IS-EDITABLE>False</IS-EDITABLE>
+            </SPEC-HIERARCHY>
+          </CHILDREN>
+        </SPECIFICATION>
+      </SPECIFICATIONS>
+      <SPEC-RELATIONS>
+        <SPEC-RELATION IDENTIFIER="beziehungAnforderungen_0" LAST-CHANGE="2018-04-13T11:24:18+02:00">
+          <TARGET>
+            <SPEC-OBJECT-REF>erkennungFeuer</SPEC-OBJECT-REF>
+          </TARGET>
+          <SOURCE>
+            <SPEC-OBJECT-REF>&#252;berwachungBodentemperatur</SPEC-OBJECT-REF>
+          </SOURCE>
+          <TYPE>
+            <SPEC-RELATION-TYPE-REF>Ableitungsbeziehung</SPEC-RELATION-TYPE-REF>
+          </TYPE>
+        </SPEC-RELATION>
+      </SPEC-RELATIONS>
+    </REQ-IF-CONTENT>
+  </CORE-CONTENT>
+</REQ-IF>

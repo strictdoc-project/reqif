@@ -81,8 +81,17 @@ class ValidateCommand:
     ) -> ReqIFErrorBundle:
         semantic_warnings: List[ReqIFSemanticError] = []
 
+        input_file = passthrough_config.input_file
+
+        # It is important to convert the input path to an absolute path because
+        # of the following workaround with os.chdir when calling the
+        # xmlschema library. See below.
+        if not os.path.isabs(input_file):
+            input_file = os.path.abspath(input_file)
+
         if passthrough_config.use_reqif_schema:
             old_cwd = os.getcwd()
+
             try:
                 os.chdir(PATH_TO_REQIF_ROOT)
                 schema = xmlschema.XMLSchema(
@@ -94,7 +103,7 @@ class ValidateCommand:
                     # we do os.chdir.
                     base_url=os.path.join(PATH_TO_REQIF_ROOT),
                 )
-                schema.validate(passthrough_config.input_file)
+                schema.validate(input_file)
             except XMLSchemaValidationError as xml_schema_validation_error_:
                 xml_schema_validation_error = ReqIFXMLSchemaValidationError(
                     xml_schema_validation_error_
@@ -108,7 +117,7 @@ class ValidateCommand:
                 os.chdir(old_cwd)
 
         try:
-            reqif_bundle = ReqIFParser.parse(passthrough_config.input_file)
+            reqif_bundle = ReqIFParser.parse(input_file)
         except ReqIFXMLParsingError as exception:
             return ReqIFErrorBundle(
                 xml_errors=[exception],
