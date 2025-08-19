@@ -57,7 +57,7 @@ development = [
 
   # Linters & static analysis
   "flake8 >= 3.9.2",
-  "mypy >= 0.910",
+  "mypy == 1.16",
   "pylint >= 2.11.1",
   "ruff >= 0.0.243",
 

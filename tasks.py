@@ -173,7 +173,7 @@ def release(context, username=None, password=None):
     # tokens set up on a local machine.
     assert username is None or password is not None
 
-    repository_argument_or_none = "" if username else ("--repository reqif_release")
+    repository_argument_or_none = "" if username else "--repository reqif_release"
     user_password = f"-u{username} -p{password}" if username is not None else ""
     command = f"""
         rm -rfv dist/ &&
