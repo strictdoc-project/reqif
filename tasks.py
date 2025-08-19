@@ -175,11 +175,15 @@ def release(context, username=None, password=None):
 
     repository_argument_or_none = "" if username else "--repository reqif_release"
     user_password = f"-u{username} -p{password}" if username is not None else ""
+
+    # NOTE: It is important that both tar.gz and whl files are uploaded.
+    # This is needed for uv to pull dependencies with uv sync --no-build.
+    # See https://github.com/strictdoc-project/reqif/issues/199.
     command = f"""
         rm -rfv dist/ &&
         python3 -m build &&
             twine check dist/* &&
-            twine upload dist/reqif-*.tar.gz
+            twine upload dist/reqif-*.tar.gz dist/*.whl
                 {repository_argument_or_none}
                 {user_password}
     """
