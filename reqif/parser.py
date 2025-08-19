@@ -1,3 +1,6 @@
+# Ignoring for now:
+# A005 Module `parser` shadows a Python standard-library module.
+# ruff: noqa: A005
 import copy
 import io
 import os
