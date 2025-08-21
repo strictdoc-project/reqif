@@ -10,13 +10,13 @@ class SpecObjectAttribute:
         self,
         attribute_type: SpecObjectAttributeType,
         definition_ref: str,
-        value: Union[str, List[str]],
+        value: Union[bool, float, int, str, List[str]],
         value_stripped_xhtml: Optional[str] = None,
         xml_node: Optional[Any] = None,
     ):
         self.attribute_type: SpecObjectAttributeType = attribute_type
         self.definition_ref: str = definition_ref
-        self.value: Union[str, List[str]] = value
+        self.value: Union[bool, float, int, str, List[str]] = value
         # Only for XHTML attributes: A value stripped of the
         # <xhtml:...> namespace. <xhtml:div> becomes <div>...
         self.value_stripped_xhtml: Optional[str] = value_stripped_xhtml
