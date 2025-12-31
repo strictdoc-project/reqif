@@ -1,12 +1,11 @@
-*.idea
+/.idea/
+/.venv/
+/dist/
+
 **/build/
 *.egg-info/
 *.pyc
 *.script
-*.venv
-dist
-output.zip
-*.sketch
 .DS_Store
 setup.py
 .vscode

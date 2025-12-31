@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<REQ-IF xmlns="http://www.omg.org/spec/ReqIF/20110401/reqif.xsd">
+  <THE-HEADER>
+    <REQ-IF-HEADER IDENTIFIER="header_id">
+      <CREATION-TIME>2023-01-01T00:00:00.000Z</CREATION-TIME>
+      <REQ-IF-TOOL-ID>Test Tool</REQ-IF-TOOL-ID>
+      <REQ-IF-VERSION>1.0</REQ-IF-VERSION>
+      <SOURCE-TOOL-ID>Test</SOURCE-TOOL-ID>
+      <TITLE>Minimal ReqIF</TITLE>
+    </REQ-IF-HEADER>
+  </THE-HEADER>
+  <CORE-CONTENT>
+    <REQ-IF-CONTENT>
+      <DATATYPES>
+        <DATATYPE-DEFINITION-STRING IDENTIFIER="DT_String" LONG-NAME="String" MAX-LENGTH="1000">
+        </DATATYPE-DEFINITION-STRING>
+      </DATATYPES>
+      <SPEC-TYPES>
+        <SPEC-OBJECT-TYPE IDENTIFIER="SOT_Req" LONG-NAME="Requirement">
+          <SPEC-ATTRIBUTES>
+            <ATTRIBUTE-DEFINITION-STRING IDENTIFIER="AD_ForeignID" LONG-NAME="ReqIF.ForeignID">
+              <TYPE>
+                <DATATYPE-DEFINITION-STRING-REF>DT_String</DATATYPE-DEFINITION-STRING-REF>
+              </TYPE>
+            </ATTRIBUTE-DEFINITION-STRING>
+          </SPEC-ATTRIBUTES>
+        </SPEC-OBJECT-TYPE>
+        <SPECIFICATION-TYPE IDENTIFIER="ST_Spec" LAST-CHANGE="2023-01-01T00:00:00.000Z" LONG-NAME="Specification">
+          <SPEC-ATTRIBUTES>
+            <ATTRIBUTE-DEFINITION-STRING IDENTIFIER="AD_SpecName" LONG-NAME="Name">
+              <TYPE>
+                <DATATYPE-DEFINITION-STRING-REF>DT_String</DATATYPE-DEFINITION-STRING-REF>
+              </TYPE>
+            </ATTRIBUTE-DEFINITION-STRING>
+          </SPEC-ATTRIBUTES>
+        </SPECIFICATION-TYPE>
+      </SPEC-TYPES>
+      <SPEC-OBJECTS>
+        <SPEC-OBJECT IDENTIFIER="_73d9cdc2-1c71-4d27-92ab-1df19c9f6ac3" LAST-CHANGE="2025-10-15T05:15:32.902Z">
+          <TYPE>
+            <SPEC-OBJECT-TYPE-REF>_6cf52001-6b78-428a-bfcd-429ba136d53a</SPEC-OBJECT-TYPE-REF>
+          </TYPE>
+          <VALUES>
+            <ATTRIBUTE-VALUE-XHTML>
+              <DEFINITION>
+                <ATTRIBUTE-DEFINITION-XHTML-REF>_0cad5cb5-6b09-4b60-bb66-fed63d56e806</ATTRIBUTE-DEFINITION-XHTML-REF>
+              </DEFINITION>
+              <THE-VALUE><div xmlns="http://www.w3.org/1999/xhtml">
+              <p><!-- x-tinymce/html -->The&#xA0;###<!-- x-tinymce/html -->Platform shall&#xA0; provide cover art within 2s of audio select</p>
+              </div></THE-VALUE>
+            </ATTRIBUTE-VALUE-XHTML>
+            <ATTRIBUTE-VALUE-STRING THE-VALUE="1672600">
+              <DEFINITION>
+                <ATTRIBUTE-DEFINITION-STRING-REF>_d0bf9a76-226d-4856-9387-e64040705955</ATTRIBUTE-DEFINITION-STRING-REF>
+              </DEFINITION>
+            </ATTRIBUTE-VALUE-STRING>
+            <ATTRIBUTE-VALUE-ENUMERATION>
+              <DEFINITION>
+                <ATTRIBUTE-DEFINITION-ENUMERATION-REF>_4d6b67beb8b9fa04468c6c2d5ae99f484d02c5d8</ATTRIBUTE-DEFINITION-ENUMERATION-REF>
+              </DEFINITION>
+              <VALUES>
+                <ENUM-VALUE-REF>_009812fe2a185feb11f17bd36dcd508a736fe8c8</ENUM-VALUE-REF>
+              </VALUES>
+            </ATTRIBUTE-VALUE-ENUMERATION>
+          </VALUES>
+        </SPEC-OBJECT>
+      </SPEC-OBJECTS>
+      <SPECIFICATIONS>
+        <SPECIFICATION IDENTIFIER="SPEC_Main" LONG-NAME="Main Specification">
+          <VALUES>
+            <ATTRIBUTE-VALUE-STRING THE-VALUE="Test Specification">
+              <DEFINITION>
+                <ATTRIBUTE-DEFINITION-STRING-REF>AD_SpecName</ATTRIBUTE-DEFINITION-STRING-REF>
+              </DEFINITION>
+            </ATTRIBUTE-VALUE-STRING>
+          </VALUES>
+          <TYPE>
+            <SPECIFICATION-TYPE-REF>ST_Spec</SPECIFICATION-TYPE-REF>
+          </TYPE>
+          <CHILDREN>
+            <SPEC-HIERARCHY IDENTIFIER="SH_001" LONG-NAME="Requirement Hierarchy">
+              <OBJECT>
+                <SPEC-OBJECT-REF>_73d9cdc2-1c71-4d27-92ab-1df19c9f6ac3</SPEC-OBJECT-REF>
+              </OBJECT>
+            </SPEC-HIERARCHY>
+          </CHILDREN>
+        </SPECIFICATION>
+      </SPECIFICATIONS>
+    </REQ-IF-CONTENT>
+  </CORE-CONTENT>
+</REQ-IF>
