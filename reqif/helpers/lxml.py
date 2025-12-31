@@ -3,12 +3,12 @@ from copy import deepcopy
 from itertools import chain
 
 from lxml import etree
-from lxml.etree import _Comment, tostring
+from lxml.etree import Comment, tostring
 from lxml.html import fragment_fromstring
 
 
 def lxml_dump_node(node):
-    return lxml_stringify_node(node)
+    return lxml_stringify_node(node, root_node=False)
 
 
 # This code is taken from Python 3.7. The addition is escaping of the tab
@@ -25,6 +25,8 @@ def lxml_escape_for_html(string: str) -> str:
     string = string.replace(">", "&gt;")
     string = string.replace('"', "&quot;")
     string = string.replace("'", "&#x27;")
+    # Non-breaking space character.
+    string = string.replace("\xa0", "&#xA0;")
     # Invisible tab character
     string = string.replace("\t", "&#9;")
     return string
@@ -120,16 +122,53 @@ def lxml_stringify_namespaced_children(node, namespace_tag=None) -> str:
     return string
 
 
-def lxml_stringify_node(node):
-    nskey = None
-    if len(node.nsmap) > 0:
-        nskey = next(iter(node.nsmap.keys()))
+def lxml_stringify_node(node, root_node=True):
+    """
+    Stringify a given LXML node.
+
+    :param node:
+    :param root_node: Needed to track whether a node is the first among the
+                      nodes being stringified. Some ReqIF producers do not use a
+                      global xmlns="http://www.w3.org/1999/xhtml" namespace.
+                      Instead, they assign this namespace only to the very first
+                      node inside the ATTRIBUTE-VALUE-XHTML/THE-VALUE tag, for
+                      example: <div xmlns="http://www.w3.org/1999/xhtml">...
+                      Tracking this root node ensures that the xmlns attribute
+                      is assigned only to the first node and not to all
+                      subsequent nodes.
+    :return:
+    """
     output = ""
+
+    # Some ReqIF producers add <!-- --> comments but these comment nodes
+    # cannot be handled using etree.QName(node).localname like used further
+    # below. Handling them separately with this dedicated branch.
+    # A user report that helped to discover this case:
+    # https://github.com/strictdoc-project/reqif/issues/205
+    if lxml_is_comment_node(node):
+        assert node.text is not None
+        output = f"<!--{node.text}-->"
+        if node.tail is not None:
+            output += lxml_escape_for_html(node.tail)
+        return output
+
+    nskey = None
+    nsvalue = None
+    if len(node.nsmap) > 0:
+        nskey, nsvalue = next(iter(node.nsmap.items()))
+
     node_no_ns_tag = etree.QName(node).localname
-    tag = f"{nskey}:{node_no_ns_tag}" if node.tag[0] == "{" else node.tag
+    tag = (
+        f"{nskey}:{node_no_ns_tag}"
+        if node.tag[0] == "{" and nskey is not None
+        else node_no_ns_tag
+    )
     output += f"<{tag}"
     for attribute, attribute_value in node.attrib.items():
         output += f' {attribute}="{lxml_escape_for_html(attribute_value)}"'
+    if nsvalue is not None and root_node:
+        output += f' xmlns="{nsvalue}"'
+
     # <object> is surprisingly a tag that must have a closing tag even if it
     # is empty. If self-closed, it breaks all the following markup.
     if (
@@ -141,7 +180,7 @@ def lxml_stringify_node(node):
         if node.text is not None:
             output += lxml_escape_for_html(node.text)
         for child in node.getchildren():
-            output += lxml_stringify_node(child)
+            output += lxml_stringify_node(child, root_node=False)
         output += f"</{tag}>"
     else:
         output += "/>"
@@ -221,5 +260,4 @@ def lxml_strip_namespace_from_xml(root_xml, full=False):
 
 
 def lxml_is_comment_node(xml_node):
-    # FIXME: Accessing a "_"-marked Comment class of lxml is not great.
-    return isinstance(xml_node, _Comment)
+    return xml_node.tag is Comment
