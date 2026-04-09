@@ -135,6 +135,7 @@ class AttributeDefinitionParser:
                         )
                         if xml_attribute_definition is not None:
                             default_value_definition_ref = xml_attribute_definition.text
+
             elif attribute_definition.tag == "ATTRIBUTE-DEFINITION-XHTML":
                 attribute_type = SpecObjectAttributeType.XHTML
                 try:
@@ -167,6 +168,7 @@ class AttributeDefinitionParser:
                         default_value = lxml_stringify_namespaced_children(xml_values)
                     else:
                         raise NotImplementedError
+
             elif attribute_definition.tag == "ATTRIBUTE-DEFINITION-ENUMERATION":
                 attribute_type = SpecObjectAttributeType.ENUMERATION
                 multi_valued_string = (
@@ -210,6 +212,7 @@ class AttributeDefinitionParser:
                                     default_value = xml_enum_value_ref.text
                         else:
                             raise NotImplementedError
+
             elif attribute_definition.tag == "ATTRIBUTE-DEFINITION-DATE":
                 attribute_type = SpecObjectAttributeType.DATE
                 try:
@@ -220,6 +223,13 @@ class AttributeDefinitionParser:
                     )
                 except Exception as exception:
                     raise NotImplementedError(attribute_definition) from exception
+
+                xml_default_value = attribute_definition.find("DEFAULT-VALUE")
+                if xml_default_value is not None:
+                    xml_attribute_value = xml_default_value.find("ATTRIBUTE-VALUE-DATE")
+                    assert xml_attribute_value is not None
+                    default_value = xml_attribute_value.attrib["THE-VALUE"]
+
             else:
                 raise NotImplementedError(attribute_definition) from None
             attribute_definition = SpecAttributeDefinition(
