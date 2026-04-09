@@ -105,9 +105,7 @@ class AttributeDefinitionParser:
 
                 xml_default_value = attribute_definition.find("DEFAULT-VALUE")
                 if xml_default_value is not None:
-                    xml_attribute_value = xml_default_value.find(
-                        "ATTRIBUTE-VALUE-INTEGER"
-                    )
+                    xml_attribute_value = xml_default_value.find("ATTRIBUTE-VALUE-REAL")
                     assert xml_attribute_value is not None
                     default_value = xml_attribute_value.attrib["THE-VALUE"]
 

@@ -172,3 +172,33 @@ def test_06_string_attribute_default_value() -> None:
         == "TEST_STRING_ATTRIBUTE_LONG_NAME"
     )
     assert reqif_spec_object_type.attribute_definitions[0].default_value == "TBD"
+
+
+def test_07_real_attribute_definition_with_default_value() -> None:
+    spec_type_string = """
+<SPEC-OBJECT-TYPE IDENTIFIER="TEST_SPEC_OBJECT_TYPE_ID" LAST-CHANGE="2021-02-08T16:37:07.454+01:00" LONG-NAME="TEST_SPEC_OBJECT_TYPE_LONG_NAME">
+  <SPEC-ATTRIBUTES>
+    <ATTRIBUTE-DEFINITION-REAL IDENTIFIER="TEST_REAL_ATTRIBUTE_ID" LONG-NAME="TEST_REAL_ATTRIBUTE_LONG_NAME" IS-EDITABLE="false">
+      <DEFAULT-VALUE>
+        <ATTRIBUTE-VALUE-REAL THE-VALUE="3.14"/>
+      </DEFAULT-VALUE>
+      <TYPE>
+        <DATATYPE-DEFINITION-REAL-REF>TEST_REAL_TYPE</DATATYPE-DEFINITION-REAL-REF>
+      </TYPE>
+    </ATTRIBUTE-DEFINITION-REAL>
+  </SPEC-ATTRIBUTES>
+</SPEC-OBJECT-TYPE>
+    """  # noqa: E501
+    spec_type_xml = etree.fromstring(spec_type_string)
+
+    reqif_spec_object_type = SpecObjectTypeParser.parse(spec_type_xml)
+    assert isinstance(reqif_spec_object_type, ReqIFSpecObjectType)
+    assert reqif_spec_object_type.identifier == "TEST_SPEC_OBJECT_TYPE_ID"
+    assert reqif_spec_object_type.long_name == "TEST_SPEC_OBJECT_TYPE_LONG_NAME"
+    attribute_map = reqif_spec_object_type.attribute_map
+    assert len(attribute_map) == 1
+    assert (
+        attribute_map.get("TEST_REAL_ATTRIBUTE_ID").long_name
+        == "TEST_REAL_ATTRIBUTE_LONG_NAME"
+    )
+    assert reqif_spec_object_type.attribute_definitions[0].default_value == "3.14"
