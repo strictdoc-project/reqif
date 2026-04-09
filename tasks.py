@@ -141,6 +141,7 @@ def lint_mypy(context):
             --disable-error-code=type-arg
             --disable-error-code=union-attr
             --strict
+            --no-site-packages
             --python-version=3.9
         """,
     )
