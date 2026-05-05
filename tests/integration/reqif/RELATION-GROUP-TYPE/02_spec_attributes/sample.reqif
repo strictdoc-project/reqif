@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<REQ-IF xmlns="http://www.omg.org/spec/ReqIF/20110401/reqif.xsd" xmlns:configuration="http://eclipse.org/rmf/pror/toolextensions/1.0">
+  <CORE-CONTENT>
+    <REQ-IF-CONTENT>
+      <DATATYPES>
+        <DATATYPE-DEFINITION-STRING IDENTIFIER="_dtype_String" LAST-CHANGE="2015-12-14T02:04:51.769+01:00" LONG-NAME="String" MAX-LENGTH="1024"/>
+      </DATATYPES>
+      <SPEC-TYPES>
+        <RELATION-GROUP-TYPE IDENTIFIER="ID_RelationGroupType_WithAttrs" LAST-CHANGE="2012-04-07T01:51:37.112+02:00" LONG-NAME="Relation Group Type With Attributes">
+          <SPEC-ATTRIBUTES>
+            <ATTRIBUTE-DEFINITION-STRING IDENTIFIER="_attr_rgt_string" LAST-CHANGE="2015-12-14T02:04:51.769+01:00" LONG-NAME="Comment">
+              <TYPE>
+                <DATATYPE-DEFINITION-STRING-REF>_dtype_String</DATATYPE-DEFINITION-STRING-REF>
+              </TYPE>
+            </ATTRIBUTE-DEFINITION-STRING>
+          </SPEC-ATTRIBUTES>
+        </RELATION-GROUP-TYPE>
+      </SPEC-TYPES>
+    </REQ-IF-CONTENT>
+  </CORE-CONTENT>
+</REQ-IF>
