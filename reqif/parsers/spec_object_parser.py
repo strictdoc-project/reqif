@@ -32,13 +32,9 @@ class SpecObjectParser:
         )
 
         xml_spec_values = spec_object_xml.find("VALUES")
-        attributes: Optional[List[SpecObjectAttribute]] = (
-            AttributeValueParser.parse_attribute_values(xml_spec_values)
+        attributes: List[SpecObjectAttribute] = (
+            AttributeValueParser.parse_attribute_values(xml_spec_values) or []
         )
-
-        # FIXME: Technically, we can get a ReqIF file where VALUES is empty.
-        # But don't want to break the interfaces for now.
-        assert attributes is not None
 
         return ReqIFSpecObject(
             xml_node=spec_object_xml,
