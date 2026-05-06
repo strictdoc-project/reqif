@@ -40,6 +40,22 @@ def test_01_nominal_case():
     assert spec_object.attribute_map["TEST_FIELD_STATEMENT"].value == "Test statement"
 
 
+def test_03_missing_values_element():
+    """ReqIF-1.2 §10.8.36/§10.8.40: <VALUES/> is optional; omitting it must not raise."""
+    spec_object_string = """
+<SPEC-OBJECT IDENTIFIER="TEST_NO_VALUES_ID" LAST-CHANGE="2021-10-15T11:32:40.205+02:00">
+  <TYPE>
+    <SPEC-OBJECT-TYPE-REF>TEST_SPEC_OBJECT_TYPE</SPEC-OBJECT-TYPE-REF>
+  </TYPE>
+</SPEC-OBJECT>
+    """
+
+    spec_object_xml = etree.fromstring(spec_object_string)
+    spec_object = SpecObjectParser.parse(spec_object_xml)
+    assert spec_object.identifier == "TEST_NO_VALUES_ID"
+    assert spec_object.attributes == []
+
+
 def test_02_attributes_xhtml():
     spec_object_string = """\
 <SPEC-OBJECT xmlns:reqif-xhtml="http://www.w3.org/1999/xhtml" IDENTIFIER="TEST_SPEC_OBJECT_ID" LAST-CHANGE="2021-10-15T11:32:40.205+02:00">
