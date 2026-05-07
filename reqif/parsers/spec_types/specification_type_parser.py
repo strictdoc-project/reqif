@@ -67,7 +67,10 @@ class SpecificationTypeParser:
             output += f' LONG-NAME="{spec_type.long_name}"'
 
         # Some documents have a SPECIFICATION-TYPE without any SPEC-ATTRIBUTES.
-        if spec_type.is_self_closed:
+        has_attributes = (
+            spec_type.spec_attributes is not None and len(spec_type.spec_attributes) > 0
+        )
+        if spec_type.is_self_closed and not has_attributes:
             output += "/>\n"
             return output
         else:
