@@ -52,7 +52,11 @@ class SpecRelationTypeParser:
             output += f' LAST-CHANGE="{spec_relation_type.last_change}"'
         if spec_relation_type.long_name is not None:
             output += f' LONG-NAME="{spec_relation_type.long_name}"'
-        if spec_relation_type.is_self_closed:
+        has_attributes = (
+            spec_relation_type.attribute_definitions is not None
+            and len(spec_relation_type.attribute_definitions) > 0
+        )
+        if spec_relation_type.is_self_closed and not has_attributes:
             output += "/>\n"
             return output
 
