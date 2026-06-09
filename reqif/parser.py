@@ -62,6 +62,7 @@ from reqif.parsers.spec_types.specification_type_parser import (
 from reqif.parsers.specification_parser import (
     ReqIFSpecificationParser,
 )
+from reqif.progress import ReqIFProgressCallback, track_progress
 from reqif.reqif_bundle import ReqIFBundle, ReqIFZBundle
 
 logger = logging.getLogger(__name__)
@@ -69,13 +70,19 @@ logger = logging.getLogger(__name__)
 
 class ReqIFParser:
     @staticmethod
-    def parse(input_path: str) -> ReqIFBundle:
+    def parse(
+        input_path: str,
+        progress: Optional[ReqIFProgressCallback] = None,
+    ) -> ReqIFBundle:
         with open(input_path, "r", encoding="UTF-8") as file:
             content = file.read()
-        return ReqIFParser.parse_from_string(content)
+        return ReqIFParser.parse_from_string(content, progress=progress)
 
     @staticmethod
-    def parse_from_string(reqif_content: str) -> ReqIFBundle:
+    def parse_from_string(
+        reqif_content: str,
+        progress: Optional[ReqIFProgressCallback] = None,
+    ) -> ReqIFBundle:
         # LXML used to produce this error on an empty content string, but now
         # it simply raises an XMLSyntaxError with no message.
         # FIXME: No time to investigate/report this now.
@@ -91,11 +98,13 @@ class ReqIFParser:
             raise ReqIFXMLParsingError(str(exception)) from None
 
         # Build ReqIF bundle.
-        reqif_bundle = ReqIFParser._parse_reqif(xml_reqif_root)
+        reqif_bundle = ReqIFParser._parse_reqif(xml_reqif_root, progress=progress)
         return reqif_bundle
 
     @staticmethod
-    def _parse_reqif(xml_reqif) -> ReqIFBundle:
+    def _parse_reqif(
+        xml_reqif, progress: Optional[ReqIFProgressCallback] = None
+    ) -> ReqIFBundle:
         docinfo: DocInfo = xml_reqif.docinfo
 
         # There should be a better way of detecting if the whole
@@ -218,7 +227,9 @@ class ReqIFParser:
                     reqif_content,
                     lookup,
                     content_exceptions,
-                ) = ReqIFParser._parse_reqif_content(xml_req_if_content)
+                ) = ReqIFParser._parse_reqif_content(
+                    xml_req_if_content, progress=progress
+                )
                 core_content = ReqIFCoreContent(req_if_content=reqif_content)
                 exceptions.extend(content_exceptions)
             else:
@@ -242,6 +253,7 @@ class ReqIFParser:
     @staticmethod
     def _parse_reqif_content(
         xml_req_if_content,
+        progress: Optional[ReqIFProgressCallback] = None,
     ) -> Tuple[ReqIFReqIFContent, ReqIFObjectLookup, List[ReqIFSchemaError]]:
         assert xml_req_if_content is not None
         assert xml_req_if_content.tag == "REQ-IF-CONTENT"
@@ -252,7 +264,7 @@ class ReqIFParser:
         xml_data_types = xml_req_if_content.find("DATATYPES")
         if xml_data_types is not None:
             data_types = []
-            for xml_data_type in list(xml_data_types):
+            for xml_data_type in track_progress(xml_data_types, "DATATYPES", progress):
                 data_type = DataTypeParser.parse(xml_data_type)
                 data_types.append(data_type)
                 data_types_lookup[data_type.identifier] = data_type
@@ -271,7 +283,9 @@ class ReqIFParser:
         xml_spec_types = xml_req_if_content.find("SPEC-TYPES")
         if xml_spec_types is not None:
             spec_types = []
-            for xml_spec_object_type_xml in list(xml_spec_types):
+            for xml_spec_object_type_xml in track_progress(
+                xml_spec_types, "SPEC-TYPES", progress
+            ):
                 spec_type: Union[
                     ReqIFSpecObjectType,
                     ReqIFSpecRelationType,
@@ -299,7 +313,9 @@ class ReqIFParser:
         xml_specifications = xml_req_if_content.find("SPECIFICATIONS")
         if xml_specifications is not None:
             specifications = []
-            for xml_specification in xml_specifications:
+            for xml_specification in track_progress(
+                xml_specifications, "SPECIFICATIONS", progress
+            ):
                 specification = ReqIFSpecificationParser.parse(xml_specification)
                 specifications.append(specification)
 
@@ -310,7 +326,9 @@ class ReqIFParser:
         if xml_spec_relations is not None:
             spec_relations = []
 
-            for xml_spec_relation in xml_spec_relations:
+            for xml_spec_relation in track_progress(
+                xml_spec_relations, "SPEC-RELATIONS", progress
+            ):
                 try:
                     spec_relation = SpecRelationParser.parse(xml_spec_relation)
                     spec_relations.append(spec_relation)
@@ -333,7 +351,9 @@ class ReqIFParser:
         xml_spec_objects = xml_req_if_content.find("SPEC-OBJECTS")
         if xml_spec_objects is not None:
             spec_objects = []
-            for xml_spec_object in xml_spec_objects:
+            for xml_spec_object in track_progress(
+                xml_spec_objects, "SPEC-OBJECTS", progress
+            ):
                 if lxml_is_comment_node(xml_spec_object):
                     continue
                 spec_object = SpecObjectParser.parse(xml_spec_object)
@@ -347,7 +367,9 @@ class ReqIFParser:
             spec_relation_groups = []
             if len(xml_spec_relation_groups) != 0:
                 spec_relation_groups = []
-                for xml_relation_group in xml_spec_relation_groups:
+                for xml_relation_group in track_progress(
+                    xml_spec_relation_groups, "SPEC-RELATION-GROUPS", progress
+                ):
                     relation_group = ReqIFRelationGroupParser.parse(xml_relation_group)
                     spec_relation_groups.append(relation_group)
 
@@ -370,12 +392,19 @@ class ReqIFParser:
 
 class ReqIFZParser:
     @staticmethod
-    def parse(input_path: str) -> ReqIFZBundle:
+    def parse(
+        input_path: str,
+        progress: Optional[ReqIFProgressCallback] = None,
+    ) -> ReqIFZBundle:
         try:
             with zipfile.ZipFile(input_path) as zip_file:
                 attachments = {}
                 reqif_bundles: Dict[str, ReqIFBundle] = {}
-                for filename in zip_file.namelist():
+                # The progress over a ReqIFz archive is reported at the
+                # archive member level: one call per processed member, with
+                # the member's filename as the section name.
+                filenames = zip_file.namelist()
+                for file_index, filename in enumerate(filenames):
                     if os.path.splitext(filename)[1] in [".reqif", ".xml"]:
                         with zip_file.open(filename) as file:
                             content = file.read().decode(encoding="UTF-8")
@@ -385,6 +414,8 @@ class ReqIFZParser:
                     else:
                         with zip_file.open(filename) as file:
                             attachments[filename] = file.read()
+                    if progress is not None:
+                        progress(filename, file_index + 1, len(filenames))
 
                 return ReqIFZBundle(reqif_bundles, attachments)
 

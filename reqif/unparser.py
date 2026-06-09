@@ -1,5 +1,5 @@
 import io
-from typing import List
+from typing import List, Optional
 from zipfile import ZIP_DEFLATED, ZipFile
 
 from reqif.models.reqif_namespace_info import ReqIFNamespaceInfo
@@ -25,12 +25,16 @@ from reqif.parsers.spec_types.specification_type_parser import (
     SpecificationTypeParser,
 )
 from reqif.parsers.specification_parser import ReqIFSpecificationParser
+from reqif.progress import ReqIFProgressCallback, track_progress
 from reqif.reqif_bundle import ReqIFBundle, ReqIFZBundle
 
 
 class ReqIFUnparser:
     @staticmethod
-    def unparse(bundle: ReqIFBundle) -> str:
+    def unparse(
+        bundle: ReqIFBundle,
+        progress: Optional[ReqIFProgressCallback] = None,
+    ) -> str:
         reqif_xml_output = '<?xml version="1.0" encoding="UTF-8"?>\n'
 
         reqif_xml_output += ReqIFUnparser.unparse_namespace_info(bundle.namespace_info)
@@ -46,13 +50,17 @@ class ReqIFUnparser:
 
                 if reqif_content.data_types is not None:
                     reqif_xml_output += "      <DATATYPES>\n"
-                    for data_type in reqif_content.data_types:
+                    for data_type in track_progress(
+                        reqif_content.data_types, "DATATYPES", progress
+                    ):
                         reqif_xml_output += DataTypeParser.unparse(data_type)
                     reqif_xml_output += "      </DATATYPES>\n"
 
                 if reqif_content.spec_types is not None:
                     reqif_xml_output += "      <SPEC-TYPES>\n"
-                    for spec_type in reqif_content.spec_types:
+                    for spec_type in track_progress(
+                        reqif_content.spec_types, "SPEC-TYPES", progress
+                    ):
                         if isinstance(spec_type, ReqIFSpecObjectType):
                             reqif_xml_output += SpecObjectTypeParser.unparse(spec_type)
                         elif isinstance(spec_type, ReqIFSpecRelationType):
@@ -72,7 +80,9 @@ class ReqIFUnparser:
                 if reqif_content.spec_objects is not None:
                     reqif_xml_output += "      <SPEC-OBJECTS>\n"
 
-                    for spec_object in reqif_content.spec_objects:
+                    for spec_object in track_progress(
+                        reqif_content.spec_objects, "SPEC-OBJECTS", progress
+                    ):
                         reqif_xml_output += SpecObjectParser.unparse(spec_object)
 
                     reqif_xml_output += "      </SPEC-OBJECTS>\n"
@@ -80,7 +90,9 @@ class ReqIFUnparser:
                 if reqif_content.spec_relations is not None:
                     reqif_xml_output += "      <SPEC-RELATIONS>\n"
 
-                    for spec_relation in reqif_content.spec_relations:
+                    for spec_relation in track_progress(
+                        reqif_content.spec_relations, "SPEC-RELATIONS", progress
+                    ):
                         reqif_xml_output += SpecRelationParser.unparse(spec_relation)
 
                     reqif_xml_output += "      </SPEC-RELATIONS>\n"
@@ -88,7 +100,9 @@ class ReqIFUnparser:
                 if reqif_content.specifications is not None:
                     reqif_xml_output += "      <SPECIFICATIONS>\n"
 
-                    for specification in reqif_content.specifications:
+                    for specification in track_progress(
+                        reqif_content.specifications, "SPECIFICATIONS", progress
+                    ):
                         reqif_xml_output += ReqIFSpecificationParser.unparse(
                             specification
                         )
@@ -98,7 +112,11 @@ class ReqIFUnparser:
                 if reqif_content.spec_relation_groups is not None:
                     reqif_xml_output += "      <SPEC-RELATION-GROUPS>\n"
 
-                    for spec_relation_group in reqif_content.spec_relation_groups:
+                    for spec_relation_group in track_progress(
+                        reqif_content.spec_relation_groups,
+                        "SPEC-RELATION-GROUPS",
+                        progress,
+                    ):
                         reqif_xml_output += ReqIFRelationGroupParser.unparse(
                             spec_relation_group
                         )
@@ -158,12 +176,21 @@ class ReqIFUnparser:
 
 class ReqIFZUnparser:
     @staticmethod
-    def unparse(bundle: ReqIFZBundle) -> bytes:
+    def unparse(
+        bundle: ReqIFZBundle,
+        progress: Optional[ReqIFProgressCallback] = None,
+    ) -> bytes:
         """
         Based on:
         Python in-memory zip library
         https://stackoverflow.com/a/44946732/598057
         """
+
+        # The progress over a ReqIFz archive is reported at the archive
+        # member level: one call per written member, with the member's
+        # filename as the section name.
+        files_total = len(bundle.reqif_bundles) + len(bundle.attachments)
+        files_done = 0
 
         zip_buffer = io.BytesIO()
         with ZipFile(zip_buffer, "a", ZIP_DEFLATED) as zip_file:
@@ -171,9 +198,15 @@ class ReqIFZUnparser:
             for filename_, reqif_bundle_ in bundle.reqif_bundles.items():
                 reqif_string_ = ReqIFUnparser.unparse(reqif_bundle_)
                 zip_file.writestr(filename_, reqif_string_)
+                files_done += 1
+                if progress is not None:
+                    progress(filename_, files_done, files_total)
 
             # Then write the attachments.
             for attachment, attachment_bytes in bundle.attachments.items():
                 zip_file.writestr(attachment, attachment_bytes)
+                files_done += 1
+                if progress is not None:
+                    progress(attachment, files_done, files_total)
 
         return zip_buffer.getvalue()
