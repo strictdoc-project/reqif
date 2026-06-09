@@ -67,6 +67,37 @@ with open(output_file_path, "w", encoding="UTF-8") as output_file:
 The contents of `reqif_xml_output` should be the same as the contents of the 
 `input_file`.
 
+### Logging
+
+The `reqif` library logs its diagnostic messages (for example, warnings about
+unknown tags) through Python's standard
+[`logging`](https://docs.python.org/3/howto/logging.html) module, using the
+`"reqif"` logger hierarchy. Following the
+[standard convention for libraries](https://docs.python.org/3/howto/logging.html#configuring-logging-for-a-library),
+the library does not configure any handlers itself, so by default an
+application that imports `reqif` sees no log output.
+
+To see the library's warnings on the console, attach a handler to the
+`"reqif"` logger:
+
+```py
+import logging
+
+logging.getLogger("reqif").addHandler(logging.StreamHandler())
+```
+
+Any other `logging` configuration works as well, e.g. `logging.basicConfig()`
+or a handler that writes the records to a file. To also see the messages that
+accompany recoverable schema errors (the errors themselves are collected in
+`reqif_bundle.exceptions`), set the logger's level to `DEBUG`:
+
+```py
+logging.getLogger("reqif").setLevel(logging.DEBUG)
+```
+
+The `reqif` command-line tool attaches its own handler, so its output does
+not depend on this configuration.
+
 ## Using ReqIF as a command-line tool
 
 After installing the `reqif` Pip package, the `reqif` command becomes available
