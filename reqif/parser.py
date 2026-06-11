@@ -133,14 +133,28 @@ class ReqIFParser:
                 f"Expected root tag to be REQ-IF, got: {xml_reqif_nons_root.tag}."
             ) from None
 
-        # The best workaround I could find for getting the exact content of
-        # the namespaces and attributes of the <REQ-IF ...> tag.
+        # Capture the exact content of the namespaces and attributes of the
+        # <REQ-IF ...> tag. lxml has no API to serialize only an element's
+        # opening tag (etree.tostring always serializes the whole subtree), so
+        # serialize a shallow copy of the root that carries the same tag,
+        # nsmap, and attributes but no children.
         # https://stackoverflow.com/questions/74879238
-        xml_reqif_root_2 = xml_reqif.getroot()
-        for child in list(xml_reqif_root_2):
-            xml_reqif_root_2.remove(child)
+        # NB: this must read from the original (non-namespace-stripped) tree,
+        # and must not mutate it. Removing the <CORE-CONTENT> child instead, as
+        # earlier versions did, forced libxml2 to reconcile namespaces across
+        # the whole detached spec-object subtree, which is O(N^2) in the number
+        # of spec objects.
+        xml_reqif_root = xml_reqif.getroot()
+        shallow_root = etree.Element(xml_reqif_root.tag, nsmap=xml_reqif_root.nsmap)
+        # Empty (rather than absent) text reproduces the previous output for
+        # pretty-printed inputs: the root is serialized as <REQ-IF ...></REQ-IF>
+        # rather than the self-closing <REQ-IF .../>, before </REQ-IF> is
+        # stripped below.
+        shallow_root.text = ""
+        for attribute_name, attribute_value in xml_reqif_root.attrib.items():
+            shallow_root.set(attribute_name, attribute_value)
         original_reqif_tag_dump = etree.tostring(
-            xml_reqif_root_2, pretty_print=True
+            shallow_root, pretty_print=True
         ).decode("utf8")
         original_reqif_tag_dump = original_reqif_tag_dump.replace(
             "</REQ-IF>", ""
