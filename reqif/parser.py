@@ -3,6 +3,7 @@
 # ruff: noqa: A005
 import copy
 import io
+import logging
 import os
 import zipfile
 from collections import OrderedDict, defaultdict
@@ -62,6 +63,8 @@ from reqif.parsers.specification_parser import (
     ReqIFSpecificationParser,
 )
 from reqif.reqif_bundle import ReqIFBundle, ReqIFZBundle
+
+logger = logging.getLogger(__name__)
 
 
 class ReqIFParser:
@@ -315,6 +318,13 @@ class ReqIFParser:
                         spec_relation.target
                     )
                 except ReqIFMissingTagException as exception:
+                    # The canonical reporting channel for recoverable schema
+                    # errors is the returned bundle's "exceptions" list (the
+                    # validate command prints them from there). Log at DEBUG
+                    # only, so that embedding applications can observe the
+                    # errors as they occur without the CLI reporting each of
+                    # them twice.
+                    logger.debug("%s", exception.get_description())
                     exceptions.append(exception)
 
         # <SPEC-OBJECTS>

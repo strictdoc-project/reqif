@@ -1,3 +1,4 @@
+import logging
 import os
 import sys
 
@@ -20,6 +21,17 @@ except FileNotFoundError:
     sys.exit(1)
 
 
+class _LowercaseLevelFormatter(logging.Formatter):
+    """
+    Renders log records the way the CLI used to print() them, e.g.
+    "warning: Unknown child tag: FOO." with a lowercase level prefix.
+    """
+
+    def format(self, record: logging.LogRecord) -> str:
+        record.levelname = record.levelname.lower()
+        return super().format(record)
+
+
 def main() -> None:
     # How to make python 3 print() utf8
     # https://stackoverflow.com/a/3597849/598057
@@ -27,6 +39,18 @@ def main() -> None:
     sys.stdout = open(  # pylint: disable=bad-option-value,consider-using-with
         1, "w", encoding="utf-8", closefd=False
     )
+
+    # The reqif library logs through the "reqif" logger hierarchy and emits
+    # nothing by default. The CLI shows the library's warnings on stdout in
+    # the same format the CLI printed them before the library switched to
+    # logging. The handler is constructed after the sys.stdout reassignment
+    # above so that it writes to the UTF-8-configured stream.
+    reqif_log_handler = logging.StreamHandler(stream=sys.stdout)
+    reqif_log_handler.setFormatter(
+        _LowercaseLevelFormatter("%(levelname)s: %(message)s")
+    )
+    logging.getLogger("reqif").addHandler(reqif_log_handler)
+    logging.getLogger("reqif").setLevel(logging.WARNING)
 
     parser = create_reqif_args_parser()
 
