@@ -199,7 +199,7 @@ class AttributeValueParser:
     @staticmethod
     def unparse_attribute_values(
         attribute_values: Optional[List[SpecObjectAttribute]],
-    ):
+    ) -> str:
         if attribute_values is None:
             return ""
         if len(attribute_values) == 0:

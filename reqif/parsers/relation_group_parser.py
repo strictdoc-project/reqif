@@ -1,7 +1,12 @@
+import logging
 from typing import List, Optional
 
 from reqif.models.reqif_relation_group import ReqIFRelationGroup
+from reqif.models.reqif_spec_object import SpecObjectAttribute
 from reqif.parsers.alternative_id_parser import AlternativeIDParser
+from reqif.parsers.attribute_value_parser import AttributeValueParser
+
+logger = logging.getLogger(__name__)
 
 
 class ReqIFRelationGroupParser:
@@ -28,6 +33,12 @@ class ReqIFRelationGroupParser:
         # LONG-NAME is optional
         long_name: Optional[str] = (
             attributes["LONG-NAME"] if "LONG-NAME" in attributes else None
+        )
+
+        values: Optional[List[SpecObjectAttribute]] = (
+            AttributeValueParser.parse_attribute_values(
+                xml_relation_group.find("VALUES")
+            )
         )
 
         spec_relations: Optional[List[str]] = None
@@ -68,6 +79,7 @@ class ReqIFRelationGroupParser:
             source_specification_ref=source_specification_ref,
             target_specification_ref=target_specification_ref,
             spec_relations=spec_relations,
+            values=values,
             is_self_closed=False,
         )
 
@@ -90,6 +102,36 @@ class ReqIFRelationGroupParser:
         output += AlternativeIDParser.unparse(
             relation_group.alternative_id, "          "
         )
+
+        # Emitted first, mirroring SPEC-OBJECT's ["VALUES", "TYPE"] child order.
+        # Ordering is not the reason for the position: RELATION-GROUP is an
+        # xsd:all, so its children are unordered.
+        #
+        # The bundled reqif.xsd does not permit VALUES on RELATION-GROUP at all,
+        # although the ReqIF spec PDF's MOF model (10.8.33) defines it. That is a
+        # known defect of the ReqIF XML schema, called out as such in the prostep
+        # ivip ReqIF Implementation Guide v1.8, section 2.11, whose advice is
+        # addressed to whoever authors the content.
+        #
+        # Writing the element is therefore a deliberate deviation from the
+        # schema, and whether to ship such a file is the caller's call to make:
+        # they know which tools will read the output. So warn rather than refuse,
+        # naming the group so the caller can find it. There is no matching
+        # warning on the parse side, because sections 2.1, 2.3 and 2.13 of the
+        # same guide ask importing tools to be forgiving about what they read and
+        # keep the strictness on the export side.
+        if relation_group.values is not None and len(relation_group.values) > 0:
+            logger.warning(
+                "RELATION-GROUP %s: writing a VALUES element, which the ReqIF "
+                "XML schema does not permit on RELATION-GROUP (a known schema "
+                "defect; see prostep ivip ReqIF Implementation Guide v1.8, "
+                "section 2.11). Other ReqIF tools may reject this file or drop "
+                "these values silently. Silence this by raising the level of "
+                "the %s logger.",
+                relation_group.identifier,
+                __name__,
+            )
+        output += AttributeValueParser.unparse_attribute_values(relation_group.values)
 
         if relation_group.spec_relations is not None:
             output += "          <SPEC-RELATIONS>\n"

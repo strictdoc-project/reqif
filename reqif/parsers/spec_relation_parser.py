@@ -6,7 +6,6 @@ from reqif.models.reqif_spec_object import SpecObjectAttribute
 from reqif.models.reqif_spec_relation import (
     ReqIFSpecRelation,
 )
-from reqif.models.reqif_types import SpecObjectAttributeType
 from reqif.parsers.alternative_id_parser import AlternativeIDParser
 from reqif.parsers.attribute_value_parser import AttributeValueParser
 
@@ -55,35 +54,13 @@ class SpecRelationParser:
             xml_spec_relation.find("TARGET").find("SPEC-OBJECT-REF").text
         )
 
-        values_attribute: Optional[SpecObjectAttribute] = None
+        # Delegate to the shared helper rather than hand-rolling the loop: it
+        # keeps every value instead of only the first, and it covers all seven
+        # ATTRIBUTE-VALUE-* kinds rather than STRING/INTEGER/XHTML alone.
         xml_values = xml_spec_relation.find("VALUES")
-        if xml_values is not None:
-            for xml_value in xml_values:
-                if xml_value.tag == "ATTRIBUTE-VALUE-STRING":
-                    attribute_value = xml_value.attrib["THE-VALUE"]
-                    definition_ref = xml_value[0][0].text
-                    values_attribute = SpecObjectAttribute(
-                        xml_node=xml_value,
-                        attribute_type=SpecObjectAttributeType.STRING,
-                        definition_ref=definition_ref,
-                        value=attribute_value,
-                    )
-                elif xml_value.tag == "ATTRIBUTE-VALUE-XHTML":
-                    values_attribute = AttributeValueParser.parse_xhtml_attribute_value(
-                        xml_value
-                    )
-                elif xml_value.tag == "ATTRIBUTE-VALUE-INTEGER":
-                    attribute_value = xml_value.attrib["THE-VALUE"]
-                    definition_ref = xml_value[0][0].text
-                    values_attribute = SpecObjectAttribute(
-                        xml_node=xml_value,
-                        attribute_type=SpecObjectAttributeType.INTEGER,
-                        definition_ref=definition_ref,
-                        value=attribute_value,
-                    )
-                else:
-                    raise NotImplementedError
-                break
+        values: Optional[List[SpecObjectAttribute]] = (
+            AttributeValueParser.parse_attribute_values(xml_values)
+        )
 
         spec_relation = ReqIFSpecRelation(
             alternative_id=AlternativeIDParser.parse(xml_spec_relation),
@@ -95,7 +72,7 @@ class SpecRelationParser:
             relation_type_ref=relation_type_ref,
             source=spec_relation_source,
             target=spec_relation_target,
-            values_attribute=values_attribute,
+            values=values,
         )
         return spec_relation
 
@@ -132,10 +109,9 @@ class SpecRelationParser:
                     spec_relation
                 )
             elif tag == "VALUES":
-                if spec_relation.values_attribute is not None:
-                    output += AttributeValueParser.unparse_attribute_values(
-                        [spec_relation.values_attribute]
-                    )
+                output += AttributeValueParser.unparse_attribute_values(
+                    spec_relation.values
+                )
             else:
                 raise NotImplementedError(tag)
 

@@ -1,5 +1,7 @@
 from typing import List, Optional
 
+from reqif.models.reqif_spec_object import SpecObjectAttribute
+
 
 class ReqIFRelationGroup:  # pylint: disable=too-many-instance-attributes
     def __init__(  # pylint: disable=too-many-arguments
@@ -12,6 +14,7 @@ class ReqIFRelationGroup:  # pylint: disable=too-many-instance-attributes
         source_specification_ref: Optional[str] = None,
         target_specification_ref: Optional[str] = None,
         spec_relations: Optional[List[str]] = None,
+        values: Optional[List[SpecObjectAttribute]] = None,
         is_self_closed: bool = True,
         alternative_id: Optional[str] = None,
     ):
@@ -24,4 +27,7 @@ class ReqIFRelationGroup:  # pylint: disable=too-many-instance-attributes
         self.source_specification_ref: Optional[str] = source_specification_ref
         self.target_specification_ref: Optional[str] = target_specification_ref
         self.spec_relations: Optional[List[str]] = spec_relations
+        # A RELATION-GROUP may carry attribute values under <VALUES>, exactly
+        # like a SPEC-OBJECT.
+        self.values: Optional[List[SpecObjectAttribute]] = values
         self.is_self_closed: bool = is_self_closed
