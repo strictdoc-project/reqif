@@ -6,15 +6,17 @@ build-backend = "hatchling.build"
 path = "reqif/__init__.py"
 
 [tool.hatch.build]
+exclude = [
+  "/.*",
+  "/tests",
+]
+
+[tool.hatch.build.targets.sdist]
 include = [
   "LICENSE",
   "README.md",
   "pyproject.toml",
   "reqif/"
-]
-exclude = [
-  "/.*",
-  "/tests",
 ]
 
 [project]
