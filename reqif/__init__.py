@@ -1,7 +1,7 @@
 import logging
 import os.path
 
-__version__ = "0.0.54"
+__version__ = "0.1.0"
 
 # Follow the standard library convention for logging in libraries: attach a
 # NullHandler to the package root logger so that reqif emits no output unless
