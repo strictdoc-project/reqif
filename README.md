@@ -49,6 +49,44 @@ for attachment in reqifz_bundle.attachments:
     print(f"Attachment: {attachment}")
 ```
 
+### Retrieving the requirement text
+
+A `SPEC-HIERARCHY` node does not contain the requirement itself. It only
+references a `SPEC-OBJECT` by its identifier (`SPEC-OBJECT-REF`). The
+`SPEC-OBJECT` stores its attribute values, and the attribute names (for example,
+`ReqIF.Text`) come from its `SPEC-OBJECT-TYPE`. The values of the XHTML
+attributes are XHTML fragments that can be converted to plain text with `lxml`,
+which is installed together with `reqif`:
+
+```py
+import lxml.html
+
+from reqif.models.reqif_types import SpecObjectAttributeType
+from reqif.parser import ReqIFParser
+
+reqif_bundle = ReqIFParser.parse("input.reqif")
+for specification in reqif_bundle.core_content.req_if_content.specifications:
+    for current_hierarchy in reqif_bundle.iterate_specification_hierarchy(specification):
+        # SPEC-OBJECT-REF -> SPEC-OBJECT
+        spec_object = reqif_bundle.get_spec_object_by_ref(current_hierarchy.spec_object)
+        spec_object_type = reqif_bundle.get_spec_object_type_by_ref(spec_object.spec_object_type)
+        print(spec_object.identifier, spec_object.long_name)
+
+        for attribute in spec_object.attributes:
+            attribute_name = spec_object_type.attribute_map[attribute.definition_ref].long_name
+            if attribute.attribute_type == SpecObjectAttributeType.XHTML:
+                # value_stripped_xhtml is the XHTML without the namespace prefix:
+                # <xhtml:div> becomes <div>.
+                text = lxml.html.fromstring(attribute.value_stripped_xhtml).text_content()
+                value = " ".join(text.split())
+            else:
+                value = attribute.value
+            print(f"  {attribute_name}: {value}")
+```
+
+See `tests/integration/examples/05_extract_requirement_text` for a complete
+example with its input file and expected output.
+
 ### Unparsing ReqIF
 
 ```py
