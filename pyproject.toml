@@ -68,7 +68,10 @@ development = [
   "coverage >= 5.4",
 
   # Integration tests
-  "lit >= 0.11.0.post1",
+  # lit 23 rejects ShTest("0") in tests/integration/lit.cfg: the "0" turns
+  # on execute_external, which LLVM 23 deprecates.
+  # FIXME: Move the integration tests to the internal shell of lit.
+  "lit == 18.1.8",
   "filecheck >= 0.0.20",
   "html5lib >= 1.1",
   "pytidylib >= 0.3.2",
