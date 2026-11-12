@@ -32,7 +32,7 @@ class ExampleIdentifiers:
     # For example, 550e8400-e29b-41d4-a716-446655440000 or similar.
     # For this example, we keep it as strings.
     STRING_DATATYPE_ID = create_uuid()
-    SPEC_ATTRIBUTE_ID = create_uuid()
+    SPEC_ATTRIBUTE_IDs = list(map(create_uuid, range(9)))
     SPEC_OBJECT_TYPE_ID = create_uuid()
     SPEC_OBJECT_ID = create_uuid()
     SPEC_HIERARCHY_ID = create_uuid()
@@ -63,15 +63,47 @@ spec_object_type = ReqIFSpecObjectType.create(
     attribute_definitions=[requirement_text_attribute],
 )
 
-spec_object_attribute = SpecObjectAttribute(
-    attribute_type=SpecObjectAttributeType.STRING,
-    definition_ref=ExampleIdentifiers.SPEC_ATTRIBUTE_ID,
-    value="System ABC shall do XYQ.",
-)
+spec_object_attributes = [
+    SpecObjectAttribute(
+        attribute_type=SpecObjectAttributeType.STRING,
+        definition_ref=ExampleIdentifiers.SPEC_ATTRIBUTE_IDs[0],
+        value="System ABC shall do XYQ.",
+    ),
+    SpecObjectAttribute(
+        attribute_type=SpecObjectAttributeType.INTEGER,
+        definition_ref=ExampleIdentifiers.SPEC_ATTRIBUTE_IDs[1],
+        value="1",
+    ),
+    SpecObjectAttribute(
+        attribute_type=SpecObjectAttributeType.INTEGER,
+        definition_ref=ExampleIdentifiers.SPEC_ATTRIBUTE_IDs[2],
+        value=1,
+    ),
+    SpecObjectAttribute(
+        attribute_type=SpecObjectAttributeType.REAL,
+        definition_ref=ExampleIdentifiers.SPEC_ATTRIBUTE_IDs[3],
+        value="1.0",
+    ),
+    SpecObjectAttribute(
+        attribute_type=SpecObjectAttributeType.REAL,
+        definition_ref=ExampleIdentifiers.SPEC_ATTRIBUTE_IDs[4],
+        value=1.0,
+    ),
+    SpecObjectAttribute(
+        attribute_type=SpecObjectAttributeType.BOOLEAN,
+        definition_ref=ExampleIdentifiers.SPEC_ATTRIBUTE_IDs[5],
+        value=False,
+    ),
+    SpecObjectAttribute(
+        attribute_type=SpecObjectAttributeType.BOOLEAN,
+        definition_ref=ExampleIdentifiers.SPEC_ATTRIBUTE_IDs[6],
+        value=True,
+    ),
+]
 
 spec_object = ReqIFSpecObject(
     identifier=ExampleIdentifiers.SPEC_OBJECT_ID,
-    attributes=[spec_object_attribute],
+    attributes=spec_object_attributes,
     spec_object_type=spec_object_type.identifier,
     last_change=date_now,
 )
