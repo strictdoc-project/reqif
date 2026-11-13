@@ -1,0 +1,17 @@
+RUN: python %S/script.py | filecheck %s --dump-input=fail
+CHECK:      Specification: System requirements
+CHECK-NEXT:   SPEC-OBJECT: SPEC-OBJECT-SECTION-1
+CHECK-NEXT:     LONG-NAME: Login section
+CHECK-NEXT:     ReqIF.ChapterName: Login
+CHECK-NEXT:     SPEC-OBJECT: SPEC-OBJECT-REQ-1
+CHECK-NEXT:       LONG-NAME: Password length
+CHECK-NEXT:       ReqIF.ForeignID: REQ-1
+CHECK-NEXT:       ReqIF.Text: The system shall reject passwords shorter than 12 characters.
+CHECK-NEXT:     SPEC-OBJECT: SPEC-OBJECT-REQ-2
+CHECK-NEXT:       LONG-NAME: Failed logins
+CHECK-NEXT:       ReqIF.ForeignID: REQ-2
+CHECK-NEXT:       ReqIF.Text: The system shall lock an account after: 5 failed login attempts, or an administrator request.
+
+# The requirement text must be plain text, without any XHTML tags left.
+RUN: python %S/script.py | filecheck %s --check-prefix=CHECK-PLAIN-TEXT --dump-input=fail
+CHECK-PLAIN-TEXT-NOT: <
