@@ -1,5 +1,7 @@
 from lxml import etree
 
+from reqif.models.reqif_spec_object import SpecObjectAttribute
+from reqif.models.reqif_types import SpecObjectAttributeType
 from reqif.parsers.spec_object_parser import (
     SpecObjectParser,
 )
@@ -115,3 +117,45 @@ def test_02_attributes_xhtml():
         ].value
         == expected_xhtml
     )
+
+
+def test_unparse_spec_object_without_values_element():
+    spec_object_string = """
+<SPEC-OBJECT IDENTIFIER="TEST_NO_VALUES_ID">
+  <TYPE>
+    <SPEC-OBJECT-TYPE-REF>TEST_SPEC_OBJECT_TYPE</SPEC-OBJECT-TYPE-REF>
+  </TYPE>
+</SPEC-OBJECT>
+    """
+
+    spec_object = SpecObjectParser.parse(etree.fromstring(spec_object_string))
+    output = SpecObjectParser.unparse(spec_object)
+
+    assert "<VALUES" not in output
+    assert (
+        "<SPEC-OBJECT-TYPE-REF>TEST_SPEC_OBJECT_TYPE</SPEC-OBJECT-TYPE-REF>" in output
+    )
+
+
+def test_unparse_spec_object_without_values_element_after_adding_attribute():
+    spec_object_string = """
+<SPEC-OBJECT IDENTIFIER="TEST_NO_VALUES_ID">
+  <TYPE>
+    <SPEC-OBJECT-TYPE-REF>TEST_SPEC_OBJECT_TYPE</SPEC-OBJECT-TYPE-REF>
+  </TYPE>
+</SPEC-OBJECT>
+    """
+    spec_object = SpecObjectParser.parse(etree.fromstring(spec_object_string))
+    spec_object.attributes.append(
+        SpecObjectAttribute(
+            attribute_type=SpecObjectAttributeType.STRING,
+            definition_ref="TEST_FIELD_UID",
+            value="SR001",
+        )
+    )
+
+    output = SpecObjectParser.unparse(spec_object)
+
+    reparsed = SpecObjectParser.parse(etree.fromstring(output))
+    assert reparsed.attribute_map["TEST_FIELD_UID"].value == "SR001"
+    assert output.index("<VALUES>") < output.index("<TYPE>")

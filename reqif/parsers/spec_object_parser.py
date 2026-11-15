@@ -69,8 +69,11 @@ class SpecObjectParser:
 
         if spec_object.xml_node is not None:
             children_tags = list(map(lambda el: el.tag, list(spec_object.xml_node)))
-            assert "VALUES" in children_tags
             assert "TYPE" in children_tags
+            # VALUES is optional. Write it back only if the object has
+            # attributes, e.g. ones added after parsing.
+            if "VALUES" not in children_tags and len(spec_object.attributes) > 0:
+                children_tags.insert(children_tags.index("TYPE"), "VALUES")
         else:
             children_tags = ["ALTERNATIVE-ID", "VALUES", "TYPE"]
 
