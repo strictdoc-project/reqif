@@ -123,7 +123,7 @@ class ReqIFSpecHierarchyParser:
         if hierarchy.last_change:
             output += f' LAST-CHANGE="{hierarchy.last_change}"'
         if hierarchy.long_name:
-            output += f' LONG-NAME="{hierarchy.long_name}"'
+            output += f' LONG-NAME="{lxml_escape_for_html(hierarchy.long_name)}"'
         output += ">\n"
 
         output += AlternativeIDParser.unparse(

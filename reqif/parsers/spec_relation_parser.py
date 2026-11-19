@@ -1,6 +1,7 @@
 import html
 from typing import List, Optional
 
+from reqif.helpers.lxml import lxml_escape_for_html
 from reqif.models.error_handling import ReqIFMissingTagException
 from reqif.models.reqif_spec_object import SpecObjectAttribute
 from reqif.models.reqif_spec_relation import (
@@ -80,7 +81,7 @@ class SpecRelationParser:
     def unparse(spec_relation: ReqIFSpecRelation):
         output = "        <SPEC-RELATION"
         if spec_relation.description is not None:
-            output += f' DESC="{spec_relation.description}"'
+            output += f' DESC="{lxml_escape_for_html(spec_relation.description)}"'
         output += f' IDENTIFIER="{spec_relation.identifier}"'
         if spec_relation.last_change is not None:
             output += f' LAST-CHANGE="{spec_relation.last_change}"'

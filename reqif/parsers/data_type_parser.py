@@ -254,7 +254,7 @@ class DataTypeParser:
             if data_type_definition.last_change:
                 output += f' LAST-CHANGE="{data_type_definition.last_change}"'
             if data_type_definition.long_name:
-                output += f' LONG-NAME="{data_type_definition.long_name}"'
+                output += f' LONG-NAME="{lxml_escape_for_html(data_type_definition.long_name)}"'
             if data_type_definition.max_value is not None:
                 output += f' MAX="{data_type_definition.max_value}"'
             if data_type_definition.min_value is not None:
@@ -287,7 +287,7 @@ class DataTypeParser:
             if data_type_definition.last_change is not None:
                 output += f' LAST-CHANGE="{data_type_definition.last_change}"'
             if data_type_definition.long_name is not None:
-                output += f' LONG-NAME="{data_type_definition.long_name}"'
+                output += f' LONG-NAME="{lxml_escape_for_html(data_type_definition.long_name)}"'
 
             if data_type_definition.max_value is not None:
                 output += f' MAX="{data_type_definition.max_value}"'
@@ -335,7 +335,7 @@ class DataTypeParser:
                 for value in data_type_definition.values:
                     output += "            <ENUM-VALUE"
                     if value.description is not None:
-                        output += f' DESC="{value.description}"'
+                        output += f' DESC="{lxml_escape_for_html(value.description)}"'
                     output += f' IDENTIFIER="{value.identifier}"'
                     if value.last_change is not None:
                         output += f' LAST-CHANGE="{value.last_change}"'
@@ -374,7 +374,7 @@ class DataTypeParser:
             if data_type_definition.last_change:
                 output += f' LAST-CHANGE="{data_type_definition.last_change}"'
             if data_type_definition.long_name:
-                output += f' LONG-NAME="{data_type_definition.long_name}"'
+                output += f' LONG-NAME="{lxml_escape_for_html(data_type_definition.long_name)}"'
             if (
                 data_type_definition.is_self_closed
                 and data_type_definition.alternative_id is None
