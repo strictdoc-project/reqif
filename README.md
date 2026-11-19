@@ -55,12 +55,11 @@ A `SPEC-HIERARCHY` node does not contain the requirement itself. It only
 references a `SPEC-OBJECT` by its identifier (`SPEC-OBJECT-REF`). The
 `SPEC-OBJECT` stores its attribute values, and the attribute names (for example,
 `ReqIF.Text`) come from its `SPEC-OBJECT-TYPE`. The values of the XHTML
-attributes are XHTML fragments that can be converted to plain text with `lxml`,
-which is installed together with `reqif`:
+attributes are XHTML fragments that `xhtml_to_plain_text` converts to plain
+text:
 
 ```py
-import lxml.html
-
+from reqif.helpers.xhtml import xhtml_to_plain_text
 from reqif.models.reqif_types import SpecObjectAttributeType
 from reqif.parser import ReqIFParser
 
@@ -77,12 +76,16 @@ for specification in reqif_bundle.core_content.req_if_content.specifications:
             if attribute.attribute_type == SpecObjectAttributeType.XHTML:
                 # value_stripped_xhtml is the XHTML without the namespace prefix:
                 # <xhtml:div> becomes <div>.
-                text = lxml.html.fromstring(attribute.value_stripped_xhtml).text_content()
-                value = " ".join(text.split())
+                value = xhtml_to_plain_text(attribute.value_stripped_xhtml)
             else:
                 value = attribute.value
             print(f"  {attribute_name}: {value}")
 ```
+
+`xhtml_to_plain_text` collapses the whitespace of the XHTML and separates the
+words of block elements such as `<p>`, `<li>` and `<br/>`, even when the XHTML
+has no whitespace between the tags. Pass `keep_paragraphs=True` to separate the
+blocks with a blank line and to start a new line at each `<br/>`.
 
 See `tests/integration/examples/05_extract_requirement_text` for a complete
 example with its input file and expected output.

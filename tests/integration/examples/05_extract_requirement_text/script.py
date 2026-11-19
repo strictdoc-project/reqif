@@ -1,16 +1,7 @@
 # ruff: noqa: T201
-import lxml.html
-
+from reqif.helpers.xhtml import xhtml_to_plain_text
 from reqif.models.reqif_types import SpecObjectAttributeType
 from reqif.parser import ReqIFParser
-
-
-def xhtml_to_plain_text(xhtml: str) -> str:
-    # Keep only the text of the XHTML fragment and collapse the whitespace
-    # that comes from the indentation of the XHTML tags.
-    text = lxml.html.fromstring(xhtml).text_content()
-    return " ".join(text.split())
-
 
 input_file_path = "input.reqif"
 

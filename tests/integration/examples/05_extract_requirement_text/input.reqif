@@ -101,6 +101,26 @@
             <SPEC-OBJECT-TYPE-REF>SPEC-OBJECT-TYPE-REQUIREMENT</SPEC-OBJECT-TYPE-REF>
           </TYPE>
         </SPEC-OBJECT>
+        <SPEC-OBJECT IDENTIFIER="SPEC-OBJECT-REQ-3" LAST-CHANGE="2026-01-01T00:00:00+00:00" LONG-NAME="Session timeout">
+          <VALUES>
+            <ATTRIBUTE-VALUE-STRING THE-VALUE="REQ-3">
+              <DEFINITION>
+                <ATTRIBUTE-DEFINITION-STRING-REF>ATTRIBUTE-FOREIGN-ID</ATTRIBUTE-DEFINITION-STRING-REF>
+              </DEFINITION>
+            </ATTRIBUTE-VALUE-STRING>
+            <ATTRIBUTE-VALUE-XHTML>
+              <DEFINITION>
+                <ATTRIBUTE-DEFINITION-XHTML-REF>ATTRIBUTE-TEXT</ATTRIBUTE-DEFINITION-XHTML-REF>
+              </DEFINITION>
+              <THE-VALUE>
+                <xhtml:div><xhtml:p>The system <xhtml:b>shall</xhtml:b> end a session after:</xhtml:p><xhtml:ul><xhtml:li>15 minutes without activity, or</xhtml:li><xhtml:li>a logout.</xhtml:li></xhtml:ul></xhtml:div>
+              </THE-VALUE>
+            </ATTRIBUTE-VALUE-XHTML>
+          </VALUES>
+          <TYPE>
+            <SPEC-OBJECT-TYPE-REF>SPEC-OBJECT-TYPE-REQUIREMENT</SPEC-OBJECT-TYPE-REF>
+          </TYPE>
+        </SPEC-OBJECT>
       </SPEC-OBJECTS>
       <SPECIFICATIONS>
         <SPECIFICATION IDENTIFIER="SPECIFICATION-1" LAST-CHANGE="2026-01-01T00:00:00+00:00" LONG-NAME="System requirements">
@@ -121,6 +141,11 @@
                 <SPEC-HIERARCHY IDENTIFIER="SPEC-HIERARCHY-REQ-2" LAST-CHANGE="2026-01-01T00:00:00+00:00">
                   <OBJECT>
                     <SPEC-OBJECT-REF>SPEC-OBJECT-REQ-2</SPEC-OBJECT-REF>
+                  </OBJECT>
+                </SPEC-HIERARCHY>
+                <SPEC-HIERARCHY IDENTIFIER="SPEC-HIERARCHY-REQ-3" LAST-CHANGE="2026-01-01T00:00:00+00:00">
+                  <OBJECT>
+                    <SPEC-OBJECT-REF>SPEC-OBJECT-REQ-3</SPEC-OBJECT-REF>
                   </OBJECT>
                 </SPEC-HIERARCHY>
               </CHILDREN>
