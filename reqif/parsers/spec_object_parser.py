@@ -1,6 +1,7 @@
 import logging
 from typing import List, Optional
 
+from reqif.helpers.lxml import lxml_escape_for_html
 from reqif.models.reqif_spec_object import (
     ReqIFSpecObject,
     SpecObjectAttribute,
@@ -57,14 +58,14 @@ class SpecObjectParser:
 
         output += "        <SPEC-OBJECT"
         if spec_object.description is not None:
-            output += f' DESC="{spec_object.description}"'
+            output += f' DESC="{lxml_escape_for_html(spec_object.description)}"'
 
         output += f' IDENTIFIER="{spec_object.identifier}"'
 
         if spec_object.last_change:
             output += f' LAST-CHANGE="{spec_object.last_change}"'
         if spec_object.long_name is not None:
-            output += f' LONG-NAME="{spec_object.long_name}"'
+            output += f' LONG-NAME="{lxml_escape_for_html(spec_object.long_name)}"'
         output += ">\n"
 
         if spec_object.xml_node is not None:

@@ -1,6 +1,7 @@
 import logging
 from typing import List, Optional
 
+from reqif.helpers.lxml import lxml_escape_for_html
 from reqif.models.reqif_relation_group import ReqIFRelationGroup
 from reqif.models.reqif_spec_object import SpecObjectAttribute
 from reqif.parsers.alternative_id_parser import AlternativeIDParser
@@ -89,14 +90,14 @@ class ReqIFRelationGroupParser:
         output += "        <RELATION-GROUP"
 
         if relation_group.description is not None:
-            output += f' DESC="{relation_group.description}"'
+            output += f' DESC="{lxml_escape_for_html(relation_group.description)}"'
 
         output += f' IDENTIFIER="{relation_group.identifier}"'
 
         if relation_group.last_change is not None:
             output += f' LAST-CHANGE="{relation_group.last_change}"'
         if relation_group.long_name:
-            output += f' LONG-NAME="{relation_group.long_name}"'
+            output += f' LONG-NAME="{lxml_escape_for_html(relation_group.long_name)}"'
         output += ">\n"
 
         output += AlternativeIDParser.unparse(
