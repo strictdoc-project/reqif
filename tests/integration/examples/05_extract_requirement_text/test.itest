@@ -11,6 +11,10 @@ CHECK-NEXT:     SPEC-OBJECT: SPEC-OBJECT-REQ-2
 CHECK-NEXT:       LONG-NAME: Failed logins
 CHECK-NEXT:       ReqIF.ForeignID: REQ-2
 CHECK-NEXT:       ReqIF.Text: The system shall lock an account after: 5 failed login attempts, or an administrator request.
+CHECK-NEXT:     SPEC-OBJECT: SPEC-OBJECT-REQ-3
+CHECK-NEXT:       LONG-NAME: Session timeout
+CHECK-NEXT:       ReqIF.ForeignID: REQ-3
+CHECK-NEXT:       ReqIF.Text: The system shall end a session after: 15 minutes without activity, or a logout.
 
 # The requirement text must be plain text, without any XHTML tags left.
 RUN: python %S/script.py | filecheck %s --check-prefix=CHECK-PLAIN-TEXT --dump-input=fail
